@@ -2,4 +2,4 @@
 
 void InitRadio();
 
-void SendBytes(int bytes[], int len);
+void SendBytes(char bytes[], int len);

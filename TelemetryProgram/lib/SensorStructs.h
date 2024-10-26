@@ -1,6 +1,6 @@
 #pragma once
 
-struct SensorData
+typedef struct SensorData
 {
     /* data */
 };

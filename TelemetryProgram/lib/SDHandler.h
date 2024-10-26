@@ -2,4 +2,4 @@
 
 void InitSDHandler();
 
-void StoreBytes(int bytes[], int len);
+void StoreBytes(char bytes[], int len);

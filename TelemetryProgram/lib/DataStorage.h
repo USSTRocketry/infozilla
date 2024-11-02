@@ -2,6 +2,6 @@
 
 void InitDataStorage();
 
-void StoreBytes(char bytes[], int len);
+void StoreBytes(int bytes[], int len);
 
-char* GetByteData(int len, int offset); // Return Bytes Array
+int* GetByteData(int len, int offset); // Return Bytes Array

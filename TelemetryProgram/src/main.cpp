@@ -8,8 +8,8 @@
 #include <SensorStructs.h>
 
 int i = 0;
-SensorData data;
-
+SensorData sensorData;
+GPSData gpsData;
 // put function declarations here:
 int myFunction(int, int);
 
@@ -30,6 +30,8 @@ void loop() {
   Serial.printf("Hello World: %i\n", i);
   delay(500);
   // put your main code here, to run repeatedly:
+  sensorData = GetSensorData();
+  gpsData = GetGPSData();
 
 }
 

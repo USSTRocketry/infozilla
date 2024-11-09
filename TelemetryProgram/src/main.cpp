@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <DataPackager.h>
 
 int i = 0;
 // put function declarations here:
@@ -8,6 +9,8 @@ void setup() {
   Serial.begin(0);
   // put your setup code here, to run once:
   int result = myFunction(2, 3);
+  
+  InitDataPackager()
 }
 
 void loop() {
@@ -15,6 +18,7 @@ void loop() {
   Serial.printf("Hello World: %i\n", i);
   delay(500);
   // put your main code here, to run repeatedly:
+
 }
 
 // put function definitions here:

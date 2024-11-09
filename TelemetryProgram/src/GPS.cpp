@@ -1,3 +1,6 @@
+#include <Arduino.h>
 #include <GPS.h>
 
-gpsData GetSensorData();
+gpsData GetSensorData() {
+    Serial.printf("GetSensorData()");
+}

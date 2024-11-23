@@ -13,11 +13,6 @@ typedef struct
     float z;
 }GyroData;
 
-typedef struct {
-    float x;
-    float y;
-    float z;
-}GPSData;
 
 typedef struct 
 {
@@ -26,7 +21,7 @@ typedef struct
     float thermoval;
     AxelData accelerometer;
     GyroData gyroscopeData;
-    GPSData GPS;
+    //GPSData GPS;
     long int timestamp;
 }SensorData;
 

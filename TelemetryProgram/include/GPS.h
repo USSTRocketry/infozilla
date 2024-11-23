@@ -2,9 +2,9 @@
 
 void InitGPS();
 
-struct GPSData
+typedef struct
 {
     /* data */
-};
+} GPSData;
 
-gpsData GetGPSData();
+GPSData GetGPSData();

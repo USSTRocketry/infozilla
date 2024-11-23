@@ -8,19 +8,10 @@
 #include <Sensors.h>
 #include <SensorStructs.h>
 
-
-#include "SensorStructs.h"
-#include "DataPackager.h"
-#include "DataStorage.h"
-#include "GPS.h"
-#include "Radio.h"
-#include "SDHandler.h"
-#include "Sensors.h"
-
 char data[sizeof(SensorData)];
 
 int i = 0;
-SensorData sensorData;
+SensorData *sensorData;
 GPSData gpsData;
 // put function declarations here:
 int myFunction(int, int);
@@ -30,11 +21,11 @@ void setup() {
   // put your setup code here, to run once:
   int result = myFunction(2, 3);
   
-  InitDataPackager()
-  InitDataStorage()
-  InitRadio()
-  InitSDHandler()
-  InitSensors()
+  InitDataPackager();
+  InitDataStorage();
+  InitRadio();
+  InitSDHandler();
+  InitSensors();
 }
 
 void loop() {

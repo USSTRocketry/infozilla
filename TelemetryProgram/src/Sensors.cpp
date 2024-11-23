@@ -1,3 +1,4 @@
+#include <Arduino.h>
 #include <SensorStructs.h>
 
 SensorData sdata;
@@ -20,8 +21,7 @@ SensorData sdata;
  */
 
 void InitSensors(){
-
-
+    Serial.printf("InitSensors()");
 }
 
 SensorData* GetSensorData(){

@@ -1,6 +1,8 @@
 #pragma once
 
-struct gpsData
+void InitGPS();
+
+struct GPSData
 {
     /* data */
 };

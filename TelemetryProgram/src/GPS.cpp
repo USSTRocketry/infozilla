@@ -1,3 +1,3 @@
 #include <GPS.h>
 
-gpsData GetSensorData();
+gpsData GetGPSData();

@@ -4,6 +4,6 @@ void InitSDHandler(){
 
 }
 
-void StoreBytes(char bytes[], int len){
+void StoreBytesInSD(char bytes[], int len){
     
 }

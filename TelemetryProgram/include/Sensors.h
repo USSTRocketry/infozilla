@@ -2,4 +2,4 @@
 
 void InitSensors();
 
-struct SensorData GetSensorData();
+SensorData *GetSensorData();

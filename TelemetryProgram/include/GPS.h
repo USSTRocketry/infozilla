@@ -5,4 +5,4 @@ struct gpsData
     /* data */
 };
 
-gpsData GetSensorData();
+gpsData GetGPSData();

@@ -1,8 +1,8 @@
 #include "DataStorage.h"
 
-char *GetByteData(int len, int offset)
+void GetByteData(int len, int offset, char *output)
 {
-    return nullptr;
+    
 }
 
 void InitDataStorage(){

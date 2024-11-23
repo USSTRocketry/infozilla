@@ -1,4 +1,16 @@
+
 #include <Arduino.h>
+
+
+#include "SensorStructs.h"
+#include "DataPackager.h"
+#include "DataStorage.h"
+#include "GPS.h"
+#include "Radio.h"
+#include "SDHandler.h"
+#include "Sensors.h"
+
+char data[sizeof(SensorData)];
 
 int i = 0;
 // put function declarations here:
@@ -20,4 +32,17 @@ void loop() {
 // put function definitions here:
 int myFunction(int x, int y) {
   return x + y;
+}
+
+void Handledata(){
+
+}
+
+void TransferDataToSD(){
+
+}
+
+char *TurnSensorDataToBytes(SensorData *data){
+  return NULL;
+
 }

@@ -1,15 +1,30 @@
 #include <Arduino.h>
 #include <SensorStructs.h>
 
-SensorData data;
+SensorData sdata;
+
+/**
+ * Every sensor library that we need:
+ * 
+ * 1)
+ * 
+ * 2)
+ * 
+ * 3)
+ * 
+ * 4)
+ * 
+ * 5)
+ * 
+ * 6)
+ * 
+ */
 
 void InitSensors(){
     Serial.printf("InitSensors()");
 }
 
+SensorData* GetSensorData(){
 
-
-struct SensorData GetSensorData(){
-    Serial.printf("GetSensorData()");
-    return data;
+    return &sdata;
 }

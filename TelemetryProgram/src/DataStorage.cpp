@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <DataStorage.h>
 
-char *GetByteData(int len, int offset)
+char *GetByteData(int len, int offset, char *output)
 {
     Serial.printf("GetByteData()");
     return nullptr;

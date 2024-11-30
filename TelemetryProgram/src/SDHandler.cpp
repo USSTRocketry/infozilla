@@ -4,6 +4,6 @@ void InitSDHandler(){
     Serial.printf("InitSDHandler()");
 }
 
-void StoreBytes(char bytes[], int len){
-    Serial.printf("StoreBytes()");
+void StoreBytesInSD(char bytes[], int len){
+    
 }

@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include <robtillaart/FRAM_I2C@^0.8.1>
+#include <Adafruit_BMP280.h>
 #include <SensorStructs.h>
 
 SensorData sdata;

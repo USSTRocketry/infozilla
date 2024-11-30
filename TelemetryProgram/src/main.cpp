@@ -19,7 +19,7 @@ int myFunction(int, int);
 void setup() {
   Serial.begin(0);
   // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+  // int result = myFunction(2, 3);
   
   InitDataPackager();
   InitDataStorage();

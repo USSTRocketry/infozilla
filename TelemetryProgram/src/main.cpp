@@ -8,29 +8,8 @@
 // #include <SensorStructs.h>
 #include <Wire.h>
 #include "Avionics_HAL.h"
+#include <SDHandler.h>
 
-SensorBMP280 bmp280Sensor;
-
-void setup() {
-    Serial.begin(9600);
-    if (bmp280Sensor.begin()) {
-        Serial.println("BMP280 initialized.");
-    } else {
-        Serial.println("Initialization failed.");
-    }
-}
-
-void loop() {
-    BMP280Data* data = bmp280Sensor.read();
-    Serial.print("Temp: ");
-    Serial.print(data->temperature);
-    Serial.print("°C, Pressure: ");
-    Serial.print(data->pressure);
-    Serial.print("Pa, Altitude: ");
-    Serial.print(data->altitude);
-    Serial.println("m");
-    delay(1000);
-}
 
 // char data[sizeof(SensorData)];
 
@@ -40,17 +19,18 @@ void loop() {
 // // put function declarations here:
 // int myFunction(int, int);
 
-// void setup() {
-//   Serial.begin(0);
-//   // put your setup code here, to run once:
-//   // int result = myFunction(2, 3);
+void setup() {
+    // Serial.begin(0);
+// put your setup code here, to run once:
+// int result = myFunction(2, 3);
   
 //   InitDataPackager();
 //   InitDataStorage();
 //   InitRadio();
 //   InitSDHandler();
 //   InitSensors();
-// }
+    InitSD();
+}
 
 // void loop() {
 //   i++;

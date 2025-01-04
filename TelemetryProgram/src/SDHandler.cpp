@@ -28,15 +28,18 @@ void InitSD()
  //SPI.setMOSI(7);  // Audio shield has MOSI on pin 7
  //SPI.setSCK(14);  // Audio shield has SCK on pin 14
   
+  Serial.println("Initializing SD card...");
  // Open serial communications and wait for port to open:
   Serial.begin(9600);
    while (!Serial) {
     ; // wait for serial port to connect.
   }
+  Serial.println("SD card initialized.");
 
 
-  Serial.print("Initializing SD card...");
+}
 
+void createExampleTxt() {
   if (!SD.begin(chipSelect)) {
     Serial.println("initialization failed!");
     return;
@@ -55,6 +58,9 @@ void InitSD()
   myFile = SD.open("example.txt", FILE_WRITE);
   myFile.close();
 
+}
+
+void deleteExampleTxt(){
   // Check to see if the file exists: 
   if (SD.exists("example.txt")) {
     Serial.println("example.txt exists.");

@@ -29,22 +29,22 @@ void InitSD()
  //SPI.setSCK(14);  // Audio shield has SCK on pin 14
   
   Serial.println("Initializing SD card...");
- // Open serial communications and wait for port to open:
-  Serial.begin(9600);
-   while (!Serial) {
-    ; // wait for serial port to connect.
+  if (!SD.begin(chipSelect)) {
+    Serial.println("initialization failed!");
+    return;
   }
+// Open serial communications and wait for port to open:
+  // Serial.begin(9600);
+  //  while (!Serial) {
+  //   ; // wait for serial port to connect.
+  // }
   Serial.println("SD card initialized.");
 
 
 }
 
 void createExampleTxt() {
-  if (!SD.begin(chipSelect)) {
-    Serial.println("initialization failed!");
-    return;
-  }
-  Serial.println("initialization done.");
+  
 
   if (SD.exists("example.txt")) {
     Serial.println("example.txt exists.");
@@ -81,10 +81,10 @@ void deleteExampleTxt(){
   }
 }
 
-void loop()
-{
-  // Write data to SD continuously
-}
+// void loop()
+// {
+//   // Write data to SD continuously
+// }
 
 
 

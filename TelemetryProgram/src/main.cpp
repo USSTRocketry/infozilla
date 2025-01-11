@@ -14,7 +14,7 @@ SensorMagnetometer magnetometer(LIS3MDL_I2CADDR_DEFAULT, I2C_WIRE0); // Magnomet
 SensorTemperature tempSensor; // Default I2C address and bus
 GPS gps(GPS_HW_SERIAL, 9600);
 // RYLR998Radio radio(HW_SERIAL8, 9600); // Not default Radio to be used
-RFM95Radio radio(RADIO_CS, RADIO_INT, HW_SPI0); // Default radio used
+RFM95Radio radio(RADIO_CS, 0, HW_SPI0); // Default radio used - Interrupt 0 because it's not used, 915 MHz default 
 
 void setup() {
 

@@ -38,15 +38,12 @@ void loop() {
 //   // put your main code here, to run repeatedly:
 //   sensorData = GetSensorData();
 //   gpsData = GetGPSData();
-    BMP280Data* data = bmp280Sensor.read();
-    Serial.print("Temp: ");
-    Serial.print(data->temperature);
-    Serial.print("°C, Pressure: ");
-    Serial.print(data->pressure);
-    Serial.print("Pa, Altitude: ");
-    Serial.print(data->altitude);
-    Serial.println("m");
-    delay(1000);
+    ReadBMP();
+    ReadAccelGyro();
+    ReadMagnetometer();
+    ReadTempSensor();
+    ReadGPS();
+    ReadRadio();
 
 }
 
@@ -118,4 +115,87 @@ void InitRadio() {
     }
     radio.setFrequency(915.0);
     radio.setTxPower(20);
+}
+
+void ReadBMP(){
+    BMP280Data* data = bmp280Sensor.read();
+    Serial.print("Temp: ");
+    Serial.print(data->temperature);
+    Serial.print("°C, Pressure: ");
+    Serial.print(data->pressure);
+    Serial.print("Pa, Altitude: ");
+    Serial.print(data->altitude);
+    Serial.println("m");
+    delay(1000);
+}
+
+void ReadAccelGyro(){
+    AccelGyroData* data = accelGyro.read();
+    Serial.print("Accel: ");
+    Serial.print(data->accelX);
+    Serial.print(", ");
+    Serial.print(data->accelY);
+    Serial.print(", ");
+    Serial.println(data->accelZ);
+
+    Serial.print("Gyro: ");
+    Serial.print(data->gyroX);
+    Serial.print(", ");
+    Serial.print(data->gyroY);
+    Serial.print(", ");
+    Serial.println(data->gyroZ);
+
+    delay(500);
+
+}
+
+void ReadMagnetometer(){
+
+    MagnetometerData* data = magnetometer.read();
+    Serial.print("Magnetic Field: ");
+    Serial.print(data->magneticX);
+    Serial.print(", ");
+    Serial.print(data->magneticY);
+    Serial.print(", ");
+    Serial.println(data->magneticZ);
+
+    delay(500);
+}
+
+void ReadTempSensor(){
+    float temperature = tempSensor.read();
+    Serial.print("Temperature: ");
+    Serial.print(temperature);
+    Serial.println(" °C");
+    delay(1000);
+}
+
+void ReadGPS() {
+    GPSData* data = gps.read();
+    if (gps.hasFix()) {
+        Serial.print("Lat: "); Serial.println(data->latitude, 6);
+        Serial.print("Lon: "); Serial.println(data->longitude, 6);
+        Serial.print("Alt: "); Serial.println(data->altitude);
+    } else {
+        Serial.println("No GPS fix available.");
+    }
+    delay(1000);
+}
+
+void ReadRadio() {
+    const char* message = "Hello, LoRa!";
+    if (radio.send((const uint8_t*)message, strlen(message))) {
+        Serial.println("Message sent!");
+    }
+
+    // Receive a message
+    uint8_t buffer[64];
+    size_t length;
+    if (radio.receive(buffer, sizeof(buffer), length)) {
+        Serial.print("Received: ");
+        Serial.write(buffer, length);
+        Serial.println();
+    }
+
+    delay(1000);
 }

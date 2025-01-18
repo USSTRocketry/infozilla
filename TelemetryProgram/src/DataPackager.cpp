@@ -1,14 +1,14 @@
-#include <Arduino.h>
-#include <DataPackager.h>
+// #include <Arduino.h>
+// #include <DataPackager.h>
 
-void InitDataPackager(){
-    Serial.printf("InitDataPackager()");
-}
+// void InitDataPackager(){
+//     Serial.printf("InitDataPackager()");
+// }
 
-void HandleData() {
-    Serial.printf("HandleData()");
-}
+// void HandleData() {
+//     Serial.printf("HandleData()");
+// }
 
-void TransferToSD(){
-    Serial.printf("TransferToSD()");
-}
+// void TransferToSD(){
+//     Serial.printf("TransferToSD()");
+// }

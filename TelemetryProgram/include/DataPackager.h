@@ -1,7 +1,7 @@
-#pragma once
+// #pragma once
 
-void InitDataPackager();
+// void InitDataPackager();
 
-void HandleData();
+// void HandleData();
 
-void TransferToSD();
+// void TransferToSD();

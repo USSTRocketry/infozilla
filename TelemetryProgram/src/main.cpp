@@ -8,14 +8,16 @@
 #include "Avionics_HAL.h"
 
 // Constructors for sensors
-SensorBMP280 bmp280Sensor; // SensorBMP280 - Temp, pressure, and altitude
-SensorAccelGyro accelGyro(0x6A, I2C_WIRE0); // Accelerometer and gyroscope sensor Default I2C address and bus
-SensorMagnetometer magnetometer(LIS3MDL_I2CADDR_DEFAULT, I2C_WIRE0); // Magnometer Default I2C address and bus
-SensorTemperature tempSensor; // Default I2C address and bus
-GPS gps(GPS_HW_SERIAL, 9600);
-// RYLR998Radio radio(HW_SERIAL8, 9600); // Not default Radio to be used
-RFM95Radio radio(RADIO_CS, 0, HW_SPI0); // Default radio used - Interrupt 0 because it's not used, 915 MHz default 
-
+    SensorBMP280 bmp280Sensor; // SensorBMP280 - Temp, pressure, and altitude
+    SensorAccelGyro accelGyro(0x6A, I2C_WIRE0); // Accelerometer and gyroscope sensor Default I2C address and bus
+    SensorMagnetometer magnetometer(LIS3MDL_I2CADDR_DEFAULT, I2C_WIRE0); // Magnometer Default I2C address and bus
+    SensorTemperature tempSensor; // Default I2C address and bus
+    GPS gps(GPS_HW_SERIAL, 9600);
+    // RYLR998Radio radio(HW_SERIAL8, 9600); // Not default Radio to be used
+    RFM95Radio radio(RADIO_CS, 0, HW_SPI0); // Default radio used - Interrupt 0 because it's not used, 915 MHz default 
+    
+    // Store everything as byte array
+    float sensordata[16];
 void setup() {
 
     Serial.begin(9600);
@@ -38,13 +40,40 @@ void loop() {
 //   // put your main code here, to run repeatedly:
 //   sensorData = GetSensorData();
 //   gpsData = GetGPSData();
-    ReadBMP();
-    ReadAccelGyro();
-    ReadMagnetometer();
-    ReadTempSensor();
-    ReadGPS();
-    ReadRadio();
+    PrintBMP();
+    PrintAccelGyro();
+    PrintMagnetometer();
+    PrintTempSensor();
+    PrintGPS();
+    RWRadio();
 
+
+
+    // BMP 
+    BMP280Data* bmpdata = bmp280Sensor.read();
+
+    // AccelGyro
+    AccelGyroData* acceldata = accelGyro.read();
+
+    // Magnetometer
+    MagnetometerData* magdata = magnetometer.read();
+
+    // Temperature
+    float temperature = tempSensor.read();
+
+    // GPS
+    GPSData* gpsdata = gps.read();
+    if (gps.hasFix()) {
+        // Serial.print("Lat: "); Serial.println(gpsdata->latitude, 6);
+        // Serial.print("Lon: "); Serial.println(gpsdata->longitude, 6);
+        // Serial.print("Alt: "); Serial.println(gpsdata->altitude);
+    } else {
+        // Serial.println("No GPS fix available.");
+    }
+
+    // Read everything at same rate
+    delay(1000);
+    
 }
 
 // // put function definitions here:
@@ -117,7 +146,7 @@ void InitRadio() {
     radio.setTxPower(20);
 }
 
-void ReadBMP(){
+void PrintBMP(){
     BMP280Data* data = bmp280Sensor.read();
     Serial.print("Temp: ");
     Serial.print(data->temperature);
@@ -126,10 +155,10 @@ void ReadBMP(){
     Serial.print("Pa, Altitude: ");
     Serial.print(data->altitude);
     Serial.println("m");
-    delay(1000);
+    // delay(1000);
 }
 
-void ReadAccelGyro(){
+void PrintAccelGyro(){
     AccelGyroData* data = accelGyro.read();
     Serial.print("Accel: ");
     Serial.print(data->accelX);
@@ -145,11 +174,11 @@ void ReadAccelGyro(){
     Serial.print(", ");
     Serial.println(data->gyroZ);
 
-    delay(500);
+    // delay(1000);
 
 }
 
-void ReadMagnetometer(){
+void PrintMagnetometer(){
 
     MagnetometerData* data = magnetometer.read();
     Serial.print("Magnetic Field: ");
@@ -159,18 +188,18 @@ void ReadMagnetometer(){
     Serial.print(", ");
     Serial.println(data->magneticZ);
 
-    delay(500);
+    // delay(1000);
 }
 
-void ReadTempSensor(){
+void PrintTempSensor(){
     float temperature = tempSensor.read();
     Serial.print("Temperature: ");
     Serial.print(temperature);
     Serial.println(" °C");
-    delay(1000);
+    // delay(1000);
 }
 
-void ReadGPS() {
+void PrintGPS() {
     GPSData* data = gps.read();
     if (gps.hasFix()) {
         Serial.print("Lat: "); Serial.println(data->latitude, 6);
@@ -179,10 +208,10 @@ void ReadGPS() {
     } else {
         Serial.println("No GPS fix available.");
     }
-    delay(1000);
+    // delay(1000);
 }
 
-void ReadRadio() {
+void RWRadio() {
     const char* message = "Hello, LoRa!";
     if (radio.send((const uint8_t*)message, strlen(message))) {
         Serial.println("Message sent!");
@@ -197,5 +226,5 @@ void ReadRadio() {
         Serial.println();
     }
 
-    delay(1000);
+    // delay(1000);
 }

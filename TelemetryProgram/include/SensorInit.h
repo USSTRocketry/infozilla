@@ -7,9 +7,9 @@ void InitTempSensor();
 void InitGPS();
 void InitRadio();
 
-void ReadBMP();
-void ReadAccelGyro();
-void ReadMagnetometer();
-void ReadTempSensor();
-void ReadGPS();
-void ReadRadio();
+void PrintBMP();
+void PrintAccelGyro();
+void PrintMagnetometer();
+void PrintTempSensor();
+void PrintGPS();
+void RWRadio();

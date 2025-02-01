@@ -1,7 +1,7 @@
 #include <Wire.h>
 #include <SPI.h>
 #include <Arduino.h>
-#include <Adafruit_BMP280.hs>
+#include <Adafruit_BMP280.h>
 #include <SensorStructs.h>
 
 SensorData sdata;

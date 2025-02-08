@@ -2,25 +2,26 @@
 // #include <DataPackager.h>
 #include <fp16.h>
 #include <SensorStructs.h>
+#include <DataStorage.h>
 
 char *convertedStruct;
 int convertedStructLen = 0;
 
 struct PackagedData
 {
-    short barval;
-    short accelx;
-    short accely;
-    short accelz;
-    short thermoval;
-    short gyrox;
-    short gyroy;
-    short gyroz;
-    long timestamp;
+    short barval;//2
+    short accelx;//2
+    short accely;//2
+    short accelz;//2
+    short thermoval;//2
+    short gyrox;//2
+    short gyroy;//2
+    short gyroz;//2
+    long timestamp;//8?
 };
 
 PackagedData LocalPackagedData;
-
+char *packagesDataAsBytes;
 
 void InitDataPackager(){
     //Serial.printf("InitDataPackager()");
@@ -29,13 +30,15 @@ void InitDataPackager(){
 
 
 
-// void HandleData() {
-//     Serial.printf("HandleData()");
-// }
+void HandleData() {
+    Serial.printf("HandleData()");
+    //convertStructToCompressedData(GetSensorData(), &LocalPackagedData);
+    StoreBytes((char *)&LocalPackagedData, sizeof(LocalPackagedData))
+}
 
-// void TransferToSD(){
-//     Serial.printf("TransferToSD()");
-// }
+void TransferToSD(){
+    Serial.printf("TransferToSD()");
+}
 
 uint16_t floatToHalf(float input){
     return fp16_ieee_from_fp32_value(input);
@@ -55,9 +58,4 @@ void convertStructToCompressedData(SensorData *data, PackagedData *packagedData)
     packagedData->gyroy = floatToHalf(data->gyroscopeData.y);
     packagedData->gyroz = floatToHalf(data->gyroscopeData.z);
     packagedData->timestamp = data->timestamp;
-}
-
-
-void update(){
-    //convertStructToCompressedData(GetSensorData(), &LocalPackagedData);
 }

@@ -15,7 +15,7 @@ void setup() {
     while (!Serial) {
         ; // wait for serial port to connect.
     }
-    InitSensors()
+    InitSensors();
 }
 
 void loop() {
@@ -25,7 +25,7 @@ void loop() {
 //   // put your main code here, to run repeatedly:
 //   sensorData = GetSensorData();
 //   gpsData = GetGPSData();
-    PrintSensors()
+    PrintSensors();
 
 }
 

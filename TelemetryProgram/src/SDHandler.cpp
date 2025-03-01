@@ -46,41 +46,49 @@ void InitSD()
 void createExampleTxt() {
   
 
-  if (SD.exists("example.txt")) {
-    Serial.println("example.txt exists.");
+  if (SD.exists("FlightData.fdat")) {
+    Serial.println("FlightData.fdat exists.");
   }
   else {
-    Serial.println("example.txt doesn't exist.");
+    Serial.println("FlightData.fdat doesn't exist.");
   }
 
   // open a new file and immediately close it:
-  Serial.println("Creating example.txt...");
-  myFile = SD.open("example.txt", FILE_WRITE);
+  Serial.println("Creating FlightData.fdat...");
+  myFile = SD.open("FlightData.fdat", FILE_WRITE);
   myFile.close();
 
 }
 
 void deleteExampleTxt(){
   // Check to see if the file exists: 
-  if (SD.exists("example.txt")) {
-    Serial.println("example.txt exists.");
+  if (SD.exists("FlightData.fdat")) {
+    Serial.println("FlightData.fdat exists.");
   }
   else {
-    Serial.println("example.txt doesn't exist.");  
+    Serial.println("FlightData.fdat doesn't exist.");  
   }
 
   // delete the file:
-  Serial.println("Removing example.txt...");
-  SD.remove("example.txt");
+  Serial.println("Removing FlightData.fdat...");
+  SD.remove("FlightData.fdat");
 
-  if (SD.exists("example.txt")){ 
-    Serial.println("example.txt exists.");
+  if (SD.exists("FlightData.fdat")){ 
+    Serial.println("FlightData.fdat exists.");
   }
   else {
-    Serial.println("example.txt doesn't exist.");  
+    Serial.println("FlightData.fdat doesn't exist.");  
   }
+  
 }
 
+void WriteTest(){
+  //File f = SD.open()
+}
+
+void readtest(){
+
+}
 // void loop()
 // {
 //   // Write data to SD continuously

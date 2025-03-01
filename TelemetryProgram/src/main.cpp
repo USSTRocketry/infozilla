@@ -3,6 +3,7 @@
 #include <Wire.h>
 #include <SDHandler.h>
 #include <SensorInit.h>
+#include <Sensors.h>
 
 // HAL libs
 #include "Avionics_HAL.h"
@@ -14,7 +15,7 @@ void setup() {
     while (!Serial) {
         ; // wait for serial port to connect.
     }
-    
+    InitSensors()
 }
 
 void loop() {
@@ -24,7 +25,8 @@ void loop() {
 //   // put your main code here, to run repeatedly:
 //   sensorData = GetSensorData();
 //   gpsData = GetGPSData();
-    
+    PrintSensors()
+
 }
 
 // // put function definitions here:

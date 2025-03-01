@@ -57,7 +57,7 @@ SensorData* GetSensorData(){
     return &sdata;
 }
 
-void PrintSensorData(){ // loop
+void PrintSensors(){ // loop
 
     PrintBMP();
     PrintAccelGyro();

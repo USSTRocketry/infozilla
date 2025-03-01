@@ -16,6 +16,8 @@ void setup() {
         ; // wait for serial port to connect.
     }
     InitSensors();
+    InitSD();
+    WriteTest();
 }
 
 void loop() {
@@ -25,14 +27,12 @@ void loop() {
 //   // put your main code here, to run repeatedly:
 //   sensorData = GetSensorData();
 //   gpsData = GetGPSData();
+
     PrintSensors();
+    //Create delay so sensord Read everything at same rate probably want to set to 100 ms for actual flight.
+    delay(1000);
 
 }
-
-// // put function definitions here:
-// int myFunction(int x, int y) {
-//   return x + y;
-// }
 
 // void Handledata(){
 

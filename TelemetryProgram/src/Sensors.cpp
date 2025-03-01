@@ -87,9 +87,6 @@ void PrintSensors(){ // loop
     } else {
         // Serial.println("No GPS fix available.");
     }
-
-    // Read everything at same rate
-    delay(1000);
 }
 
 void GetBarData(){

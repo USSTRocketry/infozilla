@@ -9,3 +9,5 @@
 #include <SPI.h>
 
 void InitSD();
+
+void WriteTest();

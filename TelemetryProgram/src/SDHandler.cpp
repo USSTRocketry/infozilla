@@ -83,10 +83,25 @@ void deleteExampleTxt(){
 }
 
 void WriteTest(){
-  //File f = SD.open()
-}
+  File f = SD.open("FlightData.fdat", FILE_WRITE);
+  f.seek(SeekEnd);
+  char *buf = "Hello World";
+  for (int i = 0; i < 10; i++)
+  {
+    /* code */
+    f.write(buf,12);
+  }
+  f.close();
 
-void readtest(){
+  f = SD.open("FlightData.fdat",FILE_READ);
+  char b[12];
+
+  for (int i = 0; i < 10; i++)
+  {
+    /* code */
+    f.readBytes(b,12);
+    Serial.print(b);
+  }
 
 }
 // void loop()

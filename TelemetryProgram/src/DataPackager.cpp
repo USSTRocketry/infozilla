@@ -4,6 +4,8 @@
 #include <SensorStructs.h>
 #include <DataStorage.h>
 #include <Sensors.h>
+#include <SDHandler.h>
+#include <string>
 
 // char *convertedStruct;
 // int convertedStructLen = 0;
@@ -29,12 +31,24 @@ void InitDataPackager(){
     
 }
 
+std::string ConvertSensorDataToString(SensorData data){
+    std::string s = std::to_string(data.barval)+","+
+    std::to_string(data.thermoval)+","
+    +std::to_string(data.accelerometer.x)+","
+    +std::to_string(data.accelerometer.y)+","
+    +std::to_string(data.accelerometer.z)+","
+    +std::to_string(data.gyroscopeData.x)+","
+    +std::to_string(data.gyroscopeData.y)+","
+    +std::to_string(data.gyroscopeData.z)+","
+    +std::to_string(data.timestamp)+",";
 
+    return s;
+}
 
 void HandleData() {
     Serial.printf("HandleData()");
-    //convertStructToCompressedData(GetSensorData(), &LocalPackagedData);
-    StoreBytes(GetSensorData(), sizeof(SensorData))
+
+    //StoreBytes(GetSensorData(), sizeof(SensorData))
 }
 
 void TransferToSD(){

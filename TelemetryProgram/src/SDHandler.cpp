@@ -3,7 +3,6 @@
 // When it works, push to HAL submodule
 // Include wrappers for options/customization when initializing SD (same as what is in HAL library already)
 //****************************** */
-
 #include <SDHandler.h>
 // For examples, go to SDHandler.h > SD.h > from SD.h ../examples/Files/Files.ino
 
@@ -20,7 +19,9 @@ File myFile;
 // Wiz820+SD board: pin 4
 // Teensy 2.0: pin 0
 // Teensy++ 2.0: pin 20
-const int chipSelect = 10;
+const int chipSelect = BUILTIN_SDCARD;
+const int flashModule;
+int savecount = 0;
 
 void InitSD()
 {
@@ -83,27 +84,43 @@ void deleteExampleTxt(){
 }
 
 void WriteTest(){
+  //SD.remove("FlightData.fdat");
   File f = SD.open("FlightData.fdat", FILE_WRITE);
-  f.seek(SeekEnd);
-  char *buf = "Hello World";
+  std::string buf = "Jello World";
   for (int i = 0; i < 10; i++)
   {
     /* code */
-    f.write(buf,12);
+    //f.write(buf,12);
+    f.println(buf.c_str());
   }
   f.close();
 
   f = SD.open("FlightData.fdat",FILE_READ);
   char b[12];
 
-  for (int i = 0; i < 10; i++)
+  for (int i = 0; i < 30; i++)
   {
     /* code */
     f.readBytes(b,12);
     Serial.print(b);
   }
+  f.close();
+}
+
+
+void StoreStringLineToCSV(std::string stringline){
+  File f; 
+  if (!SD.exists("FlightData.csv")) {
+    f = SD.open("FlightData.csv", FILE_WRITE);
+    f.println("BarVal,Thermoval,accel_x,accell_y,accell_z,Gyro_x,Gyro_y,Gyro_z,timestamp");
+  }else{
+    f = SD.open("FlightData.csv", FILE_WRITE);
+  }
+  f.println(stringline.c_str());
+  f.close();
 
 }
+
 // void loop()
 // {
 //   // Write data to SD continuously

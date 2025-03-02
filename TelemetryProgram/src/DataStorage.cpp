@@ -1,5 +1,5 @@
 // #include <Arduino.h>
-// #include <DataStorage.h>
+#include <DataStorage.h>
 
 // char *GetByteData(int len, int offset, char *output)
 // {
@@ -14,3 +14,11 @@
 // void StoreBytes(char bytes[], int len){
 //     Serial.printf("StoreBytes()");
 // }
+
+void StoreStringLine(std::string s){
+
+}
+
+void TransferFiles(FILE from, FILE to){
+    
+}

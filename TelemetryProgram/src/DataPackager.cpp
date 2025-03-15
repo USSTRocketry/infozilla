@@ -6,6 +6,7 @@
 #include <Sensors.h>
 #include <SDHandler.h>
 #include <string>
+#include <ArduinoLowPower.h>
 // char *convertedStruct;
 // int convertedStructLen = 0;
 
@@ -32,6 +33,8 @@ typedef enum {
 
 FlightStates FlightState = PowerUp;
 double InitialHeightData;
+double barvalQueue[20];
+int BarvalStart = 0, BarvalEvd = 1;
 
 //PackagedData LocalPackagedData;
 char *packagesDataAsBytes;
@@ -43,7 +46,7 @@ void InitDataPackager(){
 }
 
 std::string ConvertSensorDataToString(SensorData* data){
-    std::string s = std::to_string(data.barval)+","+
+    std::string s = std::to_string(data->barval)+","+
     std::to_string(data->thermoval)+","
     +std::to_string(data->accelerometer.x)+","
     +std::to_string(data->accelerometer.y)+","
@@ -65,26 +68,44 @@ void HandleData() {
 void Update(){
     SensorData *RetrivedData = GetSensorData();
     double currentBarVal = RetrivedData->barval;
+    AddValToQueue(currentBarVal);
     switch (FlightState)
     {
     case PowerUp:
         /* code */
-        if(abs(InitialHeightData-currentBarVal) > 100){
+        if(abs(InitialHeightData-currentBarVal) > 100.0){
             FlightState = InFlight;
         }
 
         break;
     case InFlight:
+        if(abs(ReadValFromQueue()-currentBarVal) < 1.0){
+            FlightState = Landed;
+        }
         break;
     case Landed:
+        // todo: Wait about 60 seconds
         break;
     case SaveData:
+        // todo: Disable Data collection and move all files from builtin flash to sd
         break;
     case PowerDown:
+        // todo: go to low power state 
+        LowPower.deepSleep(5000);
         break;
     default:
         break;
     }
+}
+
+void AddValToQueue(double val){
+    BarvalStart = (BarvalStart+1)%20;
+    BarvalEvd = (BarvalEvd+1)%20;
+    barvalQueue[BarvalStart] = val;
+}
+
+double ReadValFromQueue(){
+    return barvalQueue[BarvalEvd];
 }
 
 void TransferToSD(){

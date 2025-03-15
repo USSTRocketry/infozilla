@@ -19,6 +19,9 @@ File myFile;
 // Wiz820+SD board: pin 4
 // Teensy 2.0: pin 0
 // Teensy++ 2.0: pin 20
+
+#define OPTIONAL_FLASH_CHIP = 7
+
 const int chipSelect = BUILTIN_SDCARD;
 const int flashModule;
 int savecount = 0;
@@ -28,6 +31,7 @@ void InitSD()
  //UNCOMMENT THESE TWO LINES FOR TEENSY AUDIO BOARD:
  //SPI.setMOSI(7);  // Audio shield has MOSI on pin 7
  //SPI.setSCK(14);  // Audio shield has SCK on pin 14
+FLASHMEM
   
   Serial.println("Initializing SD card...");
   if (!SD.begin(chipSelect)) {

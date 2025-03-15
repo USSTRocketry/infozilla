@@ -6,7 +6,7 @@ const int SDchipSelect = 4;    // Audio Shield has SD card CS on pin 10
 const int FlashChipSelect = 6; // digital pin for flash chip CS pin
 //const int FlashChipSelect = 21; // Arduino 101 built-in SPI Flash
 
-void setup() {
+void setup_temp() {
   //uncomment these if using Teensy audio shield
   //SPI.setSCK(14);  // Audio shield has SCK on pin 14
   //SPI.setMOSI(7);  // Audio shield has MOSI on pin 7
@@ -25,10 +25,10 @@ void setup() {
   Serial.println(F("Copy all files from SD Card to SPI Flash"));
 
   if (!SD.begin(SDchipSelect)) {
-    error("Unable to access SD card");
+    //error("Unable to access SD card");
   }
   if (!SerialFlash.begin(FlashChipSelect)) {
-    error("Unable to access SPI Flash chip");
+    //error("Unable to access SPI Flash chip");
   }
 
   File rootdir = SD.open("/");
@@ -49,14 +49,14 @@ void setup() {
       SerialFlashFile ff = SerialFlash.open(filename);
       if (ff && ff.size() == f.size()) {
         Serial.println(F("  size is the same, comparing data..."));
-        if (compareFiles(f, ff) == true) {
-          Serial.println(F("  files are identical :)"));
-          f.close();
-          ff.close();
-          continue;  // advance to next file
-        } else {
-          Serial.println(F("  files are different"));
-        }
+        // if (compareFiles(f, ff) == true) {
+        //   Serial.println(F("  files are identical :)"));
+        //   f.close();
+        //   ff.close();
+        //   continue;  // advance to next file
+        // } else {
+        //   Serial.println(F("  files are different"));
+        // }
       } else {
         Serial.print(F("  size is different, "));
         Serial.print(ff.size());
@@ -117,10 +117,6 @@ bool compareFiles(File &file, SerialFlashFile &ffile) {
     count = count - n;
   }
   return true;  // all data identical
-}
-
-
-void loop() {
 }
 
 void error(const char *message) {

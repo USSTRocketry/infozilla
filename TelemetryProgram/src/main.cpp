@@ -8,6 +8,15 @@
 // HAL libs
 #include "Avionics_HAL.h"
 
+// Low Power mode libraries
+#include <ArduinoLowPower.h>
+#include <FlexiTimer2.h>
+
+// Enter low power mode
+void sleep() {
+    //go in low power mode. Note that the board will reset once it is woken up
+    LowPower.deepSleep();
+}
 
 void setup() {
 

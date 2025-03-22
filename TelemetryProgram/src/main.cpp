@@ -24,9 +24,9 @@ void setup() {
     while (!Serial) {
         ; // wait for serial port to connect.
     }
-    //InitSensors();
-    InitSD();
-    WriteTest();
+    InitSensors();
+    // InitSD();
+    // WriteTest();
 }
 
 void loop() {

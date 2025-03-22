@@ -67,26 +67,26 @@ void PrintSensors(){ // loop
     RWRadio();
 
     // BMP 
-    BMP280Data* bmpdata = bmp280Sensor.read();
+    // BMP280Data* bmpdata = bmp280Sensor.read();
 
-    // AccelGyro
-    AccelGyroData* acceldata = accelGyro.read();
+    // // AccelGyro
+    // AccelGyroData* acceldata = accelGyro.read();
 
-    // Magnetometer
-    MagnetometerData* magdata = magnetometer.read();
+    // // Magnetometer
+    // MagnetometerData* magdata = magnetometer.read();
 
-    // Temperature
-    float temperature = tempSensor.read();
+    // // Temperature
+    // float temperature = tempSensor.read();
 
-    // GPS
-    GPSData* gpsdata = gps.read();
-    if (gps.hasFix()) {
-        // Serial.print("Lat: "); Serial.println(gpsdata->latitude, 6);
-        // Serial.print("Lon: "); Serial.println(gpsdata->longitude, 6);
-        // Serial.print("Alt: "); Serial.println(gpsdata->altitude);
-    } else {
-        // Serial.println("No GPS fix available.");
-    }
+    // // GPS
+    // GPSData* gpsdata = gps.read();
+    // if (gps.hasFix()) {
+    //     // Serial.print("Lat: "); Serial.println(gpsdata->latitude, 6);
+    //     // Serial.print("Lon: "); Serial.println(gpsdata->longitude, 6);
+    //     // Serial.print("Alt: "); Serial.println(gpsdata->altitude);
+    // } else {
+    //     // Serial.println("No GPS fix available.");
+    // }
 }
 
 void GetBarData(){
@@ -98,7 +98,7 @@ void InitBMP(){
     if (bmp280Sensor.begin()) {
         Serial.println("BMP280 initialized.");
     } else {
-        Serial.println("Initialization failed.");
+        Serial.println("BMP Initialization failed.");
     }
 }
 
@@ -212,6 +212,7 @@ void PrintGPS() {
 
 void RWRadio() {
     const char* message = "Hello, LoRa!";
+    Serial.println("Radio Started.");
     if (radio.send((const uint8_t*)message, strlen(message))) {
         Serial.println("Message sent!");
     }
@@ -224,6 +225,6 @@ void RWRadio() {
         Serial.write(buffer, length);
         Serial.println();
     }
-
+    Serial.println("Radio Finished.");
     // delay(1000);
 }

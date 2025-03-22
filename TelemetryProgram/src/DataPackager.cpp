@@ -6,7 +6,7 @@
 #include <Sensors.h>
 #include <SDHandler.h>
 #include <string>
-#include <ArduinoLowPower.h>
+// #include <ArduinoLowPower.h>
 // char *convertedStruct;
 // int convertedStructLen = 0;
 
@@ -43,6 +43,20 @@ void InitDataPackager(){
     //Serial.printf("InitDataPackager()");
     InitialHeightData = GetSensorData()->barval;
     
+}
+
+void AddValToQueue(double val){
+    BarvalStart = (BarvalStart+1)%20;
+    BarvalEvd = (BarvalEvd+1)%20;
+    barvalQueue[BarvalStart] = val;
+}
+
+double ReadValFromQueue(){
+    return barvalQueue[BarvalEvd];
+}
+
+void TransferToSD(){
+    Serial.printf("TransferToSD()");
 }
 
 std::string ConvertSensorDataToString(SensorData* data){
@@ -91,26 +105,14 @@ void Update(){
         break;
     case PowerDown:
         // todo: go to low power state 
-        LowPower.deepSleep(5000);
+        // LowPower.deepSleep(5000);
         break;
     default:
         break;
     }
 }
 
-void AddValToQueue(double val){
-    BarvalStart = (BarvalStart+1)%20;
-    BarvalEvd = (BarvalEvd+1)%20;
-    barvalQueue[BarvalStart] = val;
-}
 
-double ReadValFromQueue(){
-    return barvalQueue[BarvalEvd];
-}
-
-void TransferToSD(){
-    Serial.printf("TransferToSD()");
-}
 
 // uint16_t floatToHalf(float input){
 //     return fp16_ieee_from_fp32_value(input);

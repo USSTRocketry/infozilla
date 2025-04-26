@@ -12,9 +12,9 @@
 SensorData sdata;
 
 // Constructors for sensors
-SensorBMP280 bmp280Sensor; // SensorBMP280 - Temp, pressure, and altitude
-SensorAccelGyro accelGyro(0x6A, I2C_WIRE0); // Accelerometer and gyroscope sensor Default I2C address and bus
-SensorMagnetometer magnetometer(LIS3MDL_I2CADDR_DEFAULT, I2C_WIRE0); // Magnometer Default I2C address and bus
+SensorBMP280 bmp280Sensor(0x77); // SensorBMP280 - Temp, pressure, and altitude
+SensorAccelGyro accelGyro(0x6B, I2C_WIRE0); // Accelerometer and gyroscope sensor Default I2C address and bus
+SensorMagnetometer magnetometer(0x1E, I2C_WIRE0); // Magnometer Default I2C address and bus
 SensorTemperature tempSensor; // Default I2C address and bus
 GPS gps(GPS_HW_SERIAL, 9600);
 // RYLR998Radio radio(HW_SERIAL8, 9600); // Not default Radio to be used
@@ -64,7 +64,7 @@ void PrintSensors(){ // loop
     PrintMagnetometer();
     PrintTempSensor();
     PrintGPS();
-    RWRadio();
+    // RWRadio();
 
     // BMP 
     // BMP280Data* bmpdata = bmp280Sensor.read();
@@ -132,6 +132,8 @@ void InitTempSensor(){
 void InitGPS() {
     gps.begin();
     gps.configure(1000, PMTK_SET_NMEA_OUTPUT_RMCONLY);
+    Serial.println("GPS initialized.");
+
 }
 
 void InitRadio() {
@@ -143,6 +145,8 @@ void InitRadio() {
     }
     radio.setFrequency(915.0);
     radio.setTxPower(20);
+    Serial.println("RFM95 initialized part 2.");
+
 }
 
 void PrintBMP(){

@@ -2,6 +2,6 @@
 
 // void InitDataPackager();
 
-// void HandleData();
+void HandleData();
 
 // void TransferToSD();

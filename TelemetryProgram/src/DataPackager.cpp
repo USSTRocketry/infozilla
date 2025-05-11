@@ -6,6 +6,12 @@
 #include <Sensors.h>
 #include <SDHandler.h>
 #include <string>
+
+//this define is for the low power library needing this define but not having it defined.
+#define voidFuncPtr void*
+#include <ArduinoLowPower.h>
+#include <FlexiTimer2.h>
+
 // #include <ArduinoLowPower.h>
 // char *convertedStruct;
 // int convertedStructLen = 0;
@@ -34,7 +40,9 @@ typedef enum {
 FlightStates FlightState = PowerUp;
 double InitialHeightData;
 double barvalQueue[20];
-int BarvalStart = 0, BarvalEvd = 1;
+int BarvalStart = 0, BarvalEnd = 1;
+uint32_t startTimeToSleep = 0;
+bool isCollectingData = true;
 
 //PackagedData LocalPackagedData;
 char *packagesDataAsBytes;
@@ -47,41 +55,34 @@ void InitDataPackager(){
 
 void AddValToQueue(double val){
     BarvalStart = (BarvalStart+1)%20;
-    BarvalEvd = (BarvalEvd+1)%20;
+    BarvalEnd = (BarvalEnd+1)%20;
     barvalQueue[BarvalStart] = val;
 }
 
 double ReadValFromQueue(){
-    return barvalQueue[BarvalEvd];
+    return barvalQueue[BarvalEnd];
 }
 
 void TransferToSD(){
     Serial.printf("TransferToSD()");
 }
 
-std::string ConvertSensorDataToString(SensorData* data){
-    std::string s = std::to_string(data->barval)+","+
-    std::to_string(data->thermoval)+","
-    +std::to_string(data->accelerometer.x)+","
-    +std::to_string(data->accelerometer.y)+","
-    +std::to_string(data->accelerometer.z)+","
-    +std::to_string(data->gyroscopeData.x)+","
-    +std::to_string(data->gyroscopeData.y)+","
-    +std::to_string(data->gyroscopeData.z)+","
-    +std::to_string(data->timestamp)+",";
-
-    return s;
-}
-
 void HandleData() {
-    Serial.printf("HandleData()");
+
+    if(isCollectingData){
+        SensorData *RetrivedData = GetSensorData();
+
+        Update(RetrivedData->barval);
+    }else{
+        Update();
+    }
 
     //StoreBytes(GetSensorData(), sizeof(SensorData))
 }
 
-void Update(){
-    SensorData *RetrivedData = GetSensorData();
-    double currentBarVal = RetrivedData->barval;
+void Update(double barval = 0){
+    
+    double currentBarVal = barval;
     AddValToQueue(currentBarVal);
     switch (FlightState)
     {
@@ -94,17 +95,24 @@ void Update(){
         break;
     case InFlight:
         if(abs(ReadValFromQueue()-currentBarVal) < 1.0){
+            startTimeToSleep = millis();
             FlightState = Landed;
         }
         break;
     case Landed:
-        // todo: Wait about 60 seconds
+        // Wait about 60 seconds
+        if(millis() - startTimeToSleep > 60000){
+            FlightState = SaveData;
+            isCollectingData = false;
+        }
+        
         break;
     case SaveData:
-        // todo: Disable Data collection and move all files from builtin flash to sd
+        // todo: move all files from builtin flash to sd
         break;
     case PowerDown:
-        // todo: go to low power state 
+        // go to low power state 
+        LowPower.deepSleep();
         // LowPower.deepSleep(5000);
         break;
     default:

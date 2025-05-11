@@ -4,19 +4,10 @@
 #include <SDHandler.h>
 #include <SensorInit.h>
 #include <Sensors.h>
+#include <DataPackager.h>
 
 // HAL libs
 #include "Avionics_HAL.h"
-
-// Low Power mode libraries
-#include <ArduinoLowPower.h>
-#include <FlexiTimer2.h>
-
-// Enter low power mode
-void sleep() {
-    //go in low power mode. Note that the board will reset once it is woken up
-    LowPower.deepSleep();
-}
 
 void setup() {
 
@@ -25,7 +16,7 @@ void setup() {
         ; // wait for serial port to connect.
     }
     InitSensors();
-    // InitSD();
+    InitSD();
     // WriteTest();
 }
 
@@ -37,7 +28,8 @@ void loop() {
 //   sensorData = GetSensorData();
 //   gpsData = GetGPSData();
 
-    PrintSensors();
+    //PrintSensors();
+    HandleData();
     //Create delay so sensord Read everything at same rate probably want to set to 100 ms for actual flight.
     delay(1000);
 

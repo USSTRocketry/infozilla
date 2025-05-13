@@ -73,6 +73,8 @@ void HandleData() {
         SensorData *RetrivedData = GetSensorData();
 
         Update(RetrivedData->barval);
+
+        StoreBytes((char *)RetrivedData,sizeof(*RetrivedData));
     }else{
         Update();
     }

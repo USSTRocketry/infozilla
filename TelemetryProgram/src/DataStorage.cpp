@@ -76,11 +76,16 @@ void TransferFileData(File to){
 
 std::string convertDataToCSVRow(SensorData* sensorData){
     // BarVal,Thermoval,accel_x,accell_y,accell_z,Gyro_x,Gyro_y,Gyro_z,timestamp
-    return std::to_string(sensorData->barval)+","+
-    std::to_string(sensorData->thermoval)+","+std::to_string(sensorData->accelerometer.x)+","+
-    std::to_string(sensorData->accelerometer.y)+","+std::to_string(sensorData->accelerometer.z)+","+
-    std::to_string(sensorData->gyroscopeData.x)+","+std::to_string(sensorData->gyroscopeData.y)+","+
-    std::to_string(sensorData->gyroscopeData.z)+","+std::to_string(sensorData->timestamp)+"\n";
+    // TODO: Some data is missing here, like GPS data.
+    return std::to_string(sensorData->bmp280.altitude) + "," +
+           std::to_string(sensorData->temperature) + "," +
+           std::to_string(sensorData->accelGyro.accelX) + "," +
+           std::to_string(sensorData->accelGyro.accelY) + "," +
+           std::to_string(sensorData->accelGyro.accelZ) + "," +
+           std::to_string(sensorData->magnetometer.magneticX) + "," +
+           std::to_string(sensorData->magnetometer.magneticY) + "," +
+           std::to_string(sensorData->magnetometer.magneticZ) + "," +
+           std::to_string(sensorData->timestamp) + "\n";
 }
 
 void StoreData(SensorData* sensorData){

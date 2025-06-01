@@ -46,10 +46,11 @@ bool isCollectingData = true;
 
 //PackagedData LocalPackagedData;
 char *packagesDataAsBytes;
+void Update(float barval = 0);
 
 void InitDataPackager(){
     //Serial.printf("InitDataPackager()");
-    InitialHeightData = GetSensorData()->barval;
+    InitialHeightData = GetSensorData()->bmp280.altitude;
     
 }
 
@@ -72,7 +73,7 @@ void HandleData() {
     if(isCollectingData){
         SensorData *RetrivedData = GetSensorData();
 
-        Update(RetrivedData->barval);
+        Update(RetrivedData->bmp280.altitude);
 
         StoreBytes((char *)RetrivedData,sizeof(*RetrivedData));
     }else{
@@ -82,7 +83,7 @@ void HandleData() {
     //StoreBytes(GetSensorData(), sizeof(SensorData))
 }
 
-void Update(double barval = 0){
+void Update(float barval){
     
     double currentBarVal = barval;
     AddValToQueue(currentBarVal);

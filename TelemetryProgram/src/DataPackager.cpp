@@ -3,6 +3,7 @@
 #include <fp16.h>
 #include <SensorStructs.h>
 #include <DataStorage.h>
+#include <DataPackager.h>
 #include <Sensors.h>
 #include <SDHandler.h>
 #include <string>
@@ -29,13 +30,7 @@
 //     long timestamp;//8?
 // };
 
-typedef enum {
-    PowerUp,
-    InFlight,
-    Landed,
-    SaveData,
-    PowerDown
-}FlightStates;
+
 
 FlightStates FlightState = PowerUp;
 double InitialHeightData;
@@ -46,10 +41,11 @@ bool isCollectingData = true;
 
 //PackagedData LocalPackagedData;
 char *packagesDataAsBytes;
+void Update(float barval = 0);
 
 void InitDataPackager(){
     //Serial.printf("InitDataPackager()");
-    InitialHeightData = GetSensorData()->barval;
+    InitialHeightData = GetSensorData()->bmp280.altitude;
     
 }
 
@@ -72,7 +68,7 @@ void HandleData() {
     if(isCollectingData){
         SensorData *RetrivedData = GetSensorData();
 
-        Update(RetrivedData->barval);
+        Update(RetrivedData->bmp280.altitude);
 
         StoreBytes((char *)RetrivedData,sizeof(*RetrivedData));
     }else{
@@ -82,14 +78,27 @@ void HandleData() {
     //StoreBytes(GetSensorData(), sizeof(SensorData))
 }
 
-void Update(double barval = 0){
+FlightStates GetFlightState(){
+    return FlightState;
+}
+
+void SetFlightState(FlightStates flightState){
+    FlightState = flightState;
+}
+
+void Update(float barval){
     
     double currentBarVal = barval;
     AddValToQueue(currentBarVal);
     switch (FlightState)
     {
     case PowerUp:
-        /* code */
+        /* dont do anything */
+        isCollectingData = false;
+
+        break;
+    case ReadyForLaunch:
+        isCollectingData = true;
         if(abs(InitialHeightData-currentBarVal) > 100.0){
             FlightState = InFlight;
         }

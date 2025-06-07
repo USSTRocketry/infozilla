@@ -5,6 +5,7 @@
 #include <SensorStructs.h>
 #include <SensorInit.h>
 #include <SDHandler.h>
+#include <log.h>
 
 // HAL libs
 #include "Avionics_HAL.h"
@@ -12,13 +13,13 @@
 SensorData sdata;
 
 // Constructors for sensors
-SensorBMP280 bmp280Sensor(0x77); // SensorBMP280 - Temp, pressure, and altitude
+SensorBMP280 bmp280Sensor; // SensorBMP280 - Temp, pressure, and altitude
 SensorAccelGyro accelGyro(0x6B, I2C_WIRE0); // Accelerometer and gyroscope sensor Default I2C address and bus
 SensorMagnetometer magnetometer(0x1E, I2C_WIRE0); // Magnometer Default I2C address and bus
 SensorTemperature tempSensor; // Default I2C address and bus
 GPS gps(GPS_HW_SERIAL, 9600);
 // RYLR998Radio radio(HW_SERIAL8, 9600); // Not default Radio to be used
-RFM95Radio radio(RADIO_CS, 0, HW_SPI0); // Default radio used - Interrupt 0 because it's not used, 915 MHz default 
+RFM95Radio radio(RADIO_CS, RADIO_INT, RADIO_SPI, 915.0); // Default radio used - Interrupt 0 because it's not used, 915 MHz default 
 
 
 
@@ -42,7 +43,7 @@ RFM95Radio radio(RADIO_CS, 0, HW_SPI0); // Default radio used - Interrupt 0 beca
  */
 
 void InitSensors(){
-    Serial.printf("InitSensors()");
+    log_message(__func__, "Initializing sensors...");
     InitSD();
     InitBMP();
     InitAccelGyro();
@@ -54,7 +55,59 @@ void InitSensors(){
 
 SensorData* GetSensorData(){
 
+    BMP280Data* bmpData = bmp280Sensor.read();
+    sdata.bmp280.temperature = bmpData->temperature;
+    sdata.bmp280.pressure = bmpData->pressure;
+    sdata.bmp280.altitude = bmpData->altitude;
+
+
+    AccelGyroData* accelData = accelGyro.read();
+    sdata.accelGyro.temperature = accelData->temperature;
+    sdata.accelGyro.accelX = accelData->accelX;
+    sdata.accelGyro.accelY = accelData->accelY;
+    sdata.accelGyro.accelZ = accelData->accelZ;
+    sdata.accelGyro.gyroX = accelData->gyroX;
+    sdata.accelGyro.gyroY = accelData->gyroY;
+    sdata.accelGyro.gyroZ = accelData->gyroZ;
+
+
+    MagnetometerData* magData = magnetometer.read();
+    sdata.magnetometer.magneticX = magData->magneticX;
+    sdata.magnetometer.magneticY = magData->magneticY;
+    sdata.magnetometer.magneticZ = magData->magneticZ;
+
+    float temperature = tempSensor.read();
+    sdata.temperature = temperature;
+
+    GPSData* gpsData = gps.read();
+    if (gpsData != nullptr){
+        sdata.gps.latitude = gpsData->latitude;
+        sdata.gps.longitude = gpsData->longitude;
+        sdata.gps.altitude = gpsData->altitude;
+        sdata.gps.speed = gpsData->speed;
+        sdata.gps.angle = gpsData->angle;
+        sdata.gps.satellites = gpsData->satellites;
+        sdata.gps.fix_quality = gpsData->fix_quality;
+    }else{
+        log_message(__func__, "GPS data is null, setting to 0s.");
+        sdata.gps.latitude = 0.0f;
+        sdata.gps.longitude = 0.0f;
+        sdata.gps.altitude = 0.0f;
+        sdata.gps.speed = 0.0f;
+        sdata.gps.angle = 0.0f;
+        sdata.gps.satellites = 0;
+        sdata.gps.fix_quality = 0;
+    }
+    
+
+    sdata.timestamp = millis();
+
     return &sdata;
+}
+
+void update_gps_data(void){
+    // Update GPS data
+    gps.update();
 }
 
 void PrintSensors(){ // loop
@@ -64,42 +117,15 @@ void PrintSensors(){ // loop
     PrintMagnetometer();
     PrintTempSensor();
     PrintGPS();
-    // RWRadio();
-
-    // BMP 
-    // BMP280Data* bmpdata = bmp280Sensor.read();
-
-    // // AccelGyro
-    // AccelGyroData* acceldata = accelGyro.read();
-
-    // // Magnetometer
-    // MagnetometerData* magdata = magnetometer.read();
-
-    // // Temperature
-    // float temperature = tempSensor.read();
-
-    // // GPS
-    // GPSData* gpsdata = gps.read();
-    // if (gps.hasFix()) {
-    //     // Serial.print("Lat: "); Serial.println(gpsdata->latitude, 6);
-    //     // Serial.print("Lon: "); Serial.println(gpsdata->longitude, 6);
-    //     // Serial.print("Alt: "); Serial.println(gpsdata->altitude);
-    // } else {
-    //     // Serial.println("No GPS fix available.");
-    // }
-}
-
-void GetBarData(){
-
 }
 
 bool InitBMP(){
     // Init BMP280
     if (bmp280Sensor.begin()) {
-        Serial.println("BMP280 initialized.");
+        log_message(__func__, "BMP280 initialized.");
         return true;
     } else {
-        Serial.println("BMP Initialization failed.");
+        log_message(__func__, "Failed to initialize BMP280 sensor!");
         return false;
     }
 }
@@ -107,21 +133,21 @@ bool InitBMP(){
 bool InitAccelGyro() {
     // Init AccelGyro
     if (accelGyro.begin()) {
-        Serial.println("AccelGyro initialized.");
         return true;
+        log_message(__func__, "AccelGyro initialized.");
     } else {
-        Serial.println("Failed to initialize accelerometer/gyroscope sensor!");
-        \return false;
+        log_message(__func__, "Failed to initialize accelerometer/gyroscope sensor!");
+        return false;
     }
 }
 
 bool InitMagnetometer() {
     // Init Magnetometer
     if (magnetometer.begin()) {
-        Serial.println("Magnetometer initialized.");
         return true;
+        log_message(__func__, "Magnetometer initialized.");
     } else {
-        Serial.println("Failed to initialize magnetometer!");
+        log_message(__func__, "Failed to initialize magnetometer!");
         return false;
     }
 }
@@ -129,97 +155,62 @@ bool InitMagnetometer() {
 bool InitTempSensor(){
     // Init Temperature Sensor
     if (tempSensor.begin()) {
-        Serial.println("Temperature sensor initialized.");
         return true;
+        log_message(__func__, "Temperature sensor initialized.");
     } else {
-        Serial.println("Failed to initialize temperature sensor!");
+        log_message(__func__, "Failed to initialize temperature sensor!");
         return false;
     }
 }
 
 void InitGPS() {
     gps.begin();
-    gps.configure(1000, PMTK_SET_NMEA_OUTPUT_RMCONLY);
-    Serial.println("GPS initialized.");
-
+    log_message(__func__, "GPS initialized.");
 }
 
 bool InitRadio() {
     if (radio.begin()) {
-        Serial.println("RFM95 initialized.");
+        log_message(__func__, "RFM95 initialized.");
     } else {
-        Serial.println("Failed to initialize RFM95!");
+        log_message(__func__, "Failed to initialize RFM95!");
 
     }
     radio.setFrequency(915.0);
     radio.setTxPower(20);
-    Serial.println("RFM95 initialized part 2.");
-
 }
 
 void PrintBMP(){
     BMP280Data* data = bmp280Sensor.read();
-    Serial.print("Temp: ");
-    Serial.print(data->temperature);
-    Serial.print("°C, Pressure: ");
-    Serial.print(data->pressure);
-    Serial.print("Pa, Altitude: ");
-    Serial.print(data->altitude);
-    Serial.println("m");
-    // delay(1000);
+    log_message(__func__, "Temp: %.2f°C, Pressure: %.2fPa, Altitude: %.2fm",
+                data->temperature, data->pressure, data->altitude);
 }
 
 void PrintAccelGyro(){
     AccelGyroData* data = accelGyro.read();
-    Serial.print("Accel: ");
-    Serial.print(data->accelX);
-    Serial.print(", ");
-    Serial.print(data->accelY);
-    Serial.print(", ");
-    Serial.println(data->accelZ);
-
-    Serial.print("Gyro: ");
-    Serial.print(data->gyroX);
-    Serial.print(", ");
-    Serial.print(data->gyroY);
-    Serial.print(", ");
-    Serial.println(data->gyroZ);
-
-    // delay(1000);
-
+    log_message(__func__, "Accel: %.2f, %.2f, %.2f", data->accelX, data->accelY, data->accelZ);
+    log_message(__func__, "Gyro: %.2f, %.2f, %.2f", data->gyroX, data->gyroY, data->gyroZ);
 }
 
 void PrintMagnetometer(){
 
     MagnetometerData* data = magnetometer.read();
-    Serial.print("Magnetic Field: ");
-    Serial.print(data->magneticX);
-    Serial.print(", ");
-    Serial.print(data->magneticY);
-    Serial.print(", ");
-    Serial.println(data->magneticZ);
-
-    // delay(1000);
+    log_message(__func__, "Magnetic Field: %.2f, %.2f, %.2f", data->magneticX, data->magneticY, data->magneticZ);
 }
 
 void PrintTempSensor(){
     float temperature = tempSensor.read();
-    Serial.print("Temperature: ");
-    Serial.print(temperature);
-    Serial.println(" °C");
-    // delay(1000);
+    log_message(__func__, "Temperature: %.2f °C", temperature);
 }
 
 void PrintGPS() {
     GPSData* data = gps.read();
     if (gps.hasFix()) {
-        Serial.print("Lat: "); Serial.println(data->latitude, 6);
-        Serial.print("Lon: "); Serial.println(data->longitude, 6);
-        Serial.print("Alt: "); Serial.println(data->altitude);
+        log_message(__func__, "Lat: %.6f", data->latitude);
+        log_message(__func__, "Lon: %.6f", data->longitude);
+        log_message(__func__, "Alt: %.2f", data->altitude);
     } else {
-        Serial.println("No GPS fix available.");
+        log_message(__func__, "No GPS fix available.");
     }
-    // delay(1000);
 }
 
 void RWRadio() {
@@ -238,5 +229,96 @@ void RWRadio() {
         Serial.println();
     }
     Serial.println("Radio Finished.");
-    // delay(1000);
+}
+
+
+// Radio packaging
+/*
+"""
++--------------------+-----------+-------+------------+-------------------------------+
+| Field              | Type      | Bytes | Multiplier | Description                   |
++--------------------+-----------+-------+------------+-------------------------------+
+| BMP280 Temp        | int16_t   | 2     | *100       | Temperature in °C             |
+| Pressure           | uint32_t  | 4     | *100       | Pressure in hPa               |
+| BMP280 Altitude    | int16_t   | 2     | *10        | Altitude in meters            |
+| Accel X/Y/Z        | int16_t*3 | 6     | *100       | Acceleration in m/s²          |
+| Gyro X/Y/Z         | int16_t*3 | 6     | *100       | Angular velocity in °/s       |
+| IMU Temp           | int16_t   | 2     | *100       | IMU temperature in °C         |
+| Mag X/Y/Z          | int16_t*3 | 6     | *100       | Magnetic field in µT          |
+| Extra Temp Sensor  | int16_t   | 2     | *100       | External temp in °C           |
+| GPS Latitude       | int32_t   | 4     | *1e7       | Degrees                       |
+| GPS Longitude      | int32_t   | 4     | *1e7       | Degrees                       |
+| GPS Altitude       | int16_t   | 2     | *10        | Altitude in meters            |
+| GPS Speed          | uint16_t  | 2     | *100       | Speed in knots                |
+| GPS Angle          | uint16_t  | 2     | *100       | Heading angle in degrees      |
+| timestamp          | uint32_t  | 4     | *1         | Timestamp of data             |
++--------------------+-----------+-------+------------+-------------------------------+
+| TOTAL              |           | 54    |            |                               |
++--------------------+-----------+-------+------------+-------------------------------+
+
+"""
+
+# Define the format string for struct.unpack
+FORMAT = "<h I h 3h 3h h 3h h i i h H H I"
+*/
+
+
+#pragma pack(push, 1)  // Ensure no padding is added between struct members
+struct PacketData {
+    int16_t bmp280_temp;        // Temperature in °C (*100)
+    uint32_t pressure;          // Pressure in hPa (*100)
+    int16_t bmp280_altitude;    // Altitude in meters (*10)
+    int16_t accel_x;            // Acceleration X in m/s² (*100)
+    int16_t accel_y;            // Acceleration Y in m/s² (*100)
+    int16_t accel_z;            // Acceleration Z in m/s² (*100)
+    int16_t gyro_x;             // Angular velocity X in °/s (*100)
+    int16_t gyro_y;             // Angular velocity Y in °/s (*100)
+    int16_t gyro_z;             // Angular velocity Z in °/s (*100)
+    int16_t imu_temp;           // IMU temperature in °C (*100)
+    int16_t mag_x;              // Magnetic field X in µT (*100)
+    int16_t mag_y;              // Magnetic field Y in µT (*100)
+    int16_t mag_z;              // Magnetic field Z in µT (*100)
+    int16_t extra_temp_sensor;  // Extra temp in °C (*100)
+    int32_t gps_latitude;       // Latitude in degrees (*1e7)
+    int32_t gps_longitude;      // Longitude in degrees (*1e7)
+    int16_t gps_altitude;       // Altitude in meters (*10)
+    uint16_t gps_speed;         // Speed in knots (*100)
+    uint16_t gps_angle;         // Heading angle in degrees (*100)
+    uint32_t timestamp;         // Timestamp of data
+};
+#pragma pack(pop)
+
+void sensor_data_to_radio_packet(const SensorData& data, struct PacketData& packetData) {
+    packetData.bmp280_temp = static_cast<int16_t>(data.bmp280.temperature * 100);
+    packetData.pressure = static_cast<uint32_t>(data.bmp280.pressure * 100);
+    packetData.bmp280_altitude = static_cast<int16_t>(data.bmp280.altitude * 10);
+    packetData.accel_x = static_cast<int16_t>(data.accelGyro.accelX * 100);
+    packetData.accel_y = static_cast<int16_t>(data.accelGyro.accelY * 100);
+    packetData.accel_z = static_cast<int16_t>(data.accelGyro.accelZ * 100);
+    packetData.gyro_x = static_cast<int16_t>(data.accelGyro.gyroX * 100);
+    packetData.gyro_y = static_cast<int16_t>(data.accelGyro.gyroY * 100);
+    packetData.gyro_z = static_cast<int16_t>(data.accelGyro.gyroZ * 100);
+    packetData.imu_temp = static_cast<int16_t>(data.accelGyro.temperature* 100);
+    packetData.mag_x = static_cast<int16_t>(data.magnetometer.magneticX * 100);
+    packetData.mag_y = static_cast<int16_t>(data.magnetometer.magneticY * 100);
+    packetData.mag_z = static_cast<int16_t>(data.magnetometer.magneticZ * 100);
+    packetData.extra_temp_sensor = static_cast<int16_t>(data.temperature * 100);
+    packetData.gps_latitude = static_cast<int32_t>(data.gps.latitude * 1e7);
+    packetData.gps_longitude = static_cast<int32_t>(data.gps.longitude * 1e7);
+    packetData.gps_altitude = static_cast<int16_t>(data.gps.altitude * 10);
+    packetData.gps_speed = static_cast<uint16_t>(data.gps.speed * 100);
+    packetData.gps_angle = static_cast<uint16_t>(data.gps.angle * 100);
+    packetData.timestamp = data.timestamp;
+}
+
+void transmit_sensor_data(const SensorData& data) {
+    struct PacketData packetData;
+    sensor_data_to_radio_packet(data, packetData);
+
+    // Send the packet over the radio
+    if (radio.send((const uint8_t*)&packetData, sizeof(packetData))) {
+        log_message(__func__, "Sensor data transmitted successfully.");
+    } else {
+        log_message(__func__, "Failed to transmit sensor data.");
+    }
 }

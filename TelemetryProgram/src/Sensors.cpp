@@ -93,39 +93,47 @@ void GetBarData(){
 
 }
 
-void InitBMP(){
+bool InitBMP(){
     // Init BMP280
     if (bmp280Sensor.begin()) {
         Serial.println("BMP280 initialized.");
+        return true;
     } else {
         Serial.println("BMP Initialization failed.");
+        return false;
     }
 }
 
-void InitAccelGyro() {
+bool InitAccelGyro() {
     // Init AccelGyro
     if (accelGyro.begin()) {
         Serial.println("AccelGyro initialized.");
+        return true;
     } else {
         Serial.println("Failed to initialize accelerometer/gyroscope sensor!");
+        \return false;
     }
 }
 
-void InitMagnetometer() {
+bool InitMagnetometer() {
     // Init Magnetometer
     if (magnetometer.begin()) {
         Serial.println("Magnetometer initialized.");
+        return true;
     } else {
         Serial.println("Failed to initialize magnetometer!");
+        return false;
     }
 }
 
-void InitTempSensor(){
+bool InitTempSensor(){
     // Init Temperature Sensor
     if (tempSensor.begin()) {
         Serial.println("Temperature sensor initialized.");
+        return true;
     } else {
         Serial.println("Failed to initialize temperature sensor!");
+        return false;
     }
 }
 
@@ -136,7 +144,7 @@ void InitGPS() {
 
 }
 
-void InitRadio() {
+bool InitRadio() {
     if (radio.begin()) {
         Serial.println("RFM95 initialized.");
     } else {

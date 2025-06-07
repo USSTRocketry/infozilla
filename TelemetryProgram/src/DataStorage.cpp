@@ -24,7 +24,7 @@ void InitSdCard(){
         SD.remove("/FlightData.fdat");
     }
 
-    SerialFlash.create("/FlightData.fdat", sizeof("/FlightData.fdat"));
+    SerialFlash.create("/FlightData.fdat", sizeof("/FlightData.fdat")); 
     File file = SD.open("/FlightData.fdat",O_CREAT & O_WRITE);
 
     file.write("BarVal,Thermoval,accel_x,accell_y,accell_z,Gyro_x,Gyro_y,Gyro_z,timestamp\n");
@@ -72,6 +72,7 @@ void TransferFileData(File to){
         to.write(buff, n);
         count = count - n;
     }
+    from.close();
 }
 
 std::string convertDataToCSVRow(SensorData* sensorData){

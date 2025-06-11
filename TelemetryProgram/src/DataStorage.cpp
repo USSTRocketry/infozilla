@@ -41,7 +41,8 @@ void InitSdCard(){
 
 void InitDataStorage(){
     Serial.printf("InitDataStorage()");
-    StoreStringLine("BarVal,Thermoval,accel_x,accell_y,accell_z,Gyro_x,Gyro_y,Gyro_z,timestamp");
+    StoreStringLine("Altitude,Pressure,Temperature,Acceleration_X,Acceleration_Y,Acceleration_Z,gyroX,gyroY,gyroZ,\
+    magneticX,magneticY,magneticX,GPS_Altitude,GPS_Angle,GPS_Fix_Quality,GPS_Latitude,GPS_Longitude,GPS_Speed,Timestamp");
 }
 
 // void StoreBytes(char bytes[], int len){
@@ -76,16 +77,44 @@ void TransferFileData(File to){
 }
 
 std::string convertDataToCSVRow(SensorData* sensorData){
+
+    // BMP280Data bmp280;
+    // AccelGyroData accelGyro;
+    // MagnetometerData magnetometer;
+    // GPSData gps;
+    // float temperature;
+    // long int timestamp;
+
     // BarVal,Thermoval,accel_x,accell_y,accell_z,Gyro_x,Gyro_y,Gyro_z,timestamp
+    // Altitude,Pressure,Temperature,Acceleration_X,Acceleration_Y,Acceleration_Z,gyroX,gyroY,gyroZ,
+    // magneticX,magneticY,magneticX,GPS_Altitude,GPS_Angle,GPS_Fix_Quality,GPS_Latitude,GPS_Longitude,GPS_Speed,Timestamp
     // TODO: Some data is missing here, like GPS data.
+
+    
     return std::to_string(sensorData->bmp280.altitude) + "," +
+            std::to_string(sensorData->bmp280.pressure) + "," +
+
            std::to_string(sensorData->temperature) + "," +
+
            std::to_string(sensorData->accelGyro.accelX) + "," +
            std::to_string(sensorData->accelGyro.accelY) + "," +
            std::to_string(sensorData->accelGyro.accelZ) + "," +
+
+            std::to_string(sensorData->accelGyro.gyroX) + "," +
+            std::to_string(sensorData->accelGyro.gyroY) + "," +
+            std::to_string(sensorData->accelGyro.gyroZ) + "," +
+
            std::to_string(sensorData->magnetometer.magneticX) + "," +
            std::to_string(sensorData->magnetometer.magneticY) + "," +
            std::to_string(sensorData->magnetometer.magneticZ) + "," +
+
+            std::to_string(sensorData->gps.altitude) + "," +
+            std::to_string(sensorData->gps.angle) + "," +
+            std::to_string(sensorData->gps.fix_quality) + "," +
+            std::to_string(sensorData->gps.latitude) + "," +
+            std::to_string(sensorData->gps.longitude) + "," +
+            std::to_string(sensorData->gps.speed) + "," +
+
            std::to_string(sensorData->timestamp) + "\n";
 }
 

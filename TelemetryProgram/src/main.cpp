@@ -97,6 +97,9 @@ void loop() {
     if(currentMillis - last_sensor_read_time >= SENSOR_READ_FREQUENCY) {
         sensorData = GetSensorData();
         last_sensor_read_time = currentMillis;
+
+        //This saves and Handles the internal state machine.
+        HandleData(sensorData);
     }
 
     if(PRINT_DEBUG && (currentMillis - last_debug_time >= PRINT_FREQUENCY)) {

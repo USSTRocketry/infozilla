@@ -34,7 +34,7 @@
 
 FlightStates FlightState = PowerUp;
 double InitialHeightData;
-double barvalQueue[20];
+double barvalQueue[30];
 int BarvalStart = 0, BarvalEnd = 1;
 uint32_t startTimeToSleep = 0;
 bool isCollectingData = true;
@@ -50,8 +50,8 @@ void InitDataPackager(){
 }
 
 void AddValToQueue(double val){
-    BarvalStart = (BarvalStart+1)%20;
-    BarvalEnd = (BarvalEnd+1)%20;
+    BarvalStart = (BarvalStart+1)%30;
+    BarvalEnd = (BarvalEnd+1)%30;
     barvalQueue[BarvalStart] = val;
 }
 
@@ -63,16 +63,16 @@ void TransferToSD(){
     Serial.printf("TransferToSD()");
 }
 
-void HandleData() {
+void HandleData(SensorData *RetrivedData) {
 
     if(isCollectingData){
-        SensorData *RetrivedData = GetSensorData();
+        //SensorData *RetrivedData = GetSensorData();
 
         Update(RetrivedData->bmp280.altitude);
 
         StoreBytes((char *)RetrivedData,sizeof(*RetrivedData));
     }else{
-        Update();
+        Update(1013.25);//sea level
     }
 
     //StoreBytes(GetSensorData(), sizeof(SensorData))
@@ -99,7 +99,7 @@ void Update(float barval){
         break;
     case ReadyForLaunch:
         isCollectingData = true;
-        if(abs(InitialHeightData-currentBarVal) > 100.0){
+        if(abs(InitialHeightData-currentBarVal) > 5.0){
             FlightState = InFlight;
         }
 
@@ -120,6 +120,8 @@ void Update(float barval){
         break;
     case SaveData:
         // todo: move all files from builtin flash to sd
+
+        FlightState = PowerDown;
         break;
     case PowerDown:
         // go to low power state 

@@ -2,7 +2,7 @@
 
 // void InitDataPackager();
 
-void HandleData();
+void HandleData(SensorData *RetrivedData);
 
 typedef enum {
     PowerUp,

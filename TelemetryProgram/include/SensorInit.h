@@ -1,11 +1,11 @@
 #pragma once
 
-void InitBMP();
-void InitAccelGyro();
-void InitMagnetometer();
-void InitTempSensor();
+bool InitBMP();
+bool InitAccelGyro();
+bool InitMagnetometer();
+bool InitTempSensor();
 void InitGPS();
-void InitRadio();
+bool InitRadio();
 
 void PrintBMP();
 void PrintAccelGyro();

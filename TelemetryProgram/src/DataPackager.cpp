@@ -132,25 +132,3 @@ void Update(float barval){
         break;
     }
 }
-
-
-
-// uint16_t floatToHalf(float input){
-//     return fp16_ieee_from_fp32_value(input);
-// }
-
-// float halfToFloat(uint16_t input){
-//     return fp16_ieee_to_fp32_bits(input);
-// }
-
-// void convertStructToCompressedData(SensorData *data, PackagedData *packagedData){
-//     packagedData->barval = floatToHalf(data->barval);
-//     packagedData->accelx = floatToHalf(data->accelerometer.x);
-//     packagedData->accely = floatToHalf(data->accelerometer.y);
-//     packagedData->accelz = floatToHalf(data->accelerometer.z);
-//     packagedData->thermoval = floatToHalf(data->thermoval);
-//     packagedData->gyrox = floatToHalf(data->gyroscopeData.x);
-//     packagedData->gyroy = floatToHalf(data->gyroscopeData.y);
-//     packagedData->gyroz = floatToHalf(data->gyroscopeData.z);
-//     packagedData->timestamp = data->timestamp;
-// }

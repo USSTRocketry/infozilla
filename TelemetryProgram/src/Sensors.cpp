@@ -133,8 +133,9 @@ bool InitBMP(){
 bool InitAccelGyro() {
     // Init AccelGyro
     if (accelGyro.begin()) {
-        return true;
+        
         log_message(__func__, "AccelGyro initialized.");
+        return true;
     } else {
         log_message(__func__, "Failed to initialize accelerometer/gyroscope sensor!");
         return false;
@@ -169,14 +170,15 @@ void InitGPS() {
 }
 
 bool InitRadio() {
-    if (radio.begin()) {
+    bool successs = radio.begin();
+    if (successs) {
         log_message(__func__, "RFM95 initialized.");
     } else {
         log_message(__func__, "Failed to initialize RFM95!");
-
     }
     radio.setFrequency(915.0);
     radio.setTxPower(20);
+    return successs;
 }
 
 void PrintBMP(){

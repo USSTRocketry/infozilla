@@ -23,7 +23,7 @@ File myFile;
 #define OPTIONAL_FLASH_CHIP = 7
 
 const int chipSelect = BUILTIN_SDCARD;
-const int flashModule;
+//const int flashModule;
 int savecount = 0;
 
 void InitSD()

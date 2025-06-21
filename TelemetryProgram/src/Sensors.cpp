@@ -178,6 +178,7 @@ bool InitRadio() {
     }
     radio.setFrequency(915.0);
     radio.setTxPower(20);
+
     return successs;
 }
 

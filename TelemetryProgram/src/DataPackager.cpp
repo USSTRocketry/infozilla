@@ -13,6 +13,14 @@
 #include <ArduinoLowPower.h>
 #include <FlexiTimer2.h>
 
+#define IsTestingMode true
+
+#if IsTestingMode
+#define TestingMultiplier 0.01
+#else
+#define TestingMultiplier 1
+#endif
+
 // #include <ArduinoLowPower.h>
 // char *convertedStruct;
 // int convertedStructLen = 0;
@@ -41,7 +49,6 @@ bool isCollectingData = true;
 
 //PackagedData LocalPackagedData;
 char *packagesDataAsBytes;
-void Update(float barval = 0);
 
 void InitDataPackager(){
     //Serial.printf("InitDataPackager()");
@@ -70,7 +77,8 @@ void HandleData(SensorData *RetrivedData) {
 
         Update(RetrivedData->bmp280.altitude);
 
-        StoreBytes((char *)RetrivedData,sizeof(*RetrivedData));
+        //StoreBytes((char *)RetrivedData,sizeof(*RetrivedData));
+        StoreStringLine(convertDataToCSVRow(RetrivedData));
     }else{
         Update(1013.25);//sea level
     }
@@ -86,9 +94,9 @@ void SetFlightState(FlightStates flightState){
     FlightState = flightState;
 }
 
-void Update(float barval){
+void Update(float barval_meters){
     
-    double currentBarVal = barval;
+    double currentBarVal = barval_meters;
     AddValToQueue(currentBarVal);
     switch (FlightState)
     {
@@ -96,10 +104,18 @@ void Update(float barval){
         /* dont do anything */
         isCollectingData = false;
 
+        #if IsTestingMode
+        FlightState = ReadyForLaunch;
+        #else
+
+        radio.recieve();
+
+        #endif
+
         break;
     case ReadyForLaunch:
         isCollectingData = true;
-        if(abs(InitialHeightData-currentBarVal) > 5.0){
+        if(abs(InitialHeightData-currentBarVal) > 5.0 * TestingMultiplier){
             FlightState = InFlight;
         }
 
@@ -125,7 +141,7 @@ void Update(float barval){
         break;
     case PowerDown:
         // go to low power state 
-        LowPower.deepSleep();
+        // LowPower.deepSleep();
         // LowPower.deepSleep(5000);
         break;
     default:

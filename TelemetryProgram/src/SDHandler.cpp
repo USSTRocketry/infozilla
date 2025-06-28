@@ -1,12 +1,5 @@
-//****************************** */
-// Develop SD Handler on this project
-// When it works, push to HAL submodule
-// Include wrappers for options/customization when initializing SD (same as what is in HAL library already)
-//****************************** */
 #include <SDHandler.h>
 // For examples, go to SDHandler.h > SD.h > from SD.h ../examples/Files/Files.ino
-
-
 
 File myFile;
 
@@ -93,7 +86,6 @@ void WriteTest(){
   std::string buf = "Jello World";
   for (int i = 0; i < 10; i++)
   {
-    /* code */
     //f.write(buf,12);
     f.println(buf.c_str());
   }
@@ -104,7 +96,6 @@ void WriteTest(){
 
   for (int i = 0; i < 30; i++)
   {
-    /* code */
     f.readBytes(b,12);
     Serial.print(b);
   }
@@ -124,11 +115,6 @@ void StoreStringLineToCSV(std::string stringline){
   f.close();
 
 }
-
-// void loop()
-// {
-//   // Write data to SD continuously
-// }
 
 
 

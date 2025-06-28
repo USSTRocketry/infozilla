@@ -9,7 +9,7 @@
 #include <string>
 
 //this define is for the low power library needing this define but not having it defined.
-#define voidFuncPtr void*
+// #define voidFuncPtr void*
 #include <ArduinoLowPower.h>
 #include <FlexiTimer2.h>
 
@@ -21,34 +21,12 @@
 #define TestingMultiplier 1
 #endif
 
-// #include <ArduinoLowPower.h>
-// char *convertedStruct;
-// int convertedStructLen = 0;
-
-// struct PackagedData
-// {
-//     short barval;//2
-//     short accelx;//2
-//     short accely;//2
-//     short accelz;//2
-//     short thermoval;//2
-//     short gyrox;//2
-//     short gyroy;//2
-//     short gyroz;//2
-//     long timestamp;//8?
-// };
-
-
-
 FlightStates FlightState = PowerUp;
 double InitialHeightData;
 double barvalQueue[30];
 int BarvalStart = 0, BarvalEnd = 1;
 uint32_t startTimeToSleep = 0;
 bool isCollectingData = true;
-
-//PackagedData LocalPackagedData;
-char *packagesDataAsBytes;
 
 void InitDataPackager(){
     //Serial.printf("InitDataPackager()");
@@ -73,17 +51,11 @@ void TransferToSD(){
 void HandleData(SensorData *RetrivedData) {
 
     if(isCollectingData){
-        //SensorData *RetrivedData = GetSensorData();
-
         Update(RetrivedData->bmp280.altitude);
-
-        //StoreBytes((char *)RetrivedData,sizeof(*RetrivedData));
         StoreStringLine(convertDataToCSVRow(RetrivedData));
     }else{
-        Update(1013.25);//sea level
+        Update(1013.25); //sea level
     }
-
-    //StoreBytes(GetSensorData(), sizeof(SensorData))
 }
 
 FlightStates GetFlightState(){

@@ -19,7 +19,6 @@ void InitSdCard(){
     //error("Unable to access SPI Flash chip");
     }
 
-    //File rootdir = SD.open("/");
     if(SD.exists("/FlightData.fdat")){
         SD.remove("/FlightData.fdat");
     }
@@ -33,21 +32,11 @@ void InitSdCard(){
 
 }
 
-// char *GetByteData(int len, int offset, char *output)
-// {
-//     Serial.printf("GetByteData()");
-//     return nullptr;
-// }
-
 void InitDataStorage(){
     Serial.printf("InitDataStorage()");
     StoreStringLine("Altitude,Pressure,Temperature,Acceleration_X,Acceleration_Y,Acceleration_Z,gyroX,gyroY,gyroZ,\
     magneticX,magneticY,magneticX,GPS_Altitude,GPS_Angle,GPS_Fix_Quality,GPS_Latitude,GPS_Longitude,GPS_Speed,Timestamp");
 }
-
-// void StoreBytes(char bytes[], int len){
-//     Serial.printf("StoreBytes()");
-// }
 
 void StoreStringLine(std::string s){
     File file = SD.open("/FlightData.fdat",O_APPEND);
@@ -77,13 +66,6 @@ void TransferFileData(File to){
 }
 
 std::string convertDataToCSVRow(SensorData* sensorData){
-
-    // BMP280Data bmp280;
-    // AccelGyroData accelGyro;
-    // MagnetometerData magnetometer;
-    // GPSData gps;
-    // float temperature;
-    // long int timestamp;
 
     // BarVal,Thermoval,accel_x,accell_y,accell_z,Gyro_x,Gyro_y,Gyro_z,timestamp
     // Altitude,Pressure,Temperature,Acceleration_X,Acceleration_Y,Acceleration_Z,gyroX,gyroY,gyroZ,

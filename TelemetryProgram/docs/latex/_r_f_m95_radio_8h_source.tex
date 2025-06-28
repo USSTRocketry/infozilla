@@ -1,0 +1,45 @@
+\doxysection{RFM95\+Radio.\+h}
+\hypertarget{_r_f_m95_radio_8h_source}{}\label{_r_f_m95_radio_8h_source}\index{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/HAL/RFM95Radio.h@{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/HAL/RFM95Radio.h}}
+\mbox{\hyperlink{_r_f_m95_radio_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_telemetry_radio_8h}{TelemetryRadio.h}}"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <RH\_RF95.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <RHHardwareSPI1.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <RHHardwareSPI2.h>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_p_i_n_s_8h}{PINS.h}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{types_8h}{types.h}}"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_r_f_m95_radio_a09d2afda322ba9ce5157e84b4fe615fd}{RFM95Radio}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_telemetry_radio}{TelemetryRadio}}\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00017\ \ \ \ \ RH\_RF95\ rf95;\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00018\ \ \ \ \ uint8\_t\ csPin;\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00019\ \ \ \ \ uint8\_t\ intPin;\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{float}\ frequency;\ \ \ \ \ \ \ }
+\DoxyCodeLine{00021\ \ \ \ \ uint8\_t\ spiIndex;\ \ \ \ \ \ }
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00028\ \ \ \ \ RHGenericSPI*\ getSPIInstance(uint8\_t\ spiIndex);}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00038\ \ \ \ \ \mbox{\hyperlink{class_r_f_m95_radio_a09d2afda322ba9ce5157e84b4fe615fd}{RFM95Radio}}(uint8\_t\ csPin,\ uint8\_t\ intPin,\ uint8\_t\ spiIndex\ =\ \mbox{\hyperlink{types_8h_aa3d09f3b50eb6189bef57d77d3d5f77f}{HW\_SPI1}},\ \textcolor{keywordtype}{float}\ frequency\ =\ 915.0);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{class_r_f_m95_radio_a4ae6f40cdeecf0d3ebccf538ebcd54d3}{\string~RFM95Radio}}()\textcolor{keyword}{\ override\ }\{\}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_r_f_m95_radio_a1ab3bbfa65752214240336f32dcbf5f8}{begin}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_r_f_m95_radio_aa481ec04fed8895e0d154dd6ef937ee2}{reset}}(uint8\_t\ resetPin)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_r_f_m95_radio_a0afeb25136949409b5df33234848464e}{send}}(\textcolor{keyword}{const}\ uint8\_t*\ data,\ \textcolor{keywordtype}{size\_t}\ length)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_r_f_m95_radio_ad560dd93339e3dfbaddae1037c54a85a}{receive}}(uint8\_t*\ buffer,\ \textcolor{keywordtype}{size\_t}\ maxLength,\ \textcolor{keywordtype}{size\_t}\&\ receivedLength)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_r_f_m95_radio_a7d7ac9f2684ccfada9f6822a8d9a7e4e}{setFrequency}}(\textcolor{keywordtype}{float}\ frequency)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_r_f_m95_radio_aca6805cc84d17b9dbb513f39f57e3e65}{setTxPower}}(uint8\_t\ power)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_r_f_m95_radio_a99839c8d74f989aa5af6ecee8949e709}{configureLoRa}}(uint8\_t\ spreadingFactor,\ uint16\_t\ bandwidth,\ uint8\_t\ codingRate)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00093\ \};}
+
+\end{DoxyCode}

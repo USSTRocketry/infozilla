@@ -1,0 +1,126 @@
+\doxysection{C\+:/\+Users/\+Bobby/\+Documents/\+USST/\+Infozilla/infozilla/\+Telemetry\+Program/lib/\+FP16-\/master/test/ieee-\/from-\/fp32-\/value.cc File Reference}
+\hypertarget{ieee-from-fp32-value_8cc}{}\label{ieee-from-fp32-value_8cc}\index{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/FP16-\/master/test/ieee-\/from-\/fp32-\/value.cc@{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/FP16-\/master/test/ieee-\/from-\/fp32-\/value.cc}}
+{\ttfamily \#include $<$gtest/gtest.\+h$>$}\newline
+{\ttfamily \#include $<$cstdint$>$}\newline
+{\ttfamily \#include $<$fp16.\+h$>$}\newline
+{\ttfamily \#include $<$tables.\+h$>$}\newline
+Include dependency graph for ieee-\/from-\/fp32-\/value.cc\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=319pt]{ieee-from-fp32-value_8cc__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{ieee-from-fp32-value_8cc_a98d1d25d5212a4652deaea0098797f1f}{TEST}} (FP16\+\_\+\+IEEE\+\_\+\+FROM\+\_\+\+FP32\+\_\+\+VALUE, normalized\+\_\+powers\+\_\+of\+\_\+2)
+\item 
+\mbox{\hyperlink{ieee-from-fp32-value_8cc_a1a844ac825d26fa8f62ecde48b4d22a7}{TEST}} (FP16\+\_\+\+IEEE\+\_\+\+FROM\+\_\+\+FP32\+\_\+\+VALUE, denormalized\+\_\+powers\+\_\+of\+\_\+2)
+\item 
+\mbox{\hyperlink{ieee-from-fp32-value_8cc_a7e79530b547177ae2895c14bfd22a1fb}{TEST}} (FP16\+\_\+\+IEEE\+\_\+\+FROM\+\_\+\+FP32\+\_\+\+VALUE, zero)
+\item 
+\mbox{\hyperlink{ieee-from-fp32-value_8cc_add1019a00a901caf617f84dcbfba1c68}{TEST}} (FP16\+\_\+\+IEEE\+\_\+\+FROM\+\_\+\+FP32\+\_\+\+VALUE, infinity)
+\item 
+\mbox{\hyperlink{ieee-from-fp32-value_8cc_aeec4dffd3b0e094d206cdf67c83a1d59}{TEST}} (FP16\+\_\+\+IEEE\+\_\+\+FROM\+\_\+\+FP32\+\_\+\+VALUE, positive\+\_\+nan)
+\item 
+\mbox{\hyperlink{ieee-from-fp32-value_8cc_aea41b39da124f354cb20bc2f1efcdfcb}{TEST}} (FP16\+\_\+\+IEEE\+\_\+\+FROM\+\_\+\+FP32\+\_\+\+VALUE, negative\+\_\+nan)
+\item 
+\mbox{\hyperlink{ieee-from-fp32-value_8cc_a3ba0c2860c80d8f1f955f987cb047797}{TEST}} (FP16\+\_\+\+IEEE\+\_\+\+FROM\+\_\+\+FP32\+\_\+\+VALUE, revertible)
+\item 
+\mbox{\hyperlink{ieee-from-fp32-value_8cc_a61491139728b71233fa542aa814a082a}{TEST}} (FP16\+\_\+\+IEEE\+\_\+\+FROM\+\_\+\+FP32\+\_\+\+VALUE, underflow)
+\item 
+\mbox{\hyperlink{ieee-from-fp32-value_8cc_a5b8682d48190588f90775f6f8ec96c10}{TEST}} (FP16\+\_\+\+IEEE\+\_\+\+FROM\+\_\+\+FP32\+\_\+\+VALUE, overflow)
+\item 
+\mbox{\hyperlink{ieee-from-fp32-value_8cc_aa7597bfa519b79ae8447ffc8b612e969}{TEST}} (FP16\+\_\+\+IEEE\+\_\+\+FROM\+\_\+\+FP32\+\_\+\+VALUE, positive\+\_\+denormalized\+\_\+values)
+\item 
+\mbox{\hyperlink{ieee-from-fp32-value_8cc_abd10075027beca38165443db905deb17}{TEST}} (FP16\+\_\+\+IEEE\+\_\+\+FROM\+\_\+\+FP32\+\_\+\+VALUE, negative\+\_\+denormalized\+\_\+values)
+\item 
+\mbox{\hyperlink{ieee-from-fp32-value_8cc_a047d0f14cf127a994376389bdecdb46d}{TEST}} (FP16\+\_\+\+IEEE\+\_\+\+FROM\+\_\+\+FP32\+\_\+\+VALUE, positive\+\_\+normalized\+\_\+values)
+\item 
+\mbox{\hyperlink{ieee-from-fp32-value_8cc_a5f7440d9969a510796f2e6c48b6c5e7b}{TEST}} (FP16\+\_\+\+IEEE\+\_\+\+FROM\+\_\+\+FP32\+\_\+\+VALUE, negative\+\_\+normalized\+\_\+values)
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{ieee-from-fp32-value_8cc_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{ieee-from-fp32-value_8cc_a1a844ac825d26fa8f62ecde48b4d22a7}\index{ieee-\/from-\/fp32-\/value.cc@{ieee-\/from-\/fp32-\/value.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!ieee-\/from-\/fp32-\/value.cc@{ieee-\/from-\/fp32-\/value.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [1/13]}}
+{\footnotesize\ttfamily \label{ieee-from-fp32-value_8cc_a1a844ac825d26fa8f62ecde48b4d22a7} 
+TEST (\begin{DoxyParamCaption}\item[{FP16\+\_\+\+IEEE\+\_\+\+FROM\+\_\+\+FP32\+\_\+\+VALUE}]{}{, }\item[{denormalized\+\_\+powers\+\_\+of\+\_\+2}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{ieee-from-fp32-value_8cc_add1019a00a901caf617f84dcbfba1c68}\index{ieee-\/from-\/fp32-\/value.cc@{ieee-\/from-\/fp32-\/value.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!ieee-\/from-\/fp32-\/value.cc@{ieee-\/from-\/fp32-\/value.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [2/13]}}
+{\footnotesize\ttfamily \label{ieee-from-fp32-value_8cc_add1019a00a901caf617f84dcbfba1c68} 
+TEST (\begin{DoxyParamCaption}\item[{FP16\+\_\+\+IEEE\+\_\+\+FROM\+\_\+\+FP32\+\_\+\+VALUE}]{}{, }\item[{infinity}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{ieee-from-fp32-value_8cc_abd10075027beca38165443db905deb17}\index{ieee-\/from-\/fp32-\/value.cc@{ieee-\/from-\/fp32-\/value.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!ieee-\/from-\/fp32-\/value.cc@{ieee-\/from-\/fp32-\/value.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [3/13]}}
+{\footnotesize\ttfamily \label{ieee-from-fp32-value_8cc_abd10075027beca38165443db905deb17} 
+TEST (\begin{DoxyParamCaption}\item[{FP16\+\_\+\+IEEE\+\_\+\+FROM\+\_\+\+FP32\+\_\+\+VALUE}]{}{, }\item[{negative\+\_\+denormalized\+\_\+values}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{ieee-from-fp32-value_8cc_aea41b39da124f354cb20bc2f1efcdfcb}\index{ieee-\/from-\/fp32-\/value.cc@{ieee-\/from-\/fp32-\/value.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!ieee-\/from-\/fp32-\/value.cc@{ieee-\/from-\/fp32-\/value.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [4/13]}}
+{\footnotesize\ttfamily \label{ieee-from-fp32-value_8cc_aea41b39da124f354cb20bc2f1efcdfcb} 
+TEST (\begin{DoxyParamCaption}\item[{FP16\+\_\+\+IEEE\+\_\+\+FROM\+\_\+\+FP32\+\_\+\+VALUE}]{}{, }\item[{negative\+\_\+nan}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{ieee-from-fp32-value_8cc_a5f7440d9969a510796f2e6c48b6c5e7b}\index{ieee-\/from-\/fp32-\/value.cc@{ieee-\/from-\/fp32-\/value.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!ieee-\/from-\/fp32-\/value.cc@{ieee-\/from-\/fp32-\/value.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [5/13]}}
+{\footnotesize\ttfamily \label{ieee-from-fp32-value_8cc_a5f7440d9969a510796f2e6c48b6c5e7b} 
+TEST (\begin{DoxyParamCaption}\item[{FP16\+\_\+\+IEEE\+\_\+\+FROM\+\_\+\+FP32\+\_\+\+VALUE}]{}{, }\item[{negative\+\_\+normalized\+\_\+values}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{ieee-from-fp32-value_8cc_a98d1d25d5212a4652deaea0098797f1f}\index{ieee-\/from-\/fp32-\/value.cc@{ieee-\/from-\/fp32-\/value.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!ieee-\/from-\/fp32-\/value.cc@{ieee-\/from-\/fp32-\/value.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [6/13]}}
+{\footnotesize\ttfamily \label{ieee-from-fp32-value_8cc_a98d1d25d5212a4652deaea0098797f1f} 
+TEST (\begin{DoxyParamCaption}\item[{FP16\+\_\+\+IEEE\+\_\+\+FROM\+\_\+\+FP32\+\_\+\+VALUE}]{}{, }\item[{normalized\+\_\+powers\+\_\+of\+\_\+2}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{ieee-from-fp32-value_8cc_a5b8682d48190588f90775f6f8ec96c10}\index{ieee-\/from-\/fp32-\/value.cc@{ieee-\/from-\/fp32-\/value.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!ieee-\/from-\/fp32-\/value.cc@{ieee-\/from-\/fp32-\/value.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [7/13]}}
+{\footnotesize\ttfamily \label{ieee-from-fp32-value_8cc_a5b8682d48190588f90775f6f8ec96c10} 
+TEST (\begin{DoxyParamCaption}\item[{FP16\+\_\+\+IEEE\+\_\+\+FROM\+\_\+\+FP32\+\_\+\+VALUE}]{}{, }\item[{overflow}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{ieee-from-fp32-value_8cc_aa7597bfa519b79ae8447ffc8b612e969}\index{ieee-\/from-\/fp32-\/value.cc@{ieee-\/from-\/fp32-\/value.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!ieee-\/from-\/fp32-\/value.cc@{ieee-\/from-\/fp32-\/value.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [8/13]}}
+{\footnotesize\ttfamily \label{ieee-from-fp32-value_8cc_aa7597bfa519b79ae8447ffc8b612e969} 
+TEST (\begin{DoxyParamCaption}\item[{FP16\+\_\+\+IEEE\+\_\+\+FROM\+\_\+\+FP32\+\_\+\+VALUE}]{}{, }\item[{positive\+\_\+denormalized\+\_\+values}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{ieee-from-fp32-value_8cc_aeec4dffd3b0e094d206cdf67c83a1d59}\index{ieee-\/from-\/fp32-\/value.cc@{ieee-\/from-\/fp32-\/value.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!ieee-\/from-\/fp32-\/value.cc@{ieee-\/from-\/fp32-\/value.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [9/13]}}
+{\footnotesize\ttfamily \label{ieee-from-fp32-value_8cc_aeec4dffd3b0e094d206cdf67c83a1d59} 
+TEST (\begin{DoxyParamCaption}\item[{FP16\+\_\+\+IEEE\+\_\+\+FROM\+\_\+\+FP32\+\_\+\+VALUE}]{}{, }\item[{positive\+\_\+nan}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{ieee-from-fp32-value_8cc_a047d0f14cf127a994376389bdecdb46d}\index{ieee-\/from-\/fp32-\/value.cc@{ieee-\/from-\/fp32-\/value.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!ieee-\/from-\/fp32-\/value.cc@{ieee-\/from-\/fp32-\/value.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [10/13]}}
+{\footnotesize\ttfamily \label{ieee-from-fp32-value_8cc_a047d0f14cf127a994376389bdecdb46d} 
+TEST (\begin{DoxyParamCaption}\item[{FP16\+\_\+\+IEEE\+\_\+\+FROM\+\_\+\+FP32\+\_\+\+VALUE}]{}{, }\item[{positive\+\_\+normalized\+\_\+values}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{ieee-from-fp32-value_8cc_a3ba0c2860c80d8f1f955f987cb047797}\index{ieee-\/from-\/fp32-\/value.cc@{ieee-\/from-\/fp32-\/value.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!ieee-\/from-\/fp32-\/value.cc@{ieee-\/from-\/fp32-\/value.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [11/13]}}
+{\footnotesize\ttfamily \label{ieee-from-fp32-value_8cc_a3ba0c2860c80d8f1f955f987cb047797} 
+TEST (\begin{DoxyParamCaption}\item[{FP16\+\_\+\+IEEE\+\_\+\+FROM\+\_\+\+FP32\+\_\+\+VALUE}]{}{, }\item[{revertible}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{ieee-from-fp32-value_8cc_a61491139728b71233fa542aa814a082a}\index{ieee-\/from-\/fp32-\/value.cc@{ieee-\/from-\/fp32-\/value.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!ieee-\/from-\/fp32-\/value.cc@{ieee-\/from-\/fp32-\/value.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [12/13]}}
+{\footnotesize\ttfamily \label{ieee-from-fp32-value_8cc_a61491139728b71233fa542aa814a082a} 
+TEST (\begin{DoxyParamCaption}\item[{FP16\+\_\+\+IEEE\+\_\+\+FROM\+\_\+\+FP32\+\_\+\+VALUE}]{}{, }\item[{underflow}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{ieee-from-fp32-value_8cc_a7e79530b547177ae2895c14bfd22a1fb}\index{ieee-\/from-\/fp32-\/value.cc@{ieee-\/from-\/fp32-\/value.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!ieee-\/from-\/fp32-\/value.cc@{ieee-\/from-\/fp32-\/value.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [13/13]}}
+{\footnotesize\ttfamily \label{ieee-from-fp32-value_8cc_a7e79530b547177ae2895c14bfd22a1fb} 
+TEST (\begin{DoxyParamCaption}\item[{FP16\+\_\+\+IEEE\+\_\+\+FROM\+\_\+\+FP32\+\_\+\+VALUE}]{}{, }\item[{zero}]{}{}\end{DoxyParamCaption})}
+

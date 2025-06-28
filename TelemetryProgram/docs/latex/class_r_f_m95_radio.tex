@@ -1,0 +1,249 @@
+\doxysection{RFM95\+Radio Class Reference}
+\hypertarget{class_r_f_m95_radio}{}\label{class_r_f_m95_radio}\index{RFM95Radio@{RFM95Radio}}
+
+
+Represents a telemetry radio interface using the RFM95 (915MHz and 433MHz) Lo\+Ra module.  
+
+
+
+
+{\ttfamily \#include $<$RFM95\+Radio.\+h$>$}
+
+
+
+Inheritance diagram for RFM95\+Radio\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=164pt]{class_r_f_m95_radio__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for RFM95\+Radio\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=164pt]{class_r_f_m95_radio__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_r_f_m95_radio_a09d2afda322ba9ce5157e84b4fe615fd}{RFM95\+Radio}} (uint8\+\_\+t cs\+Pin, uint8\+\_\+t int\+Pin, uint8\+\_\+t spi\+Index=\mbox{\hyperlink{types_8h_aa3d09f3b50eb6189bef57d77d3d5f77f}{HW\+\_\+\+SPI1}}, float frequency=915.\+0)
+\begin{DoxyCompactList}\small\item\em Constructor for the \doxylink{class_r_f_m95_radio}{RFM95\+Radio} class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_r_f_m95_radio_a4ae6f40cdeecf0d3ebccf538ebcd54d3}{\texorpdfstring{$\sim$}{\string~}\+RFM95\+Radio}} () override
+\begin{DoxyCompactList}\small\item\em Destructor for the \doxylink{class_r_f_m95_radio}{RFM95\+Radio} class. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_r_f_m95_radio_a1ab3bbfa65752214240336f32dcbf5f8}{begin}} () override
+\begin{DoxyCompactList}\small\item\em Initialize the RFM95 module. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_r_f_m95_radio_aa481ec04fed8895e0d154dd6ef937ee2}{reset}} (uint8\+\_\+t reset\+Pin) override
+\begin{DoxyCompactList}\small\item\em Reset the RFM95 module. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_r_f_m95_radio_a0afeb25136949409b5df33234848464e}{send}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, size\+\_\+t length) override
+\begin{DoxyCompactList}\small\item\em Send data using the RFM95 module. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_r_f_m95_radio_ad560dd93339e3dfbaddae1037c54a85a}{receive}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}buffer, size\+\_\+t max\+Length, size\+\_\+t \&received\+Length) override
+\begin{DoxyCompactList}\small\item\em Receive data using the RFM95 module. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_r_f_m95_radio_a7d7ac9f2684ccfada9f6822a8d9a7e4e}{set\+Frequency}} (float frequency) override
+\begin{DoxyCompactList}\small\item\em Set the frequency for Lo\+Ra communication. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_r_f_m95_radio_aca6805cc84d17b9dbb513f39f57e3e65}{set\+Tx\+Power}} (uint8\+\_\+t power) override
+\begin{DoxyCompactList}\small\item\em Set the transmission power for the RFM95 module. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_r_f_m95_radio_a99839c8d74f989aa5af6ecee8949e709}{configure\+Lo\+Ra}} (uint8\+\_\+t spreading\+Factor, uint16\+\_\+t bandwidth, uint8\+\_\+t coding\+Rate) override
+\begin{DoxyCompactList}\small\item\em Configure Lo\+Ra parameters such as spreading factor, bandwidth, and coding rate. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_telemetry_radio}{Telemetry\+Radio}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_telemetry_radio_a174453d4a4d9d8497e9171b0e1d3ed61}{\texorpdfstring{$\sim$}{\string~}\+Telemetry\+Radio}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a telemetry radio interface using the RFM95 (915MHz and 433MHz) Lo\+Ra module. 
+
+\label{doc-constructors}
+\Hypertarget{class_r_f_m95_radio_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_r_f_m95_radio_a09d2afda322ba9ce5157e84b4fe615fd}\index{RFM95Radio@{RFM95Radio}!RFM95Radio@{RFM95Radio}}
+\index{RFM95Radio@{RFM95Radio}!RFM95Radio@{RFM95Radio}}
+\doxysubsubsection{\texorpdfstring{RFM95Radio()}{RFM95Radio()}}
+{\footnotesize\ttfamily \label{class_r_f_m95_radio_a09d2afda322ba9ce5157e84b4fe615fd} 
+RFM95\+Radio\+::\+RFM95\+Radio (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{cs\+Pin}{, }\item[{uint8\+\_\+t}]{int\+Pin}{, }\item[{uint8\+\_\+t}]{spi\+Index}{ = {\ttfamily \mbox{\hyperlink{types_8h_aa3d09f3b50eb6189bef57d77d3d5f77f}{HW\+\_\+\+SPI1}}}, }\item[{float}]{frequency}{ = {\ttfamily 915.0}}\end{DoxyParamCaption})}
+
+
+
+Constructor for the \doxylink{class_r_f_m95_radio}{RFM95\+Radio} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cs\+Pin} & Chip Select pin for the RFM95 module. \\
+\hline
+{\em int\+Pin} & Interrupt pin connected to the RFM95 DIO0 line. \\
+\hline
+{\em spi\+Index} & SPI interface index (default\+: HW\+\_\+\+SPI0). \\
+\hline
+{\em frequency} & Frequency for Lo\+Ra communication in MHz (default\+: 915.\+0). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_r_f_m95_radio_a4ae6f40cdeecf0d3ebccf538ebcd54d3}\index{RFM95Radio@{RFM95Radio}!````~RFM95Radio@{\texorpdfstring{$\sim$}{\string~}RFM95Radio}}
+\index{````~RFM95Radio@{\texorpdfstring{$\sim$}{\string~}RFM95Radio}!RFM95Radio@{RFM95Radio}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}RFM95Radio()}{\string~RFM95Radio()}}
+{\footnotesize\ttfamily \label{class_r_f_m95_radio_a4ae6f40cdeecf0d3ebccf538ebcd54d3} 
+RFM95\+Radio\+::\texorpdfstring{$\sim$}{\string~}\+RFM95\+Radio (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}
+
+
+
+Destructor for the \doxylink{class_r_f_m95_radio}{RFM95\+Radio} class. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_r_f_m95_radio_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_r_f_m95_radio_a1ab3bbfa65752214240336f32dcbf5f8}\index{RFM95Radio@{RFM95Radio}!begin@{begin}}
+\index{begin@{begin}!RFM95Radio@{RFM95Radio}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}}
+{\footnotesize\ttfamily \label{class_r_f_m95_radio_a1ab3bbfa65752214240336f32dcbf5f8} 
+bool RFM95\+Radio\+::begin (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Initialize the RFM95 module. 
+
+\begin{DoxyReturn}{Returns}
+true if initialization succeeds, false otherwise. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_telemetry_radio_aa173a8794b1d667270af6a354965d6f7}{Telemetry\+Radio}}.
+
+\Hypertarget{class_r_f_m95_radio_a99839c8d74f989aa5af6ecee8949e709}\index{RFM95Radio@{RFM95Radio}!configureLoRa@{configureLoRa}}
+\index{configureLoRa@{configureLoRa}!RFM95Radio@{RFM95Radio}}
+\doxysubsubsection{\texorpdfstring{configureLoRa()}{configureLoRa()}}
+{\footnotesize\ttfamily \label{class_r_f_m95_radio_a99839c8d74f989aa5af6ecee8949e709} 
+void RFM95\+Radio\+::configure\+Lo\+Ra (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{spreading\+Factor}{, }\item[{uint16\+\_\+t}]{bandwidth}{, }\item[{uint8\+\_\+t}]{coding\+Rate}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Configure Lo\+Ra parameters such as spreading factor, bandwidth, and coding rate. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em spreading\+Factor} & Spreading factor (e.\+g., 7-\/12). \\
+\hline
+{\em bandwidth} & Bandwidth in k\+Hz (e.\+g., 125, 250, 500). \\
+\hline
+{\em coding\+Rate} & Coding rate (e.\+g., 5 for 4/5, 6 for 4/6). \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_telemetry_radio_a95d3f01697d86e3b58fc6b589298bbff}{Telemetry\+Radio}}.
+
+\Hypertarget{class_r_f_m95_radio_ad560dd93339e3dfbaddae1037c54a85a}\index{RFM95Radio@{RFM95Radio}!receive@{receive}}
+\index{receive@{receive}!RFM95Radio@{RFM95Radio}}
+\doxysubsubsection{\texorpdfstring{receive()}{receive()}}
+{\footnotesize\ttfamily \label{class_r_f_m95_radio_ad560dd93339e3dfbaddae1037c54a85a} 
+bool RFM95\+Radio\+::receive (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{size\+\_\+t}]{max\+Length}{, }\item[{size\+\_\+t \&}]{received\+Length}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Receive data using the RFM95 module. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & Pointer to the buffer to store received data. \\
+\hline
+{\em max\+Length} & Maximum length of the buffer. \\
+\hline
+{\em received\+Length} & Reference to store the actual received length. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if data is received successfully, false otherwise. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_telemetry_radio_a5739c2ab2baeb582e6fe68384222b374}{Telemetry\+Radio}}.
+
+\Hypertarget{class_r_f_m95_radio_aa481ec04fed8895e0d154dd6ef937ee2}\index{RFM95Radio@{RFM95Radio}!reset@{reset}}
+\index{reset@{reset}!RFM95Radio@{RFM95Radio}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily \label{class_r_f_m95_radio_aa481ec04fed8895e0d154dd6ef937ee2} 
+void RFM95\+Radio\+::reset (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{reset\+Pin}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reset the RFM95 module. 
+
+
+
+Implements \mbox{\hyperlink{class_telemetry_radio_a9e2bcded604882a83de37ee4a85403ea}{Telemetry\+Radio}}.
+
+\Hypertarget{class_r_f_m95_radio_a0afeb25136949409b5df33234848464e}\index{RFM95Radio@{RFM95Radio}!send@{send}}
+\index{send@{send}!RFM95Radio@{RFM95Radio}}
+\doxysubsubsection{\texorpdfstring{send()}{send()}}
+{\footnotesize\ttfamily \label{class_r_f_m95_radio_a0afeb25136949409b5df33234848464e} 
+bool RFM95\+Radio\+::send (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{length}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Send data using the RFM95 module. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Pointer to the data to send. \\
+\hline
+{\em length} & Length of the data in bytes. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the data is sent successfully, false otherwise. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_telemetry_radio_a7b88926fc28998a9dd100d2a8c370fc6}{Telemetry\+Radio}}.
+
+\Hypertarget{class_r_f_m95_radio_a7d7ac9f2684ccfada9f6822a8d9a7e4e}\index{RFM95Radio@{RFM95Radio}!setFrequency@{setFrequency}}
+\index{setFrequency@{setFrequency}!RFM95Radio@{RFM95Radio}}
+\doxysubsubsection{\texorpdfstring{setFrequency()}{setFrequency()}}
+{\footnotesize\ttfamily \label{class_r_f_m95_radio_a7d7ac9f2684ccfada9f6822a8d9a7e4e} 
+void RFM95\+Radio\+::set\+Frequency (\begin{DoxyParamCaption}\item[{float}]{frequency}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Set the frequency for Lo\+Ra communication. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em frequency} & Frequency in MHz to set. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_telemetry_radio_ae0656456d10994f42f6b5b39010de481}{Telemetry\+Radio}}.
+
+\Hypertarget{class_r_f_m95_radio_aca6805cc84d17b9dbb513f39f57e3e65}\index{RFM95Radio@{RFM95Radio}!setTxPower@{setTxPower}}
+\index{setTxPower@{setTxPower}!RFM95Radio@{RFM95Radio}}
+\doxysubsubsection{\texorpdfstring{setTxPower()}{setTxPower()}}
+{\footnotesize\ttfamily \label{class_r_f_m95_radio_aca6805cc84d17b9dbb513f39f57e3e65} 
+void RFM95\+Radio\+::set\+Tx\+Power (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{power}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Set the transmission power for the RFM95 module. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em power} & Transmission power in d\+Bm (typical range\+: 5-\/20). \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_telemetry_radio_aa68afab17b7d4a9cd2aa852484652e35}{Telemetry\+Radio}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Bobby/\+Documents/\+USST/\+Infozilla/infozilla/\+Telemetry\+Program/lib/\+HAL/\mbox{\hyperlink{_r_f_m95_radio_8h}{RFM95\+Radio.\+h}}\item 
+C\+:/\+Users/\+Bobby/\+Documents/\+USST/\+Infozilla/infozilla/\+Telemetry\+Program/lib/\+HAL/\mbox{\hyperlink{_r_f_m95_radio_8cpp}{RFM95\+Radio.\+cpp}}\end{DoxyCompactItemize}

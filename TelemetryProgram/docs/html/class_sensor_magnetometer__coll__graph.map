@@ -1,0 +1,7 @@
+<map id="SensorMagnetometer" name="SensorMagnetometer">
+<area shape="rect" id="Node000001" title=" " alt="" coords="26,104,172,131"/>
+<area shape="rect" id="Node000002" href="$class_sensor.html" title=" " alt="" coords="5,5,68,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="55,44,93,102,89,105,51,46"/>
+<area shape="rect" id="Node000003" href="$struct__magnetometer_data.html" title=" " alt="" coords="92,5,232,32"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="148,46,109,105,105,102,143,44"/>
+</map>

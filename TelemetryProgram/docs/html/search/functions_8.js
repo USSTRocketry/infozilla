@@ -1,0 +1,14 @@
+var searchData=
+[
+  ['half_0',['half',['../classhalf__float_1_1half.html#a5bd94df7393dbb20e00757b9fcbc944f',1,'half_float::half::half()'],['../classhalf__float_1_1half.html#ab56421622ebddd86fc75ad1eebdfbd8e',1,'half_float::half::half(detail::expr rhs)'],['../classhalf__float_1_1half.html#aad7fddc333853c6a37016e2eac3d4d04',1,'half_float::half::half(float rhs)']]],
+  ['half2float_1',['half2float',['../namespacehalf__float_1_1detail.html#aeba56faf29df3c6e56303d58d112bf55',1,'half_float::detail']]],
+  ['half2float_5fimpl_2',['half2float_impl',['../namespacehalf__float_1_1detail.html#a4079321dbb42a53dabfc1a69d469417d',1,'half_float::detail::half2float_impl(uint16 value, true_type)'],['../namespacehalf__float_1_1detail.html#a38fb083cf49cbb09bbac0abdf54a79ad',1,'half_float::detail::half2float_impl(uint16 value, false_type)']]],
+  ['half2int_3',['half2int',['../namespacehalf__float_1_1detail.html#a78bf248e5c07c8b73adbb0986b430675',1,'half_float::detail']]],
+  ['half2int_5fimpl_4',['half2int_impl',['../namespacehalf__float_1_1detail.html#a93c7f040e64b7cedad971b42bedc85a2',1,'half_float::detail']]],
+  ['half2int_5fup_5',['half2int_up',['../namespacehalf__float_1_1detail.html#a1672f8be699238543caa56fc43ed17ee',1,'half_float::detail']]],
+  ['half_5fcast_6',['half_cast',['../namespacehalf__float_1_1detail.html#a62e0b5eaa7fb70b52bc00cf87ef3f3ea',1,'half_float::detail::half_cast(U arg)'],['../namespacehalf__float_1_1detail.html#a10a9c9bad301b0c8b2b99371c0f487f3',1,'half_float::detail::half_cast(U arg)'],['../namespacehalf__float.html#a62e0b5eaa7fb70b52bc00cf87ef3f3ea',1,'half_float::half_cast()']]],
+  ['half_5fto_5ffloat_7',['half_to_float',['../namespace_eigen_1_1half__impl.html#a95f763352514926ddc9954a501b0146a',1,'Eigen::half_impl']]],
+  ['handledata_8',['HandleData',['../_data_packager_8h.html#a1b56a8f1552cdb5cb8cad5dc98562dd1',1,'HandleData(SensorData *RetrivedData):&#160;DataPackager.cpp'],['../_data_packager_8cpp.html#a1b56a8f1552cdb5cb8cad5dc98562dd1',1,'HandleData(SensorData *RetrivedData):&#160;DataPackager.cpp']]],
+  ['hasfix_9',['hasFix',['../class_g_p_s.html#a5b0119a5d40df6f81b1d09bbf0329ebe',1,'GPS']]],
+  ['hypot_10',['hypot',['../structhalf__float_1_1detail_1_1functions.html#a1ea6c3b5f49e742b82828c69c755210c',1,'half_float::detail::functions::hypot()'],['../namespacehalf__float_1_1detail.html#a380a4c5a399e3dc14fdf39c53277edc5',1,'half_float::detail::hypot(half x, half y)'],['../namespacehalf__float_1_1detail.html#a540836fd441b3d89f321b9db43c6e2ce',1,'half_float::detail::hypot(half x, expr y)'],['../namespacehalf__float_1_1detail.html#a10f0a3e50b1bc0a0c6760ce5f0a378bc',1,'half_float::detail::hypot(expr x, half y)'],['../namespacehalf__float_1_1detail.html#ad5632f31bdd1c66892231c5c4027ecd8',1,'half_float::detail::hypot(expr x, expr y)'],['../namespacehalf__float.html#a380a4c5a399e3dc14fdf39c53277edc5',1,'half_float::hypot()']]]
+];

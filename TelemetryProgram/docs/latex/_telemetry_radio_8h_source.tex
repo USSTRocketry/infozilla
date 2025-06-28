@@ -1,0 +1,35 @@
+\doxysection{Telemetry\+Radio.\+h}
+\hypertarget{_telemetry_radio_8h_source}{}\label{_telemetry_radio_8h_source}\index{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/HAL/TelemetryRadio.h@{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/HAL/TelemetryRadio.h}}
+\mbox{\hyperlink{_telemetry_radio_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_telemetry_radio}{TelemetryRadio}}\ \{}
+\DoxyCodeLine{00007\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_telemetry_radio_a174453d4a4d9d8497e9171b0e1d3ed61}{\string~TelemetryRadio}}()\ \{\}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{comment}{//\ Initialize\ the\ radio\ with\ default\ or\ customized\ settings}}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_telemetry_radio_aa173a8794b1d667270af6a354965d6f7}{begin}}()\ =\ 0;}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_telemetry_radio_a9e2bcded604882a83de37ee4a85403ea}{reset}}(uint8\_t\ resetPin\ =\ 127)\ =\ 0;\ \textcolor{comment}{//\ Non\ esistent\ pin}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{comment}{//\ Send\ data\ over\ the\ radio}}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_telemetry_radio_a7b88926fc28998a9dd100d2a8c370fc6}{send}}(\textcolor{keyword}{const}\ uint8\_t*\ data,\ \textcolor{keywordtype}{size\_t}\ length)\ =\ 0;}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{comment}{//\ Receive\ data\ from\ the\ radio}}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_telemetry_radio_a5739c2ab2baeb582e6fe68384222b374}{receive}}(uint8\_t*\ buffer,\ \textcolor{keywordtype}{size\_t}\ maxLength,\ \textcolor{keywordtype}{size\_t}\&\ receivedLength)\ =\ 0;}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{comment}{//\ Set\ a\ custom\ frequency}}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_telemetry_radio_ae0656456d10994f42f6b5b39010de481}{setFrequency}}(\textcolor{keywordtype}{float}\ frequency)\ =\ 0;}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{comment}{//\ Set\ a\ custom\ transmission\ power}}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_telemetry_radio_aa68afab17b7d4a9cd2aa852484652e35}{setTxPower}}(uint8\_t\ power)\ =\ 0;}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{comment}{//\ Configure\ spreading\ factor,\ bandwidth,\ etc.\ (LoRa-\/specific\ settings)}}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_telemetry_radio_a95d3f01697d86e3b58fc6b589298bbff}{configureLoRa}}(uint8\_t\ spreadingFactor,\ uint16\_t\ bandwidth,\ uint8\_t\ codingRate)\ =\ 0;}
+\DoxyCodeLine{00029\ \};}
+
+\end{DoxyCode}

@@ -1,0 +1,228 @@
+\doxysection{RYLR998\+Radio Class Reference}
+\hypertarget{class_r_y_l_r998_radio}{}\label{class_r_y_l_r998_radio}\index{RYLR998Radio@{RYLR998Radio}}
+
+
+A class to interface with the RYLR998 Lo\+Ra radio module.  
+
+
+
+
+{\ttfamily \#include $<$RYLR998\+Radio.\+h$>$}
+
+
+
+Inheritance diagram for RYLR998\+Radio\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=164pt]{class_r_y_l_r998_radio__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for RYLR998\+Radio\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=164pt]{class_r_y_l_r998_radio__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_r_y_l_r998_radio_a8e0f6a35a5939d0a480cc39b143288dc}{RYLR998\+Radio}} (uint8\+\_\+t serial\+Port=\mbox{\hyperlink{_p_i_n_s_8h_adfab05e5f37d2a59854b3193a3861c7c}{RYLR998\+\_\+\+HW\+\_\+\+SERIAL}}, uint32\+\_\+t baud\+Rate=9600)
+\item 
+\mbox{\hyperlink{class_r_y_l_r998_radio_a6e3928d159d78ca56b53adbeccf4707a}{\texorpdfstring{$\sim$}{\string~}\+RYLR998\+Radio}} () override
+\item 
+bool \mbox{\hyperlink{class_r_y_l_r998_radio_a1ce869d9e5cdcd6324ad7bcb60cb586f}{send}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, size\+\_\+t length) override
+\begin{DoxyCompactList}\small\item\em Sends data using the RYLR998 radio module. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_r_y_l_r998_radio_a0919598153aaeb9fa4e151dcf8373a51}{receive}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}buffer, size\+\_\+t max\+Length, size\+\_\+t \&received\+Length) override
+\begin{DoxyCompactList}\small\item\em Receives data from the RYLR998 radio module. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_r_y_l_r998_radio_a764f55b8f587efcac4dbfee86bed5ae6}{begin}} () override
+\begin{DoxyCompactList}\small\item\em Initializes the RYLR998 radio module. This method sets up the serial communication and configures the RYLR998 module for operation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_r_y_l_r998_radio_a5e5b8805584662921056200347e7e56c}{set\+Frequency}} (float frequency) override
+\begin{DoxyCompactList}\small\item\em Sets the frequency for the RYLR998 radio module. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_r_y_l_r998_radio_ab3559ac8b6e8c2f888c91947b6e22bd5}{set\+Tx\+Power}} (uint8\+\_\+t power) override
+\begin{DoxyCompactList}\small\item\em Sets the transmission power for the RYLR998 radio module. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_r_y_l_r998_radio_a6bee13907f56a958ba9d75e10ae8ebca}{configure\+Lo\+Ra}} (uint8\+\_\+t spreading\+Factor, uint16\+\_\+t bandwidth, uint8\+\_\+t coding\+Rate) override
+\begin{DoxyCompactList}\small\item\em Configures Lo\+Ra parameters for the RYLR998 radio module. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_telemetry_radio}{Telemetry\+Radio}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_telemetry_radio_a174453d4a4d9d8497e9171b0e1d3ed61}{\texorpdfstring{$\sim$}{\string~}\+Telemetry\+Radio}} ()
+\item 
+virtual void \mbox{\hyperlink{class_telemetry_radio_a9e2bcded604882a83de37ee4a85403ea}{reset}} (uint8\+\_\+t reset\+Pin=127)=0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class to interface with the RYLR998 Lo\+Ra radio module. 
+
+This class provides methods to initialize and communicate with the RYLR998 Lo\+Ra radio module. It allows sending and receiving data, setting frequency, transmission power, and configuring Lo\+Ra parameters such as spreading factor, bandwidth, and coding rate. \begin{DoxyNote}{Note}
+This class inherits from the \doxylink{class_telemetry_radio}{Telemetry\+Radio} base class.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em rylr998} & Reference to a hardware serial port used for communication with the RYLR998 module. \\
+\hline
+{\em baud\+Rate} & The baud rate for serial communication. Default is 9600. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-constructors}
+\Hypertarget{class_r_y_l_r998_radio_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_r_y_l_r998_radio_a8e0f6a35a5939d0a480cc39b143288dc}\index{RYLR998Radio@{RYLR998Radio}!RYLR998Radio@{RYLR998Radio}}
+\index{RYLR998Radio@{RYLR998Radio}!RYLR998Radio@{RYLR998Radio}}
+\doxysubsubsection{\texorpdfstring{RYLR998Radio()}{RYLR998Radio()}}
+{\footnotesize\ttfamily \label{class_r_y_l_r998_radio_a8e0f6a35a5939d0a480cc39b143288dc} 
+RYLR998\+Radio\+::\+RYLR998\+Radio (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{serial\+Port}{ = {\ttfamily \mbox{\hyperlink{_p_i_n_s_8h_adfab05e5f37d2a59854b3193a3861c7c}{RYLR998\+\_\+\+HW\+\_\+\+SERIAL}}}, }\item[{uint32\+\_\+t}]{baud\+Rate}{ = {\ttfamily 9600}}\end{DoxyParamCaption})}
+
+\Hypertarget{class_r_y_l_r998_radio_a6e3928d159d78ca56b53adbeccf4707a}\index{RYLR998Radio@{RYLR998Radio}!````~RYLR998Radio@{\texorpdfstring{$\sim$}{\string~}RYLR998Radio}}
+\index{````~RYLR998Radio@{\texorpdfstring{$\sim$}{\string~}RYLR998Radio}!RYLR998Radio@{RYLR998Radio}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}RYLR998Radio()}{\string~RYLR998Radio()}}
+{\footnotesize\ttfamily \label{class_r_y_l_r998_radio_a6e3928d159d78ca56b53adbeccf4707a} 
+RYLR998\+Radio\+::\texorpdfstring{$\sim$}{\string~}\+RYLR998\+Radio (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_r_y_l_r998_radio_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_r_y_l_r998_radio_a764f55b8f587efcac4dbfee86bed5ae6}\index{RYLR998Radio@{RYLR998Radio}!begin@{begin}}
+\index{begin@{begin}!RYLR998Radio@{RYLR998Radio}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}}
+{\footnotesize\ttfamily \label{class_r_y_l_r998_radio_a764f55b8f587efcac4dbfee86bed5ae6} 
+bool RYLR998\+Radio\+::begin (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Initializes the RYLR998 radio module. This method sets up the serial communication and configures the RYLR998 module for operation. 
+
+\begin{DoxyReturn}{Returns}
+true if initialization is successful, false otherwise. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_telemetry_radio_aa173a8794b1d667270af6a354965d6f7}{Telemetry\+Radio}}.
+
+\Hypertarget{class_r_y_l_r998_radio_a6bee13907f56a958ba9d75e10ae8ebca}\index{RYLR998Radio@{RYLR998Radio}!configureLoRa@{configureLoRa}}
+\index{configureLoRa@{configureLoRa}!RYLR998Radio@{RYLR998Radio}}
+\doxysubsubsection{\texorpdfstring{configureLoRa()}{configureLoRa()}}
+{\footnotesize\ttfamily \label{class_r_y_l_r998_radio_a6bee13907f56a958ba9d75e10ae8ebca} 
+void RYLR998\+Radio\+::configure\+Lo\+Ra (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{spreading\+Factor}{, }\item[{uint16\+\_\+t}]{bandwidth}{, }\item[{uint8\+\_\+t}]{coding\+Rate}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Configures Lo\+Ra parameters for the RYLR998 radio module. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em spreading\+Factor} & The spreading factor to be set. \\
+\hline
+{\em bandwidth} & The bandwidth to be set. \\
+\hline
+{\em coding\+Rate} & The coding rate to be set. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_telemetry_radio_a95d3f01697d86e3b58fc6b589298bbff}{Telemetry\+Radio}}.
+
+\Hypertarget{class_r_y_l_r998_radio_a0919598153aaeb9fa4e151dcf8373a51}\index{RYLR998Radio@{RYLR998Radio}!receive@{receive}}
+\index{receive@{receive}!RYLR998Radio@{RYLR998Radio}}
+\doxysubsubsection{\texorpdfstring{receive()}{receive()}}
+{\footnotesize\ttfamily \label{class_r_y_l_r998_radio_a0919598153aaeb9fa4e151dcf8373a51} 
+bool RYLR998\+Radio\+::receive (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{size\+\_\+t}]{max\+Length}{, }\item[{size\+\_\+t \&}]{received\+Length}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Receives data from the RYLR998 radio module. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & Pointer to the buffer where received data will be stored. \\
+\hline
+{\em max\+Length} & Maximum length of data to be received. \\
+\hline
+{\em received\+Length} & Reference to a variable where the actual length of received data will be stored. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if data is received successfully, false otherwise. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_telemetry_radio_a5739c2ab2baeb582e6fe68384222b374}{Telemetry\+Radio}}.
+
+\Hypertarget{class_r_y_l_r998_radio_a1ce869d9e5cdcd6324ad7bcb60cb586f}\index{RYLR998Radio@{RYLR998Radio}!send@{send}}
+\index{send@{send}!RYLR998Radio@{RYLR998Radio}}
+\doxysubsubsection{\texorpdfstring{send()}{send()}}
+{\footnotesize\ttfamily \label{class_r_y_l_r998_radio_a1ce869d9e5cdcd6324ad7bcb60cb586f} 
+bool RYLR998\+Radio\+::send (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{length}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Sends data using the RYLR998 radio module. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Pointer to the data to be sent. \\
+\hline
+{\em length} & Length of the data to be sent. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the data was sent successfully, false otherwise. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_telemetry_radio_a7b88926fc28998a9dd100d2a8c370fc6}{Telemetry\+Radio}}.
+
+\Hypertarget{class_r_y_l_r998_radio_a5e5b8805584662921056200347e7e56c}\index{RYLR998Radio@{RYLR998Radio}!setFrequency@{setFrequency}}
+\index{setFrequency@{setFrequency}!RYLR998Radio@{RYLR998Radio}}
+\doxysubsubsection{\texorpdfstring{setFrequency()}{setFrequency()}}
+{\footnotesize\ttfamily \label{class_r_y_l_r998_radio_a5e5b8805584662921056200347e7e56c} 
+void RYLR998\+Radio\+::set\+Frequency (\begin{DoxyParamCaption}\item[{float}]{frequency}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Sets the frequency for the RYLR998 radio module. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em frequency} & The frequency to be set. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_telemetry_radio_ae0656456d10994f42f6b5b39010de481}{Telemetry\+Radio}}.
+
+\Hypertarget{class_r_y_l_r998_radio_ab3559ac8b6e8c2f888c91947b6e22bd5}\index{RYLR998Radio@{RYLR998Radio}!setTxPower@{setTxPower}}
+\index{setTxPower@{setTxPower}!RYLR998Radio@{RYLR998Radio}}
+\doxysubsubsection{\texorpdfstring{setTxPower()}{setTxPower()}}
+{\footnotesize\ttfamily \label{class_r_y_l_r998_radio_ab3559ac8b6e8c2f888c91947b6e22bd5} 
+void RYLR998\+Radio\+::set\+Tx\+Power (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{power}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Sets the transmission power for the RYLR998 radio module. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em power} & The transmission power to be set (0-\/22 d\+Bm). \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_telemetry_radio_aa68afab17b7d4a9cd2aa852484652e35}{Telemetry\+Radio}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Bobby/\+Documents/\+USST/\+Infozilla/infozilla/\+Telemetry\+Program/lib/\+HAL/\mbox{\hyperlink{_r_y_l_r998_radio_8h}{RYLR998\+Radio.\+h}}\item 
+C\+:/\+Users/\+Bobby/\+Documents/\+USST/\+Infozilla/infozilla/\+Telemetry\+Program/lib/\+HAL/\mbox{\hyperlink{_r_y_l_r998_radio_8cpp}{RYLR998\+Radio.\+cpp}}\end{DoxyCompactItemize}

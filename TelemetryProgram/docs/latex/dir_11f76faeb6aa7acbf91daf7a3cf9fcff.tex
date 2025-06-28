@@ -1,0 +1,1106 @@
+\doxysection{C\+:/\+Users/\+Bobby/\+Documents/\+USST/\+Infozilla/infozilla/\+Telemetry\+Program/lib/\+HAL Directory Reference}
+\hypertarget{dir_11f76faeb6aa7acbf91daf7a3cf9fcff}{}\label{dir_11f76faeb6aa7acbf91daf7a3cf9fcff}\index{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/HAL Directory Reference@{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/HAL Directory Reference}}
+Directory dependency graph for HAL\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=148pt]{dir_11f76faeb6aa7acbf91daf7a3cf9fcff_dep}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Files}
+\begin{DoxyCompactItemize}
+\item 
+file \mbox{\hyperlink{_avionics___h_a_l_8h}{Avionics\+\_\+\+HAL.\+h}}
+\item 
+file \mbox{\hyperlink{_g_p_s_8cpp}{GPS.\+cpp}}
+\item 
+file \mbox{\hyperlink{_g_p_s_8h}{GPS.\+h}}
+\item 
+file \mbox{\hyperlink{_p_i_n_s_8h}{PINS.\+h}}
+\item 
+file \mbox{\hyperlink{_r_f_m95_radio_8cpp}{RFM95\+Radio.\+cpp}}
+\item 
+file \mbox{\hyperlink{_r_f_m95_radio_8h}{RFM95\+Radio.\+h}}
+\item 
+file \mbox{\hyperlink{_r_y_l_r998_radio_8cpp}{RYLR998\+Radio.\+cpp}}
+\item 
+file \mbox{\hyperlink{_r_y_l_r998_radio_8h}{RYLR998\+Radio.\+h}}
+\item 
+file \mbox{\hyperlink{_sensor_8cpp}{Sensor.\+cpp}}
+\item 
+file \mbox{\hyperlink{_sensor_8h}{Sensor.\+h}}
+\item 
+file \mbox{\hyperlink{_sensor_accel_gyro_8cpp}{Sensor\+Accel\+Gyro.\+cpp}}
+\item 
+file \mbox{\hyperlink{_sensor_accel_gyro_8h}{Sensor\+Accel\+Gyro.\+h}}
+\item 
+file \mbox{\hyperlink{_sensor_b_m_p280_8cpp}{Sensor\+BMP280.\+cpp}}
+\item 
+file \mbox{\hyperlink{_sensor_b_m_p280_8h}{Sensor\+BMP280.\+h}}
+\item 
+file \mbox{\hyperlink{_sensor_magnetometer_8cpp}{Sensor\+Magnetometer.\+cpp}}
+\item 
+file \mbox{\hyperlink{_sensor_magnetometer_8h}{Sensor\+Magnetometer.\+h}}
+\item 
+file \mbox{\hyperlink{_sensor_temp_8cpp}{Sensor\+Temp.\+cpp}}
+\item 
+file \mbox{\hyperlink{_sensor_temp_8h}{Sensor\+Temp.\+h}}
+\item 
+file \mbox{\hyperlink{_telemetry_radio_8h}{Telemetry\+Radio.\+h}}
+\item 
+file \mbox{\hyperlink{types_8h}{types.\+h}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\hypertarget{README.md_autotoc_md3}{}\doxysubsection{\texorpdfstring{HAL}{HAL}}\label{README.md_autotoc_md3}
+\hypertarget{README.md_autotoc_md4}{}\doxysubsection{\texorpdfstring{HAL and {\ttfamily platformio.\+ini} Configuration}{HAL and {\ttfamily platformio.\+ini} Configuration}}\label{README.md_autotoc_md4}
+\hypertarget{README.md_autotoc_md5}{}\doxysubsubsection{\texorpdfstring{Adding HAL as a Submodule}{Adding HAL as a Submodule}}\label{README.md_autotoc_md5}
+
+\begin{DoxyEnumerate}
+\item Navigate to your platform\+IO project directory
+\item Add the HAL repository as a submodule in {\ttfamily lib/}\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{git\ submodule\ add\ https://github.com/USSTRocketry/HAL.git\ lib/HAL}
+\DoxyCodeLine{git\ submodule\ update\ -\/-\/init\ -\/-\/recursive}
+
+\end{DoxyCode}
+
+\end{DoxyEnumerate}\hypertarget{README.md_autotoc_md6}{}\doxysubsubsection{\texorpdfstring{Updating {\ttfamily platformio.\+ini}}{Updating {\ttfamily platformio.\+ini}}}\label{README.md_autotoc_md6}
+Add these dependencies under {\ttfamily \mbox{[}env\mbox{]}} in {\ttfamily platformio.\+ini}\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{lib\_deps\ =}
+\DoxyCodeLine{\ \ SPI}
+\DoxyCodeLine{\ \ RadioHead}
+\DoxyCodeLine{\ \ https://github.com/adafruit/Adafruit\_BMP280\_Library}
+\DoxyCodeLine{\ \ https://github.com/adafruit/Adafruit\_BusIO}
+\DoxyCodeLine{\ \ https://github.com/adafruit/Adafruit\_GPS}
+\DoxyCodeLine{\ \ https://github.com/adafruit/Adafruit\_LIS3MDL}
+\DoxyCodeLine{\ \ https://github.com/adafruit/Adafruit\_LSM6DS}
+\DoxyCodeLine{\ \ https://github.com/adafruit/Adafruit\_MCP9808}
+\DoxyCodeLine{\ \ https://github.com/adafruit/Adafruit\_Sensor}
+
+\end{DoxyCode}
+\hypertarget{README.md_autotoc_md7}{}\doxysubsubsection{\texorpdfstring{Verifying}{Verifying}}\label{README.md_autotoc_md7}
+
+\begin{DoxyEnumerate}
+\item Install dependencies\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{pio\ lib\ install}
+
+\end{DoxyCode}
+
+\item Build the project\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{pio\ run}
+
+\end{DoxyCode}
+
+\end{DoxyEnumerate}\hypertarget{README.md_autotoc_md8}{}\doxysubsection{\texorpdfstring{Sensor\+BMP280}{Sensor\+BMP280}}\label{README.md_autotoc_md8}
+The {\ttfamily \doxylink{class_sensor_b_m_p280}{Sensor\+BMP280}} class allows interaction with the {\bfseries{Adafruit BMP280}} sensor for measuring temperature, pressure, and altitude. It supports both {\bfseries{I2C}} and {\bfseries{SPI}} communication modes.\hypertarget{README.md_autotoc_md9}{}\doxysubsubsubsection{\texorpdfstring{Features}{Features}}\label{README.md_autotoc_md9}
+
+\begin{DoxyItemize}
+\item Measures {\bfseries{temperature}}, {\bfseries{pressure}}, and {\bfseries{altitude}}.
+\item Supports {\bfseries{I2C}} and {\bfseries{SPI}} interfaces.
+\item Configures sensor settings for optimal performance (sampling rate, filtering, etc.).
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md10}{}\doxysubsubsubsection{\texorpdfstring{Usage}{Usage}}\label{README.md_autotoc_md10}
+\hypertarget{README.md_autotoc_md11}{}\doxysubsubsubsubsection{\texorpdfstring{1. {\bfseries{I2C Mode}}}{1. {\bfseries{I2C Mode}}}}\label{README.md_autotoc_md11}
+To use the sensor with I2C, instantiate the class with the I2C address and wire (defaults to {\ttfamily I2\+C\+\_\+\+WIRE0})\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{class_sensor_b_m_p280}{SensorBMP280}}\ \mbox{\hyperlink{_sensors_8cpp_aac54c63d0da302c797be826366065466}{bmp280Sensor}}(BMP280\_ADDRESS,\ \mbox{\hyperlink{_sensor_8h_a1a0ff10faa6578101d9717e25182ea16}{I2C\_WIRE0}});}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item {\ttfamily BMP280\+\_\+\+ADDRESS}\+: I2C address (default\+: {\ttfamily 0x76} or {\ttfamily 0x77}).
+\item {\ttfamily I2\+C\+\_\+\+WIRE0}, {\ttfamily I2\+C\+\_\+\+WIRE1}, {\ttfamily I2\+C\+\_\+\+WIRE2}\+: Select I2C bus (default\+: {\ttfamily Wire}).
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md12}{}\doxysubsubsubsubsection{\texorpdfstring{2. {\bfseries{SPI Mode}}}{2. {\bfseries{SPI Mode}}}}\label{README.md_autotoc_md12}
+For SPI communication, provide the chip select and SPI pins\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{class_sensor_b_m_p280}{SensorBMP280}}\ \mbox{\hyperlink{_sensors_8cpp_aac54c63d0da302c797be826366065466}{bmp280Sensor}}(CS\_PIN,\ MISO\_PIN,\ MOSI\_PIN,\ SCK\_PIN);}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item {\ttfamily CS\+\_\+\+PIN}, {\ttfamily MISO\+\_\+\+PIN}, {\ttfamily MOSI\+\_\+\+PIN}, {\ttfamily SCK\+\_\+\+PIN}\+: SPI pins (choose appropriate pins for your setup).
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md13}{}\doxysubsubsubsubsection{\texorpdfstring{3. {\bfseries{Initialize the Sensor}}}{3. {\bfseries{Initialize the Sensor}}}}\label{README.md_autotoc_md13}
+Use the {\ttfamily begin()} method to initialize the sensor\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{uint8\_t\ status\ =\ \mbox{\hyperlink{_sensors_8cpp_aac54c63d0da302c797be826366065466}{bmp280Sensor}}.begin();}
+
+\end{DoxyCode}
+\hypertarget{README.md_autotoc_md14}{}\doxysubsubsubsubsection{\texorpdfstring{4. {\bfseries{Reading Data}}}{4. {\bfseries{Reading Data}}}}\label{README.md_autotoc_md14}
+Read temperature, pressure, and altitude using the {\ttfamily read()} method\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{types_8h_ab261644c5efcb7e97882e695b0964f03}{BMP280Data}}*\ data\ =\ \mbox{\hyperlink{_sensors_8cpp_aac54c63d0da302c797be826366065466}{bmp280Sensor}}.read();}
+
+\end{DoxyCode}
+
+
+This returns a pointer to {\ttfamily \doxylink{types_8h_ab261644c5efcb7e97882e695b0964f03}{BMP280\+Data}} containing\+:
+\begin{DoxyItemize}
+\item {\ttfamily data-\/\texorpdfstring{$>$}{>}altitude}\+: Altitude in meters.
+\item {\ttfamily data-\/\texorpdfstring{$>$}{>}pressure}\+: Atmospheric pressure in Pascals.
+\item {\ttfamily data-\/\texorpdfstring{$>$}{>}temperature}\+: Temperature in Celsius.
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md15}{}\doxysubsubsubsection{\texorpdfstring{Constructors}{Constructors}}\label{README.md_autotoc_md15}
+
+\begin{DoxyItemize}
+\item {\bfseries{I2C Constructor}}\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{class_sensor_b_m_p280}{SensorBMP280}}(uint8\_t\ i2c\_addr\ =\ BMP280\_ADDRESS,\ uint8\_t\ i2c\_wire\ =\ \mbox{\hyperlink{_sensor_8h_a1a0ff10faa6578101d9717e25182ea16}{I2C\_WIRE0}},\ \textcolor{keywordtype}{float}\ ground\_alt\ =\ 0.0f);}
+
+\end{DoxyCode}
+
+\begin{DoxyItemize}
+\item {\ttfamily i2c\+\_\+addr}\+: \doxylink{class_sensor}{Sensor} I2C address (default\+: {\ttfamily BMP280\+\_\+\+ADDRESS}).
+\item {\ttfamily i2c\+\_\+wire}\+: I2C wire (default\+: {\ttfamily I2\+C\+\_\+\+WIRE0}).
+\item {\ttfamily ground\+\_\+alt}\+: Ground altitude for altitude calculation (optional).
+\end{DoxyItemize}
+\item {\bfseries{SPI Constructor}}\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{class_sensor_b_m_p280}{SensorBMP280}}(uint8\_t\ cs,\ uint8\_t\ miso,\ uint8\_t\ mosi,\ uint8\_t\ sck,\ \textcolor{keywordtype}{float}\ ground\_alt\ =\ 0.0f);}
+
+\end{DoxyCode}
+
+\begin{DoxyItemize}
+\item {\ttfamily cs}, {\ttfamily miso}, {\ttfamily mosi}, {\ttfamily sck}\+: SPI pins.
+\item {\ttfamily ground\+\_\+alt}\+: Ground altitude for altitude calculation (optional).
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md16}{}\doxysubsubsubsection{\texorpdfstring{Example Code}{Example Code}}\label{README.md_autotoc_md16}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_sensor_b_m_p280_8h}{SensorBMP280.h}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{class_sensor_b_m_p280}{SensorBMP280}}\ \mbox{\hyperlink{_sensors_8cpp_aac54c63d0da302c797be826366065466}{bmp280Sensor}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}{setup}}()\ \{}
+\DoxyCodeLine{\ \ \ \ Serial.begin(9600);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_sensors_8cpp_aac54c63d0da302c797be826366065466}{bmp280Sensor}}.begin())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}BMP280\ initialized."{}});}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Initialization\ failed."{}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{main_8cpp_afe461d27b9c48d5921c00d521181f12f}{loop}}()\ \{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{types_8h_ab261644c5efcb7e97882e695b0964f03}{BMP280Data}}*\ data\ =\ \mbox{\hyperlink{_sensors_8cpp_aac54c63d0da302c797be826366065466}{bmp280Sensor}}.read();}
+\DoxyCodeLine{\ \ \ \ Serial.print(\textcolor{stringliteral}{"{}Temp:\ "{}});}
+\DoxyCodeLine{\ \ \ \ Serial.print(data-\/>\mbox{\hyperlink{struct__bmp280_data_a9ae17af9bb5363ffd3a26dabcc0ebff2}{temperature}});}
+\DoxyCodeLine{\ \ \ \ Serial.print(\textcolor{stringliteral}{"{}°C,\ Pressure:\ "{}});}
+\DoxyCodeLine{\ \ \ \ Serial.print(data-\/>\mbox{\hyperlink{struct__bmp280_data_ad00011803b34967781193888b0448cac}{pressure}});}
+\DoxyCodeLine{\ \ \ \ Serial.print(\textcolor{stringliteral}{"{}Pa,\ Altitude:\ "{}});}
+\DoxyCodeLine{\ \ \ \ Serial.print(data-\/>\mbox{\hyperlink{struct__bmp280_data_a9e7cdb968bca4b93f85b703602b91717}{altitude}});}
+\DoxyCodeLine{\ \ \ \ Serial.println(\textcolor{stringliteral}{"{}m"{}});}
+\DoxyCodeLine{\ \ \ \ delay(1000);}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{README.md_autotoc_md17}{}\doxysubsection{\texorpdfstring{Sensor\+Accel\+Gyro}{Sensor\+Accel\+Gyro}}\label{README.md_autotoc_md17}
+The {\ttfamily \doxylink{class_sensor_accel_gyro}{Sensor\+Accel\+Gyro}} class provides an interface for interfacing with an accelerometer and gyroscope sensor (e.\+g., LSM6\+DSOX). It supports communication via both I2C and SPI protocols and provides methods to initialize and read data from the sensor.
+
+\DoxyHorRuler{0}
+\hypertarget{README.md_autotoc_md19}{}\doxysubsubsection{\texorpdfstring{Features}{Features}}\label{README.md_autotoc_md19}
+
+\begin{DoxyItemize}
+\item Supports I2C and SPI communication protocols.
+\item Provides accelerometer, gyroscope, and temperature readings.
+\item Configurable I2C bus and SPI pins for flexibility.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+ \hypertarget{README.md_autotoc_md21}{}\doxysubsubsection{\texorpdfstring{Constructor Parameters}{Constructor Parameters}}\label{README.md_autotoc_md21}
+\hypertarget{README.md_autotoc_md22}{}\doxysubsubsubsection{\texorpdfstring{I2C Constructor}{I2C Constructor}}\label{README.md_autotoc_md22}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{class_sensor_accel_gyro}{SensorAccelGyro}}(uint8\_t\ i2c\_addr,\ uint8\_t\ i2c\_wire);}
+
+\end{DoxyCode}
+
+\begin{DoxyItemize}
+\item {\bfseries{{\ttfamily i2c\+\_\+addr}}}\+: The I2C address of the accelerometer/gyroscope sensor.
+\item {\bfseries{{\ttfamily i2c\+\_\+wire}}}\+: The I2C bus to use ({\ttfamily I2\+C\+\_\+\+WIRE0}, {\ttfamily I2\+C\+\_\+\+WIRE1}, etc.).
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md23}{}\doxysubsubsubsection{\texorpdfstring{SPI Constructor}{SPI Constructor}}\label{README.md_autotoc_md23}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{class_sensor_accel_gyro}{SensorAccelGyro}}(uint8\_t\ cs,\ uint8\_t\ miso,\ uint8\_t\ mosi,\ uint8\_t\ sck);}
+
+\end{DoxyCode}
+
+\begin{DoxyItemize}
+\item {\bfseries{{\ttfamily cs}}}\+: Chip select pin for SPI.
+\item {\bfseries{{\ttfamily miso}}}\+: Master In Slave Out pin for SPI.
+\item {\bfseries{{\ttfamily mosi}}}\+: Master Out Slave In pin for SPI.
+\item {\bfseries{{\ttfamily sck}}}\+: Clock pin for SPI.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{README.md_autotoc_md25}{}\doxysubsubsection{\texorpdfstring{Public Methods}{Public Methods}}\label{README.md_autotoc_md25}
+\hypertarget{README.md_autotoc_md26}{}\doxysubsubsubsection{\texorpdfstring{{\ttfamily uint8\+\_\+t begin()}}{{\ttfamily uint8\+\_\+t begin()}}}\label{README.md_autotoc_md26}
+Initializes the sensor for communication.
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Returns}}\+: Status of initialization ({\ttfamily 0} for failure, {\ttfamily 1} for success).
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md27}{}\doxysubsubsubsection{\texorpdfstring{{\ttfamily Accel\+Gyro\+Data\texorpdfstring{$\ast$}{*} read()}}{{\ttfamily Accel\+Gyro\+Data\texorpdfstring{$\ast$}{*} read()}}}\label{README.md_autotoc_md27}
+Reads the current accelerometer, gyroscope, and temperature data.
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Returns}}\+: Pointer to an {\ttfamily \doxylink{types_8h_a052a1cf82d94d02541cda224aec1bc21}{Accel\+Gyro\+Data}} structure containing\+:
+\begin{DoxyItemize}
+\item {\ttfamily temperature}\+: Current temperature in degrees Celsius.
+\item {\ttfamily accelX}, {\ttfamily accelY}, {\ttfamily accelZ}\+: Acceleration in m/s² for X, Y, and Z axes.
+\item {\ttfamily gyroX}, {\ttfamily gyroY}, {\ttfamily gyroZ}\+: Angular velocity in rad/s for X, Y, and Z axes.
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{README.md_autotoc_md29}{}\doxysubsubsection{\texorpdfstring{Example Usage}{Example Usage}}\label{README.md_autotoc_md29}
+\hypertarget{README.md_autotoc_md30}{}\doxysubsubsubsection{\texorpdfstring{Using I2C}{Using I2C}}\label{README.md_autotoc_md30}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_sensor_accel_gyro_8h}{SensorAccelGyro.h}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{class_sensor_accel_gyro}{SensorAccelGyro}}\ \mbox{\hyperlink{_sensors_8cpp_abf8ecea494d852ec809e7d5caf7bb020}{accelGyro}}(0x6A,\ \mbox{\hyperlink{_sensor_8h_a1a0ff10faa6578101d9717e25182ea16}{I2C\_WIRE0}});\ \textcolor{comment}{//\ Default\ I2C\ address\ and\ bus}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}{setup}}()\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{_sensors_8cpp_abf8ecea494d852ec809e7d5caf7bb020}{accelGyro}}.begin())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Failed\ to\ initialize\ accelerometer/gyroscope\ sensor!"{}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{main_8cpp_afe461d27b9c48d5921c00d521181f12f}{loop}}()\ \{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{types_8h_a052a1cf82d94d02541cda224aec1bc21}{AccelGyroData}}*\ data\ =\ \mbox{\hyperlink{_sensors_8cpp_abf8ecea494d852ec809e7d5caf7bb020}{accelGyro}}.read();}
+\DoxyCodeLine{\ \ \ \ Serial.print(\textcolor{stringliteral}{"{}Accel:\ "{}});}
+\DoxyCodeLine{\ \ \ \ Serial.print(data-\/>\mbox{\hyperlink{struct__accel_gyro_data_a6b20894eb13397001bb376e5126d6f2a}{accelX}});}
+\DoxyCodeLine{\ \ \ \ Serial.print(\textcolor{stringliteral}{"{},\ "{}});}
+\DoxyCodeLine{\ \ \ \ Serial.print(data-\/>\mbox{\hyperlink{struct__accel_gyro_data_a106dbe73b09e01279996aff80e848ac1}{accelY}});}
+\DoxyCodeLine{\ \ \ \ Serial.print(\textcolor{stringliteral}{"{},\ "{}});}
+\DoxyCodeLine{\ \ \ \ Serial.println(data-\/>\mbox{\hyperlink{struct__accel_gyro_data_ae3d3bfa640a77a03ed64f3f3b01bea14}{accelZ}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Serial.print(\textcolor{stringliteral}{"{}Gyro:\ "{}});}
+\DoxyCodeLine{\ \ \ \ Serial.print(data-\/>\mbox{\hyperlink{struct__accel_gyro_data_a3023fc970ad8b0a212732f58da9acd46}{gyroX}});}
+\DoxyCodeLine{\ \ \ \ Serial.print(\textcolor{stringliteral}{"{},\ "{}});}
+\DoxyCodeLine{\ \ \ \ Serial.print(data-\/>\mbox{\hyperlink{struct__accel_gyro_data_ab148b2aff876f50a53bbba1cf554bc48}{gyroY}});}
+\DoxyCodeLine{\ \ \ \ Serial.print(\textcolor{stringliteral}{"{},\ "{}});}
+\DoxyCodeLine{\ \ \ \ Serial.println(data-\/>\mbox{\hyperlink{struct__accel_gyro_data_a1e7dcd08569f6c5053d3e911ca157d6c}{gyroZ}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ delay(500);}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{README.md_autotoc_md31}{}\doxysubsubsubsection{\texorpdfstring{Using SPI}{Using SPI}}\label{README.md_autotoc_md31}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_sensor_accel_gyro_8h}{SensorAccelGyro.h}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{class_sensor_accel_gyro}{SensorAccelGyro}}\ \mbox{\hyperlink{_sensors_8cpp_abf8ecea494d852ec809e7d5caf7bb020}{accelGyro}}(10,\ 12,\ 11,\ 13);\ \textcolor{comment}{//\ SPI\ pins}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}{setup}}()\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{_sensors_8cpp_abf8ecea494d852ec809e7d5caf7bb020}{accelGyro}}.begin())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Failed\ to\ initialize\ accelerometer/gyroscope\ sensor!"{}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{main_8cpp_afe461d27b9c48d5921c00d521181f12f}{loop}}()\ \{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{types_8h_a052a1cf82d94d02541cda224aec1bc21}{AccelGyroData}}*\ data\ =\ \mbox{\hyperlink{_sensors_8cpp_abf8ecea494d852ec809e7d5caf7bb020}{accelGyro}}.read();}
+\DoxyCodeLine{\ \ \ \ Serial.print(\textcolor{stringliteral}{"{}Temperature:\ "{}});}
+\DoxyCodeLine{\ \ \ \ Serial.println(data-\/>\mbox{\hyperlink{struct__accel_gyro_data_ad42265c3d7a5c48ce8660f04572a9b82}{temperature}});}
+\DoxyCodeLine{\ \ \ \ delay(500);}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{README.md_autotoc_md33}{}\doxysubsection{\texorpdfstring{Sensor\+Magnetometer}{Sensor\+Magnetometer}}\label{README.md_autotoc_md33}
+The {\ttfamily \doxylink{class_sensor_magnetometer}{Sensor\+Magnetometer}} class provides an interface for working with a magnetometer sensor (e.\+g., Adafruit LIS3\+MDL). It supports communication via both I2C and SPI protocols, allowing flexible hardware integration.
+
+\DoxyHorRuler{0}
+\hypertarget{README.md_autotoc_md35}{}\doxysubsubsection{\texorpdfstring{Features}{Features}}\label{README.md_autotoc_md35}
+
+\begin{DoxyItemize}
+\item Supports I2C and SPI communication protocols.
+\item Provides magnetic field readings for the X, Y, and Z axes.
+\item Configurable I2C bus and SPI pins for flexible usage.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{README.md_autotoc_md37}{}\doxysubsubsection{\texorpdfstring{Constructor Parameters}{Constructor Parameters}}\label{README.md_autotoc_md37}
+\hypertarget{README.md_autotoc_md38}{}\doxysubsubsubsection{\texorpdfstring{I2C Constructor}{I2C Constructor}}\label{README.md_autotoc_md38}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{class_sensor_magnetometer}{SensorMagnetometer}}(uint8\_t\ i2c\_addr,\ uint8\_t\ i2c\_wire);}
+
+\end{DoxyCode}
+
+\begin{DoxyItemize}
+\item {\bfseries{{\ttfamily i2c\+\_\+addr}}}\+: The I2C address of the magnetometer sensor (default\+: {\ttfamily LIS3\+MDL\+\_\+\+I2\+CADDR\+\_\+\+DEFAULT}).
+\item {\bfseries{{\ttfamily i2c\+\_\+wire}}}\+: The I2C bus to use ({\ttfamily I2\+C\+\_\+\+WIRE0}, {\ttfamily I2\+C\+\_\+\+WIRE1}, etc.).
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md39}{}\doxysubsubsubsection{\texorpdfstring{SPI Constructor}{SPI Constructor}}\label{README.md_autotoc_md39}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{class_sensor_magnetometer}{SensorMagnetometer}}(uint8\_t\ cs,\ uint8\_t\ miso,\ uint8\_t\ mosi,\ uint8\_t\ sck);}
+
+\end{DoxyCode}
+
+\begin{DoxyItemize}
+\item {\bfseries{{\ttfamily cs}}}\+: Chip select pin for SPI.
+\item {\bfseries{{\ttfamily miso}}}\+: Master In Slave Out pin for SPI.
+\item {\bfseries{{\ttfamily mosi}}}\+: Master Out Slave In pin for SPI.
+\item {\bfseries{{\ttfamily sck}}}\+: Clock pin for SPI.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{README.md_autotoc_md41}{}\doxysubsubsection{\texorpdfstring{Public Methods}{Public Methods}}\label{README.md_autotoc_md41}
+\hypertarget{README.md_autotoc_md42}{}\doxysubsubsubsection{\texorpdfstring{{\ttfamily uint8\+\_\+t begin()}}{{\ttfamily uint8\+\_\+t begin()}}}\label{README.md_autotoc_md42}
+Initializes the magnetometer sensor for communication.
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Returns}}\+: Status of initialization ({\ttfamily 0} for failure, {\ttfamily 1} for success).
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md43}{}\doxysubsubsubsection{\texorpdfstring{{\ttfamily Magnetometer\+Data\texorpdfstring{$\ast$}{*} read()}}{{\ttfamily Magnetometer\+Data\texorpdfstring{$\ast$}{*} read()}}}\label{README.md_autotoc_md43}
+Reads the current magnetic field data.
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Returns}}\+: Pointer to a {\ttfamily \doxylink{types_8h_a34c81329fddf919347a1c051065b79ef}{Magnetometer\+Data}} structure containing\+:
+\begin{DoxyItemize}
+\item {\ttfamily magX}, {\ttfamily magY}, {\ttfamily magZ}\+: Magnetic field values (in µT) for X, Y, and Z axes.
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{README.md_autotoc_md45}{}\doxysubsubsection{\texorpdfstring{Example Usage}{Example Usage}}\label{README.md_autotoc_md45}
+\hypertarget{README.md_autotoc_md46}{}\doxysubsubsubsection{\texorpdfstring{Using I2C}{Using I2C}}\label{README.md_autotoc_md46}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_sensor_magnetometer_8h}{SensorMagnetometer.h}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{class_sensor_magnetometer}{SensorMagnetometer}}\ \mbox{\hyperlink{_sensors_8cpp_ac3bbb256fd91ccdbbfb187dbc86fc188}{magnetometer}}(LIS3MDL\_I2CADDR\_DEFAULT,\ \mbox{\hyperlink{_sensor_8h_a1a0ff10faa6578101d9717e25182ea16}{I2C\_WIRE0}});\ \textcolor{comment}{//\ Default\ I2C\ address\ and\ bus}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}{setup}}()\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{_sensors_8cpp_ac3bbb256fd91ccdbbfb187dbc86fc188}{magnetometer}}.begin())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Failed\ to\ initialize\ magnetometer!"{}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{main_8cpp_afe461d27b9c48d5921c00d521181f12f}{loop}}()\ \{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{types_8h_a34c81329fddf919347a1c051065b79ef}{MagnetometerData}}*\ data\ =\ \mbox{\hyperlink{_sensors_8cpp_ac3bbb256fd91ccdbbfb187dbc86fc188}{magnetometer}}.read();}
+\DoxyCodeLine{\ \ \ \ Serial.print(\textcolor{stringliteral}{"{}Magnetic\ Field:\ "{}});}
+\DoxyCodeLine{\ \ \ \ Serial.print(data-\/>magX);}
+\DoxyCodeLine{\ \ \ \ Serial.print(\textcolor{stringliteral}{"{},\ "{}});}
+\DoxyCodeLine{\ \ \ \ Serial.print(data-\/>magY);}
+\DoxyCodeLine{\ \ \ \ Serial.print(\textcolor{stringliteral}{"{},\ "{}});}
+\DoxyCodeLine{\ \ \ \ Serial.println(data-\/>magZ);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ delay(500);}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{README.md_autotoc_md47}{}\doxysubsubsubsection{\texorpdfstring{Using SPI}{Using SPI}}\label{README.md_autotoc_md47}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_sensor_magnetometer_8h}{SensorMagnetometer.h}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{class_sensor_magnetometer}{SensorMagnetometer}}\ \mbox{\hyperlink{_sensors_8cpp_ac3bbb256fd91ccdbbfb187dbc86fc188}{magnetometer}}(10,\ 12,\ 11,\ 13);\ \textcolor{comment}{//\ SPI\ pins}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}{setup}}()\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{_sensors_8cpp_ac3bbb256fd91ccdbbfb187dbc86fc188}{magnetometer}}.begin())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Failed\ to\ initialize\ magnetometer!"{}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{main_8cpp_afe461d27b9c48d5921c00d521181f12f}{loop}}()\ \{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{types_8h_a34c81329fddf919347a1c051065b79ef}{MagnetometerData}}*\ data\ =\ \mbox{\hyperlink{_sensors_8cpp_ac3bbb256fd91ccdbbfb187dbc86fc188}{magnetometer}}.read();}
+\DoxyCodeLine{\ \ \ \ Serial.print(\textcolor{stringliteral}{"{}Magnetic\ Field:\ "{}});}
+\DoxyCodeLine{\ \ \ \ Serial.print(data-\/>magX);}
+\DoxyCodeLine{\ \ \ \ Serial.print(\textcolor{stringliteral}{"{},\ "{}});}
+\DoxyCodeLine{\ \ \ \ Serial.print(data-\/>magY);}
+\DoxyCodeLine{\ \ \ \ Serial.print(\textcolor{stringliteral}{"{},\ "{}});}
+\DoxyCodeLine{\ \ \ \ Serial.println(data-\/>magZ);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ delay(500);}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{README.md_autotoc_md48}{}\doxysubsection{\texorpdfstring{Sensor\+Temperature}{Sensor\+Temperature}}\label{README.md_autotoc_md48}
+The {\ttfamily \doxylink{class_sensor_temperature}{Sensor\+Temperature}} class provides an interface to interact with the MCP9808 temperature sensor. It supports communication over the I2C protocol and provides methods to initialize and read temperature data.
+
+\DoxyHorRuler{0}
+\hypertarget{README.md_autotoc_md50}{}\doxysubsubsection{\texorpdfstring{Features}{Features}}\label{README.md_autotoc_md50}
+
+\begin{DoxyItemize}
+\item I2C communication support for temperature data.
+\item Easy initialization with configurable I2C address and bus.
+\item Provides high-\/accuracy temperature readings.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{README.md_autotoc_md52}{}\doxysubsubsection{\texorpdfstring{Constructor Parameters}{Constructor Parameters}}\label{README.md_autotoc_md52}
+\hypertarget{README.md_autotoc_md53}{}\doxysubsubsubsection{\texorpdfstring{I2C Constructor}{I2C Constructor}}\label{README.md_autotoc_md53}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{class_sensor_temperature}{SensorTemperature}}(uint8\_t\ i2c\_addr\ =\ MCP9808\_I2CADDR\_DEFAULT,\ uint8\_t\ i2c\_wire\ =\ \mbox{\hyperlink{_sensor_8h_a1a0ff10faa6578101d9717e25182ea16}{I2C\_WIRE0}});}
+
+\end{DoxyCode}
+
+\begin{DoxyItemize}
+\item {\bfseries{{\ttfamily i2c\+\_\+addr}}}\+: I2C address of the MCP9808 sensor (default\+: {\ttfamily MCP9808\+\_\+\+I2\+CADDR\+\_\+\+DEFAULT}).
+\item {\bfseries{{\ttfamily i2c\+\_\+wire}}}\+: I2C bus to use ({\ttfamily I2\+C\+\_\+\+WIRE0}, {\ttfamily I2\+C\+\_\+\+WIRE1}, etc.).
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{README.md_autotoc_md55}{}\doxysubsubsection{\texorpdfstring{Public Methods}{Public Methods}}\label{README.md_autotoc_md55}
+\hypertarget{README.md_autotoc_md56}{}\doxysubsubsubsection{\texorpdfstring{{\ttfamily uint8\+\_\+t begin()}}{{\ttfamily uint8\+\_\+t begin()}}}\label{README.md_autotoc_md56}
+Initializes the temperature sensor for communication.
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Returns}}\+: Status of initialization ({\ttfamily 0} for failure, {\ttfamily 1} for success).
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md57}{}\doxysubsubsubsection{\texorpdfstring{{\ttfamily float read()}}{{\ttfamily float read()}}}\label{README.md_autotoc_md57}
+Reads the current temperature from the sensor.
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Returns}}\+: Temperature in degrees Celsius.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{README.md_autotoc_md59}{}\doxysubsubsection{\texorpdfstring{Example Usage}{Example Usage}}\label{README.md_autotoc_md59}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}SensorTemperature.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{class_sensor_temperature}{SensorTemperature}}\ \mbox{\hyperlink{_sensors_8cpp_acca61771252459cb41d3a23799d58b48}{tempSensor}};\ \textcolor{comment}{//\ Default\ I2C\ address\ and\ bus}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}{setup}}()\ \{}
+\DoxyCodeLine{\ \ \ \ Serial.begin(115200);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{_sensors_8cpp_acca61771252459cb41d3a23799d58b48}{tempSensor}}.begin())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Failed\ to\ initialize\ temperature\ sensor!"{}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{main_8cpp_afe461d27b9c48d5921c00d521181f12f}{loop}}()\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{float}\ temperature\ =\ \mbox{\hyperlink{_sensors_8cpp_acca61771252459cb41d3a23799d58b48}{tempSensor}}.read();}
+\DoxyCodeLine{\ \ \ \ Serial.print(\textcolor{stringliteral}{"{}Temperature:\ "{}});}
+\DoxyCodeLine{\ \ \ \ Serial.print(temperature);}
+\DoxyCodeLine{\ \ \ \ Serial.println(\textcolor{stringliteral}{"{}\ °C"{}});}
+\DoxyCodeLine{\ \ \ \ delay(1000);}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{README.md_autotoc_md60}{}\doxysubsection{\texorpdfstring{GPS}{GPS}}\label{README.md_autotoc_md60}
+The {\ttfamily \doxylink{class_g_p_s}{GPS}} class provides an interface for integrating \doxylink{class_g_p_s}{GPS} modules using the Adafruit \doxylink{class_g_p_s}{GPS} library. It supports hardware serial communication and provides methods for configuration, data retrieval, and command communication.
+
+\DoxyHorRuler{0}
+\hypertarget{README.md_autotoc_md62}{}\doxysubsubsection{\texorpdfstring{Features}{Features}}\label{README.md_autotoc_md62}
+
+\begin{DoxyItemize}
+\item Supports hardware serial communication.
+\item Configurable baud rate and update rate.
+\item Retrieves latitude, longitude, altitude, and other \doxylink{class_g_p_s}{GPS} data.
+\item Allows sending custom commands to the \doxylink{class_g_p_s}{GPS} module.
+\item Fix detection to check satellite connectivity.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{README.md_autotoc_md64}{}\doxysubsubsection{\texorpdfstring{Constructor Parameters}{Constructor Parameters}}\label{README.md_autotoc_md64}
+\hypertarget{README.md_autotoc_md65}{}\doxysubsubsubsection{\texorpdfstring{Constructor}{Constructor}}\label{README.md_autotoc_md65}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{class_g_p_s}{GPS}}(uint8\_t\ serial\ =\ \mbox{\hyperlink{_p_i_n_s_8h_a6d1ec000c91b59c9bbc1896abf564ca1}{GPS\_HW\_SERIAL}},\ uint32\_t\ baud\_rate\ =\ 9600);}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item {\bfseries{{\ttfamily serial}}}\+: Specifies the hardware serial port to use. Use predefined macros ({\ttfamily GPS\+\_\+\+HW\+\_\+\+SERIAL0}, {\ttfamily GPS\+\_\+\+HW\+\_\+\+SERIAL1}, etc.) for easy configuration.
+\item {\bfseries{{\ttfamily baud\+\_\+rate}}}\+: Communication speed with the \doxylink{class_g_p_s}{GPS} module. Defaults to {\ttfamily 9600}.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{README.md_autotoc_md67}{}\doxysubsubsection{\texorpdfstring{Public Methods}{Public Methods}}\label{README.md_autotoc_md67}
+\hypertarget{README.md_autotoc_md68}{}\doxysubsubsubsection{\texorpdfstring{{\ttfamily void begin()}}{{\ttfamily void begin()}}}\label{README.md_autotoc_md68}
+Initializes the \doxylink{class_g_p_s}{GPS} module with the specified serial port and baud rate.\hypertarget{README.md_autotoc_md69}{}\doxysubsubsubsection{\texorpdfstring{{\ttfamily void configure(uint32\+\_\+t update\+\_\+rate\+\_\+ms = 1000, const char\texorpdfstring{$\ast$}{*} output\+\_\+mode = PMTK\+\_\+\+SET\+\_\+\+NMEA\+\_\+\+OUTPUT\+\_\+\+RMCONLY)}}{{\ttfamily void configure(uint32\+\_\+t update\+\_\+rate\+\_\+ms = 1000, const char\texorpdfstring{$\ast$}{*} output\+\_\+mode = PMTK\+\_\+\+SET\+\_\+\+NMEA\+\_\+\+OUTPUT\+\_\+\+RMCONLY)}}}\label{README.md_autotoc_md69}
+Configures the \doxylink{class_g_p_s}{GPS} module settings.
+
+
+\begin{DoxyItemize}
+\item {\bfseries{{\ttfamily update\+\_\+rate\+\_\+ms}}}\+: Update interval for \doxylink{class_g_p_s}{GPS} data (in milliseconds). Default is {\ttfamily 1000 ms}.
+\item {\bfseries{{\ttfamily output\+\_\+mode}}}\+: NMEA output mode. Default is {\ttfamily PMTK\+\_\+\+SET\+\_\+\+NMEA\+\_\+\+OUTPUT\+\_\+\+RMCONLY} (only RMC data).
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md70}{}\doxysubsubsubsection{\texorpdfstring{{\ttfamily GPSData\texorpdfstring{$\ast$}{*} read()}}{{\ttfamily GPSData\texorpdfstring{$\ast$}{*} read()}}}\label{README.md_autotoc_md70}
+Reads the latest \doxylink{class_g_p_s}{GPS} data and updates the {\ttfamily \doxylink{struct_g_p_s_data}{GPSData}} structure.
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Returns}}\+: Pointer to a {\ttfamily \doxylink{struct_g_p_s_data}{GPSData}} structure containing\+:
+\begin{DoxyItemize}
+\item {\ttfamily latitude} and {\ttfamily longitude}\+: Coordinates in decimal degrees.
+\item {\ttfamily altitude}\+: Altitude above sea level (meters).
+\item {\ttfamily speed}\+: Speed in km/h.
+\item {\ttfamily fix\+Quality}\+: Indicates the \doxylink{class_g_p_s}{GPS} fix quality (0 for no fix, 1 for standard, 2+ for enhanced fixes).
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md71}{}\doxysubsubsubsection{\texorpdfstring{{\ttfamily bool has\+Fix()}}{{\ttfamily bool has\+Fix()}}}\label{README.md_autotoc_md71}
+Checks if the \doxylink{class_g_p_s}{GPS} module has a satellite fix.
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Returns}}\+: {\ttfamily true} if a fix is available, {\ttfamily false} otherwise.
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md72}{}\doxysubsubsubsection{\texorpdfstring{{\ttfamily void send\+Command(const char\texorpdfstring{$\ast$}{*} command)}}{{\ttfamily void send\+Command(const char\texorpdfstring{$\ast$}{*} command)}}}\label{README.md_autotoc_md72}
+Sends a custom command string to the \doxylink{class_g_p_s}{GPS} module.
+
+\DoxyHorRuler{0}
+\hypertarget{README.md_autotoc_md74}{}\doxysubsubsection{\texorpdfstring{Example Usage}{Example Usage}}\label{README.md_autotoc_md74}
+\hypertarget{README.md_autotoc_md75}{}\doxysubsubsubsection{\texorpdfstring{Basic Example}{Basic Example}}\label{README.md_autotoc_md75}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_g_p_s_8h}{GPS.h}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{class_g_p_s}{GPS}}\ \mbox{\hyperlink{_sensors_8cpp_ae799a671dd1e22fea5372678d83fa6c5}{gps}}(GPS\_HW\_SERIAL1,\ 9600);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}{setup}}()\ \{}
+\DoxyCodeLine{\ \ \ \ Serial.begin(115200);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{_sensors_8cpp_ae799a671dd1e22fea5372678d83fa6c5}{gps}}.begin();}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{_sensors_8cpp_ae799a671dd1e22fea5372678d83fa6c5}{gps}}.configure(1000,\ PMTK\_SET\_NMEA\_OUTPUT\_RMCONLY);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{main_8cpp_afe461d27b9c48d5921c00d521181f12f}{loop}}()\ \{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{struct_g_p_s_data}{GPSData}}*\ data\ =\ \mbox{\hyperlink{_sensors_8cpp_ae799a671dd1e22fea5372678d83fa6c5}{gps}}.read();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_sensors_8cpp_ae799a671dd1e22fea5372678d83fa6c5}{gps}}.hasFix())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}Lat:\ "{}});\ Serial.println(data-\/>\mbox{\hyperlink{struct_g_p_s_data_a605d853b4e7cbb2c523b37ebbf018d00}{latitude}},\ 6);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}Lon:\ "{}});\ Serial.println(data-\/>\mbox{\hyperlink{struct_g_p_s_data_aee24caf310c4c5ab5905408f16b38778}{longitude}},\ 6);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}Alt:\ "{}});\ Serial.println(data-\/>\mbox{\hyperlink{struct_g_p_s_data_a0801c2082de32b6a0ae9b01e483d3128}{altitude}});}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}No\ GPS\ fix\ available."{}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ delay(1000);}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{README.md_autotoc_md76}{}\doxysubsection{\texorpdfstring{RYLR998\+Radio}{RYLR998\+Radio}}\label{README.md_autotoc_md76}
+The {\ttfamily \doxylink{class_r_y_l_r998_radio}{RYLR998\+Radio}} class provides a high-\/level interface for communicating with the RYLR998 Lo\+Ra module. It supports basic operations such as sending and receiving data, configuring Lo\+Ra parameters, and setting transmission parameters.
+
+\DoxyHorRuler{0}
+\hypertarget{README.md_autotoc_md78}{}\doxysubsubsection{\texorpdfstring{Features}{Features}}\label{README.md_autotoc_md78}
+
+\begin{DoxyItemize}
+\item Simple API for sending and receiving data.
+\item Adjustable frequency, transmission power, and Lo\+Ra parameters.
+\item Uses Teensy hardware serial.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{README.md_autotoc_md80}{}\doxysubsubsection{\texorpdfstring{Constructor Parameters}{Constructor Parameters}}\label{README.md_autotoc_md80}
+\hypertarget{README.md_autotoc_md81}{}\doxysubsubsubsection{\texorpdfstring{{\ttfamily RYLR998\+Radio(uint8\+\_\+t serial\+Port, uint32\+\_\+t baud\+Rate)}}{{\ttfamily RYLR998\+Radio(uint8\+\_\+t serial\+Port, uint32\+\_\+t baud\+Rate)}}}\label{README.md_autotoc_md81}
+
+\begin{DoxyItemize}
+\item {\bfseries{{\ttfamily serial\+Port}}}\+: The hardware serial port to use (e.\+g., {\ttfamily HW\+\_\+\+SERIAL1}, {\ttfamily HW\+\_\+\+SERIAL2}, etc.). Default id {\ttfamily HW\+\_\+\+SERIAL8}
+\item {\bfseries{{\ttfamily baud\+Rate}}}\+: Baud rate for communication. Defaults to {\ttfamily 9600}.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{README.md_autotoc_md83}{}\doxysubsubsection{\texorpdfstring{Public Methods}{Public Methods}}\label{README.md_autotoc_md83}
+\hypertarget{README.md_autotoc_md84}{}\doxysubsubsubsection{\texorpdfstring{{\ttfamily bool begin()}}{{\ttfamily bool begin()}}}\label{README.md_autotoc_md84}
+Initializes the RYLR998 radio module.
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Returns}}\+: {\ttfamily true} if initialization is successful, {\ttfamily false} otherwise.
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md85}{}\doxysubsubsubsection{\texorpdfstring{{\ttfamily bool send(const uint8\+\_\+t\texorpdfstring{$\ast$}{*} data, size\+\_\+t length)}}{{\ttfamily bool send(const uint8\+\_\+t\texorpdfstring{$\ast$}{*} data, size\+\_\+t length)}}}\label{README.md_autotoc_md85}
+Sends data through the Lo\+Ra module.
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Parameters}}\+:
+\begin{DoxyItemize}
+\item {\ttfamily data}\+: Pointer to the data buffer to send.
+\item {\ttfamily length}\+: Length of the data buffer.
+\end{DoxyItemize}
+\item {\bfseries{Returns}}\+: {\ttfamily true} if data is sent successfully, {\ttfamily false} otherwise.
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md86}{}\doxysubsubsubsection{\texorpdfstring{{\ttfamily bool receive(uint8\+\_\+t\texorpdfstring{$\ast$}{*} buffer, size\+\_\+t max\+Length, size\+\_\+t\& received\+Length)}}{{\ttfamily bool receive(uint8\+\_\+t\texorpdfstring{$\ast$}{*} buffer, size\+\_\+t max\+Length, size\+\_\+t\& received\+Length)}}}\label{README.md_autotoc_md86}
+Receives data from the Lo\+Ra module.
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Parameters}}\+:
+\begin{DoxyItemize}
+\item {\ttfamily buffer}\+: Buffer to store received data.
+\item {\ttfamily max\+Length}\+: Maximum size of the buffer.
+\item {\ttfamily received\+Length}\+: Actual length of the received data.
+\end{DoxyItemize}
+\item {\bfseries{Returns}}\+: {\ttfamily true} if data is received successfully, {\ttfamily false} otherwise.
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md87}{}\doxysubsubsubsection{\texorpdfstring{{\ttfamily void set\+Frequency(float frequency)}}{{\ttfamily void set\+Frequency(float frequency)}}}\label{README.md_autotoc_md87}
+Sets the operating frequency of the Lo\+Ra module.
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Parameters}}\+:
+\begin{DoxyItemize}
+\item {\ttfamily frequency}\+: Desired frequency in MHz.
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md88}{}\doxysubsubsubsection{\texorpdfstring{{\ttfamily void set\+Tx\+Power(uint8\+\_\+t power)}}{{\ttfamily void set\+Tx\+Power(uint8\+\_\+t power)}}}\label{README.md_autotoc_md88}
+Sets the transmission power of the Lo\+Ra module.
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Parameters}}\+:
+\begin{DoxyItemize}
+\item {\ttfamily power}\+: Transmission power level (1-\/20).
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{README.md_autotoc_md89}{}\doxysubsubsubsection{\texorpdfstring{{\ttfamily void configure\+Lo\+Ra(uint8\+\_\+t spreading\+Factor, uint16\+\_\+t bandwidth, uint8\+\_\+t coding\+Rate)}}{{\ttfamily void configure\+Lo\+Ra(uint8\+\_\+t spreading\+Factor, uint16\+\_\+t bandwidth, uint8\+\_\+t coding\+Rate)}}}\label{README.md_autotoc_md89}
+Configures Lo\+Ra-\/specific parameters.
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Parameters}}\+:
+\begin{DoxyItemize}
+\item {\ttfamily spreading\+Factor}\+: Value from {\ttfamily 6} to {\ttfamily 12}, defining the chirp spreading rate.
+\item {\ttfamily bandwidth}\+: Bandwidth in k\+Hz (e.\+g., {\ttfamily 125}, {\ttfamily 250}, {\ttfamily 500}).
+\item {\ttfamily coding\+Rate}\+: Coding rate from {\ttfamily 1} to {\ttfamily 4}.
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{README.md_autotoc_md91}{}\doxysubsubsection{\texorpdfstring{Example Usage}{Example Usage}}\label{README.md_autotoc_md91}
+\hypertarget{README.md_autotoc_md92}{}\doxysubsubsubsection{\texorpdfstring{Basic Initialization and Transmission}{Basic Initialization and Transmission}}\label{README.md_autotoc_md92}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_r_y_l_r998_radio_8h}{RYLR998Radio.h}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Default\ Serial\ is\ HW\_SERIAL8\ and\ default\ baud\ rate\ is\ 9600}}
+\DoxyCodeLine{\textcolor{comment}{//\ so\ RYLR998Radio\ radio;\ is\ sufficient\ if\ using\ HW\_SERIAL8}}
+\DoxyCodeLine{\mbox{\hyperlink{class_r_y_l_r998_radio}{RYLR998Radio}}\ \mbox{\hyperlink{_sensors_8cpp_ad0029e1163fe9d74320740de6934ad1e}{radio}}(\mbox{\hyperlink{types_8h_af66182e5b9ab9f0816fe724d0999dc8c}{HW\_SERIAL8}},\ 9600);}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}{setup}}()\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{_sensors_8cpp_ad0029e1163fe9d74320740de6934ad1e}{radio}}.begin())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Failed\ to\ initialize\ RYLR998\ module!"{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{_sensors_8cpp_ad0029e1163fe9d74320740de6934ad1e}{radio}}.setFrequency(915.0);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{_sensors_8cpp_ad0029e1163fe9d74320740de6934ad1e}{radio}}.setTxPower(14);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{_sensors_8cpp_ad0029e1163fe9d74320740de6934ad1e}{radio}}.configureLoRa(7,\ 125,\ 1);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{main_8cpp_afe461d27b9c48d5921c00d521181f12f}{loop}}()\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ message\ =\ \textcolor{stringliteral}{"{}Hello,\ LoRa!"{}};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_sensors_8cpp_ad0029e1163fe9d74320740de6934ad1e}{radio}}.send((\textcolor{keyword}{const}\ uint8\_t*)message,\ strlen(message)))\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Message\ sent\ successfully!"{}});}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Failed\ to\ send\ message."{}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ delay(2000);}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{README.md_autotoc_md93}{}\doxysubsubsubsection{\texorpdfstring{Receiving Data}{Receiving Data}}\label{README.md_autotoc_md93}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_r_y_l_r998_radio_8h}{RYLR998Radio.h}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Default\ Serial\ is\ HW\_SERIAL8\ and\ default\ baud\ rate\ is\ 9600}}
+\DoxyCodeLine{\textcolor{comment}{//\ so\ RYLR998Radio\ radio;\ is\ sufficient\ if\ using\ HW\_SERIAL8}}
+\DoxyCodeLine{\mbox{\hyperlink{class_r_y_l_r998_radio}{RYLR998Radio}}\ \mbox{\hyperlink{_sensors_8cpp_ad0029e1163fe9d74320740de6934ad1e}{radio}}(\mbox{\hyperlink{types_8h_af66182e5b9ab9f0816fe724d0999dc8c}{HW\_SERIAL8}},\ 9600);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}{setup}}()\ \{}
+\DoxyCodeLine{\ \ \ \ Serial.begin(115200);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{_sensors_8cpp_ad0029e1163fe9d74320740de6934ad1e}{radio}}.begin();}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{main_8cpp_afe461d27b9c48d5921c00d521181f12f}{loop}}()\ \{}
+\DoxyCodeLine{\ \ \ \ uint8\_t\ buffer[256];}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{size\_t}\ receivedLength;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_sensors_8cpp_ad0029e1163fe9d74320740de6934ad1e}{radio}}.receive(buffer,\ \textcolor{keyword}{sizeof}(buffer),\ receivedLength))\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}Received:\ "{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.write(buffer,\ receivedLength);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.println();}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ delay(100);}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{README.md_autotoc_md95}{}\doxysubsubsection{\texorpdfstring{Notes}{Notes}}\label{README.md_autotoc_md95}
+
+\begin{DoxyItemize}
+\item Ensure the hardware serial port specified matches your wiring.
+\item The {\ttfamily RYLR998\+\_\+\+HW\+\_\+\+SERIAL} macro defines the default serial port and can be overridden if needed.
+\item Supported frequencies and power levels depend on the regional regulations for Lo\+Ra communication.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{README.md_autotoc_md97}{}\doxysubsection{\texorpdfstring{RFM95\+Radio}{RFM95\+Radio}}\label{README.md_autotoc_md97}
+The {\ttfamily \doxylink{class_r_f_m95_radio}{RFM95\+Radio}} class provides an interface for the RFM95 Lo\+Ra transceiver, offering configurable SPI communication and Lo\+Ra-\/specific features like frequency, power, and modulation settings.
+
+\DoxyHorRuler{0}
+\hypertarget{README.md_autotoc_md99}{}\doxysubsubsection{\texorpdfstring{Features}{Features}}\label{README.md_autotoc_md99}
+
+\begin{DoxyItemize}
+\item Lo\+Ra communication via RFM95 transceiver.
+\item Configurable SPI port for flexible hardware compatibility.
+\item Adjustable frequency, transmission power, and Lo\+Ra modulation parameters.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{README.md_autotoc_md101}{}\doxysubsubsection{\texorpdfstring{Constructor}{Constructor}}\label{README.md_autotoc_md101}
+\hypertarget{README.md_autotoc_md102}{}\doxysubsubsubsection{\texorpdfstring{{\ttfamily RFM95\+Radio(uint8\+\_\+t cs\+Pin, uint8\+\_\+t int\+Pin, uint8\+\_\+t spi\+Index = HW\+\_\+\+SPI0, float frequency = 915.\+0)}}{{\ttfamily RFM95\+Radio(uint8\+\_\+t cs\+Pin, uint8\+\_\+t int\+Pin, uint8\+\_\+t spi\+Index = HW\+\_\+\+SPI0, float frequency = 915.\+0)}}}\label{README.md_autotoc_md102}
+Initializes an \doxylink{class_r_f_m95_radio}{RFM95\+Radio} instance.
+
+
+\begin{DoxyItemize}
+\item {\bfseries{{\ttfamily cs\+Pin}}}\+: Chip Select pin for SPI communication.
+\item {\bfseries{{\ttfamily int\+Pin}}}\+: Interrupt pin connected to the RFM95\textquotesingle{}s DIO0.
+\item {\bfseries{{\ttfamily spi\+Index}}}\+: SPI port index ({\ttfamily HW\+\_\+\+SPI0}, {\ttfamily HW\+\_\+\+SPI1}, {\ttfamily HW\+\_\+\+SPI2}).
+\item {\bfseries{{\ttfamily frequency}}}\+: Operating frequency in MHz (default\+: {\ttfamily 915.\+0}).
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{README.md_autotoc_md104}{}\doxysubsubsection{\texorpdfstring{Methods}{Methods}}\label{README.md_autotoc_md104}
+\hypertarget{README.md_autotoc_md105}{}\doxysubsubsubsection{\texorpdfstring{{\ttfamily bool begin()}}{{\ttfamily bool begin()}}}\label{README.md_autotoc_md105}
+Initializes the RFM95 transceiver.
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Returns}}\+:
+\begin{DoxyItemize}
+\item {\ttfamily true} if initialization is successful.
+\item {\ttfamily false} otherwise.
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{README.md_autotoc_md107}{}\doxysubsubsubsection{\texorpdfstring{{\ttfamily bool send(const uint8\+\_\+t\texorpdfstring{$\ast$}{*} data, size\+\_\+t length)}}{{\ttfamily bool send(const uint8\+\_\+t\texorpdfstring{$\ast$}{*} data, size\+\_\+t length)}}}\label{README.md_autotoc_md107}
+Sends data via Lo\+Ra.
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Parameters}}\+:
+\begin{DoxyItemize}
+\item {\ttfamily data}\+: Pointer to the data buffer to send.
+\item {\ttfamily length}\+: Length of the data in bytes.
+\end{DoxyItemize}
+\item {\bfseries{Returns}}\+:
+\begin{DoxyItemize}
+\item {\ttfamily true} if the data was successfully sent.
+\item {\ttfamily false} otherwise.
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{README.md_autotoc_md109}{}\doxysubsubsubsection{\texorpdfstring{{\ttfamily bool receive(uint8\+\_\+t\texorpdfstring{$\ast$}{*} buffer, size\+\_\+t max\+Length, size\+\_\+t\& received\+Length)}}{{\ttfamily bool receive(uint8\+\_\+t\texorpdfstring{$\ast$}{*} buffer, size\+\_\+t max\+Length, size\+\_\+t\& received\+Length)}}}\label{README.md_autotoc_md109}
+Receives data via Lo\+Ra.
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Parameters}}\+:
+\begin{DoxyItemize}
+\item {\ttfamily buffer}\+: Pointer to the buffer to store received data.
+\item {\ttfamily max\+Length}\+: Maximum length of the buffer.
+\item {\ttfamily received\+Length}\+: Reference to store the actual length of the received data.
+\end{DoxyItemize}
+\item {\bfseries{Returns}}\+:
+\begin{DoxyItemize}
+\item {\ttfamily true} if data was successfully received.
+\item {\ttfamily false} otherwise.
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{README.md_autotoc_md111}{}\doxysubsubsubsection{\texorpdfstring{{\ttfamily void set\+Frequency(float frequency)}}{{\ttfamily void set\+Frequency(float frequency)}}}\label{README.md_autotoc_md111}
+Sets the operating frequency of the RFM95 transceiver.
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Parameters}}\+:
+\begin{DoxyItemize}
+\item {\ttfamily frequency}\+: Operating frequency in MHz.
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{README.md_autotoc_md113}{}\doxysubsubsubsection{\texorpdfstring{{\ttfamily void set\+Tx\+Power(uint8\+\_\+t power)}}{{\ttfamily void set\+Tx\+Power(uint8\+\_\+t power)}}}\label{README.md_autotoc_md113}
+Sets the transmission power of the RFM95 transceiver.
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Parameters}}\+:
+\begin{DoxyItemize}
+\item {\ttfamily power}\+: Transmission power in d\+Bm (typically between {\ttfamily 5} and {\ttfamily 23}).
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{README.md_autotoc_md115}{}\doxysubsubsubsection{\texorpdfstring{{\ttfamily void configure\+Lo\+Ra(uint8\+\_\+t spreading\+Factor, uint16\+\_\+t bandwidth, uint8\+\_\+t coding\+Rate)}}{{\ttfamily void configure\+Lo\+Ra(uint8\+\_\+t spreading\+Factor, uint16\+\_\+t bandwidth, uint8\+\_\+t coding\+Rate)}}}\label{README.md_autotoc_md115}
+Configures Lo\+Ra modulation parameters.
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Parameters}}\+:
+\begin{DoxyItemize}
+\item {\ttfamily spreading\+Factor}\+: Lo\+Ra spreading factor (e.\+g., {\ttfamily 7} to {\ttfamily 12}).
+\item {\ttfamily bandwidth}\+: Lo\+Ra bandwidth in Hz (e.\+g., {\ttfamily 125000} for 125 k\+Hz).
+\item {\ttfamily coding\+Rate}\+: Lo\+Ra coding rate (e.\+g., {\ttfamily 1} for 4/5, {\ttfamily 4} for 4/8).
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{README.md_autotoc_md117}{}\doxysubsubsection{\texorpdfstring{Example Usage}{Example Usage}}\label{README.md_autotoc_md117}
+\hypertarget{README.md_autotoc_md118}{}\doxysubsubsubsection{\texorpdfstring{Basic Initialization and Communication}{Basic Initialization and Communication}}\label{README.md_autotoc_md118}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_r_f_m95_radio_8h}{RFM95Radio.h}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Define\ RFM95\ pins\ and\ SPI\ index}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ CS\_PIN\ 10}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ INT\_PIN\ 2}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ SPI\_INDEX\ HW\_SPI1}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{class_r_f_m95_radio}{RFM95Radio}}\ \mbox{\hyperlink{_sensors_8cpp_ad0029e1163fe9d74320740de6934ad1e}{radio}}(CS\_PIN,\ INT\_PIN,\ SPI\_INDEX);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}{setup}}()\ \{}
+\DoxyCodeLine{\ \ \ \ Serial.begin(9600);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{_sensors_8cpp_ad0029e1163fe9d74320740de6934ad1e}{radio}}.begin())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Failed\ to\ initialize\ RFM95!"{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (1);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{_sensors_8cpp_ad0029e1163fe9d74320740de6934ad1e}{radio}}.setFrequency(915.0);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{_sensors_8cpp_ad0029e1163fe9d74320740de6934ad1e}{radio}}.setTxPower(20);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{main_8cpp_afe461d27b9c48d5921c00d521181f12f}{loop}}()\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Send\ a\ message}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ message\ =\ \textcolor{stringliteral}{"{}Hello,\ LoRa!"{}};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_sensors_8cpp_ad0029e1163fe9d74320740de6934ad1e}{radio}}.send((\textcolor{keyword}{const}\ uint8\_t*)message,\ strlen(message)))\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Message\ sent!"{}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Receive\ a\ message}}
+\DoxyCodeLine{\ \ \ \ uint8\_t\ buffer[64];}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{size\_t}\ length;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_sensors_8cpp_ad0029e1163fe9d74320740de6934ad1e}{radio}}.receive(buffer,\ \textcolor{keyword}{sizeof}(buffer),\ length))\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}Received:\ "{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.write(buffer,\ length);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.println();}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ delay(1000);}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{README.md_autotoc_md119}{}\doxysubsection{\texorpdfstring{Everything test}{Everything test}}\label{README.md_autotoc_md119}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <Arduino.h>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <Wire.h>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_avionics___h_a_l_8h}{Avionics\_HAL.h}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{/*}}
+\DoxyCodeLine{\textcolor{comment}{I2C\ device\ found\ at\ address\ 0x18\ (MCP9808)\ (Temperature\ Sensor)}}
+\DoxyCodeLine{\textcolor{comment}{I2C\ device\ found\ at\ address\ 0x1E\ (LIS3MDL)\ (Magnetometer)}}
+\DoxyCodeLine{\textcolor{comment}{I2C\ device\ found\ at\ address\ 0x6B\ (LSM6DS3)\ (Accelerometer\ and\ Gyroscope)}}
+\DoxyCodeLine{\textcolor{comment}{I2C\ device\ found\ at\ address\ 0x77\ (BMP280)\ \ (Pressure\ Sensor)}}
+\DoxyCodeLine{\textcolor{comment}{*/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{class_sensor_b_m_p280}{SensorBMP280}}\ \mbox{\hyperlink{_sensors_8cpp_aac54c63d0da302c797be826366065466}{bmp280Sensor}};}
+\DoxyCodeLine{\mbox{\hyperlink{class_sensor_accel_gyro}{SensorAccelGyro}}\ \mbox{\hyperlink{_sensors_8cpp_abf8ecea494d852ec809e7d5caf7bb020}{accelGyro}}(0x6B,\ \mbox{\hyperlink{_p_i_n_s_8h_a50c6c944152c1d702a5aec41eb729f46}{I2C\_WIRE}});}
+\DoxyCodeLine{\mbox{\hyperlink{class_sensor_magnetometer}{SensorMagnetometer}}\ \mbox{\hyperlink{_sensors_8cpp_ac3bbb256fd91ccdbbfb187dbc86fc188}{magnetometer}}(0x1E,\ \mbox{\hyperlink{_p_i_n_s_8h_a50c6c944152c1d702a5aec41eb729f46}{I2C\_WIRE}});}
+\DoxyCodeLine{\mbox{\hyperlink{class_sensor_temperature}{SensorTemperature}}\ \mbox{\hyperlink{_sensors_8cpp_acca61771252459cb41d3a23799d58b48}{tempSensor}};}
+\DoxyCodeLine{\mbox{\hyperlink{class_g_p_s}{GPS}}\ \mbox{\hyperlink{_sensors_8cpp_ae799a671dd1e22fea5372678d83fa6c5}{gps}}(\mbox{\hyperlink{_p_i_n_s_8h_a6d1ec000c91b59c9bbc1896abf564ca1}{GPS\_HW\_SERIAL}},\ 9600);}
+\DoxyCodeLine{\mbox{\hyperlink{class_r_f_m95_radio}{RFM95Radio}}\ \mbox{\hyperlink{_sensors_8cpp_ad0029e1163fe9d74320740de6934ad1e}{radio}}(\mbox{\hyperlink{_p_i_n_s_8h_a8132bbb50d610acfceae72488d44a90b}{RADIO\_CS}},\ \mbox{\hyperlink{_p_i_n_s_8h_a6ffd2c204b1cab63a004a4c1d1adae60}{RADIO\_INT}},\ \mbox{\hyperlink{_p_i_n_s_8h_a36d3cff8fd416765b92f1db989bf13c3}{RADIO\_SPI}},\ 915.0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{uint32\_t\ timer\ =\ millis();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ i2c\_adress\_detect()\{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Check\ all\ possible\ I2C\ addresses}}
+\DoxyCodeLine{\ \ \ \ Wire.begin();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (uint8\_t\ address\ =\ 0;\ address\ <\ 127;\ address++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Wire.beginTransmission(address);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (Wire.endTransmission()\ ==\ 0)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}I2C\ device\ found\ at\ address\ 0x"{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (address<16)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}0"{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ Serial.println(address,\ HEX);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ Serial.println(\textcolor{stringliteral}{"{}I2C\ address\ detection\ complete."{}});}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}{setup}}()\ \{}
+\DoxyCodeLine{\ \ \ \ Serial.begin(115200);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{while}\ (!Serial);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Run\ I2C\ address\ detection}}
+\DoxyCodeLine{\ \ \ \ i2c\_adress\_detect();}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Initializing\ Avionics\ HAL..."{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Initialize\ the\ BMP280\ sensor}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_sensors_8cpp_aac54c63d0da302c797be826366065466}{bmp280Sensor}}.begin())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}BMP280\ initialized."{}});}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}BMP280\ Initialization\ failed."{}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Initialize\ the\ accelerometer\ and\ gyroscope}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_sensors_8cpp_abf8ecea494d852ec809e7d5caf7bb020}{accelGyro}}.begin())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Accelerometer\ and\ Gyroscope\ initialized."{}});}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Accelerometer\ and\ Gyroscope\ Initialization\ failed."{}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Initialize\ the\ magnetometer}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_sensors_8cpp_ac3bbb256fd91ccdbbfb187dbc86fc188}{magnetometer}}.begin())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Magnetometer\ initialized."{}});}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Magnetometer\ Initialization\ failed."{}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Initialize\ the\ temperature\ sensor}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_sensors_8cpp_acca61771252459cb41d3a23799d58b48}{tempSensor}}.begin())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Temperature\ sensor\ initialized."{}});}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}Temperature\ sensor\ Initialization\ failed."{}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Initialize\ the\ GPS\ module}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_sensors_8cpp_ae799a671dd1e22fea5372678d83fa6c5}{gps}}.begin())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//gps.configure(1000,\ PMTK\_SET\_NMEA\_OUTPUT\_RMCONLY);}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}GPS\ module\ initialized."{}});}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}GPS\ Initialization\ failed."{}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Initialize\ the\ RFM95\ radio}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{_sensors_8cpp_ad0029e1163fe9d74320740de6934ad1e}{radio}}.reset(\mbox{\hyperlink{_p_i_n_s_8h_ad52a4b90d941973ef7b47a9b7c45d1da}{RADIO\_RST}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{_sensors_8cpp_ad0029e1163fe9d74320740de6934ad1e}{radio}}.begin())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RFM95\ radio\ initialized."{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ radio.setTxPower(20);}}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}RFM95\ Radio\ Initialization\ failed."{}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \mbox{\hyperlink{main_8cpp_afe461d27b9c48d5921c00d521181f12f}{loop}}()\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Update\ GPS\ data\ (NECESSARY!!!)}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{_sensors_8cpp_ae799a671dd1e22fea5372678d83fa6c5}{gps}}.update();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (millis()\ -\/\ timer\ >\ 2000)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ approximately\ every\ 2\ seconds\ or\ so,\ print\ out\ the\ current\ stats}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ timer\ =\ millis();\ \textcolor{comment}{//\ reset\ the\ timer}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/"{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Read\ and\ print\ sensor\ data}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{types_8h_ab261644c5efcb7e97882e695b0964f03}{BMP280Data}}*\ bmpData\ =\ \mbox{\hyperlink{_sensors_8cpp_aac54c63d0da302c797be826366065466}{bmp280Sensor}}.read();}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}BMP280\ \ \ \ \ \ \ \ -\/\ Temperature:\ "{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.print(bmpData-\/>\mbox{\hyperlink{struct__bmp280_data_a9ae17af9bb5363ffd3a26dabcc0ebff2}{temperature}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}\ °C,\ Pressure:\ "{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.print(bmpData-\/>\mbox{\hyperlink{struct__bmp280_data_ad00011803b34967781193888b0448cac}{pressure}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}\ hPa,\ Altitude:\ "{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.print(bmpData-\/>\mbox{\hyperlink{struct__bmp280_data_a9e7cdb968bca4b93f85b703602b91717}{altitude}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}\ m"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{types_8h_a052a1cf82d94d02541cda224aec1bc21}{AccelGyroData}}*\ accelGyroData\ =\ \mbox{\hyperlink{_sensors_8cpp_abf8ecea494d852ec809e7d5caf7bb020}{accelGyro}}.read();}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}Accelerometer\ -\/\ X:\ "{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.print(accelGyroData-\/>\mbox{\hyperlink{struct__accel_gyro_data_a6b20894eb13397001bb376e5126d6f2a}{accelX}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}\ m/s\string^2,\ Y:\ "{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.print(accelGyroData-\/>\mbox{\hyperlink{struct__accel_gyro_data_a106dbe73b09e01279996aff80e848ac1}{accelY}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}\ m/s\string^2,\ Z:\ "{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.print(accelGyroData-\/>\mbox{\hyperlink{struct__accel_gyro_data_ae3d3bfa640a77a03ed64f3f3b01bea14}{accelZ}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}\ m/s\string^2,\ Gyro\ X:\ "{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.print(accelGyroData-\/>\mbox{\hyperlink{struct__accel_gyro_data_a3023fc970ad8b0a212732f58da9acd46}{gyroX}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}\ °/s,\ Y:\ "{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.print(accelGyroData-\/>\mbox{\hyperlink{struct__accel_gyro_data_ab148b2aff876f50a53bbba1cf554bc48}{gyroY}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}\ °/s,\ Z:\ "{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.print(accelGyroData-\/>\mbox{\hyperlink{struct__accel_gyro_data_a1e7dcd08569f6c5053d3e911ca157d6c}{gyroZ}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}\ °/s,\ Temperature:\ "{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.print(accelGyroData-\/>\mbox{\hyperlink{struct__accel_gyro_data_ad42265c3d7a5c48ce8660f04572a9b82}{temperature}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}\ °C"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{types_8h_a34c81329fddf919347a1c051065b79ef}{MagnetometerData}}*\ magData\ =\ \mbox{\hyperlink{_sensors_8cpp_ac3bbb256fd91ccdbbfb187dbc86fc188}{magnetometer}}.read();}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}Magnetometer\ \ -\/\ X:\ "{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.print(magData-\/>\mbox{\hyperlink{struct__magnetometer_data_a6333ff6a2bd4f29ee03f427d6e7030dc}{magneticX}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}\ µT,\ Y:\ "{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.print(magData-\/>\mbox{\hyperlink{struct__magnetometer_data_a58611116af4c32be579db86e07efaa12}{magneticY}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}\ µT,\ Z:\ "{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.print(magData-\/>\mbox{\hyperlink{struct__magnetometer_data_ac64d817407a9d2d2b1477be3416b0fc4}{magneticZ}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}\ µT"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ temp\ =\ \mbox{\hyperlink{_sensors_8cpp_acca61771252459cb41d3a23799d58b48}{tempSensor}}.read();}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}Temp\ Sensor\ \ \ -\/\ Temperature:\ "{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.print(temp);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}\ °C"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_g_p_s_data}{GPSData}}*\ gpsData\ =\ \mbox{\hyperlink{_sensors_8cpp_ae799a671dd1e22fea5372678d83fa6c5}{gps}}.read();}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (gpsData)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}GPS\ \ \ \ \ \ \ \ \ \ \ -\/\ Latitude:\ "{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ Serial.print(gpsData-\/>\mbox{\hyperlink{struct_g_p_s_data_a605d853b4e7cbb2c523b37ebbf018d00}{latitude}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{},\ Longitude:\ "{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ Serial.print(gpsData-\/>\mbox{\hyperlink{struct_g_p_s_data_aee24caf310c4c5ab5905408f16b38778}{longitude}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{},\ Altitude:\ "{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ Serial.print(gpsData-\/>\mbox{\hyperlink{struct_g_p_s_data_a0801c2082de32b6a0ae9b01e483d3128}{altitude}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}\ m,\ Speed:\ "{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ Serial.print(gpsData-\/>\mbox{\hyperlink{struct_g_p_s_data_a4f21a8a72b90ee7267b3ed3900a42d3f}{speed}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}\ knots,\ Angle:\ "{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ Serial.print(gpsData-\/>\mbox{\hyperlink{struct_g_p_s_data_a4a000d4192d4991f1e50537d543e7159}{angle}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}\ °"{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}GPS\ data\ not\ available."{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Send\ data\ over\ the\ radio}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ uint8\_t\ dataToSend[10]\ =\ \{0x01,\ 0x02,\ 0x03,\ 0x04,\ 0x05,\ 0x06,\ 0x07,\ 0x08,\ 0x09,\ 0x0A\};}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ if\ (radio.send(dataToSend,\ sizeof(dataToSend)))\ \{}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ Serial.println("{}Data\ sent\ successfully."{});}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ \}\ else\ \{}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ Serial.println("{}Failed\ to\ send\ data."{});}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ //\ Receive\ data\ from\ the\ radio}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ uint8\_t\ receivedData[10];}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ size\_t\ receivedLength\ =\ 0;}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ if\ (radio.receive(receivedData,\ sizeof(receivedData),\ receivedLength))\ \{}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ Serial.print("{}Received\ data:\ "{});}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ for\ (size\_t\ i\ =\ 0;\ i\ <\ receivedLength;\ ++i)\ \{}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ Serial.print(receivedData[i],\ HEX);}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ Serial.print("{}\ "{});}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ Serial.println();}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ \}\ else\ \{}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ Serial.println("{}No\ data\ received."{});}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ delay(1000);\ //\ Delay\ for\ 1\ second}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 

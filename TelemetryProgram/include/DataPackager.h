@@ -1,6 +1,3 @@
-// #pragma once
-
-// void InitDataPackager();
 void Update(float barval = 0);
 void HandleData(SensorData *RetrivedData);
 
@@ -16,5 +13,3 @@ typedef enum {
 FlightStates GetFlightState();
 
 void SetFlightState(FlightStates flightState);
-
-// void TransferToSD();

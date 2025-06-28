@@ -1,0 +1,30 @@
+<map id="C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/HAL/Sensor.h" name="C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/HAL/Sensor.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="427,5,613,80"/>
+<area shape="rect" id="Node000002" href="$_sensor_8cpp.html" title=" " alt="" coords="5,128,192,203"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="412,73,205,131,193,134,191,129,203,125,411,68"/>
+<area shape="rect" id="Node000003" href="$_sensor_accel_gyro_8h.html" title=" " alt="" coords="848,128,1034,203"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="629,68,837,125,848,129,847,134,835,131,628,73"/>
+<area shape="rect" id="Node000008" href="$_sensor_b_m_p280_8h.html" title=" " alt="" coords="216,128,402,203"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="444,90,375,130,372,125,441,86"/>
+<area shape="rect" id="Node000010" href="$_sensor_magnetometer_8h.html" title=" " alt="" coords="427,128,613,203"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="522,96,522,128,517,128,517,96"/>
+<area shape="rect" id="Node000012" href="$_sensor_temp_8h.html" title=" " alt="" coords="637,128,824,203"/>
+<area shape="poly" id="edge13_Node000001_Node000012" title=" " alt="" coords="599,86,667,125,665,130,596,90"/>
+<area shape="rect" id="Node000004" href="$_avionics___h_a_l_8h.html" title=" " alt="" coords="532,251,718,325"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="834,210,719,254,718,249,833,205"/>
+<area shape="rect" id="Node000007" href="$_sensor_accel_gyro_8cpp.html" title=" " alt="" coords="953,251,1140,325"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="985,213,1017,248,1013,252,981,217"/>
+<area shape="rect" id="Node000005" href="$_sensors_8cpp.html" title=" " alt="" coords="387,373,618,432"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="576,338,535,375,532,371,572,334"/>
+<area shape="rect" id="Node000006" href="$main_8cpp.html" title=" " alt="" coords="641,373,852,432"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="678,334,718,371,714,375,674,338"/>
+<area shape="poly" id="edge8_Node000008_Node000004" title=" " alt="" coords="418,205,533,249,531,254,416,210"/>
+<area shape="rect" id="Node000009" href="$_sensor_b_m_p280_8cpp.html" title=" " alt="" coords="111,251,297,325"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="269,217,238,252,234,248,265,213"/>
+<area shape="poly" id="edge11_Node000010_Node000004" title=" " alt="" coords="564,213,595,248,591,252,560,217"/>
+<area shape="rect" id="Node000011" href="$_sensor_magnetometer_8cpp.html" title=" " alt="" coords="321,251,508,325"/>
+<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="480,217,448,252,444,248,476,213"/>
+<area shape="poly" id="edge14_Node000012_Node000004" title=" " alt="" coords="690,217,659,252,655,248,686,213"/>
+<area shape="rect" id="Node000013" href="$_sensor_temp_8cpp.html" title=" " alt="" coords="743,251,929,325"/>
+<area shape="poly" id="edge15_Node000012_Node000013" title=" " alt="" coords="775,213,806,248,802,252,771,217"/>
+</map>

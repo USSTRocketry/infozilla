@@ -1,0 +1,73 @@
+\doxysection{types.\+h}
+\hypertarget{types_8h_source}{}\label{types_8h_source}\index{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/HAL/types.h@{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/HAL/types.h}}
+\mbox{\hyperlink{types_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ Define\ macros\ for\ selecting\ hardware\ serial\ ports\ and\ corresponding\ pins}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#define\ HW\_SERIAL1\ 1\ \ }\textcolor{comment}{//\ Serial1\ (RX\ =\ 0,\ TX\ =\ 1)}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ HW\_SERIAL2\ 2\ \ }\textcolor{comment}{//\ Serial2\ (RX\ =\ 7,\ TX\ =\ 8)}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ HW\_SERIAL3\ 3\ \ }\textcolor{comment}{//\ Serial3\ (RX\ =\ 15,\ TX\ =\ 14)}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ HW\_SERIAL4\ 4\ \ }\textcolor{comment}{//\ Serial4\ (RX\ =\ 16,\ TX\ =\ 17)}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ HW\_SERIAL5\ 5\ \ }\textcolor{comment}{//\ Serial5\ (RX\ =\ 21,\ TX\ =\ 20)}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ HW\_SERIAL6\ 6\ \ }\textcolor{comment}{//\ Serial6\ (RX\ =\ 25,\ TX\ =\ 24)}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ HW\_SERIAL7\ 7\ \ }\textcolor{comment}{//\ Serial7\ (RX\ =\ 28,\ TX\ =\ 29)}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ HW\_SERIAL8\ 8\ \ }\textcolor{comment}{//\ Serial8\ (RX\ =\ 34,\ TX\ =\ 35)}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#define\ HW\_SERIAL(w)\ (w\ ==\ 1\ ?\ Serial1\ \(\backslash\)}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ (w\ ==\ 2\ ?\ Serial2\ \(\backslash\)}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ (w\ ==\ 3\ ?\ Serial3\ \(\backslash\)}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ (w\ ==\ 4\ ?\ Serial4\ \(\backslash\)}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ (w\ ==\ 5\ ?\ Serial5\ \(\backslash\)}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ (w\ ==\ 6\ ?\ Serial6\ \(\backslash\)}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ (w\ ==\ 7\ ?\ Serial7\ \(\backslash\)}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ Serial8\ \(\backslash\)}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )))))))}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#define\ HW\_SPI0\ \ \ \ \ \ \ \ \ \ \ \ \ 0\ }\textcolor{comment}{//\ hardware\_spi\ \ (MISO\ =\ ,\ MOSI\ =\ ,\ SCK\ =\ )}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#define\ HW\_SPI1\ \ \ \ \ \ \ \ \ \ \ \ \ 1\ }\textcolor{comment}{//\ hardware\_spi1\ (MISO\ =\ ,\ MOSI\ =\ ,\ SCK\ =\ )}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ HW\_SPI2\ \ \ \ \ \ \ \ \ \ \ \ \ 2\ }\textcolor{comment}{//\ hardware\_spi2\ (MISO\ =\ ,\ MOSI\ =\ ,\ SCK\ =\ )}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct__bmp280_data}{\_bmp280Data}}}
+\DoxyCodeLine{00029\ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{struct__bmp280_data_a9ae17af9bb5363ffd3a26dabcc0ebff2}{temperature}};}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{struct__bmp280_data_ad00011803b34967781193888b0448cac}{pressure}};}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{struct__bmp280_data_a9e7cdb968bca4b93f85b703602b91717}{altitude}};}
+\DoxyCodeLine{00033\ \}\ \mbox{\hyperlink{types_8h_ab261644c5efcb7e97882e695b0964f03}{BMP280Data}};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct__accel_gyro_data}{\_accelGyroData}}}
+\DoxyCodeLine{00036\ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{struct__accel_gyro_data_ad42265c3d7a5c48ce8660f04572a9b82}{temperature}};}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{struct__accel_gyro_data_a6b20894eb13397001bb376e5126d6f2a}{accelX}};}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{struct__accel_gyro_data_a106dbe73b09e01279996aff80e848ac1}{accelY}};}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{struct__accel_gyro_data_ae3d3bfa640a77a03ed64f3f3b01bea14}{accelZ}};}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{struct__accel_gyro_data_a3023fc970ad8b0a212732f58da9acd46}{gyroX}};}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{struct__accel_gyro_data_ab148b2aff876f50a53bbba1cf554bc48}{gyroY}};}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{struct__accel_gyro_data_a1e7dcd08569f6c5053d3e911ca157d6c}{gyroZ}};}
+\DoxyCodeLine{00044\ \}\ \mbox{\hyperlink{types_8h_a052a1cf82d94d02541cda224aec1bc21}{AccelGyroData}};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct__magnetometer_data}{\_magnetometerData}}}
+\DoxyCodeLine{00047\ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{struct__magnetometer_data_a6333ff6a2bd4f29ee03f427d6e7030dc}{magneticX}};}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{struct__magnetometer_data_a58611116af4c32be579db86e07efaa12}{magneticY}};}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{struct__magnetometer_data_ac64d817407a9d2d2b1477be3416b0fc4}{magneticZ}};}
+\DoxyCodeLine{00051\ \}\ \mbox{\hyperlink{types_8h_a34c81329fddf919347a1c051065b79ef}{MagnetometerData}};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct__temperature_data}{\_temperatureData}}}
+\DoxyCodeLine{00054\ \{}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{struct__temperature_data_aae6c86e2c2357408f0d4c09168a70223}{temperature}};}
+\DoxyCodeLine{00056\ \}\ \mbox{\hyperlink{types_8h_a3a0f201aa4cd5af48c340f52be9cd22c}{TemperatureData}};}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{struct_g_p_s_data_a605d853b4e7cbb2c523b37ebbf018d00}{latitude}};}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{struct_g_p_s_data_aee24caf310c4c5ab5905408f16b38778}{longitude}};}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{struct_g_p_s_data_a0801c2082de32b6a0ae9b01e483d3128}{altitude}};}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{struct_g_p_s_data_a4f21a8a72b90ee7267b3ed3900a42d3f}{speed}};\ \ \ \ \ \ \ \textcolor{comment}{//\ in\ knots}}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{struct_g_p_s_data_a4a000d4192d4991f1e50537d543e7159}{angle}};\ \ \ \ \ \ \ \textcolor{comment}{//\ course\ over\ ground}}
+\DoxyCodeLine{00064\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{struct_g_p_s_data_afb1e72394dcef2d4cf3b0399a857bbd9}{satellites}};}
+\DoxyCodeLine{00065\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{struct_g_p_s_data_ae2d985e98ac62172592ba6872ae4cca1}{fix\_quality}};\ \ \textcolor{comment}{//\ GPS\ signal\ quality}}
+\DoxyCodeLine{00066\ \}\ \mbox{\hyperlink{struct_g_p_s_data}{GPSData}};}
+\DoxyCodeLine{00067\ }
+
+\end{DoxyCode}

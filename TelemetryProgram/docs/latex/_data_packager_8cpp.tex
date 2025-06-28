@@ -1,0 +1,267 @@
+\doxysection{C\+:/\+Users/\+Bobby/\+Documents/\+USST/\+Infozilla/infozilla/\+Telemetry\+Program/src/\+Data\+Packager.cpp File Reference}
+\hypertarget{_data_packager_8cpp}{}\label{_data_packager_8cpp}\index{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/src/DataPackager.cpp@{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/src/DataPackager.cpp}}
+
+
+This file determines the state of flight of the rocket and base height of the rocket.  
+
+
+{\ttfamily \#include $<$Arduino.\+h$>$}\newline
+{\ttfamily \#include $<$fp16.\+h$>$}\newline
+{\ttfamily \#include $<$Sensor\+Structs.\+h$>$}\newline
+{\ttfamily \#include $<$Data\+Storage.\+h$>$}\newline
+{\ttfamily \#include $<$Data\+Packager.\+h$>$}\newline
+{\ttfamily \#include $<$Sensors.\+h$>$}\newline
+{\ttfamily \#include $<$SDHandler.\+h$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$Arduino\+Low\+Power.\+h$>$}\newline
+{\ttfamily \#include $<$Flexi\+Timer2.\+h$>$}\newline
+Include dependency graph for Data\+Packager.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_data_packager_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_data_packager_8cpp_a0012dc7cde9a6477d5af170af2ca7979}{Is\+Testing\+Mode}}~true
+\item 
+\#define \mbox{\hyperlink{_data_packager_8cpp_a4ae93645857b019ad0fe05f06cc3c624}{Testing\+Multiplier}}~1
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_data_packager_8cpp_a5242fa4d8398d810875a6e2a09ae17d5}{Init\+Data\+Packager}} ()
+\item 
+void \mbox{\hyperlink{_data_packager_8cpp_a97526442e0d36672755e328b8f8b80d1}{Add\+Val\+To\+Queue}} (double val)
+\item 
+double \mbox{\hyperlink{_data_packager_8cpp_a611b505776d1db9b009d3a5612b7df73}{Read\+Val\+From\+Queue}} ()
+\item 
+void \mbox{\hyperlink{_data_packager_8cpp_a7504bb33cb94dddeb2b9a8a44b1e953d}{Transfer\+To\+SD}} ()
+\item 
+void \mbox{\hyperlink{_data_packager_8cpp_a1b56a8f1552cdb5cb8cad5dc98562dd1}{Handle\+Data}} (\mbox{\hyperlink{struct_sensor_data}{Sensor\+Data}} \texorpdfstring{$\ast$}{*}Retrived\+Data)
+\item 
+\mbox{\hyperlink{_data_packager_8h_a61f503ccedfbe93b90828c8109943489}{Flight\+States}} \mbox{\hyperlink{_data_packager_8cpp_ae7bd94b4b3f508375ab03c17eaaf4ea3}{Get\+Flight\+State}} ()
+\item 
+void \mbox{\hyperlink{_data_packager_8cpp_a4a0430a32305a9922b31d43e37d5a5a0}{Set\+Flight\+State}} (\mbox{\hyperlink{_data_packager_8h_a61f503ccedfbe93b90828c8109943489}{Flight\+States}} flight\+State)
+\item 
+void \mbox{\hyperlink{_data_packager_8cpp_a913c8a9a0b8f01d13d18287c339b1f61}{Update}} (float barval\+\_\+meters)
+\begin{DoxyCompactList}\small\item\em State machine for the flight of the rocket. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_data_packager_8h_a61f503ccedfbe93b90828c8109943489}{Flight\+States}} \mbox{\hyperlink{_data_packager_8cpp_a2931ab3c205994cc0b27468c904af197}{Flight\+State}} = \mbox{\hyperlink{_data_packager_8h_a61f503ccedfbe93b90828c8109943489a16c74c8268fc0e6937a478e571ec2a2a}{Power\+Up}}
+\item 
+double \mbox{\hyperlink{_data_packager_8cpp_a7d7f80b6a3dfd507ef59f6309cf07c9f}{Initial\+Height\+Data}}
+\item 
+double \mbox{\hyperlink{_data_packager_8cpp_aea3b8a0f3db121227ce9a4f3b3e306e2}{barval\+Queue}} \mbox{[}30\mbox{]}
+\item 
+int \mbox{\hyperlink{_data_packager_8cpp_ac4e835d3c660a4134cfe34248f72f1b3}{Barval\+Start}} = 0
+\item 
+int \mbox{\hyperlink{_data_packager_8cpp_a378ebde5886becd0a2bc700bd628e16c}{Barval\+End}} = 1
+\item 
+uint32\+\_\+t \mbox{\hyperlink{_data_packager_8cpp_a916defb9699dc6648c27f970ef8aa2d2}{start\+Time\+To\+Sleep}} = 0
+\item 
+bool \mbox{\hyperlink{_data_packager_8cpp_aa0c979d67099a32c2ed8dd54eef4c939}{is\+Collecting\+Data}} = true
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This file determines the state of flight of the rocket and base height of the rocket. 
+
+\begin{DoxyAuthor}{Author}
+USST Avionics 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2025-\/06-\/28
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2025 
+\end{DoxyCopyright}
+
+
+\label{doc-define-members}
+\Hypertarget{_data_packager_8cpp_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_data_packager_8cpp_a0012dc7cde9a6477d5af170af2ca7979}\index{DataPackager.cpp@{DataPackager.cpp}!IsTestingMode@{IsTestingMode}}
+\index{IsTestingMode@{IsTestingMode}!DataPackager.cpp@{DataPackager.cpp}}
+\doxysubsubsection{\texorpdfstring{IsTestingMode}{IsTestingMode}}
+{\footnotesize\ttfamily \label{_data_packager_8cpp_a0012dc7cde9a6477d5af170af2ca7979} 
+\#define Is\+Testing\+Mode~true}
+
+\Hypertarget{_data_packager_8cpp_a4ae93645857b019ad0fe05f06cc3c624}\index{DataPackager.cpp@{DataPackager.cpp}!TestingMultiplier@{TestingMultiplier}}
+\index{TestingMultiplier@{TestingMultiplier}!DataPackager.cpp@{DataPackager.cpp}}
+\doxysubsubsection{\texorpdfstring{TestingMultiplier}{TestingMultiplier}}
+{\footnotesize\ttfamily \label{_data_packager_8cpp_a4ae93645857b019ad0fe05f06cc3c624} 
+\#define Testing\+Multiplier~1}
+
+
+
+\label{doc-func-members}
+\Hypertarget{_data_packager_8cpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_data_packager_8cpp_a97526442e0d36672755e328b8f8b80d1}\index{DataPackager.cpp@{DataPackager.cpp}!AddValToQueue@{AddValToQueue}}
+\index{AddValToQueue@{AddValToQueue}!DataPackager.cpp@{DataPackager.cpp}}
+\doxysubsubsection{\texorpdfstring{AddValToQueue()}{AddValToQueue()}}
+{\footnotesize\ttfamily \label{_data_packager_8cpp_a97526442e0d36672755e328b8f8b80d1} 
+void Add\+Val\+To\+Queue (\begin{DoxyParamCaption}\item[{double}]{val}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_data_packager_8cpp_a97526442e0d36672755e328b8f8b80d1_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{_data_packager_8cpp_ae7bd94b4b3f508375ab03c17eaaf4ea3}\index{DataPackager.cpp@{DataPackager.cpp}!GetFlightState@{GetFlightState}}
+\index{GetFlightState@{GetFlightState}!DataPackager.cpp@{DataPackager.cpp}}
+\doxysubsubsection{\texorpdfstring{GetFlightState()}{GetFlightState()}}
+{\footnotesize\ttfamily \label{_data_packager_8cpp_ae7bd94b4b3f508375ab03c17eaaf4ea3} 
+\mbox{\hyperlink{_data_packager_8h_a61f503ccedfbe93b90828c8109943489}{Flight\+States}} Get\+Flight\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_data_packager_8cpp_a1b56a8f1552cdb5cb8cad5dc98562dd1}\index{DataPackager.cpp@{DataPackager.cpp}!HandleData@{HandleData}}
+\index{HandleData@{HandleData}!DataPackager.cpp@{DataPackager.cpp}}
+\doxysubsubsection{\texorpdfstring{HandleData()}{HandleData()}}
+{\footnotesize\ttfamily \label{_data_packager_8cpp_a1b56a8f1552cdb5cb8cad5dc98562dd1} 
+void Handle\+Data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_sensor_data}{Sensor\+Data}} \texorpdfstring{$\ast$}{*}}]{Retrived\+Data}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_data_packager_8cpp_a1b56a8f1552cdb5cb8cad5dc98562dd1_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=218pt]{_data_packager_8cpp_a1b56a8f1552cdb5cb8cad5dc98562dd1_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{_data_packager_8cpp_a5242fa4d8398d810875a6e2a09ae17d5}\index{DataPackager.cpp@{DataPackager.cpp}!InitDataPackager@{InitDataPackager}}
+\index{InitDataPackager@{InitDataPackager}!DataPackager.cpp@{DataPackager.cpp}}
+\doxysubsubsection{\texorpdfstring{InitDataPackager()}{InitDataPackager()}}
+{\footnotesize\ttfamily \label{_data_packager_8cpp_a5242fa4d8398d810875a6e2a09ae17d5} 
+void Init\+Data\+Packager (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=291pt]{_data_packager_8cpp_a5242fa4d8398d810875a6e2a09ae17d5_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{_data_packager_8cpp_a611b505776d1db9b009d3a5612b7df73}\index{DataPackager.cpp@{DataPackager.cpp}!ReadValFromQueue@{ReadValFromQueue}}
+\index{ReadValFromQueue@{ReadValFromQueue}!DataPackager.cpp@{DataPackager.cpp}}
+\doxysubsubsection{\texorpdfstring{ReadValFromQueue()}{ReadValFromQueue()}}
+{\footnotesize\ttfamily \label{_data_packager_8cpp_a611b505776d1db9b009d3a5612b7df73} 
+double Read\+Val\+From\+Queue (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_data_packager_8cpp_a611b505776d1db9b009d3a5612b7df73_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{_data_packager_8cpp_a4a0430a32305a9922b31d43e37d5a5a0}\index{DataPackager.cpp@{DataPackager.cpp}!SetFlightState@{SetFlightState}}
+\index{SetFlightState@{SetFlightState}!DataPackager.cpp@{DataPackager.cpp}}
+\doxysubsubsection{\texorpdfstring{SetFlightState()}{SetFlightState()}}
+{\footnotesize\ttfamily \label{_data_packager_8cpp_a4a0430a32305a9922b31d43e37d5a5a0} 
+void Set\+Flight\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_data_packager_8h_a61f503ccedfbe93b90828c8109943489}{Flight\+States}}}]{flight\+State}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_data_packager_8cpp_a7504bb33cb94dddeb2b9a8a44b1e953d}\index{DataPackager.cpp@{DataPackager.cpp}!TransferToSD@{TransferToSD}}
+\index{TransferToSD@{TransferToSD}!DataPackager.cpp@{DataPackager.cpp}}
+\doxysubsubsection{\texorpdfstring{TransferToSD()}{TransferToSD()}}
+{\footnotesize\ttfamily \label{_data_packager_8cpp_a7504bb33cb94dddeb2b9a8a44b1e953d} 
+void Transfer\+To\+SD (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_data_packager_8cpp_a913c8a9a0b8f01d13d18287c339b1f61}\index{DataPackager.cpp@{DataPackager.cpp}!Update@{Update}}
+\index{Update@{Update}!DataPackager.cpp@{DataPackager.cpp}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily \label{_data_packager_8cpp_a913c8a9a0b8f01d13d18287c339b1f61} 
+void Update (\begin{DoxyParamCaption}\item[{float}]{barval\+\_\+meters}{}\end{DoxyParamCaption})}
+
+
+
+State machine for the flight of the rocket. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em barval\+\_\+meters} & \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=267pt]{_data_packager_8cpp_a913c8a9a0b8f01d13d18287c339b1f61_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=301pt]{_data_packager_8cpp_a913c8a9a0b8f01d13d18287c339b1f61_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-var-members}
+\Hypertarget{_data_packager_8cpp_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{_data_packager_8cpp_a378ebde5886becd0a2bc700bd628e16c}\index{DataPackager.cpp@{DataPackager.cpp}!BarvalEnd@{BarvalEnd}}
+\index{BarvalEnd@{BarvalEnd}!DataPackager.cpp@{DataPackager.cpp}}
+\doxysubsubsection{\texorpdfstring{BarvalEnd}{BarvalEnd}}
+{\footnotesize\ttfamily \label{_data_packager_8cpp_a378ebde5886becd0a2bc700bd628e16c} 
+int Barval\+End = 1}
+
+\Hypertarget{_data_packager_8cpp_aea3b8a0f3db121227ce9a4f3b3e306e2}\index{DataPackager.cpp@{DataPackager.cpp}!barvalQueue@{barvalQueue}}
+\index{barvalQueue@{barvalQueue}!DataPackager.cpp@{DataPackager.cpp}}
+\doxysubsubsection{\texorpdfstring{barvalQueue}{barvalQueue}}
+{\footnotesize\ttfamily \label{_data_packager_8cpp_aea3b8a0f3db121227ce9a4f3b3e306e2} 
+double barval\+Queue\mbox{[}30\mbox{]}}
+
+\Hypertarget{_data_packager_8cpp_ac4e835d3c660a4134cfe34248f72f1b3}\index{DataPackager.cpp@{DataPackager.cpp}!BarvalStart@{BarvalStart}}
+\index{BarvalStart@{BarvalStart}!DataPackager.cpp@{DataPackager.cpp}}
+\doxysubsubsection{\texorpdfstring{BarvalStart}{BarvalStart}}
+{\footnotesize\ttfamily \label{_data_packager_8cpp_ac4e835d3c660a4134cfe34248f72f1b3} 
+int Barval\+Start = 0}
+
+\Hypertarget{_data_packager_8cpp_a2931ab3c205994cc0b27468c904af197}\index{DataPackager.cpp@{DataPackager.cpp}!FlightState@{FlightState}}
+\index{FlightState@{FlightState}!DataPackager.cpp@{DataPackager.cpp}}
+\doxysubsubsection{\texorpdfstring{FlightState}{FlightState}}
+{\footnotesize\ttfamily \label{_data_packager_8cpp_a2931ab3c205994cc0b27468c904af197} 
+\mbox{\hyperlink{_data_packager_8h_a61f503ccedfbe93b90828c8109943489}{Flight\+States}} Flight\+State = \mbox{\hyperlink{_data_packager_8h_a61f503ccedfbe93b90828c8109943489a16c74c8268fc0e6937a478e571ec2a2a}{Power\+Up}}}
+
+\Hypertarget{_data_packager_8cpp_a7d7f80b6a3dfd507ef59f6309cf07c9f}\index{DataPackager.cpp@{DataPackager.cpp}!InitialHeightData@{InitialHeightData}}
+\index{InitialHeightData@{InitialHeightData}!DataPackager.cpp@{DataPackager.cpp}}
+\doxysubsubsection{\texorpdfstring{InitialHeightData}{InitialHeightData}}
+{\footnotesize\ttfamily \label{_data_packager_8cpp_a7d7f80b6a3dfd507ef59f6309cf07c9f} 
+double Initial\+Height\+Data}
+
+\Hypertarget{_data_packager_8cpp_aa0c979d67099a32c2ed8dd54eef4c939}\index{DataPackager.cpp@{DataPackager.cpp}!isCollectingData@{isCollectingData}}
+\index{isCollectingData@{isCollectingData}!DataPackager.cpp@{DataPackager.cpp}}
+\doxysubsubsection{\texorpdfstring{isCollectingData}{isCollectingData}}
+{\footnotesize\ttfamily \label{_data_packager_8cpp_aa0c979d67099a32c2ed8dd54eef4c939} 
+bool is\+Collecting\+Data = true}
+
+\Hypertarget{_data_packager_8cpp_a916defb9699dc6648c27f970ef8aa2d2}\index{DataPackager.cpp@{DataPackager.cpp}!startTimeToSleep@{startTimeToSleep}}
+\index{startTimeToSleep@{startTimeToSleep}!DataPackager.cpp@{DataPackager.cpp}}
+\doxysubsubsection{\texorpdfstring{startTimeToSleep}{startTimeToSleep}}
+{\footnotesize\ttfamily \label{_data_packager_8cpp_a916defb9699dc6648c27f970ef8aa2d2} 
+uint32\+\_\+t start\+Time\+To\+Sleep = 0}
+

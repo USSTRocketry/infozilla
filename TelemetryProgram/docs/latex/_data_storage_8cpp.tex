@@ -1,0 +1,150 @@
+\doxysection{C\+:/\+Users/\+Bobby/\+Documents/\+USST/\+Infozilla/infozilla/\+Telemetry\+Program/src/\+Data\+Storage.cpp File Reference}
+\hypertarget{_data_storage_8cpp}{}\label{_data_storage_8cpp}\index{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/src/DataStorage.cpp@{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/src/DataStorage.cpp}}
+
+
+This file has all the logic for saving telemetry data to the SD and flash.  
+
+
+{\ttfamily \#include $<$Data\+Storage.\+h$>$}\newline
+{\ttfamily \#include $<$Sensor\+Structs.\+h$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$Serial\+Flash.\+h$>$}\newline
+{\ttfamily \#include $<$SD.\+h$>$}\newline
+{\ttfamily \#include $<$SPI.\+h$>$}\newline
+Include dependency graph for Data\+Storage.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_data_storage_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_data_storage_8cpp_aa776e7adf4c04ecee7d750171c78557f}{Init\+Sd\+Card}} ()
+\item 
+void \mbox{\hyperlink{_data_storage_8cpp_a8a4be2bc17895989d49e908f737621f1}{Init\+Data\+Storage}} ()
+\item 
+void \mbox{\hyperlink{_data_storage_8cpp_ae671d5e55df93720bc18b7b08a8886c2}{Store\+String\+Line}} (std\+::string s)
+\item 
+void \mbox{\hyperlink{_data_storage_8cpp_ab0008bf69c2abfb7092b2cdce2a128cc}{Transfer\+File\+Data}} (File to)
+\item 
+std\+::string \mbox{\hyperlink{_data_storage_8cpp_a894c1f58954d7e8728d6473aa3496be6}{convert\+Data\+To\+CSVRow}} (\mbox{\hyperlink{struct_sensor_data}{Sensor\+Data}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{main_8cpp_ac18fb2dc2c3996591e8cefc5f4912128}{sensor\+Data}})
+\item 
+void \mbox{\hyperlink{_data_storage_8cpp_a6a98f52094279f3aaa8d47f0f304f10d}{Store\+Data}} (\mbox{\hyperlink{struct_sensor_data}{Sensor\+Data}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{main_8cpp_ac18fb2dc2c3996591e8cefc5f4912128}{sensor\+Data}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const int \mbox{\hyperlink{_data_storage_8cpp_a68e9e5c9e17fe9586bf6f9e460d32d17}{SDchip\+Select}} = 4
+\item 
+const int \mbox{\hyperlink{_data_storage_8cpp_a4f161d4ac97194a42c5131cf53383a3b}{Flash\+Chip\+Select}} = 6
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This file has all the logic for saving telemetry data to the SD and flash. 
+
+\begin{DoxyAuthor}{Author}
+USST Avionics 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2025-\/06-\/28
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2025 
+\end{DoxyCopyright}
+
+
+\label{doc-func-members}
+\Hypertarget{_data_storage_8cpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_data_storage_8cpp_a894c1f58954d7e8728d6473aa3496be6}\index{DataStorage.cpp@{DataStorage.cpp}!convertDataToCSVRow@{convertDataToCSVRow}}
+\index{convertDataToCSVRow@{convertDataToCSVRow}!DataStorage.cpp@{DataStorage.cpp}}
+\doxysubsubsection{\texorpdfstring{convertDataToCSVRow()}{convertDataToCSVRow()}}
+{\footnotesize\ttfamily \label{_data_storage_8cpp_a894c1f58954d7e8728d6473aa3496be6} 
+std\+::string convert\+Data\+To\+CSVRow (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_sensor_data}{Sensor\+Data}} \texorpdfstring{$\ast$}{*}}]{sensor\+Data}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_data_storage_8cpp_a894c1f58954d7e8728d6473aa3496be6_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{_data_storage_8cpp_a8a4be2bc17895989d49e908f737621f1}\index{DataStorage.cpp@{DataStorage.cpp}!InitDataStorage@{InitDataStorage}}
+\index{InitDataStorage@{InitDataStorage}!DataStorage.cpp@{DataStorage.cpp}}
+\doxysubsubsection{\texorpdfstring{InitDataStorage()}{InitDataStorage()}}
+{\footnotesize\ttfamily \label{_data_storage_8cpp_a8a4be2bc17895989d49e908f737621f1} 
+void Init\+Data\+Storage (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=283pt]{_data_storage_8cpp_a8a4be2bc17895989d49e908f737621f1_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{_data_storage_8cpp_aa776e7adf4c04ecee7d750171c78557f}\index{DataStorage.cpp@{DataStorage.cpp}!InitSdCard@{InitSdCard}}
+\index{InitSdCard@{InitSdCard}!DataStorage.cpp@{DataStorage.cpp}}
+\doxysubsubsection{\texorpdfstring{InitSdCard()}{InitSdCard()}}
+{\footnotesize\ttfamily \label{_data_storage_8cpp_aa776e7adf4c04ecee7d750171c78557f} 
+void Init\+Sd\+Card (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_data_storage_8cpp_a6a98f52094279f3aaa8d47f0f304f10d}\index{DataStorage.cpp@{DataStorage.cpp}!StoreData@{StoreData}}
+\index{StoreData@{StoreData}!DataStorage.cpp@{DataStorage.cpp}}
+\doxysubsubsection{\texorpdfstring{StoreData()}{StoreData()}}
+{\footnotesize\ttfamily \label{_data_storage_8cpp_a6a98f52094279f3aaa8d47f0f304f10d} 
+void Store\+Data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_sensor_data}{Sensor\+Data}} \texorpdfstring{$\ast$}{*}}]{sensor\+Data}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=297pt]{_data_storage_8cpp_a6a98f52094279f3aaa8d47f0f304f10d_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{_data_storage_8cpp_ae671d5e55df93720bc18b7b08a8886c2}\index{DataStorage.cpp@{DataStorage.cpp}!StoreStringLine@{StoreStringLine}}
+\index{StoreStringLine@{StoreStringLine}!DataStorage.cpp@{DataStorage.cpp}}
+\doxysubsubsection{\texorpdfstring{StoreStringLine()}{StoreStringLine()}}
+{\footnotesize\ttfamily \label{_data_storage_8cpp_ae671d5e55df93720bc18b7b08a8886c2} 
+void Store\+String\+Line (\begin{DoxyParamCaption}\item[{std\+::string}]{s}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_data_storage_8cpp_ae671d5e55df93720bc18b7b08a8886c2_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{_data_storage_8cpp_ab0008bf69c2abfb7092b2cdce2a128cc}\index{DataStorage.cpp@{DataStorage.cpp}!TransferFileData@{TransferFileData}}
+\index{TransferFileData@{TransferFileData}!DataStorage.cpp@{DataStorage.cpp}}
+\doxysubsubsection{\texorpdfstring{TransferFileData()}{TransferFileData()}}
+{\footnotesize\ttfamily \label{_data_storage_8cpp_ab0008bf69c2abfb7092b2cdce2a128cc} 
+void Transfer\+File\+Data (\begin{DoxyParamCaption}\item[{File}]{to}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-var-members}
+\Hypertarget{_data_storage_8cpp_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{_data_storage_8cpp_a4f161d4ac97194a42c5131cf53383a3b}\index{DataStorage.cpp@{DataStorage.cpp}!FlashChipSelect@{FlashChipSelect}}
+\index{FlashChipSelect@{FlashChipSelect}!DataStorage.cpp@{DataStorage.cpp}}
+\doxysubsubsection{\texorpdfstring{FlashChipSelect}{FlashChipSelect}}
+{\footnotesize\ttfamily \label{_data_storage_8cpp_a4f161d4ac97194a42c5131cf53383a3b} 
+const int Flash\+Chip\+Select = 6}
+
+\Hypertarget{_data_storage_8cpp_a68e9e5c9e17fe9586bf6f9e460d32d17}\index{DataStorage.cpp@{DataStorage.cpp}!SDchipSelect@{SDchipSelect}}
+\index{SDchipSelect@{SDchipSelect}!DataStorage.cpp@{DataStorage.cpp}}
+\doxysubsubsection{\texorpdfstring{SDchipSelect}{SDchipSelect}}
+{\footnotesize\ttfamily \label{_data_storage_8cpp_a68e9e5c9e17fe9586bf6f9e460d32d17} 
+const int SDchip\+Select = 4}
+

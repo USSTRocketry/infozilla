@@ -1,3 +1,14 @@
+/**
+ * @file DataPackager.cpp
+ * @author USST Avionics
+ * @brief This file determines the state of flight of the rocket and base height of the rocket
+ * @version 0.1
+ * @date 2025-06-28
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
+
 #include <Arduino.h>
 // #include <DataPackager.h>
 #include <fp16.h>
@@ -66,6 +77,11 @@ void SetFlightState(FlightStates flightState){
     FlightState = flightState;
 }
 
+/**
+ * @brief State machine for the flight of the rocket
+ * 
+ * @param barval_meters 
+ */
 void Update(float barval_meters){
     
     double currentBarVal = barval_meters;

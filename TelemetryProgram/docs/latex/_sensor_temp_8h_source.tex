@@ -1,0 +1,28 @@
+\doxysection{Sensor\+Temp.\+h}
+\hypertarget{_sensor_temp_8h_source}{}\label{_sensor_temp_8h_source}\index{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/HAL/SensorTemp.h@{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/HAL/SensorTemp.h}}
+\mbox{\hyperlink{_sensor_temp_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <Wire.h>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <Adafruit\_MCP9808.h>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{types_8h}{types.h}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_sensor_8h}{Sensor.h}}"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_sensor_temperature_ac8d335e1ed12f57fab049bc460986d5f}{SensorTemperature}}\ :\ \mbox{\hyperlink{class_sensor_a8a6b74c730b8bd209e1dd7fcfc1d3e33}{Sensor}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00011\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00012\ \ \ \ \ Adafruit\_MCP9808\ mcp9808;}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_sensor_temperature_a04b0ff2e8625d282474ef58e11f24348}{temperature}};}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{class_sensor_temperature_ac8d335e1ed12f57fab049bc460986d5f}{SensorTemperature}}(uint8\_t\ \mbox{\hyperlink{class_sensor_a0830ff1889f90b853f0c3a58353864c9}{i2c\_addr}}\ =\ MCP9808\_I2CADDR\_DEFAULT,\ uint8\_t\ \mbox{\hyperlink{class_sensor_a100459d76016af6212961a54a6f8d81f}{i2c\_wire}}\ =\ \mbox{\hyperlink{_sensor_8h_a1a0ff10faa6578101d9717e25182ea16}{I2C\_WIRE0}});}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{class_sensor_temperature_a8f1e1410785ed872e4d753e0fe8506d9}{\string~SensorTemperature}}();}
+\DoxyCodeLine{00020\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{class_sensor_temperature_add714ecd52c55c1460e6f8b54fcafa12}{begin}}();}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_sensor_temperature_a478f2cde8dd29e5e0b9a8e3c2b2e4071}{read}}();}
+\DoxyCodeLine{00022\ \};}
+
+\end{DoxyCode}

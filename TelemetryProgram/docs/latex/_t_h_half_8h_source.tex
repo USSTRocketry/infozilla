@@ -1,0 +1,98 @@
+\doxysection{THHalf.\+h}
+\hypertarget{_t_h_half_8h_source}{}\label{_t_h_half_8h_source}\index{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/FP16-\/master/third-\/party/THHalf.h@{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/FP16-\/master/third-\/party/THHalf.h}}
+\mbox{\hyperlink{_t_h_half_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ This\ implementation\ is\ extracted\ from\ PyTorch:}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ \ \ Repo:\ github.com/pytorch/pytorch}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ \ \ File:\ torch/lib/TH/THHalf.c}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ \ \ Commit\ ID:\ 92481b59d31199df57420d4b14912348cc780d1d}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ Functions\ are\ made\ "{}static\ inline"{}\ for\ performance}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{comment}{/*\ Copyright\ 1993-\/2014\ NVIDIA\ Corporation.\ \ All\ rights\ reserved.\ */}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ Host\ functions\ for\ converting\ between\ FP32\ and\ FP16\ formats}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ TH\_halfbits2float(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}*\ src,\ \textcolor{keywordtype}{float}*\ res)}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ h\ =\ *src;}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ sign\ =\ ((h\ >>\ 15)\ \&\ 1);}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ exponent\ =\ ((h\ >>\ 10)\ \&\ 0x1f);}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ mantissa\ =\ ((h\ \&\ 0x3ff)\ <<\ 13);}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordflow}{if}\ (exponent\ ==\ 0x1f)\ \{\ \ \textcolor{comment}{/*\ NaN\ or\ Inf\ */}}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ mantissa\ =\ (mantissa\ ?\ (sign\ =\ 0,\ 0x7fffff)\ :\ 0);}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ exponent\ =\ 0xff;}
+\DoxyCodeLine{00023\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (!exponent)\ \{\ \ \textcolor{comment}{/*\ Denorm\ or\ Zero\ */}}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (mantissa)\ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ msb;}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ exponent\ =\ 0x71;}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ msb\ =\ (mantissa\ \&\ 0x400000);}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mantissa\ <<=\ 1;\ \ \textcolor{comment}{/*\ normalize\ */}}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/-\/exponent;}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (!msb);}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ mantissa\ \&=\ 0x7fffff;\ \ \textcolor{comment}{/*\ 1.mantissa\ is\ implicit\ */}}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00034\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ exponent\ +=\ 0x70;}
+\DoxyCodeLine{00036\ \ \ \ \ \}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ *(\textcolor{keywordtype}{unsigned}*)res\ =\ ((sign\ <<\ 31)\ |\ (exponent\ <<\ 23)\ |\ mantissa);}
+\DoxyCodeLine{00039\ \}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ TH\_float2halfbits(\textcolor{keywordtype}{float}*\ src,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}*\ dest)}
+\DoxyCodeLine{00042\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ x\ =\ *(\textcolor{keywordtype}{unsigned}*)src;}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ u\ =\ (x\ \&\ 0x7fffffff),\ remainder,\ shift,\ lsb,\ lsb\_s1,\ lsb\_m1;}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ sign,\ exponent,\ mantissa;}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{comment}{//\ Get\ rid\ of\ +NaN/-\/NaN\ case\ first.}}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordflow}{if}\ (u\ >\ 0x7f800000)\ \{}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ *dest\ =\ 0x7fffU;}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ return\ ;}
+\DoxyCodeLine{00051\ \ \ \ \ \}}
+\DoxyCodeLine{00052\ \ \ }
+\DoxyCodeLine{00053\ \ \ \ \ sign\ =\ ((x\ >>\ 16)\ \&\ 0x8000);}
+\DoxyCodeLine{00054\ \ \ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{comment}{//\ Get\ rid\ of\ +Inf/-\/Inf,\ +0/-\/0.}}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordflow}{if}\ (u\ >\ 0x477fefff)\ \{}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ *dest\ =\ sign\ |\ 0x7c00U;}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \textcolor{keywordflow}{return};\ }
+\DoxyCodeLine{00059\ \ \ \ \ \}}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordflow}{if}\ (u\ <\ 0x33000001)\ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ *dest\ =\ (sign\ |\ 0x0000);}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00063\ \ \ \ \ \}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ exponent\ =\ ((u\ >>\ 23)\ \&\ 0xff);}
+\DoxyCodeLine{00066\ \ \ \ \ mantissa\ =\ (u\ \&\ 0x7fffff);}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordflow}{if}\ (exponent\ >\ 0x70)\ \{}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ shift\ =\ 13;}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ exponent\ -\/=\ 0x70;}
+\DoxyCodeLine{00071\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ shift\ =\ 0x7e\ -\/\ exponent;}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ exponent\ =\ 0;}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ mantissa\ |=\ 0x800000;}
+\DoxyCodeLine{00075\ \ \ \ \ \}}
+\DoxyCodeLine{00076\ \ \ \ \ lsb\ =\ (1\ <<\ shift);}
+\DoxyCodeLine{00077\ \ \ \ \ lsb\_s1\ =\ (lsb\ >>\ 1);}
+\DoxyCodeLine{00078\ \ \ \ \ lsb\_m1\ =\ (lsb\ -\/\ 1);}
+\DoxyCodeLine{00079\ \ \ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{comment}{//\ Round\ to\ nearest\ even.}}
+\DoxyCodeLine{00081\ \ \ \ \ \mbox{\hyperlink{namespacehalf__float_1_1detail_ab5ec4bbe576c7a623212d2a8e5fe4a30}{remainder}}\ =\ (mantissa\ \&\ lsb\_m1);}
+\DoxyCodeLine{00082\ \ \ \ \ mantissa\ >>=\ shift;}
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordflow}{if}\ (remainder\ >\ lsb\_s1\ ||\ (remainder\ ==\ lsb\_s1\ \&\&\ (mantissa\ \&\ 0x1)))\ \{}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ ++mantissa;}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!(mantissa\ \&\ 0x3ff))\ \{}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ ++exponent;}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ mantissa\ =\ 0;}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00089\ \ \ \ \ \}\ \ }
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \ \ *dest\ =\ (sign\ |\ (exponent\ <<\ 10)\ |\ mantissa);\ \ }
+\DoxyCodeLine{00092\ \}}
+
+\end{DoxyCode}

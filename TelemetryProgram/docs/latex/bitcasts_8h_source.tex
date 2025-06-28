@@ -1,0 +1,98 @@
+\doxysection{bitcasts.\+h}
+\hypertarget{bitcasts_8h_source}{}\label{bitcasts_8h_source}\index{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/FP16-\/master/include/fp16/bitcasts.h@{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/FP16-\/master/include/fp16/bitcasts.h}}
+\mbox{\hyperlink{bitcasts_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#ifndef\ FP16\_BITCASTS\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#define\ FP16\_BITCASTS\_H}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)\ \&\&\ (\_\_cplusplus\ >=\ 201103L)}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\ \ \ \ \#include\ <cstdint>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#elif\ !defined(\_\_OPENCL\_VERSION\_\_)}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\ \ \ \ \#include\ <stdint.h>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#if\ defined(\_\_INTEL\_COMPILER)}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\ \ \ \ \#include\ <immintrin.h>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#if\ defined(\_MSC\_VER)\ \&\&\ !defined(\_\_clang\_\_)\ \&\&\ (defined(\_M\_ARM)\ ||\ defined(\_M\_ARM64))}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\ \ \ \ \#include\ <intrin.h>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{float}\ fp32\_from\_bits(uint32\_t\ w)\ \{}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#if\ defined(\_\_OPENCL\_VERSION\_\_)}}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordflow}{return}\ as\_float(w);}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#elif\ defined(\_\_CUDA\_ARCH\_\_)}}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordflow}{return}\ \_\_uint\_as\_float((\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int})\ w);}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#elif\ defined(\_\_INTEL\_COMPILER)\ ||\ defined(\_MSC\_VER)\ \&\&\ (\_MSC\_VER\ >=\ 1932)\ \&\&\ (defined(\_M\_IX86)\ ||\ defined(\_M\_X64))}}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordflow}{return}\ \_castu32\_f32(w);}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#elif\ defined(\_MSC\_VER)\ \&\&\ !defined(\_\_clang\_\_)\ \&\&\ (defined(\_M\_ARM)\ ||\ defined(\_M\_ARM64))}}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordflow}{return}\ \_CopyFloatFromInt32((\_\_int32)\ w);}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{union\ }\{}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ uint32\_t\ as\_bits;}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ as\_value;}
+\DoxyCodeLine{00033\ \ \ \ \ \}\ fp32\ =\ \{\ w\ \};}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordflow}{return}\ fp32.as\_value;}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00036\ \}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint32\_t\ fp32\_to\_bits(\textcolor{keywordtype}{float}\ f)\ \{}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#if\ defined(\_\_OPENCL\_VERSION\_\_)}}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordflow}{return}\ as\_uint(f);}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#elif\ defined(\_\_CUDA\_ARCH\_\_)}}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordflow}{return}\ (uint32\_t)\ \_\_float\_as\_uint(f);}
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#elif\ defined(\_\_INTEL\_COMPILER)\ ||\ defined(\_MSC\_VER)\ \&\&\ (\_MSC\_VER\ >=\ 1932)\ \&\&\ (defined(\_M\_IX86)\ ||\ defined(\_M\_X64))}}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordflow}{return}\ \_castf32\_u32(f);}
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#elif\ defined(\_MSC\_VER)\ \&\&\ !defined(\_\_clang\_\_)\ \&\&\ (defined(\_M\_ARM)\ ||\ defined(\_M\_ARM64))}}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordflow}{return}\ (uint32\_t)\ \_CopyInt32FromFloat(f);}
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keyword}{union\ }\{}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ as\_value;}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ uint32\_t\ as\_bits;}
+\DoxyCodeLine{00051\ \ \ \ \ \}\ fp32\ =\ \{\ f\ \};}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordflow}{return}\ fp32.as\_bits;}
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00054\ \}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{double}\ fp64\_from\_bits(uint64\_t\ w)\ \{}
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#if\ defined(\_\_OPENCL\_VERSION\_\_)}}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordflow}{return}\ as\_double(w);}
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#elif\ defined(\_\_CUDA\_ARCH\_\_)}}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordflow}{return}\ \_\_longlong\_as\_double((\textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long})\ w);}
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#elif\ defined(\_\_INTEL\_COMPILER)\ ||\ defined(\_MSC\_VER)\ \&\&\ (\_MSC\_VER\ >=\ 1932)\ \&\&\ (defined(\_M\_IX86)\ ||\ defined(\_M\_X64))}}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordflow}{return}\ \_castu64\_f64(w);}
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\#elif\ defined(\_MSC\_VER)\ \&\&\ !defined(\_\_clang\_\_)\ \&\&\ (defined(\_M\_ARM)\ ||\ defined(\_M\_ARM64))}}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordflow}{return}\ \_CopyDoubleFromInt64((\_\_int64)\ w);}
+\DoxyCodeLine{00065\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keyword}{union\ }\{}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ uint64\_t\ as\_bits;}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ as\_value;}
+\DoxyCodeLine{00069\ \ \ \ \ \}\ fp64\ =\ \{\ w\ \};}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordflow}{return}\ fp64.as\_value;}
+\DoxyCodeLine{00071\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00072\ \}}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint64\_t\ fp64\_to\_bits(\textcolor{keywordtype}{double}\ f)\ \{}
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\#if\ defined(\_\_OPENCL\_VERSION\_\_)}}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordflow}{return}\ as\_ulong(f);}
+\DoxyCodeLine{00077\ \textcolor{preprocessor}{\#elif\ defined(\_\_CUDA\_ARCH\_\_)}}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordflow}{return}\ (uint64\_t)\ \_\_double\_as\_longlong(f);}
+\DoxyCodeLine{00079\ \textcolor{preprocessor}{\#elif\ defined(\_\_INTEL\_COMPILER)\ ||\ defined(\_MSC\_VER)\ \&\&\ (\_MSC\_VER\ >=\ 1932)\ \&\&\ (defined(\_M\_IX86)\ ||\ defined(\_M\_X64))}}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordflow}{return}\ \_castf64\_u64(f);}
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#elif\ defined(\_MSC\_VER)\ \&\&\ !defined(\_\_clang\_\_)\ \&\&\ (defined(\_M\_ARM)\ ||\ defined(\_M\_ARM64))}}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordflow}{return}\ (uint64\_t)\ \_CopyInt64FromDouble(f);}
+\DoxyCodeLine{00083\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keyword}{union\ }\{}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ as\_value;}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ uint64\_t\ as\_bits;}
+\DoxyCodeLine{00087\ \ \ \ \ \}\ fp64\ =\ \{\ f\ \};}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordflow}{return}\ fp64.as\_bits;}
+\DoxyCodeLine{00089\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00090\ \}}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FP16\_BITCASTS\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

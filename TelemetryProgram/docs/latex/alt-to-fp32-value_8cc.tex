@@ -1,0 +1,79 @@
+\doxysection{C\+:/\+Users/\+Bobby/\+Documents/\+USST/\+Infozilla/infozilla/\+Telemetry\+Program/lib/\+FP16-\/master/test/alt-\/to-\/fp32-\/value.cc File Reference}
+\hypertarget{alt-to-fp32-value_8cc}{}\label{alt-to-fp32-value_8cc}\index{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/FP16-\/master/test/alt-\/to-\/fp32-\/value.cc@{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/FP16-\/master/test/alt-\/to-\/fp32-\/value.cc}}
+{\ttfamily \#include $<$gtest/gtest.\+h$>$}\newline
+{\ttfamily \#include $<$cstdint$>$}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$fp16.\+h$>$}\newline
+{\ttfamily \#include $<$tables.\+h$>$}\newline
+Include dependency graph for alt-\/to-\/fp32-\/value.cc\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{alt-to-fp32-value_8cc__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{alt-to-fp32-value_8cc_ad63ee66d2a50ed213002cf0708637f53}{TEST}} (FP16\+\_\+\+ALT\+\_\+\+TO\+\_\+\+FP32\+\_\+\+VALUE, normalized\+\_\+powers\+\_\+of\+\_\+2)
+\item 
+\mbox{\hyperlink{alt-to-fp32-value_8cc_aa789d464fd6c0a4f14581954471921f1}{TEST}} (FP16\+\_\+\+ALT\+\_\+\+TO\+\_\+\+FP32\+\_\+\+VALUE, denormalized\+\_\+powers\+\_\+of\+\_\+2)
+\item 
+\mbox{\hyperlink{alt-to-fp32-value_8cc_ac867cd74e8e382ea228b7c68dc300d67}{TEST}} (FP16\+\_\+\+ALT\+\_\+\+TO\+\_\+\+FP32\+\_\+\+VALUE, zero)
+\item 
+\mbox{\hyperlink{alt-to-fp32-value_8cc_af9335c0872818eab759eb95fb8aa85a9}{TEST}} (FP16\+\_\+\+ALT\+\_\+\+TO\+\_\+\+FP32\+\_\+\+VALUE, positive\+\_\+normalized\+\_\+values)
+\item 
+\mbox{\hyperlink{alt-to-fp32-value_8cc_a2fcb0b2016540c1ed444c239eb20b95e}{TEST}} (FP16\+\_\+\+ALT\+\_\+\+TO\+\_\+\+FP32\+\_\+\+VALUE, negative\+\_\+normalized\+\_\+values)
+\item 
+\mbox{\hyperlink{alt-to-fp32-value_8cc_aa374073810714d1a9dc1cdcdba2b5a5c}{TEST}} (FP16\+\_\+\+ALT\+\_\+\+TO\+\_\+\+FP32\+\_\+\+VALUE, positive\+\_\+denormalized\+\_\+values)
+\item 
+\mbox{\hyperlink{alt-to-fp32-value_8cc_a20b1509b8d1002bcb1fde9373a5c2668}{TEST}} (FP16\+\_\+\+ALT\+\_\+\+TO\+\_\+\+FP32\+\_\+\+VALUE, negative\+\_\+denormalized\+\_\+values)
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{alt-to-fp32-value_8cc_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{alt-to-fp32-value_8cc_aa789d464fd6c0a4f14581954471921f1}\index{alt-\/to-\/fp32-\/value.cc@{alt-\/to-\/fp32-\/value.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!alt-\/to-\/fp32-\/value.cc@{alt-\/to-\/fp32-\/value.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [1/7]}}
+{\footnotesize\ttfamily \label{alt-to-fp32-value_8cc_aa789d464fd6c0a4f14581954471921f1} 
+TEST (\begin{DoxyParamCaption}\item[{FP16\+\_\+\+ALT\+\_\+\+TO\+\_\+\+FP32\+\_\+\+VALUE}]{}{, }\item[{denormalized\+\_\+powers\+\_\+of\+\_\+2}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{alt-to-fp32-value_8cc_a20b1509b8d1002bcb1fde9373a5c2668}\index{alt-\/to-\/fp32-\/value.cc@{alt-\/to-\/fp32-\/value.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!alt-\/to-\/fp32-\/value.cc@{alt-\/to-\/fp32-\/value.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [2/7]}}
+{\footnotesize\ttfamily \label{alt-to-fp32-value_8cc_a20b1509b8d1002bcb1fde9373a5c2668} 
+TEST (\begin{DoxyParamCaption}\item[{FP16\+\_\+\+ALT\+\_\+\+TO\+\_\+\+FP32\+\_\+\+VALUE}]{}{, }\item[{negative\+\_\+denormalized\+\_\+values}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{alt-to-fp32-value_8cc_a2fcb0b2016540c1ed444c239eb20b95e}\index{alt-\/to-\/fp32-\/value.cc@{alt-\/to-\/fp32-\/value.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!alt-\/to-\/fp32-\/value.cc@{alt-\/to-\/fp32-\/value.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [3/7]}}
+{\footnotesize\ttfamily \label{alt-to-fp32-value_8cc_a2fcb0b2016540c1ed444c239eb20b95e} 
+TEST (\begin{DoxyParamCaption}\item[{FP16\+\_\+\+ALT\+\_\+\+TO\+\_\+\+FP32\+\_\+\+VALUE}]{}{, }\item[{negative\+\_\+normalized\+\_\+values}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{alt-to-fp32-value_8cc_ad63ee66d2a50ed213002cf0708637f53}\index{alt-\/to-\/fp32-\/value.cc@{alt-\/to-\/fp32-\/value.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!alt-\/to-\/fp32-\/value.cc@{alt-\/to-\/fp32-\/value.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [4/7]}}
+{\footnotesize\ttfamily \label{alt-to-fp32-value_8cc_ad63ee66d2a50ed213002cf0708637f53} 
+TEST (\begin{DoxyParamCaption}\item[{FP16\+\_\+\+ALT\+\_\+\+TO\+\_\+\+FP32\+\_\+\+VALUE}]{}{, }\item[{normalized\+\_\+powers\+\_\+of\+\_\+2}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{alt-to-fp32-value_8cc_aa374073810714d1a9dc1cdcdba2b5a5c}\index{alt-\/to-\/fp32-\/value.cc@{alt-\/to-\/fp32-\/value.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!alt-\/to-\/fp32-\/value.cc@{alt-\/to-\/fp32-\/value.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [5/7]}}
+{\footnotesize\ttfamily \label{alt-to-fp32-value_8cc_aa374073810714d1a9dc1cdcdba2b5a5c} 
+TEST (\begin{DoxyParamCaption}\item[{FP16\+\_\+\+ALT\+\_\+\+TO\+\_\+\+FP32\+\_\+\+VALUE}]{}{, }\item[{positive\+\_\+denormalized\+\_\+values}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{alt-to-fp32-value_8cc_af9335c0872818eab759eb95fb8aa85a9}\index{alt-\/to-\/fp32-\/value.cc@{alt-\/to-\/fp32-\/value.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!alt-\/to-\/fp32-\/value.cc@{alt-\/to-\/fp32-\/value.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [6/7]}}
+{\footnotesize\ttfamily \label{alt-to-fp32-value_8cc_af9335c0872818eab759eb95fb8aa85a9} 
+TEST (\begin{DoxyParamCaption}\item[{FP16\+\_\+\+ALT\+\_\+\+TO\+\_\+\+FP32\+\_\+\+VALUE}]{}{, }\item[{positive\+\_\+normalized\+\_\+values}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{alt-to-fp32-value_8cc_ac867cd74e8e382ea228b7c68dc300d67}\index{alt-\/to-\/fp32-\/value.cc@{alt-\/to-\/fp32-\/value.cc}!TEST@{TEST}}
+\index{TEST@{TEST}!alt-\/to-\/fp32-\/value.cc@{alt-\/to-\/fp32-\/value.cc}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [7/7]}}
+{\footnotesize\ttfamily \label{alt-to-fp32-value_8cc_ac867cd74e8e382ea228b7c68dc300d67} 
+TEST (\begin{DoxyParamCaption}\item[{FP16\+\_\+\+ALT\+\_\+\+TO\+\_\+\+FP32\+\_\+\+VALUE}]{}{, }\item[{zero}]{}{}\end{DoxyParamCaption})}
+

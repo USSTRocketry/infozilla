@@ -1,0 +1,17 @@
+<map id="Sensor::Sensor" name="Sensor::Sensor">
+<area shape="rect" id="Node000001" title=" " alt="" coords="287,157,398,184"/>
+<area shape="rect" id="Node000002" href="$class_sensor_accel_gyro.html#a5bf8f7329e0c93cb212dd7544766ae7a" title=" " alt="" coords="5,5,239,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="325,145,289,94,265,68,237,46,213,35,216,30,240,42,269,64,293,91,329,142"/>
+<area shape="rect" id="Node000003" href="$class_sensor_accel_gyro.html#a38cff7881c1a3f188657a7b309d795d3" title=" " alt="" coords="5,56,239,83"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="314,149,279,122,238,97,206,86,208,81,240,92,282,117,318,145"/>
+<area shape="rect" id="Node000004" href="$class_sensor_b_m_p280.html#af03bcaae2e226acdf0c0c552175575cb" title=" " alt="" coords="16,107,228,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="271,156,238,148,187,137,189,131,239,143,272,151"/>
+<area shape="rect" id="Node000005" href="$class_sensor_b_m_p280.html#a63d6c7f37e4c908df6d2aaf19091c900" title=" " alt="" coords="16,157,228,184"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="271,173,228,173,228,168,271,168"/>
+<area shape="rect" id="Node000006" href="$class_sensor_magnetometer.html#a0a552e6a74465b01649b1657d4a4d64a" title=" " alt="" coords="45,208,199,251"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="275,191,200,211,199,206,274,186"/>
+<area shape="rect" id="Node000007" href="$class_sensor_magnetometer.html#a3db5de4b6043cf6ab131b0ea795de8c7" title=" " alt="" coords="45,275,199,317"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="321,198,285,232,240,265,200,282,198,277,237,260,282,228,317,194"/>
+<area shape="rect" id="Node000008" href="$class_sensor_temperature.html#ac8d335e1ed12f57fab049bc460986d5f" title=" " alt="" coords="51,341,193,384"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="333,200,298,266,272,301,240,331,218,344,195,353,193,349,216,340,237,327,268,298,294,263,328,197"/>
+</map>

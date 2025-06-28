@@ -1,0 +1,334 @@
+\doxysection{npy-\/halffloat.h}
+\hypertarget{npy-halffloat_8h_source}{}\label{npy-halffloat_8h_source}\index{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/FP16-\/master/third-\/party/npy-\/halffloat.h@{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/FP16-\/master/third-\/party/npy-\/halffloat.h}}
+\mbox{\hyperlink{npy-halffloat_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ This\ implementation\ is\ extracted\ from\ numpy:}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ \ \ Repo:\ github.com/numpy/numpy}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ \ \ File:\ numpy/core/src/npymath/halffloat.c}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ \ \ Commit\ ID:\ 25c23f1d956104a072a95355ffaa7a38b53710b7}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ Functions\ are\ made\ "{}static\ inline"{}\ for\ performance,\ and}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ non-\/conversion\ functions\ are\ removed,\ and\ generation\ of}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *\ exceptions\ is\ disabled.}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00012\ \textcolor{keyword}{typedef}\ uint16\_t\ \mbox{\hyperlink{npy-halffloat_8h_acdaf5997f283082a5afc13ca33813e93}{npy\_uint16}};}
+\DoxyCodeLine{00013\ \textcolor{keyword}{typedef}\ uint32\_t\ \mbox{\hyperlink{npy-halffloat_8h_a68ff8667752717e49f4e66fa08817d3b}{npy\_uint32}};}
+\DoxyCodeLine{00014\ \textcolor{keyword}{typedef}\ uint64\_t\ \mbox{\hyperlink{npy-halffloat_8h_a9127f9b89287c24a79d89439de12a893}{npy\_uint64}};}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ This\ chooses\ between\ 'ties\ to\ even'\ and\ 'ties\ away\ from\ zero'.}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ NPY\_HALF\_ROUND\_TIES\_TO\_EVEN\ 1}}
+\DoxyCodeLine{00020\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ *\ If\ these\ are\ 1,\ the\ conversions\ try\ to\ trigger\ underflow,}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ *\ overflow,\ and\ invalid\ exceptions\ in\ the\ FP\ system\ when\ needed.}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#define\ NPY\_HALF\_GENERATE\_OVERFLOW\ 0}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#define\ NPY\_HALF\_GENERATE\_UNDERFLOW\ 0}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ NPY\_HALF\_GENERATE\_INVALID\ 0}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00029\ \textcolor{comment}{\ ********************************************************************}}
+\DoxyCodeLine{00030\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ BIT-\/LEVEL\ CONVERSIONS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{00031\ \textcolor{comment}{\ ********************************************************************}}
+\DoxyCodeLine{00032\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{npy-halffloat_8h_acdaf5997f283082a5afc13ca33813e93}{npy\_uint16}}\ npy\_floatbits\_to\_halfbits(\mbox{\hyperlink{npy-halffloat_8h_a68ff8667752717e49f4e66fa08817d3b}{npy\_uint32}}\ f)}
+\DoxyCodeLine{00035\ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{npy-halffloat_8h_a68ff8667752717e49f4e66fa08817d3b}{npy\_uint32}}\ f\_exp,\ f\_sig;}
+\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{npy-halffloat_8h_acdaf5997f283082a5afc13ca33813e93}{npy\_uint16}}\ h\_sgn,\ h\_exp,\ h\_sig;}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ h\_sgn\ =\ (\mbox{\hyperlink{npy-halffloat_8h_acdaf5997f283082a5afc13ca33813e93}{npy\_uint16}})\ ((f\&0x80000000u)\ >>\ 16);}
+\DoxyCodeLine{00040\ \ \ \ \ f\_exp\ =\ (f\&0x7f800000u);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{comment}{/*\ Exponent\ overflow/NaN\ converts\ to\ signed\ inf/NaN\ */}}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordflow}{if}\ (f\_exp\ >=\ 0x47800000u)\ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (f\_exp\ ==\ 0x7f800000u)\ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Inf\ or\ NaN\ */}}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ f\_sig\ =\ (f\&0x007fffffu);}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (f\_sig\ !=\ 0)\ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ NaN\ -\/\ propagate\ the\ flag\ in\ the\ significand...\ */}}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{npy-halffloat_8h_acdaf5997f283082a5afc13ca33813e93}{npy\_uint16}}\ ret\ =\ (\mbox{\hyperlink{npy-halffloat_8h_acdaf5997f283082a5afc13ca33813e93}{npy\_uint16}})\ (0x7c00u\ +\ (f\_sig\ >>\ 13));}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ ...but\ make\ sure\ it\ stays\ a\ NaN\ */}}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ret\ ==\ 0x7c00u)\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ret++;}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ h\_sgn\ +\ ret;}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ signed\ inf\ */}}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (\mbox{\hyperlink{npy-halffloat_8h_acdaf5997f283082a5afc13ca33813e93}{npy\_uint16}})\ (h\_sgn\ +\ 0x7c00u);}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ overflow\ to\ signed\ inf\ */}}
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#if\ NPY\_HALF\_GENERATE\_OVERFLOW}}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ npy\_set\_floatstatus\_overflow();}
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (\mbox{\hyperlink{npy-halffloat_8h_acdaf5997f283082a5afc13ca33813e93}{npy\_uint16}})\ (h\_sgn\ +\ 0x7c00u);}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00066\ \ \ \ \ \}}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{comment}{/*\ Exponent\ underflow\ converts\ to\ a\ subnormal\ half\ or\ signed\ zero\ */}}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordflow}{if}\ (f\_exp\ <=\ 0x38000000u)\ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00071\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ Signed\ zeros,\ subnormal\ floats,\ and\ floats\ with\ small}}
+\DoxyCodeLine{00072\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ exponents\ all\ convert\ to\ signed\ zero\ halfs.}}
+\DoxyCodeLine{00073\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (f\_exp\ <\ 0x33000000u)\ \{}
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\#if\ NPY\_HALF\_GENERATE\_UNDERFLOW}}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ If\ f\ !=\ 0,\ it\ underflowed\ to\ 0\ */}}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((f\&0x7fffffff)\ !=\ 0)\ \{}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ npy\_set\_floatstatus\_underflow();}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00080\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ h\_sgn;}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Make\ the\ subnormal\ significand\ */}}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ f\_exp\ >>=\ 23;}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ f\_sig\ =\ (0x00800000u\ +\ (f\&0x007fffffu));}
+\DoxyCodeLine{00086\ \textcolor{preprocessor}{\#if\ NPY\_HALF\_GENERATE\_UNDERFLOW}}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ If\ it's\ not\ exactly\ represented,\ it\ underflowed\ */}}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((f\_sig\&(((\mbox{\hyperlink{npy-halffloat_8h_a68ff8667752717e49f4e66fa08817d3b}{npy\_uint32}})1\ <<\ (126\ -\/\ f\_exp))\ -\/\ 1))\ !=\ 0)\ \{}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ npy\_set\_floatstatus\_underflow();}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00091\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ f\_sig\ >>=\ (113\ -\/\ f\_exp);}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Handle\ rounding\ by\ adding\ 1\ to\ the\ bit\ beyond\ half\ precision\ */}}
+\DoxyCodeLine{00094\ \textcolor{preprocessor}{\#if\ NPY\_HALF\_ROUND\_TIES\_TO\_EVEN}}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00096\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ If\ the\ last\ bit\ in\ the\ half\ significand\ is\ 0\ (already\ even),\ and}}
+\DoxyCodeLine{00097\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ the\ remaining\ bit\ pattern\ is\ 1000...0,\ then\ we\ do\ not\ add\ one}}
+\DoxyCodeLine{00098\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ to\ the\ bit\ after\ the\ half\ significand.\ \ In\ all\ other\ cases,\ we\ do.}}
+\DoxyCodeLine{00099\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((f\_sig\&0x00003fffu)\ !=\ 0x00001000u)\ \{}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ f\_sig\ +=\ 0x00001000u;}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00103\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ f\_sig\ +=\ 0x00001000u;}
+\DoxyCodeLine{00105\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ h\_sig\ =\ (\mbox{\hyperlink{npy-halffloat_8h_acdaf5997f283082a5afc13ca33813e93}{npy\_uint16}})\ (f\_sig\ >>\ 13);}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00108\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ If\ the\ rounding\ causes\ a\ bit\ to\ spill\ into\ h\_exp,\ it\ will}}
+\DoxyCodeLine{00109\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ increment\ h\_exp\ from\ zero\ to\ one\ and\ h\_sig\ will\ be\ zero.}}
+\DoxyCodeLine{00110\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ This\ is\ the\ correct\ result.}}
+\DoxyCodeLine{00111\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (\mbox{\hyperlink{npy-halffloat_8h_acdaf5997f283082a5afc13ca33813e93}{npy\_uint16}})\ (h\_sgn\ +\ h\_sig);}
+\DoxyCodeLine{00113\ \ \ \ \ \}}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{comment}{/*\ Regular\ case\ with\ no\ overflow\ or\ underflow\ */}}
+\DoxyCodeLine{00116\ \ \ \ \ h\_exp\ =\ (\mbox{\hyperlink{npy-halffloat_8h_acdaf5997f283082a5afc13ca33813e93}{npy\_uint16}})\ ((f\_exp\ -\/\ 0x38000000u)\ >>\ 13);}
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{comment}{/*\ Handle\ rounding\ by\ adding\ 1\ to\ the\ bit\ beyond\ half\ precision\ */}}
+\DoxyCodeLine{00118\ \ \ \ \ f\_sig\ =\ (f\&0x007fffffu);}
+\DoxyCodeLine{00119\ \textcolor{preprocessor}{\#if\ NPY\_HALF\_ROUND\_TIES\_TO\_EVEN}}
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00121\ \textcolor{comment}{\ \ \ \ \ *\ If\ the\ last\ bit\ in\ the\ half\ significand\ is\ 0\ (already\ even),\ and}}
+\DoxyCodeLine{00122\ \textcolor{comment}{\ \ \ \ \ *\ the\ remaining\ bit\ pattern\ is\ 1000...0,\ then\ we\ do\ not\ add\ one}}
+\DoxyCodeLine{00123\ \textcolor{comment}{\ \ \ \ \ *\ to\ the\ bit\ after\ the\ half\ significand.\ \ In\ all\ other\ cases,\ we\ do.}}
+\DoxyCodeLine{00124\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordflow}{if}\ ((f\_sig\&0x00003fffu)\ !=\ 0x00001000u)\ \{}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ f\_sig\ +=\ 0x00001000u;}
+\DoxyCodeLine{00127\ \ \ \ \ \}}
+\DoxyCodeLine{00128\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00129\ \ \ \ \ f\_sig\ +=\ 0x00001000u;}
+\DoxyCodeLine{00130\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00131\ \ \ \ \ h\_sig\ =\ (\mbox{\hyperlink{npy-halffloat_8h_acdaf5997f283082a5afc13ca33813e93}{npy\_uint16}})\ (f\_sig\ >>\ 13);}
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00133\ \textcolor{comment}{\ \ \ \ \ *\ If\ the\ rounding\ causes\ a\ bit\ to\ spill\ into\ h\_exp,\ it\ will}}
+\DoxyCodeLine{00134\ \textcolor{comment}{\ \ \ \ \ *\ increment\ h\_exp\ by\ one\ and\ h\_sig\ will\ be\ zero.\ \ This\ is\ the}}
+\DoxyCodeLine{00135\ \textcolor{comment}{\ \ \ \ \ *\ correct\ result.\ \ h\_exp\ may\ increment\ to\ 15,\ at\ greatest,\ in}}
+\DoxyCodeLine{00136\ \textcolor{comment}{\ \ \ \ \ *\ which\ case\ the\ result\ overflows\ to\ a\ signed\ inf.}}
+\DoxyCodeLine{00137\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00138\ \textcolor{preprocessor}{\#if\ NPY\_HALF\_GENERATE\_OVERFLOW}}
+\DoxyCodeLine{00139\ \ \ \ \ h\_sig\ +=\ h\_exp;}
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordflow}{if}\ (h\_sig\ ==\ 0x7c00u)\ \{}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ npy\_set\_floatstatus\_overflow();}
+\DoxyCodeLine{00142\ \ \ \ \ \}}
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordflow}{return}\ h\_sgn\ +\ h\_sig;}
+\DoxyCodeLine{00144\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keywordflow}{return}\ h\_sgn\ +\ h\_exp\ +\ h\_sig;}
+\DoxyCodeLine{00146\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00147\ \}}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00149\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{npy-halffloat_8h_acdaf5997f283082a5afc13ca33813e93}{npy\_uint16}}\ npy\_doublebits\_to\_halfbits(\mbox{\hyperlink{npy-halffloat_8h_a9127f9b89287c24a79d89439de12a893}{npy\_uint64}}\ d)}
+\DoxyCodeLine{00150\ \{}
+\DoxyCodeLine{00151\ \ \ \ \ \mbox{\hyperlink{npy-halffloat_8h_a9127f9b89287c24a79d89439de12a893}{npy\_uint64}}\ d\_exp,\ d\_sig;}
+\DoxyCodeLine{00152\ \ \ \ \ \mbox{\hyperlink{npy-halffloat_8h_acdaf5997f283082a5afc13ca33813e93}{npy\_uint16}}\ h\_sgn,\ h\_exp,\ h\_sig;}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \ \ \ \ h\_sgn\ =\ (d\&0x8000000000000000ULL)\ >>\ 48;}
+\DoxyCodeLine{00155\ \ \ \ \ d\_exp\ =\ (d\&0x7ff0000000000000ULL);}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ \ \ \ \ \textcolor{comment}{/*\ Exponent\ overflow/NaN\ converts\ to\ signed\ inf/NaN\ */}}
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keywordflow}{if}\ (d\_exp\ >=\ 0x40f0000000000000ULL)\ \{}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (d\_exp\ ==\ 0x7ff0000000000000ULL)\ \{}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Inf\ or\ NaN\ */}}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ d\_sig\ =\ (d\&0x000fffffffffffffULL);}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (d\_sig\ !=\ 0)\ \{}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ NaN\ -\/\ propagate\ the\ flag\ in\ the\ significand...\ */}}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{npy-halffloat_8h_acdaf5997f283082a5afc13ca33813e93}{npy\_uint16}}\ ret\ =\ (\mbox{\hyperlink{npy-halffloat_8h_acdaf5997f283082a5afc13ca33813e93}{npy\_uint16}})\ (0x7c00u\ +\ (d\_sig\ >>\ 42));}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ ...but\ make\ sure\ it\ stays\ a\ NaN\ */}}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ret\ ==\ 0x7c00u)\ \{}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ret++;}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ h\_sgn\ +\ ret;}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ signed\ inf\ */}}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ h\_sgn\ +\ 0x7c00u;}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ overflow\ to\ signed\ inf\ */}}
+\DoxyCodeLine{00176\ \textcolor{preprocessor}{\#if\ NPY\_HALF\_GENERATE\_OVERFLOW}}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \ \ npy\_set\_floatstatus\_overflow();}
+\DoxyCodeLine{00178\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ h\_sgn\ +\ 0x7c00u;}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00181\ \ \ \ \ \}}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00183\ \ \ \ \ \textcolor{comment}{/*\ Exponent\ underflow\ converts\ to\ subnormal\ half\ or\ signed\ zero\ */}}
+\DoxyCodeLine{00184\ \ \ \ \ \textcolor{keywordflow}{if}\ (d\_exp\ <=\ 0x3f00000000000000ULL)\ \{}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00186\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ Signed\ zeros,\ subnormal\ floats,\ and\ floats\ with\ small}}
+\DoxyCodeLine{00187\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ exponents\ all\ convert\ to\ signed\ zero\ halfs.}}
+\DoxyCodeLine{00188\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (d\_exp\ <\ 0x3e60000000000000ULL)\ \{}
+\DoxyCodeLine{00190\ \textcolor{preprocessor}{\#if\ NPY\_HALF\_GENERATE\_UNDERFLOW}}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ If\ d\ !=\ 0,\ it\ underflowed\ to\ 0\ */}}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((d\&0x7fffffffffffffffULL)\ !=\ 0)\ \{}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ npy\_set\_floatstatus\_underflow();}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00195\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ h\_sgn;}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Make\ the\ subnormal\ significand\ */}}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ d\_exp\ >>=\ 52;}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ d\_sig\ =\ (0x0010000000000000ULL\ +\ (d\&0x000fffffffffffffULL));}
+\DoxyCodeLine{00201\ \textcolor{preprocessor}{\#if\ NPY\_HALF\_GENERATE\_UNDERFLOW}}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ If\ it's\ not\ exactly\ represented,\ it\ underflowed\ */}}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((d\_sig\&(((\mbox{\hyperlink{npy-halffloat_8h_a9127f9b89287c24a79d89439de12a893}{npy\_uint64}})1\ <<\ (1051\ -\/\ d\_exp))\ -\/\ 1))\ !=\ 0)\ \{}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \ \ \ \ npy\_set\_floatstatus\_underflow();}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00206\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ d\_sig\ >>=\ (1009\ -\/\ d\_exp);}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Handle\ rounding\ by\ adding\ 1\ to\ the\ bit\ beyond\ half\ precision\ */}}
+\DoxyCodeLine{00209\ \textcolor{preprocessor}{\#if\ NPY\_HALF\_ROUND\_TIES\_TO\_EVEN}}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00211\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ If\ the\ last\ bit\ in\ the\ half\ significand\ is\ 0\ (already\ even),\ and}}
+\DoxyCodeLine{00212\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ the\ remaining\ bit\ pattern\ is\ 1000...0,\ then\ we\ do\ not\ add\ one}}
+\DoxyCodeLine{00213\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ to\ the\ bit\ after\ the\ half\ significand.\ \ In\ all\ other\ cases,\ we\ do.}}
+\DoxyCodeLine{00214\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((d\_sig\&0x000007ffffffffffULL)\ !=\ 0x0000020000000000ULL)\ \{}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \ \ \ \ d\_sig\ +=\ 0x0000020000000000ULL;}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00218\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ d\_sig\ +=\ 0x0000020000000000ULL;}
+\DoxyCodeLine{00220\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ h\_sig\ =\ (\mbox{\hyperlink{npy-halffloat_8h_acdaf5997f283082a5afc13ca33813e93}{npy\_uint16}})\ (d\_sig\ >>\ 42);}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00223\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ If\ the\ rounding\ causes\ a\ bit\ to\ spill\ into\ h\_exp,\ it\ will}}
+\DoxyCodeLine{00224\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ increment\ h\_exp\ from\ zero\ to\ one\ and\ h\_sig\ will\ be\ zero.}}
+\DoxyCodeLine{00225\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ This\ is\ the\ correct\ result.}}
+\DoxyCodeLine{00226\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ h\_sgn\ +\ h\_sig;}
+\DoxyCodeLine{00228\ \ \ \ \ \}}
+\DoxyCodeLine{00229\ }
+\DoxyCodeLine{00230\ \ \ \ \ \textcolor{comment}{/*\ Regular\ case\ with\ no\ overflow\ or\ underflow\ */}}
+\DoxyCodeLine{00231\ \ \ \ \ h\_exp\ =\ (\mbox{\hyperlink{npy-halffloat_8h_acdaf5997f283082a5afc13ca33813e93}{npy\_uint16}})\ ((d\_exp\ -\/\ 0x3f00000000000000ULL)\ >>\ 42);}
+\DoxyCodeLine{00232\ \ \ \ \ \textcolor{comment}{/*\ Handle\ rounding\ by\ adding\ 1\ to\ the\ bit\ beyond\ half\ precision\ */}}
+\DoxyCodeLine{00233\ \ \ \ \ d\_sig\ =\ (d\&0x000fffffffffffffULL);}
+\DoxyCodeLine{00234\ \textcolor{preprocessor}{\#if\ NPY\_HALF\_ROUND\_TIES\_TO\_EVEN}}
+\DoxyCodeLine{00235\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00236\ \textcolor{comment}{\ \ \ \ \ *\ If\ the\ last\ bit\ in\ the\ half\ significand\ is\ 0\ (already\ even),\ and}}
+\DoxyCodeLine{00237\ \textcolor{comment}{\ \ \ \ \ *\ the\ remaining\ bit\ pattern\ is\ 1000...0,\ then\ we\ do\ not\ add\ one}}
+\DoxyCodeLine{00238\ \textcolor{comment}{\ \ \ \ \ *\ to\ the\ bit\ after\ the\ half\ significand.\ \ In\ all\ other\ cases,\ we\ do.}}
+\DoxyCodeLine{00239\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00240\ \ \ \ \ \textcolor{keywordflow}{if}\ ((d\_sig\&0x000007ffffffffffULL)\ !=\ 0x0000020000000000ULL)\ \{}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ d\_sig\ +=\ 0x0000020000000000ULL;}
+\DoxyCodeLine{00242\ \ \ \ \ \}}
+\DoxyCodeLine{00243\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00244\ \ \ \ \ d\_sig\ +=\ 0x0000020000000000ULL;}
+\DoxyCodeLine{00245\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00246\ \ \ \ \ h\_sig\ =\ (\mbox{\hyperlink{npy-halffloat_8h_acdaf5997f283082a5afc13ca33813e93}{npy\_uint16}})\ (d\_sig\ >>\ 42);}
+\DoxyCodeLine{00247\ }
+\DoxyCodeLine{00248\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00249\ \textcolor{comment}{\ \ \ \ \ *\ If\ the\ rounding\ causes\ a\ bit\ to\ spill\ into\ h\_exp,\ it\ will}}
+\DoxyCodeLine{00250\ \textcolor{comment}{\ \ \ \ \ *\ increment\ h\_exp\ by\ one\ and\ h\_sig\ will\ be\ zero.\ \ This\ is\ the}}
+\DoxyCodeLine{00251\ \textcolor{comment}{\ \ \ \ \ *\ correct\ result.\ \ h\_exp\ may\ increment\ to\ 15,\ at\ greatest,\ in}}
+\DoxyCodeLine{00252\ \textcolor{comment}{\ \ \ \ \ *\ which\ case\ the\ result\ overflows\ to\ a\ signed\ inf.}}
+\DoxyCodeLine{00253\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00254\ \textcolor{preprocessor}{\#if\ NPY\_HALF\_GENERATE\_OVERFLOW}}
+\DoxyCodeLine{00255\ \ \ \ \ h\_sig\ +=\ h\_exp;}
+\DoxyCodeLine{00256\ \ \ \ \ \textcolor{keywordflow}{if}\ (h\_sig\ ==\ 0x7c00u)\ \{}
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ npy\_set\_floatstatus\_overflow();}
+\DoxyCodeLine{00258\ \ \ \ \ \}}
+\DoxyCodeLine{00259\ \ \ \ \ \textcolor{keywordflow}{return}\ h\_sgn\ +\ h\_sig;}
+\DoxyCodeLine{00260\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00261\ \ \ \ \ \textcolor{keywordflow}{return}\ h\_sgn\ +\ h\_exp\ +\ h\_sig;}
+\DoxyCodeLine{00262\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00263\ \}}
+\DoxyCodeLine{00264\ }
+\DoxyCodeLine{00265\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{npy-halffloat_8h_a68ff8667752717e49f4e66fa08817d3b}{npy\_uint32}}\ npy\_halfbits\_to\_floatbits(\mbox{\hyperlink{npy-halffloat_8h_acdaf5997f283082a5afc13ca33813e93}{npy\_uint16}}\ h)}
+\DoxyCodeLine{00266\ \{}
+\DoxyCodeLine{00267\ \ \ \ \ \mbox{\hyperlink{npy-halffloat_8h_acdaf5997f283082a5afc13ca33813e93}{npy\_uint16}}\ h\_exp,\ h\_sig;}
+\DoxyCodeLine{00268\ \ \ \ \ \mbox{\hyperlink{npy-halffloat_8h_a68ff8667752717e49f4e66fa08817d3b}{npy\_uint32}}\ f\_sgn,\ f\_exp,\ f\_sig;}
+\DoxyCodeLine{00269\ }
+\DoxyCodeLine{00270\ \ \ \ \ h\_exp\ =\ (h\&0x7c00u);}
+\DoxyCodeLine{00271\ \ \ \ \ f\_sgn\ =\ ((\mbox{\hyperlink{npy-halffloat_8h_a68ff8667752717e49f4e66fa08817d3b}{npy\_uint32}})h\&0x8000u)\ <<\ 16;}
+\DoxyCodeLine{00272\ \ \ \ \ \textcolor{keywordflow}{switch}\ (h\_exp)\ \{}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 0x0000u:\ \textcolor{comment}{/*\ 0\ or\ subnormal\ */}}
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \ \ \ \ h\_sig\ =\ (h\&0x03ffu);}
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Signed\ zero\ */}}
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (h\_sig\ ==\ 0)\ \{}
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ f\_sgn;}
+\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00279\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Subnormal\ */}}
+\DoxyCodeLine{00280\ \ \ \ \ \ \ \ \ \ \ \ \ h\_sig\ <<=\ 1;}
+\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ ((h\_sig\&0x0400u)\ ==\ 0)\ \{}
+\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ h\_sig\ <<=\ 1;}
+\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ h\_exp++;}
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ \ \ \ \ f\_exp\ =\ ((\mbox{\hyperlink{npy-halffloat_8h_a68ff8667752717e49f4e66fa08817d3b}{npy\_uint32}})(127\ -\/\ 15\ -\/\ h\_exp))\ <<\ 23;}
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ \ \ \ \ f\_sig\ =\ ((\mbox{\hyperlink{npy-halffloat_8h_a68ff8667752717e49f4e66fa08817d3b}{npy\_uint32}})(h\_sig\&0x03ffu))\ <<\ 13;}
+\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ f\_sgn\ +\ f\_exp\ +\ f\_sig;}
+\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 0x7c00u:\ \textcolor{comment}{/*\ inf\ or\ NaN\ */}}
+\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ All-\/ones\ exponent\ and\ a\ copy\ of\ the\ significand\ */}}
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ f\_sgn\ +\ 0x7f800000u\ +\ (((\mbox{\hyperlink{npy-halffloat_8h_a68ff8667752717e49f4e66fa08817d3b}{npy\_uint32}})(h\&0x03ffu))\ <<\ 13);}
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:\ \textcolor{comment}{/*\ normalized\ */}}
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Just\ need\ to\ adjust\ the\ exponent\ and\ shift\ */}}
+\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ f\_sgn\ +\ (((\mbox{\hyperlink{npy-halffloat_8h_a68ff8667752717e49f4e66fa08817d3b}{npy\_uint32}})(h\&0x7fffu)\ +\ 0x1c000u)\ <<\ 13);}
+\DoxyCodeLine{00294\ \ \ \ \ \}}
+\DoxyCodeLine{00295\ \}}
+\DoxyCodeLine{00296\ }
+\DoxyCodeLine{00297\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{npy-halffloat_8h_a9127f9b89287c24a79d89439de12a893}{npy\_uint64}}\ npy\_halfbits\_to\_doublebits(\mbox{\hyperlink{npy-halffloat_8h_acdaf5997f283082a5afc13ca33813e93}{npy\_uint16}}\ h)}
+\DoxyCodeLine{00298\ \{}
+\DoxyCodeLine{00299\ \ \ \ \ \mbox{\hyperlink{npy-halffloat_8h_acdaf5997f283082a5afc13ca33813e93}{npy\_uint16}}\ h\_exp,\ h\_sig;}
+\DoxyCodeLine{00300\ \ \ \ \ \mbox{\hyperlink{npy-halffloat_8h_a9127f9b89287c24a79d89439de12a893}{npy\_uint64}}\ d\_sgn,\ d\_exp,\ d\_sig;}
+\DoxyCodeLine{00301\ }
+\DoxyCodeLine{00302\ \ \ \ \ h\_exp\ =\ (h\&0x7c00u);}
+\DoxyCodeLine{00303\ \ \ \ \ d\_sgn\ =\ ((\mbox{\hyperlink{npy-halffloat_8h_a9127f9b89287c24a79d89439de12a893}{npy\_uint64}})h\&0x8000u)\ <<\ 48;}
+\DoxyCodeLine{00304\ \ \ \ \ \textcolor{keywordflow}{switch}\ (h\_exp)\ \{}
+\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 0x0000u:\ \textcolor{comment}{/*\ 0\ or\ subnormal\ */}}
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ \ \ \ \ h\_sig\ =\ (h\&0x03ffu);}
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Signed\ zero\ */}}
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (h\_sig\ ==\ 0)\ \{}
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ d\_sgn;}
+\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Subnormal\ */}}
+\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ \ \ \ \ h\_sig\ <<=\ 1;}
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ ((h\_sig\&0x0400u)\ ==\ 0)\ \{}
+\DoxyCodeLine{00314\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ h\_sig\ <<=\ 1;}
+\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ h\_exp++;}
+\DoxyCodeLine{00316\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00317\ \ \ \ \ \ \ \ \ \ \ \ \ d\_exp\ =\ ((\mbox{\hyperlink{npy-halffloat_8h_a9127f9b89287c24a79d89439de12a893}{npy\_uint64}})(1023\ -\/\ 15\ -\/\ h\_exp))\ <<\ 52;}
+\DoxyCodeLine{00318\ \ \ \ \ \ \ \ \ \ \ \ \ d\_sig\ =\ ((\mbox{\hyperlink{npy-halffloat_8h_a9127f9b89287c24a79d89439de12a893}{npy\_uint64}})(h\_sig\&0x03ffu))\ <<\ 42;}
+\DoxyCodeLine{00319\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ d\_sgn\ +\ d\_exp\ +\ d\_sig;}
+\DoxyCodeLine{00320\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 0x7c00u:\ \textcolor{comment}{/*\ inf\ or\ NaN\ */}}
+\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ All-\/ones\ exponent\ and\ a\ copy\ of\ the\ significand\ */}}
+\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ d\_sgn\ +\ 0x7ff0000000000000ULL\ +}
+\DoxyCodeLine{00323\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (((\mbox{\hyperlink{npy-halffloat_8h_a9127f9b89287c24a79d89439de12a893}{npy\_uint64}})(h\&0x03ffu))\ <<\ 42);}
+\DoxyCodeLine{00324\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:\ \textcolor{comment}{/*\ normalized\ */}}
+\DoxyCodeLine{00325\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Just\ need\ to\ adjust\ the\ exponent\ and\ shift\ */}}
+\DoxyCodeLine{00326\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ d\_sgn\ +\ (((\mbox{\hyperlink{npy-halffloat_8h_a9127f9b89287c24a79d89439de12a893}{npy\_uint64}})(h\&0x7fffu)\ +\ 0xfc000u)\ <<\ 42);}
+\DoxyCodeLine{00327\ \ \ \ \ \}}
+\DoxyCodeLine{00328\ \}}
+
+\end{DoxyCode}

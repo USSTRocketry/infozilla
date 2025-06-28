@@ -1,0 +1,18 @@
+<map id="C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/HAL/SensorMagnetometer.cpp" name="C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/HAL/SensorMagnetometer.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="144,5,331,80"/>
+<area shape="rect" id="Node000002" href="$_sensor_magnetometer_8h.html" title=" " alt="" coords="160,128,316,155"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="240,80,240,112,235,112,235,80"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,203,65,229"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="203,158,80,201,79,196,201,153"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="89,203,144,229"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="218,158,152,197,149,192,215,153"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="168,203,307,229"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="240,155,240,187,235,187,235,155"/>
+<area shape="rect" id="Node000006" href="$types_8h.html" title=" " alt="" coords="331,203,395,229"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="261,153,330,192,327,197,258,158"/>
+<area shape="rect" id="Node000008" href="$_sensor_8h.html" title=" " alt="" coords="420,203,493,229"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="277,153,405,195,404,200,275,158"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="380,277,440,304"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="373,228,396,263,391,266,369,231"/>
+<area shape="poly" id="edge8_Node000008_Node000007" title=" " alt="" coords="450,231,428,266,424,263,446,228"/>
+</map>

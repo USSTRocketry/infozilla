@@ -1,0 +1,131 @@
+\doxysection{GPS Class Reference}
+\hypertarget{class_g_p_s}{}\label{class_g_p_s}\index{GPS@{GPS}}
+
+
+{\ttfamily \#include $<$GPS.\+h$>$}
+
+
+
+Collaboration diagram for GPS\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=138pt]{class_g_p_s__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_g_p_s_af183681255b1ffe057b2a9aa22b9f9d2}{GPS}} (uint8\+\_\+t serial=\mbox{\hyperlink{_p_i_n_s_8h_a6d1ec000c91b59c9bbc1896abf564ca1}{GPS\+\_\+\+HW\+\_\+\+SERIAL}}, uint32\+\_\+t baud\+\_\+rate=9600)
+\item 
+\mbox{\hyperlink{class_g_p_s_afe84b00ea93254fcb8b84a0f2b240c9d}{\texorpdfstring{$\sim$}{\string~}\+GPS}} ()
+\item 
+bool \mbox{\hyperlink{class_g_p_s_a168fa51c2053b5ab017ce80ed5ffccf5}{begin}} ()
+\item 
+void \mbox{\hyperlink{class_g_p_s_a7173870be89aad8cc86ed6bffea71a64}{configure}} (uint32\+\_\+t update\+\_\+rate\+\_\+ms=1000, const char \texorpdfstring{$\ast$}{*}output\+\_\+mode=PMTK\+\_\+\+SET\+\_\+\+NMEA\+\_\+\+OUTPUT\+\_\+\+RMCONLY)
+\item 
+\mbox{\hyperlink{struct_g_p_s_data}{GPSData}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_g_p_s_aa38ca65890c7fd32a6fbbb169f3880ee}{read}} ()
+\item 
+void \mbox{\hyperlink{class_g_p_s_a5b903e61f93bc5db0d9f78bec35730d4}{update}} ()
+\item 
+bool \mbox{\hyperlink{class_g_p_s_a5b0119a5d40df6f81b1d09bbf0329ebe}{has\+Fix}} ()
+\item 
+void \mbox{\hyperlink{class_g_p_s_aeac0f81d932ae7a433e02a628de14e85}{send\+Command}} (const char \texorpdfstring{$\ast$}{*}command)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_g_p_s_data}{GPSData}} \mbox{\hyperlink{class_g_p_s_a0b3113f8cfabc433390b20286462aeba}{data}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_g_p_s_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_g_p_s_af183681255b1ffe057b2a9aa22b9f9d2}\index{GPS@{GPS}!GPS@{GPS}}
+\index{GPS@{GPS}!GPS@{GPS}}
+\doxysubsubsection{\texorpdfstring{GPS()}{GPS()}}
+{\footnotesize\ttfamily \label{class_g_p_s_af183681255b1ffe057b2a9aa22b9f9d2} 
+GPS\+::\+GPS (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{serial}{ = {\ttfamily \mbox{\hyperlink{_p_i_n_s_8h_a6d1ec000c91b59c9bbc1896abf564ca1}{GPS\+\_\+\+HW\+\_\+\+SERIAL}}}, }\item[{uint32\+\_\+t}]{baud\+\_\+rate}{ = {\ttfamily 9600}}\end{DoxyParamCaption})}
+
+\Hypertarget{class_g_p_s_afe84b00ea93254fcb8b84a0f2b240c9d}\index{GPS@{GPS}!````~GPS@{\texorpdfstring{$\sim$}{\string~}GPS}}
+\index{````~GPS@{\texorpdfstring{$\sim$}{\string~}GPS}!GPS@{GPS}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}GPS()}{\string~GPS()}}
+{\footnotesize\ttfamily \label{class_g_p_s_afe84b00ea93254fcb8b84a0f2b240c9d} 
+GPS\+::\texorpdfstring{$\sim$}{\string~}\+GPS (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_g_p_s_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_g_p_s_a168fa51c2053b5ab017ce80ed5ffccf5}\index{GPS@{GPS}!begin@{begin}}
+\index{begin@{begin}!GPS@{GPS}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}}
+{\footnotesize\ttfamily \label{class_g_p_s_a168fa51c2053b5ab017ce80ed5ffccf5} 
+bool GPS\+::begin (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_g_p_s_a7173870be89aad8cc86ed6bffea71a64}\index{GPS@{GPS}!configure@{configure}}
+\index{configure@{configure}!GPS@{GPS}}
+\doxysubsubsection{\texorpdfstring{configure()}{configure()}}
+{\footnotesize\ttfamily \label{class_g_p_s_a7173870be89aad8cc86ed6bffea71a64} 
+void GPS\+::configure (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{update\+\_\+rate\+\_\+ms}{ = {\ttfamily 1000}, }\item[{const char \texorpdfstring{$\ast$}{*}}]{output\+\_\+mode}{ = {\ttfamily PMTK\+\_\+SET\+\_\+NMEA\+\_\+OUTPUT\+\_\+RMCONLY}}\end{DoxyParamCaption})}
+
+\Hypertarget{class_g_p_s_a5b0119a5d40df6f81b1d09bbf0329ebe}\index{GPS@{GPS}!hasFix@{hasFix}}
+\index{hasFix@{hasFix}!GPS@{GPS}}
+\doxysubsubsection{\texorpdfstring{hasFix()}{hasFix()}}
+{\footnotesize\ttfamily \label{class_g_p_s_a5b0119a5d40df6f81b1d09bbf0329ebe} 
+bool GPS\+::has\+Fix (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=250pt]{class_g_p_s_a5b0119a5d40df6f81b1d09bbf0329ebe_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_g_p_s_aa38ca65890c7fd32a6fbbb169f3880ee}\index{GPS@{GPS}!read@{read}}
+\index{read@{read}!GPS@{GPS}}
+\doxysubsubsection{\texorpdfstring{read()}{read()}}
+{\footnotesize\ttfamily \label{class_g_p_s_aa38ca65890c7fd32a6fbbb169f3880ee} 
+\mbox{\hyperlink{struct_g_p_s_data}{GPSData}} \texorpdfstring{$\ast$}{*} GPS\+::read (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=250pt]{class_g_p_s_aa38ca65890c7fd32a6fbbb169f3880ee_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_g_p_s_aeac0f81d932ae7a433e02a628de14e85}\index{GPS@{GPS}!sendCommand@{sendCommand}}
+\index{sendCommand@{sendCommand}!GPS@{GPS}}
+\doxysubsubsection{\texorpdfstring{sendCommand()}{sendCommand()}}
+{\footnotesize\ttfamily \label{class_g_p_s_aeac0f81d932ae7a433e02a628de14e85} 
+void GPS\+::send\+Command (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{command}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_g_p_s_a5b903e61f93bc5db0d9f78bec35730d4}\index{GPS@{GPS}!update@{update}}
+\index{update@{update}!GPS@{GPS}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily \label{class_g_p_s_a5b903e61f93bc5db0d9f78bec35730d4} 
+void GPS\+::update (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_g_p_s_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_g_p_s_a0b3113f8cfabc433390b20286462aeba}\index{GPS@{GPS}!data@{data}}
+\index{data@{data}!GPS@{GPS}}
+\doxysubsubsection{\texorpdfstring{data}{data}}
+{\footnotesize\ttfamily \label{class_g_p_s_a0b3113f8cfabc433390b20286462aeba} 
+\mbox{\hyperlink{struct_g_p_s_data}{GPSData}} GPS\+::data}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Bobby/\+Documents/\+USST/\+Infozilla/infozilla/\+Telemetry\+Program/lib/\+HAL/\mbox{\hyperlink{_g_p_s_8h}{GPS.\+h}}\item 
+C\+:/\+Users/\+Bobby/\+Documents/\+USST/\+Infozilla/infozilla/\+Telemetry\+Program/lib/\+HAL/\mbox{\hyperlink{_g_p_s_8cpp}{GPS.\+cpp}}\end{DoxyCompactItemize}

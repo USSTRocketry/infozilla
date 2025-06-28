@@ -1,0 +1,52 @@
+\doxysection{macros.\+h}
+\hypertarget{macros_8h_source}{}\label{macros_8h_source}\index{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/FP16-\/master/include/fp16/macros.h@{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/FP16-\/master/include/fp16/macros.h}}
+\mbox{\hyperlink{macros_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#ifndef\ FP16\_MACROS\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#define\ FP16\_MACROS\_H}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ FP16\_USE\_NATIVE\_CONVERSION}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\ \ \ \ \#if\ (defined(\_\_INTEL\_COMPILER)\ ||\ defined(\_\_GNUC\_\_))\ \&\&\ defined(\_\_F16C\_\_)}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ FP16\_USE\_NATIVE\_CONVERSION\ 1}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\ \ \ \ \#elif\ defined(\_MSC\_VER)\ \&\&\ (defined(\_M\_IX86)\ ||\ defined(\_M\_X64))\ \&\&\ defined(\_\_AVX2\_\_)}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ FP16\_USE\_NATIVE\_CONVERSION\ 1}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\ \ \ \ \#elif\ defined(\_MSC\_VER)\ \&\&\ defined(\_M\_ARM64)}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ FP16\_USE\_NATIVE\_CONVERSION\ 1}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\ \ \ \ \#elif\ defined(\_\_GNUC\_\_)\ \&\&\ defined(\_\_aarch64\_\_)}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ FP16\_USE\_NATIVE\_CONVERSION\ 1}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\ \ \ \ \#if\ !defined(FP16\_USE\_NATIVE\_CONVERSION)}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ FP16\_USE\_NATIVE\_CONVERSION\ 0}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\ \ \ \ \#endif\ \ }\textcolor{comment}{//\ !defined(FP16\_USE\_NATIVE\_CONVERSION)}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ !define(FP16\_USE\_NATIVE\_CONVERSION)}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#ifndef\ FP16\_USE\_FLOAT16\_TYPE}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\ \ \ \ \#if\ !defined(\_\_clang\_\_)\ \&\&\ !defined(\_\_INTEL\_COMPILER)\ \&\&\ defined(\_\_GNUC\_\_)\ \&\&\ (\_\_GNUC\_\_\ >=\ 12)}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#if\ defined(\_\_F16C\_\_)}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ FP16\_USE\_FLOAT16\_TYPE\ 1}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\ \ \ \ \#if\ !defined(FP16\_USE\_FLOAT16\_TYPE)}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ FP16\_USE\_FLOAT16\_TYPE\ 0}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\ \ \ \ \#endif\ \ }\textcolor{comment}{//\ !defined(FP16\_USE\_FLOAT16\_TYPE)}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ !defined(FP16\_USE\_FLOAT16\_TYPE)}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#ifndef\ FP16\_USE\_FP16\_TYPE}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\ \ \ \ \#if\ defined(\_\_clang\_\_)}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#if\ defined(\_\_F16C\_\_)\ ||\ defined(\_\_aarch64\_\_)}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ FP16\_USE\_FP16\_TYPE\ 1}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\ \ \ \ \#elif\ defined(\_\_GNUC\_\_)}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#if\ defined(\_\_aarch64\_\_)}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ FP16\_USE\_FP16\_TYPE\ 1}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\ \ \ \ \#if\ !defined(FP16\_USE\_FP16\_TYPE)}}
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ FP16\_USE\_FP16\_TYPE\ 0}}
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\ \ \ \ \#endif\ \ }\textcolor{comment}{//\ !defined(FP16\_USE\_FP16\_TYPE)}}
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ !defined(FP16\_USE\_FP16\_TYPE)}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FP16\_MACROS\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

@@ -1,10 +1,11 @@
 #pragma once
 
 #include <SensorStructs.h>
+#include <DebugLights.h>
 
 void GetBarData();
 void PrintSensors();
-void InitSensors();
+void InitSensors(DebugLights debug_lights);
 
 SensorData* GetSensorData();
 void transmit_sensor_data(const SensorData& data);

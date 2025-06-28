@@ -19,7 +19,7 @@ const int chipSelect = BUILTIN_SDCARD;
 //const int flashModule;
 int savecount = 0;
 
-void InitSD()
+bool InitSD()
 {
  //UNCOMMENT THESE TWO LINES FOR TEENSY AUDIO BOARD:
  //SPI.setMOSI(7);  // Audio shield has MOSI on pin 7
@@ -29,7 +29,7 @@ FLASHMEM
   Serial.println("Initializing SD card...");
   if (!SD.begin(chipSelect)) {
     Serial.println("initialization failed!");
-    return;
+    return false;
   }
 // Open serial communications and wait for port to open:
   // Serial.begin(9600);
@@ -38,7 +38,7 @@ FLASHMEM
   // }
   Serial.println("SD card initialized.");
 
-
+  return true;
 }
 
 void createExampleTxt() {

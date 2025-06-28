@@ -9,7 +9,7 @@
 #include <SPI.h>
 #include <string>
 
-void InitSD();
+bool InitSD();
 
 void WriteTest();
 

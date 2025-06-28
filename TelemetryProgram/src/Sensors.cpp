@@ -6,9 +6,13 @@
 #include <SensorInit.h>
 #include <SDHandler.h>
 #include <log.h>
+#include <Sensors.h>
+
 
 // HAL libs
 #include "Avionics_HAL.h"
+
+DebugLights debugLights;
 
 SensorData sdata;
 
@@ -42,9 +46,12 @@ RFM95Radio radio(RADIO_CS, RADIO_INT, RADIO_SPI, 915.0); // Default radio used -
  * 
  */
 
-void InitSensors(){
+void InitSensors(DebugLights debug_lights){
+    debugLights = debug_lights;
     log_message(__func__, "Initializing sensors...");
-    InitSD();
+    if(!InitSD()){
+        debugLights.AddError(INIT_SD_ERR);
+    }
     InitBMP();
     InitAccelGyro();
     InitMagnetometer();
@@ -126,6 +133,7 @@ bool InitBMP(){
         return true;
     } else {
         log_message(__func__, "Failed to initialize BMP280 sensor!");
+        debugLights.AddError(INIT_BMP_ERR);
         return false;
     }
 }
@@ -138,6 +146,7 @@ bool InitAccelGyro() {
         return true;
     } else {
         log_message(__func__, "Failed to initialize accelerometer/gyroscope sensor!");
+        debugLights.AddError(INIT_ACCELGYRO_ERR);
         return false;
     }
 }
@@ -149,6 +158,7 @@ bool InitMagnetometer() {
         log_message(__func__, "Magnetometer initialized.");
     } else {
         log_message(__func__, "Failed to initialize magnetometer!");
+        debugLights.AddError(INIT_MAGNETOMETER_ERR);
         return false;
     }
 }
@@ -160,13 +170,20 @@ bool InitTempSensor(){
         log_message(__func__, "Temperature sensor initialized.");
     } else {
         log_message(__func__, "Failed to initialize temperature sensor!");
+        debugLights.AddError(INIT_THERMOMETER_ERR);
         return false;
     }
 }
 
 void InitGPS() {
-    gps.begin();
-    log_message(__func__, "GPS initialized.");
+    if(gps.begin()){
+        log_message(__func__, "GPS initialized.");
+    }else{
+        log_message(__func__, "GPS Failed to initialize.");
+        debugLights.AddError(INIT_GPS_ERR);
+    }
+    
+    
 }
 
 bool InitRadio() {
@@ -175,6 +192,7 @@ bool InitRadio() {
         log_message(__func__, "RFM95 initialized.");
     } else {
         log_message(__func__, "Failed to initialize RFM95!");
+        debugLights.AddError(INIT_RADIO_ERR);
     }
     radio.setFrequency(915.0);
     radio.setTxPower(20);

@@ -6,6 +6,7 @@
 #include <Sensors.h>
 #include <DataPackager.h>
 #include <log.h>
+#include <DebugLights.h>
 
 // HAL libs
 #include "Avionics_HAL.h"
@@ -20,6 +21,8 @@ uint32_t last_transmit_time = 0;
 uint32_t last_heartbeat_time = 0;
 uint32_t last_sensor_read_time = 0;
 SensorData* sensorData;
+
+DebugLights debugLights;
 
 bool led_on = false;
 
@@ -80,8 +83,8 @@ void setup() {
         delay(100);
     }
 
-    InitSensors();
-    InitSD();
+    InitSensors(debugLights);
+
     // WriteTest();
     log_message(__func__, "Sensors initialized.");
     
@@ -93,6 +96,7 @@ void setup() {
 void loop() {
     update_gps_data(); // Important!!!!
     currentMillis = millis();
+    debugLights.UpdateLights();
 
     if(currentMillis - last_sensor_read_time >= SENSOR_READ_FREQUENCY) {
         sensorData = GetSensorData();

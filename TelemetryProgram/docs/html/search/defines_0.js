@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['eigen_5fdevice_5ffunc_0',['EIGEN_DEVICE_FUNC',['../eigen-half_8h.html#a9efec3cfd22b9a33bead9c6718d128da',1,'eigen-half.h']]],
-  ['eigen_5fhalf_5fcuda_5fh_1',['EIGEN_HALF_CUDA_H',['../eigen-half_8h.html#a57e184b596c50fa64ac41945c505c17b',1,'eigen-half.h']]],
-  ['eigen_5fstrong_5finline_2',['EIGEN_STRONG_INLINE',['../eigen-half_8h.html#af2b60117c00a6e75812de43bfe7db3b1',1,'eigen-half.h']]]
+  ['gps_5fen_0',['GPS_EN',['../_p_i_n_s_8h.html#a55ae23fa00da37869b8437650b112ba7',1,'PINS.h']]],
+  ['gps_5fhw_5fserial_1',['GPS_HW_SERIAL',['../_p_i_n_s_8h.html#a6d1ec000c91b59c9bbc1896abf564ca1',1,'PINS.h']]],
+  ['gps_5frx_2',['GPS_RX',['../_p_i_n_s_8h.html#a8cd04b3645e97569755976b99fe190b8',1,'PINS.h']]],
+  ['gps_5ftx_3',['GPS_TX',['../_p_i_n_s_8h.html#a05b958741e002c6dd8f8af174726665e',1,'PINS.h']]]
 ];

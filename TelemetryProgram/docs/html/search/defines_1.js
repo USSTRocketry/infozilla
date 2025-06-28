@@ -1,18 +1,15 @@
 var searchData=
 [
-  ['fp16_5fbitcasts_5fh_0',['FP16_BITCASTS_H',['../bitcasts_8h.html#ab786c45b8152427c60f42e35dbf0a575',1,'bitcasts.h']]],
-  ['fp16_5ffp16_5fh_1',['FP16_FP16_H',['../fp16_2fp16_8h.html#acf21d943cc04e20f8690c47bda33c044',1,'fp16.h']]],
-  ['fp16_5fh_2',['FP16_H',['../fp16_8h.html#a8b5c3d5d7ea9b29a1da689703fb763d0',1,'fp16.h']]],
-  ['fp16_5fmacros_5fh_3',['FP16_MACROS_H',['../macros_8h.html#ab61c88b6c95c76ccff2fa79e10939523',1,'macros.h']]],
-  ['fp16_5fuse_5ffloat16_5ftype_4',['FP16_USE_FLOAT16_TYPE',['../macros_8h.html#a510bb0764d607d2d11512003407d7390',1,'macros.h']]],
-  ['fp16_5fuse_5ffp16_5ftype_5',['FP16_USE_FP16_TYPE',['../macros_8h.html#aaee9709854516d666fcc1866d3d454f9',1,'macros.h']]],
-  ['fp16_5fuse_5fnative_5fconversion_6',['FP16_USE_NATIVE_CONVERSION',['../macros_8h.html#a47c713ca865ab11dd434b636b73f1d1f',1,'macros.h']]],
-  ['fp_5ffast_5ffmah_7',['FP_FAST_FMAH',['../half_8hpp.html#a00d5755980889a6bcc0fadf914241b81',1,'half.hpp']]],
-  ['fp_5filogb0_8',['FP_ILOGB0',['../half_8hpp.html#a9ec0e31304d15c42262b2c4a3b58443c',1,'half.hpp']]],
-  ['fp_5filogbnan_9',['FP_ILOGBNAN',['../half_8hpp.html#a01e2e5be97c739a5bdcbc619b44f9742',1,'half.hpp']]],
-  ['fp_5finfinite_10',['FP_INFINITE',['../half_8hpp.html#a4f64bcc64f8b84dd9daf5a4e56abf0ca',1,'half.hpp']]],
-  ['fp_5fnan_11',['FP_NAN',['../half_8hpp.html#a1d481cc6e6a8ff729147ed46e61a4c9f',1,'half.hpp']]],
-  ['fp_5fnormal_12',['FP_NORMAL',['../half_8hpp.html#ab9e29bb9e853934c4ba647c840b7e5de',1,'half.hpp']]],
-  ['fp_5fsubnormal_13',['FP_SUBNORMAL',['../half_8hpp.html#adbc0a13ec75c05d238ca12ef1f8c6b2b',1,'half.hpp']]],
-  ['fp_5fzero_14',['FP_ZERO',['../half_8hpp.html#a32eba50da417c9f303ba49583d5b9f40',1,'half.hpp']]]
+  ['hw_5fserial_0',['HW_SERIAL',['../types_8h.html#a5f20e8ea24e0ef69981beb161a28c510',1,'types.h']]],
+  ['hw_5fserial1_1',['HW_SERIAL1',['../types_8h.html#aeb9a79ef851ece005de2b3018169d056',1,'types.h']]],
+  ['hw_5fserial2_2',['HW_SERIAL2',['../types_8h.html#adc7fabce0c0b1228ab25c9937a3015cf',1,'types.h']]],
+  ['hw_5fserial3_3',['HW_SERIAL3',['../types_8h.html#a6849362229e853b1d89ef1095efbbefd',1,'types.h']]],
+  ['hw_5fserial4_4',['HW_SERIAL4',['../types_8h.html#a08ea8300e5314be85001cc7b76be20ef',1,'types.h']]],
+  ['hw_5fserial5_5',['HW_SERIAL5',['../types_8h.html#a74e783152bbe2b3c956ad9646eeb7eca',1,'types.h']]],
+  ['hw_5fserial6_6',['HW_SERIAL6',['../types_8h.html#a4249ba898a3e7715e167f974e9124c58',1,'types.h']]],
+  ['hw_5fserial7_7',['HW_SERIAL7',['../types_8h.html#a32f80e8bafb168740a369ef2598ff077',1,'types.h']]],
+  ['hw_5fserial8_8',['HW_SERIAL8',['../types_8h.html#af66182e5b9ab9f0816fe724d0999dc8c',1,'types.h']]],
+  ['hw_5fspi0_9',['HW_SPI0',['../types_8h.html#abbc636deac9cce5b81945886bc1e8e10',1,'types.h']]],
+  ['hw_5fspi1_10',['HW_SPI1',['../types_8h.html#aa3d09f3b50eb6189bef57d77d3d5f77f',1,'types.h']]],
+  ['hw_5fspi2_11',['HW_SPI2',['../types_8h.html#a7daa02fbba2f48f8d6e58f35ec8937ad',1,'types.h']]]
 ];

@@ -125,11 +125,11 @@ Files</h2></td></tr>
 <tr class="memitem:types_2Eh" id="r_types_2Eh"><td class="memItemLeft" align="right" valign="top"><a href="types_8h_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="types_8h.html">types.h</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md3"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md0"></a>
 HAL</h1>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md4"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md1"></a>
 HAL and <span class="tt">platformio.ini</span> Configuration</h1>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md5"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md2"></a>
 Adding HAL as a Submodule</h2>
 <ol type="1">
 <li>Navigate to your platformIO project directory</li>
@@ -137,7 +137,7 @@ Adding HAL as a Submodule</h2>
 <div class="line">git submodule update --init --recursive</div>
 </div><!-- fragment --></li>
 </ol>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md6"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md3"></a>
 Updating <span class="tt">platformio.ini</span></h2>
 <p>Add these dependencies under <span class="tt">[env]</span> in <span class="tt">platformio.ini</span>:</p>
 <div class="fragment"><div class="line">lib_deps =</div>
@@ -150,7 +150,7 @@ Updating <span class="tt">platformio.ini</span></h2>
 <div class="line">  https://github.com/adafruit/Adafruit_LSM6DS</div>
 <div class="line">  https://github.com/adafruit/Adafruit_MCP9808</div>
 <div class="line">  https://github.com/adafruit/Adafruit_Sensor</div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md7"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md4"></a>
 Verifying</h2>
 <ol type="1">
 <li>Install dependencies: <div class="fragment"><div class="line">pio lib install</div>
@@ -158,19 +158,19 @@ Verifying</h2>
 <li>Build the project: <div class="fragment"><div class="line">pio run</div>
 </div><!-- fragment --></li>
 </ol>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md8"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md5"></a>
 SensorBMP280</h1>
 <p>The <span class="tt"><a class="el" href="class_sensor_b_m_p280.html">SensorBMP280</a></span> class allows interaction with the <b>Adafruit BMP280</b> sensor for measuring temperature, pressure, and altitude. It supports both <b>I2C</b> and <b>SPI</b> communication modes.</p>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md9"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md6"></a>
 Features</h3>
 <ul>
 <li>Measures <b>temperature</b>, <b>pressure</b>, and <b>altitude</b>.</li>
 <li>Supports <b>I2C</b> and <b>SPI</b> interfaces.</li>
 <li>Configures sensor settings for optimal performance (sampling rate, filtering, etc.).</li>
 </ul>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md10"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md7"></a>
 Usage</h3>
-<h4 class="doxsection"><a class="anchor" id="autotoc_md11"></a>
+<h4 class="doxsection"><a class="anchor" id="autotoc_md8"></a>
 1. <b>I2C Mode</b></h4>
 <p>To use the sensor with I2C, instantiate the class with the I2C address and wire (defaults to <span class="tt">I2C_WIRE0</span>):</p>
 <div class="fragment"><div class="line"><a class="code hl_class" href="class_sensor_b_m_p280.html">SensorBMP280</a> <a class="code hl_variable" href="_sensors_8cpp.html#aac54c63d0da302c797be826366065466">bmp280Sensor</a>(BMP280_ADDRESS, <a class="code hl_define" href="_sensor_8h.html#a1a0ff10faa6578101d9717e25182ea16">I2C_WIRE0</a>);</div>
@@ -181,18 +181,18 @@ Usage</h3>
 <li><span class="tt">BMP280_ADDRESS</span>: I2C address (default: <span class="tt">0x76</span> or <span class="tt">0x77</span>).</li>
 <li><span class="tt">I2C_WIRE0</span>, <span class="tt">I2C_WIRE1</span>, <span class="tt">I2C_WIRE2</span>: Select I2C bus (default: <span class="tt">Wire</span>).</li>
 </ul>
-<h4 class="doxsection"><a class="anchor" id="autotoc_md12"></a>
+<h4 class="doxsection"><a class="anchor" id="autotoc_md9"></a>
 2. <b>SPI Mode</b></h4>
 <p>For SPI communication, provide the chip select and SPI pins:</p>
 <div class="fragment"><div class="line"><a class="code hl_class" href="class_sensor_b_m_p280.html">SensorBMP280</a> <a class="code hl_variable" href="_sensors_8cpp.html#aac54c63d0da302c797be826366065466">bmp280Sensor</a>(CS_PIN, MISO_PIN, MOSI_PIN, SCK_PIN);</div>
 </div><!-- fragment --><ul>
 <li><span class="tt">CS_PIN</span>, <span class="tt">MISO_PIN</span>, <span class="tt">MOSI_PIN</span>, <span class="tt">SCK_PIN</span>: SPI pins (choose appropriate pins for your setup).</li>
 </ul>
-<h4 class="doxsection"><a class="anchor" id="autotoc_md13"></a>
+<h4 class="doxsection"><a class="anchor" id="autotoc_md10"></a>
 3. <b>Initialize the Sensor</b></h4>
 <p>Use the <span class="tt">begin()</span> method to initialize the sensor:</p>
 <div class="fragment"><div class="line">uint8_t status = <a class="code hl_variable" href="_sensors_8cpp.html#aac54c63d0da302c797be826366065466">bmp280Sensor</a>.begin();</div>
-</div><!-- fragment --><h4 class="doxsection"><a class="anchor" id="autotoc_md14"></a>
+</div><!-- fragment --><h4 class="doxsection"><a class="anchor" id="autotoc_md11"></a>
 4. <b>Reading Data</b></h4>
 <p>Read temperature, pressure, and altitude using the <span class="tt">read()</span> method:</p>
 <div class="fragment"><div class="line"><a class="code hl_typedef" href="types_8h.html#ab261644c5efcb7e97882e695b0964f03">BMP280Data</a>* data = <a class="code hl_variable" href="_sensors_8cpp.html#aac54c63d0da302c797be826366065466">bmp280Sensor</a>.read();</div>
@@ -202,7 +202,7 @@ Usage</h3>
 <li><span class="tt">data-&gt;pressure</span>: Atmospheric pressure in Pascals.</li>
 <li><span class="tt">data-&gt;temperature</span>: Temperature in Celsius.</li>
 </ul>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md15"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md12"></a>
 Constructors</h3>
 <ul>
 <li><b>I2C Constructor</b>: <div class="fragment"><div class="line"><a class="code hl_class" href="class_sensor_b_m_p280.html">SensorBMP280</a>(uint8_t i2c_addr = BMP280_ADDRESS, uint8_t i2c_wire = <a class="code hl_define" href="_sensor_8h.html#a1a0ff10faa6578101d9717e25182ea16">I2C_WIRE0</a>, <span class="keywordtype">float</span> ground_alt = 0.0f);</div>
@@ -219,7 +219,7 @@ Constructors</h3>
 </ul>
 </li>
 </ul>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md16"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md13"></a>
 Example Code</h3>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_sensor_b_m_p280_8h.html">SensorBMP280.h</a>&quot;</span></div>
 <div class="line"> </div>
@@ -251,11 +251,11 @@ Example Code</h3>
 <div class="ttc" id="astruct__bmp280_data_html_a9ae17af9bb5363ffd3a26dabcc0ebff2"><div class="ttname"><a href="struct__bmp280_data.html#a9ae17af9bb5363ffd3a26dabcc0ebff2">_bmp280Data::temperature</a></div><div class="ttdeci">float temperature</div><div class="ttdef"><b>Definition</b> types.h:30</div></div>
 <div class="ttc" id="astruct__bmp280_data_html_a9e7cdb968bca4b93f85b703602b91717"><div class="ttname"><a href="struct__bmp280_data.html#a9e7cdb968bca4b93f85b703602b91717">_bmp280Data::altitude</a></div><div class="ttdeci">float altitude</div><div class="ttdef"><b>Definition</b> types.h:32</div></div>
 <div class="ttc" id="astruct__bmp280_data_html_ad00011803b34967781193888b0448cac"><div class="ttname"><a href="struct__bmp280_data.html#ad00011803b34967781193888b0448cac">_bmp280Data::pressure</a></div><div class="ttdeci">float pressure</div><div class="ttdef"><b>Definition</b> types.h:31</div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md17"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md14"></a>
 SensorAccelGyro</h1>
 <p>The <span class="tt"><a class="el" href="class_sensor_accel_gyro.html">SensorAccelGyro</a></span> class provides an interface for interfacing with an accelerometer and gyroscope sensor (e.g., LSM6DSOX). It supports communication via both I2C and SPI protocols and provides methods to initialize and read data from the sensor.</p>
 <hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md19"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md16"></a>
 Features</h2>
 <ul>
 <li>Supports I2C and SPI communication protocols.</li>
@@ -263,9 +263,9 @@ Features</h2>
 <li>Configurable I2C bus and SPI pins for flexibility.</li>
 </ul>
 <hr  />
- <h2 class="doxsection"><a class="anchor" id="autotoc_md21"></a>
+ <h2 class="doxsection"><a class="anchor" id="autotoc_md18"></a>
 Constructor Parameters</h2>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md22"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md19"></a>
 I2C Constructor</h3>
 <div class="fragment"><div class="line"><a class="code hl_class" href="class_sensor_accel_gyro.html">SensorAccelGyro</a>(uint8_t i2c_addr, uint8_t i2c_wire);</div>
 <div class="ttc" id="aclass_sensor_accel_gyro_html"><div class="ttname"><a href="class_sensor_accel_gyro.html">SensorAccelGyro</a></div><div class="ttdef"><b>Definition</b> SensorAccelGyro.h:10</div></div>
@@ -273,7 +273,7 @@ I2C Constructor</h3>
 <li><b><span class="tt">i2c_addr</span></b>: The I2C address of the accelerometer/gyroscope sensor.</li>
 <li><b><span class="tt">i2c_wire</span></b>: The I2C bus to use (<span class="tt">I2C_WIRE0</span>, <span class="tt">I2C_WIRE1</span>, etc.).</li>
 </ul>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md23"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md20"></a>
 SPI Constructor</h3>
 <div class="fragment"><div class="line"><a class="code hl_class" href="class_sensor_accel_gyro.html">SensorAccelGyro</a>(uint8_t cs, uint8_t miso, uint8_t mosi, uint8_t sck);</div>
 </div><!-- fragment --><ul>
@@ -283,15 +283,15 @@ SPI Constructor</h3>
 <li><b><span class="tt">sck</span></b>: Clock pin for SPI.</li>
 </ul>
 <hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md25"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md22"></a>
 Public Methods</h2>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md26"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md23"></a>
 <span class="tt">uint8_t begin()</span></h3>
 <p>Initializes the sensor for communication.</p>
 <ul>
 <li><b>Returns</b>: Status of initialization (<span class="tt">0</span> for failure, <span class="tt">1</span> for success).</li>
 </ul>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md27"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md24"></a>
 <span class="tt">AccelGyroData* read()</span></h3>
 <p>Reads the current accelerometer, gyroscope, and temperature data.</p>
 <ul>
@@ -303,9 +303,9 @@ Public Methods</h2>
 </li>
 </ul>
 <hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md29"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md26"></a>
 Example Usage</h2>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md30"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md27"></a>
 Using I2C</h3>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_sensor_accel_gyro_8h.html">SensorAccelGyro.h</a>&quot;</span></div>
 <div class="line"> </div>
@@ -344,7 +344,7 @@ Using I2C</h3>
 <div class="ttc" id="astruct__accel_gyro_data_html_ab148b2aff876f50a53bbba1cf554bc48"><div class="ttname"><a href="struct__accel_gyro_data.html#ab148b2aff876f50a53bbba1cf554bc48">_accelGyroData::gyroY</a></div><div class="ttdeci">float gyroY</div><div class="ttdef"><b>Definition</b> types.h:42</div></div>
 <div class="ttc" id="astruct__accel_gyro_data_html_ae3d3bfa640a77a03ed64f3f3b01bea14"><div class="ttname"><a href="struct__accel_gyro_data.html#ae3d3bfa640a77a03ed64f3f3b01bea14">_accelGyroData::accelZ</a></div><div class="ttdeci">float accelZ</div><div class="ttdef"><b>Definition</b> types.h:40</div></div>
 <div class="ttc" id="atypes_8h_html_a052a1cf82d94d02541cda224aec1bc21"><div class="ttname"><a href="types_8h.html#a052a1cf82d94d02541cda224aec1bc21">AccelGyroData</a></div><div class="ttdeci">struct _accelGyroData AccelGyroData</div></div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md31"></a>
+</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md28"></a>
 Using SPI</h3>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_sensor_accel_gyro_8h.html">SensorAccelGyro.h</a>&quot;</span></div>
 <div class="line"> </div>
@@ -364,11 +364,11 @@ Using SPI</h3>
 <div class="line">}</div>
 <div class="ttc" id="astruct__accel_gyro_data_html_ad42265c3d7a5c48ce8660f04572a9b82"><div class="ttname"><a href="struct__accel_gyro_data.html#ad42265c3d7a5c48ce8660f04572a9b82">_accelGyroData::temperature</a></div><div class="ttdeci">float temperature</div><div class="ttdef"><b>Definition</b> types.h:37</div></div>
 </div><!-- fragment --><hr  />
-<h1 class="doxsection"><a class="anchor" id="autotoc_md33"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md30"></a>
 SensorMagnetometer</h1>
 <p>The <span class="tt"><a class="el" href="class_sensor_magnetometer.html">SensorMagnetometer</a></span> class provides an interface for working with a magnetometer sensor (e.g., Adafruit LIS3MDL). It supports communication via both I2C and SPI protocols, allowing flexible hardware integration.</p>
 <hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md35"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md32"></a>
 Features</h2>
 <ul>
 <li>Supports I2C and SPI communication protocols.</li>
@@ -376,9 +376,9 @@ Features</h2>
 <li>Configurable I2C bus and SPI pins for flexible usage.</li>
 </ul>
 <hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md37"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md34"></a>
 Constructor Parameters</h2>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md38"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md35"></a>
 I2C Constructor</h3>
 <div class="fragment"><div class="line"><a class="code hl_class" href="class_sensor_magnetometer.html">SensorMagnetometer</a>(uint8_t i2c_addr, uint8_t i2c_wire);</div>
 <div class="ttc" id="aclass_sensor_magnetometer_html"><div class="ttname"><a href="class_sensor_magnetometer.html">SensorMagnetometer</a></div><div class="ttdef"><b>Definition</b> SensorMagnetometer.h:11</div></div>
@@ -386,7 +386,7 @@ I2C Constructor</h3>
 <li><b><span class="tt">i2c_addr</span></b>: The I2C address of the magnetometer sensor (default: <span class="tt">LIS3MDL_I2CADDR_DEFAULT</span>).</li>
 <li><b><span class="tt">i2c_wire</span></b>: The I2C bus to use (<span class="tt">I2C_WIRE0</span>, <span class="tt">I2C_WIRE1</span>, etc.).</li>
 </ul>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md39"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md36"></a>
 SPI Constructor</h3>
 <div class="fragment"><div class="line"><a class="code hl_class" href="class_sensor_magnetometer.html">SensorMagnetometer</a>(uint8_t cs, uint8_t miso, uint8_t mosi, uint8_t sck);</div>
 </div><!-- fragment --><ul>
@@ -396,15 +396,15 @@ SPI Constructor</h3>
 <li><b><span class="tt">sck</span></b>: Clock pin for SPI.</li>
 </ul>
 <hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md41"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md38"></a>
 Public Methods</h2>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md42"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md39"></a>
 <span class="tt">uint8_t begin()</span></h3>
 <p>Initializes the magnetometer sensor for communication.</p>
 <ul>
 <li><b>Returns</b>: Status of initialization (<span class="tt">0</span> for failure, <span class="tt">1</span> for success).</li>
 </ul>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md43"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md40"></a>
 <span class="tt">MagnetometerData* read()</span></h3>
 <p>Reads the current magnetic field data.</p>
 <ul>
@@ -414,9 +414,9 @@ Public Methods</h2>
 </li>
 </ul>
 <hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md45"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md42"></a>
 Example Usage</h2>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md46"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md43"></a>
 Using I2C</h3>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_sensor_magnetometer_8h.html">SensorMagnetometer.h</a>&quot;</span></div>
 <div class="line"> </div>
@@ -442,7 +442,7 @@ Using I2C</h3>
 <div class="ttc" id="a_sensor_magnetometer_8h_html"><div class="ttname"><a href="_sensor_magnetometer_8h.html">SensorMagnetometer.h</a></div></div>
 <div class="ttc" id="a_sensors_8cpp_html_ac3bbb256fd91ccdbbfb187dbc86fc188"><div class="ttname"><a href="_sensors_8cpp.html#ac3bbb256fd91ccdbbfb187dbc86fc188">magnetometer</a></div><div class="ttdeci">SensorMagnetometer magnetometer(0x1E, I2C_WIRE0)</div></div>
 <div class="ttc" id="atypes_8h_html_a34c81329fddf919347a1c051065b79ef"><div class="ttname"><a href="types_8h.html#a34c81329fddf919347a1c051065b79ef">MagnetometerData</a></div><div class="ttdeci">struct _magnetometerData MagnetometerData</div></div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md47"></a>
+</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md44"></a>
 Using SPI</h3>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_sensor_magnetometer_8h.html">SensorMagnetometer.h</a>&quot;</span></div>
 <div class="line"> </div>
@@ -465,11 +465,11 @@ Using SPI</h3>
 <div class="line"> </div>
 <div class="line">    delay(500);</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md48"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md45"></a>
 SensorTemperature</h1>
 <p>The <span class="tt"><a class="el" href="class_sensor_temperature.html">SensorTemperature</a></span> class provides an interface to interact with the MCP9808 temperature sensor. It supports communication over the I2C protocol and provides methods to initialize and read temperature data.</p>
 <hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md50"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md47"></a>
 Features</h2>
 <ul>
 <li>I2C communication support for temperature data.</li>
@@ -477,9 +477,9 @@ Features</h2>
 <li>Provides high-accuracy temperature readings.</li>
 </ul>
 <hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md52"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md49"></a>
 Constructor Parameters</h2>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md53"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md50"></a>
 I2C Constructor</h3>
 <div class="fragment"><div class="line"><a class="code hl_class" href="class_sensor_temperature.html">SensorTemperature</a>(uint8_t i2c_addr = MCP9808_I2CADDR_DEFAULT, uint8_t i2c_wire = <a class="code hl_define" href="_sensor_8h.html#a1a0ff10faa6578101d9717e25182ea16">I2C_WIRE0</a>);</div>
 <div class="ttc" id="aclass_sensor_temperature_html"><div class="ttname"><a href="class_sensor_temperature.html">SensorTemperature</a></div><div class="ttdef"><b>Definition</b> SensorTemp.h:10</div></div>
@@ -488,22 +488,22 @@ I2C Constructor</h3>
 <li><b><span class="tt">i2c_wire</span></b>: I2C bus to use (<span class="tt">I2C_WIRE0</span>, <span class="tt">I2C_WIRE1</span>, etc.).</li>
 </ul>
 <hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md55"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md52"></a>
 Public Methods</h2>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md56"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md53"></a>
 <span class="tt">uint8_t begin()</span></h3>
 <p>Initializes the temperature sensor for communication.</p>
 <ul>
 <li><b>Returns</b>: Status of initialization (<span class="tt">0</span> for failure, <span class="tt">1</span> for success).</li>
 </ul>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md57"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md54"></a>
 <span class="tt">float read()</span></h3>
 <p>Reads the current temperature from the sensor.</p>
 <ul>
 <li><b>Returns</b>: Temperature in degrees Celsius.</li>
 </ul>
 <hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md59"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md56"></a>
 Example Usage</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &quot;SensorTemperature.h&quot;</span></div>
 <div class="line"> </div>
@@ -524,11 +524,11 @@ Example Usage</h2>
 <div class="line">    delay(1000);</div>
 <div class="line">}</div>
 <div class="ttc" id="a_sensors_8cpp_html_acca61771252459cb41d3a23799d58b48"><div class="ttname"><a href="_sensors_8cpp.html#acca61771252459cb41d3a23799d58b48">tempSensor</a></div><div class="ttdeci">SensorTemperature tempSensor</div><div class="ttdef"><b>Definition</b> Sensors.cpp:19</div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md60"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md57"></a>
 GPS</h1>
 <p>The <span class="tt"><a class="el" href="class_g_p_s.html">GPS</a></span> class provides an interface for integrating <a class="el" href="class_g_p_s.html">GPS</a> modules using the Adafruit <a class="el" href="class_g_p_s.html">GPS</a> library. It supports hardware serial communication and provides methods for configuration, data retrieval, and command communication.</p>
 <hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md62"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md59"></a>
 Features</h2>
 <ul>
 <li>Supports hardware serial communication.</li>
@@ -538,9 +538,9 @@ Features</h2>
 <li>Fix detection to check satellite connectivity.</li>
 </ul>
 <hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md64"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md61"></a>
 Constructor Parameters</h2>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md65"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md62"></a>
 Constructor</h3>
 <div class="fragment"><div class="line"><a class="code hl_class" href="class_g_p_s.html">GPS</a>(uint8_t serial = <a class="code hl_define" href="_p_i_n_s_8h.html#a6d1ec000c91b59c9bbc1896abf564ca1">GPS_HW_SERIAL</a>, uint32_t baud_rate = 9600);</div>
 <div class="ttc" id="a_p_i_n_s_8h_html_a6d1ec000c91b59c9bbc1896abf564ca1"><div class="ttname"><a href="_p_i_n_s_8h.html#a6d1ec000c91b59c9bbc1896abf564ca1">GPS_HW_SERIAL</a></div><div class="ttdeci">#define GPS_HW_SERIAL</div><div class="ttdef"><b>Definition</b> PINS.h:22</div></div>
@@ -550,19 +550,19 @@ Constructor</h3>
 <li><b><span class="tt">baud_rate</span></b>: Communication speed with the <a class="el" href="class_g_p_s.html">GPS</a> module. Defaults to <span class="tt">9600</span>.</li>
 </ul>
 <hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md67"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md64"></a>
 Public Methods</h2>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md68"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md65"></a>
 <span class="tt">void begin()</span></h3>
 <p>Initializes the <a class="el" href="class_g_p_s.html">GPS</a> module with the specified serial port and baud rate.</p>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md69"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md66"></a>
 <span class="tt">void configure(uint32_t update_rate_ms = 1000, const char* output_mode = PMTK_SET_NMEA_OUTPUT_RMCONLY)</span></h3>
 <p>Configures the <a class="el" href="class_g_p_s.html">GPS</a> module settings.</p>
 <ul>
 <li><b><span class="tt">update_rate_ms</span></b>: Update interval for <a class="el" href="class_g_p_s.html">GPS</a> data (in milliseconds). Default is <span class="tt">1000 ms</span>.</li>
 <li><b><span class="tt">output_mode</span></b>: NMEA output mode. Default is <span class="tt">PMTK_SET_NMEA_OUTPUT_RMCONLY</span> (only RMC data).</li>
 </ul>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md70"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md67"></a>
 <span class="tt">GPSData* read()</span></h3>
 <p>Reads the latest <a class="el" href="class_g_p_s.html">GPS</a> data and updates the <span class="tt"><a class="el" href="struct_g_p_s_data.html">GPSData</a></span> structure.</p>
 <ul>
@@ -574,19 +574,19 @@ Public Methods</h2>
 </ul>
 </li>
 </ul>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md71"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md68"></a>
 <span class="tt">bool hasFix()</span></h3>
 <p>Checks if the <a class="el" href="class_g_p_s.html">GPS</a> module has a satellite fix.</p>
 <ul>
 <li><b>Returns</b>: <span class="tt">true</span> if a fix is available, <span class="tt">false</span> otherwise.</li>
 </ul>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md72"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md69"></a>
 <span class="tt">void sendCommand(const char* command)</span></h3>
 <p>Sends a custom command string to the <a class="el" href="class_g_p_s.html">GPS</a> module.</p>
 <hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md74"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md71"></a>
 Example Usage</h2>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md75"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md72"></a>
 Basic Example</h3>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_g_p_s_8h.html">GPS.h</a>&quot;</span></div>
 <div class="line"> </div>
@@ -615,11 +615,11 @@ Basic Example</h3>
 <div class="ttc" id="astruct_g_p_s_data_html_a0801c2082de32b6a0ae9b01e483d3128"><div class="ttname"><a href="struct_g_p_s_data.html#a0801c2082de32b6a0ae9b01e483d3128">GPSData::altitude</a></div><div class="ttdeci">float altitude</div><div class="ttdef"><b>Definition</b> types.h:61</div></div>
 <div class="ttc" id="astruct_g_p_s_data_html_a605d853b4e7cbb2c523b37ebbf018d00"><div class="ttname"><a href="struct_g_p_s_data.html#a605d853b4e7cbb2c523b37ebbf018d00">GPSData::latitude</a></div><div class="ttdeci">float latitude</div><div class="ttdef"><b>Definition</b> types.h:59</div></div>
 <div class="ttc" id="astruct_g_p_s_data_html_aee24caf310c4c5ab5905408f16b38778"><div class="ttname"><a href="struct_g_p_s_data.html#aee24caf310c4c5ab5905408f16b38778">GPSData::longitude</a></div><div class="ttdeci">float longitude</div><div class="ttdef"><b>Definition</b> types.h:60</div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md76"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md73"></a>
 RYLR998Radio</h1>
 <p>The <span class="tt"><a class="el" href="class_r_y_l_r998_radio.html" title="A class to interface with the RYLR998 LoRa radio module.">RYLR998Radio</a></span> class provides a high-level interface for communicating with the RYLR998 LoRa module. It supports basic operations such as sending and receiving data, configuring LoRa parameters, and setting transmission parameters.</p>
 <hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md78"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md75"></a>
 Features</h2>
 <ul>
 <li>Simple API for sending and receiving data.</li>
@@ -627,24 +627,24 @@ Features</h2>
 <li>Uses Teensy hardware serial.</li>
 </ul>
 <hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md80"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md77"></a>
 Constructor Parameters</h2>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md81"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md78"></a>
 <span class="tt">RYLR998Radio(uint8_t serialPort, uint32_t baudRate)</span></h3>
 <ul>
 <li><b><span class="tt">serialPort</span></b>: The hardware serial port to use (e.g., <span class="tt">HW_SERIAL1</span>, <span class="tt">HW_SERIAL2</span>, etc.). Default id <span class="tt">HW_SERIAL8</span></li>
 <li><b><span class="tt">baudRate</span></b>: Baud rate for communication. Defaults to <span class="tt">9600</span>.</li>
 </ul>
 <hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md83"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md80"></a>
 Public Methods</h2>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md84"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md81"></a>
 <span class="tt">bool begin()</span></h3>
 <p>Initializes the RYLR998 radio module.</p>
 <ul>
 <li><b>Returns</b>: <span class="tt">true</span> if initialization is successful, <span class="tt">false</span> otherwise.</li>
 </ul>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md85"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md82"></a>
 <span class="tt">bool send(const uint8_t* data, size_t length)</span></h3>
 <p>Sends data through the LoRa module.</p>
 <ul>
@@ -655,7 +655,7 @@ Public Methods</h2>
 </li>
 <li><b>Returns</b>: <span class="tt">true</span> if data is sent successfully, <span class="tt">false</span> otherwise.</li>
 </ul>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md86"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md83"></a>
 <span class="tt">bool receive(uint8_t* buffer, size_t maxLength, size_t&amp; receivedLength)</span></h3>
 <p>Receives data from the LoRa module.</p>
 <ul>
@@ -667,7 +667,7 @@ Public Methods</h2>
 </li>
 <li><b>Returns</b>: <span class="tt">true</span> if data is received successfully, <span class="tt">false</span> otherwise.</li>
 </ul>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md87"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md84"></a>
 <span class="tt">void setFrequency(float frequency)</span></h3>
 <p>Sets the operating frequency of the LoRa module.</p>
 <ul>
@@ -676,7 +676,7 @@ Public Methods</h2>
 </ul>
 </li>
 </ul>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md88"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md85"></a>
 <span class="tt">void setTxPower(uint8_t power)</span></h3>
 <p>Sets the transmission power of the LoRa module.</p>
 <ul>
@@ -685,7 +685,7 @@ Public Methods</h2>
 </ul>
 </li>
 </ul>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md89"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md86"></a>
 <span class="tt">void configureLoRa(uint8_t spreadingFactor, uint16_t bandwidth, uint8_t codingRate)</span></h3>
 <p>Configures LoRa-specific parameters.</p>
 <ul>
@@ -697,9 +697,9 @@ Public Methods</h2>
 </li>
 </ul>
 <hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md91"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md88"></a>
 Example Usage</h2>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md92"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md89"></a>
 Basic Initialization and Transmission</h3>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_r_y_l_r998_radio_8h.html">RYLR998Radio.h</a>&quot;</span></div>
 <div class="line"> </div>
@@ -733,7 +733,7 @@ Basic Initialization and Transmission</h3>
 <div class="ttc" id="a_sensors_8cpp_html_ad0029e1163fe9d74320740de6934ad1e"><div class="ttname"><a href="_sensors_8cpp.html#ad0029e1163fe9d74320740de6934ad1e">radio</a></div><div class="ttdeci">RFM95Radio radio(RADIO_CS, RADIO_INT, RADIO_SPI, 915.0)</div></div>
 <div class="ttc" id="aclass_r_y_l_r998_radio_html"><div class="ttname"><a href="class_r_y_l_r998_radio.html">RYLR998Radio</a></div><div class="ttdoc">A class to interface with the RYLR998 LoRa radio module.</div><div class="ttdef"><b>Definition</b> RYLR998Radio.h:19</div></div>
 <div class="ttc" id="atypes_8h_html_af66182e5b9ab9f0816fe724d0999dc8c"><div class="ttname"><a href="types_8h.html#af66182e5b9ab9f0816fe724d0999dc8c">HW_SERIAL8</a></div><div class="ttdeci">#define HW_SERIAL8</div><div class="ttdef"><b>Definition</b> types.h:12</div></div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md93"></a>
+</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md90"></a>
 Receiving Data</h3>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_r_y_l_r998_radio_8h.html">RYLR998Radio.h</a>&quot;</span></div>
 <div class="line"> </div>
@@ -759,7 +759,7 @@ Receiving Data</h3>
 <div class="line">    delay(100);</div>
 <div class="line">}</div>
 </div><!-- fragment --><hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md95"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md92"></a>
 Notes</h2>
 <ul>
 <li>Ensure the hardware serial port specified matches your wiring.</li>
@@ -767,11 +767,11 @@ Notes</h2>
 <li>Supported frequencies and power levels depend on the regional regulations for LoRa communication.</li>
 </ul>
 <hr  />
-<h1 class="doxsection"><a class="anchor" id="autotoc_md97"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md94"></a>
 RFM95Radio</h1>
 <p>The <span class="tt"><a class="el" href="class_r_f_m95_radio.html" title="Represents a telemetry radio interface using the RFM95 (915MHz and 433MHz) LoRa module.">RFM95Radio</a></span> class provides an interface for the RFM95 LoRa transceiver, offering configurable SPI communication and LoRa-specific features like frequency, power, and modulation settings.</p>
 <hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md99"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md96"></a>
 Features</h2>
 <ul>
 <li>LoRa communication via RFM95 transceiver.</li>
@@ -779,9 +779,9 @@ Features</h2>
 <li>Adjustable frequency, transmission power, and LoRa modulation parameters.</li>
 </ul>
 <hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md101"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md98"></a>
 Constructor</h2>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md102"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md99"></a>
 <span class="tt">RFM95Radio(uint8_t csPin, uint8_t intPin, uint8_t spiIndex = HW_SPI0, float frequency = 915.0)</span></h3>
 <p>Initializes an <a class="el" href="class_r_f_m95_radio.html" title="Represents a telemetry radio interface using the RFM95 (915MHz and 433MHz) LoRa module.">RFM95Radio</a> instance.</p>
 <ul>
@@ -791,9 +791,9 @@ Constructor</h2>
 <li><b><span class="tt">frequency</span></b>: Operating frequency in MHz (default: <span class="tt">915.0</span>).</li>
 </ul>
 <hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md104"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md101"></a>
 Methods</h2>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md105"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md102"></a>
 <span class="tt">bool begin()</span></h3>
 <p>Initializes the RFM95 transceiver.</p>
 <ul>
@@ -804,7 +804,7 @@ Methods</h2>
 </li>
 </ul>
 <hr  />
-<h3 class="doxsection"><a class="anchor" id="autotoc_md107"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md104"></a>
 <span class="tt">bool send(const uint8_t* data, size_t length)</span></h3>
 <p>Sends data via LoRa.</p>
 <ul>
@@ -820,7 +820,7 @@ Methods</h2>
 </li>
 </ul>
 <hr  />
-<h3 class="doxsection"><a class="anchor" id="autotoc_md109"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md106"></a>
 <span class="tt">bool receive(uint8_t* buffer, size_t maxLength, size_t&amp; receivedLength)</span></h3>
 <p>Receives data via LoRa.</p>
 <ul>
@@ -837,7 +837,7 @@ Methods</h2>
 </li>
 </ul>
 <hr  />
-<h3 class="doxsection"><a class="anchor" id="autotoc_md111"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md108"></a>
 <span class="tt">void setFrequency(float frequency)</span></h3>
 <p>Sets the operating frequency of the RFM95 transceiver.</p>
 <ul>
@@ -847,7 +847,7 @@ Methods</h2>
 </li>
 </ul>
 <hr  />
-<h3 class="doxsection"><a class="anchor" id="autotoc_md113"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md110"></a>
 <span class="tt">void setTxPower(uint8_t power)</span></h3>
 <p>Sets the transmission power of the RFM95 transceiver.</p>
 <ul>
@@ -857,7 +857,7 @@ Methods</h2>
 </li>
 </ul>
 <hr  />
-<h3 class="doxsection"><a class="anchor" id="autotoc_md115"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md112"></a>
 <span class="tt">void configureLoRa(uint8_t spreadingFactor, uint16_t bandwidth, uint8_t codingRate)</span></h3>
 <p>Configures LoRa modulation parameters.</p>
 <ul>
@@ -869,9 +869,9 @@ Methods</h2>
 </li>
 </ul>
 <hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md117"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md114"></a>
 Example Usage</h2>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md118"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md115"></a>
 Basic Initialization and Communication</h3>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="_r_f_m95_radio_8h.html">RFM95Radio.h</a>&quot;</span></div>
 <div class="line"> </div>
@@ -912,7 +912,7 @@ Basic Initialization and Communication</h3>
 <div class="line">}</div>
 <div class="ttc" id="a_r_f_m95_radio_8h_html"><div class="ttname"><a href="_r_f_m95_radio_8h.html">RFM95Radio.h</a></div></div>
 <div class="ttc" id="aclass_r_f_m95_radio_html"><div class="ttname"><a href="class_r_f_m95_radio.html">RFM95Radio</a></div><div class="ttdoc">Represents a telemetry radio interface using the RFM95 (915MHz and 433MHz) LoRa module.</div><div class="ttdef"><b>Definition</b> RFM95Radio.h:15</div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md119"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md116"></a>
 Everything test</h1>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;Arduino.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;Wire.h&gt;</span></div>

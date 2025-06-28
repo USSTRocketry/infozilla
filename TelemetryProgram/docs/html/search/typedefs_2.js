@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['false_5ftype_0',['false_type',['../namespacehalf__float_1_1detail.html#a04d0449ab22bc6d1cfb2f31a8271945c',1,'half_float::detail']]]
+  ['magnetometerdata_0',['MagnetometerData',['../types_8h.html#a34c81329fddf919347a1c051065b79ef',1,'types.h']]]
 ];

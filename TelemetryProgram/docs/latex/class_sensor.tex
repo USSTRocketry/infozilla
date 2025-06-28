@@ -1,0 +1,134 @@
+\doxysection{Sensor Class Reference}
+\hypertarget{class_sensor}{}\label{class_sensor}\index{Sensor@{Sensor}}
+
+
+{\ttfamily \#include $<$Sensor.\+h$>$}
+
+
+
+Inheritance diagram for Sensor\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_sensor__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_sensor_a8a6b74c730b8bd209e1dd7fcfc1d3e33}{Sensor}} (uint8\+\_\+t \mbox{\hyperlink{class_sensor_a0830ff1889f90b853f0c3a58353864c9}{i2c\+\_\+addr}}, uint8\+\_\+t \mbox{\hyperlink{class_sensor_a100459d76016af6212961a54a6f8d81f}{i2c\+\_\+wire}})
+\item 
+\mbox{\hyperlink{class_sensor_adc166d897eb0923eb112eddb0c03812b}{Sensor}} (uint8\+\_\+t cs, uint8\+\_\+t miso, uint8\+\_\+t mosi, uint8\+\_\+t sck)
+\item 
+\mbox{\hyperlink{class_sensor_aee8c70e7ef05ce65e7ee33686b5d7db2}{\texorpdfstring{$\sim$}{\string~}\+Sensor}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{class_sensor_a0830ff1889f90b853f0c3a58353864c9}{i2c\+\_\+addr}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{class_sensor_a100459d76016af6212961a54a6f8d81f}{i2c\+\_\+wire}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{class_sensor_a9832da3629695f578d670d0050b1284b}{spi\+\_\+cs}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{class_sensor_ad92caf704404ac6f1a3fe5c9ab21f37b}{spi\+\_\+miso}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{class_sensor_aab9150ec710efde8abe8fe6c706c8950}{spi\+\_\+mosi}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{class_sensor_a28ec8a7a83b73bd7fb00f17c6e805e3a}{spi\+\_\+sck}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{class_sensor_a2a866740311ecb0359bc42a74e998f9d}{sensor\+\_\+mode}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{class_sensor_aedde3cfbb9743352506179d01dda5872}{status}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_sensor_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_sensor_a8a6b74c730b8bd209e1dd7fcfc1d3e33}\index{Sensor@{Sensor}!Sensor@{Sensor}}
+\index{Sensor@{Sensor}!Sensor@{Sensor}}
+\doxysubsubsection{\texorpdfstring{Sensor()}{Sensor()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_sensor_a8a6b74c730b8bd209e1dd7fcfc1d3e33} 
+Sensor\+::\+Sensor (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{i2c\+\_\+addr}{, }\item[{uint8\+\_\+t}]{i2c\+\_\+wire}{ = {\ttfamily \mbox{\hyperlink{_sensor_8h_a1a0ff10faa6578101d9717e25182ea16}{I2\+C\+\_\+\+WIRE0}}}}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_sensor_a8a6b74c730b8bd209e1dd7fcfc1d3e33_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{class_sensor_adc166d897eb0923eb112eddb0c03812b}\index{Sensor@{Sensor}!Sensor@{Sensor}}
+\index{Sensor@{Sensor}!Sensor@{Sensor}}
+\doxysubsubsection{\texorpdfstring{Sensor()}{Sensor()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_sensor_adc166d897eb0923eb112eddb0c03812b} 
+Sensor\+::\+Sensor (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{cs}{, }\item[{uint8\+\_\+t}]{miso}{, }\item[{uint8\+\_\+t}]{mosi}{, }\item[{uint8\+\_\+t}]{sck}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_sensor_aee8c70e7ef05ce65e7ee33686b5d7db2}\index{Sensor@{Sensor}!````~Sensor@{\texorpdfstring{$\sim$}{\string~}Sensor}}
+\index{````~Sensor@{\texorpdfstring{$\sim$}{\string~}Sensor}!Sensor@{Sensor}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Sensor()}{\string~Sensor()}}
+{\footnotesize\ttfamily \label{class_sensor_aee8c70e7ef05ce65e7ee33686b5d7db2} 
+Sensor\+::\texorpdfstring{$\sim$}{\string~}\+Sensor (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_sensor_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_sensor_a0830ff1889f90b853f0c3a58353864c9}\index{Sensor@{Sensor}!i2c\_addr@{i2c\_addr}}
+\index{i2c\_addr@{i2c\_addr}!Sensor@{Sensor}}
+\doxysubsubsection{\texorpdfstring{i2c\_addr}{i2c\_addr}}
+{\footnotesize\ttfamily \label{class_sensor_a0830ff1889f90b853f0c3a58353864c9} 
+uint8\+\_\+t Sensor\+::i2c\+\_\+addr\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_sensor_a100459d76016af6212961a54a6f8d81f}\index{Sensor@{Sensor}!i2c\_wire@{i2c\_wire}}
+\index{i2c\_wire@{i2c\_wire}!Sensor@{Sensor}}
+\doxysubsubsection{\texorpdfstring{i2c\_wire}{i2c\_wire}}
+{\footnotesize\ttfamily \label{class_sensor_a100459d76016af6212961a54a6f8d81f} 
+uint8\+\_\+t Sensor\+::i2c\+\_\+wire\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_sensor_a2a866740311ecb0359bc42a74e998f9d}\index{Sensor@{Sensor}!sensor\_mode@{sensor\_mode}}
+\index{sensor\_mode@{sensor\_mode}!Sensor@{Sensor}}
+\doxysubsubsection{\texorpdfstring{sensor\_mode}{sensor\_mode}}
+{\footnotesize\ttfamily \label{class_sensor_a2a866740311ecb0359bc42a74e998f9d} 
+uint8\+\_\+t Sensor\+::sensor\+\_\+mode\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_sensor_a9832da3629695f578d670d0050b1284b}\index{Sensor@{Sensor}!spi\_cs@{spi\_cs}}
+\index{spi\_cs@{spi\_cs}!Sensor@{Sensor}}
+\doxysubsubsection{\texorpdfstring{spi\_cs}{spi\_cs}}
+{\footnotesize\ttfamily \label{class_sensor_a9832da3629695f578d670d0050b1284b} 
+uint8\+\_\+t Sensor\+::spi\+\_\+cs\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_sensor_ad92caf704404ac6f1a3fe5c9ab21f37b}\index{Sensor@{Sensor}!spi\_miso@{spi\_miso}}
+\index{spi\_miso@{spi\_miso}!Sensor@{Sensor}}
+\doxysubsubsection{\texorpdfstring{spi\_miso}{spi\_miso}}
+{\footnotesize\ttfamily \label{class_sensor_ad92caf704404ac6f1a3fe5c9ab21f37b} 
+uint8\+\_\+t Sensor\+::spi\+\_\+miso\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_sensor_aab9150ec710efde8abe8fe6c706c8950}\index{Sensor@{Sensor}!spi\_mosi@{spi\_mosi}}
+\index{spi\_mosi@{spi\_mosi}!Sensor@{Sensor}}
+\doxysubsubsection{\texorpdfstring{spi\_mosi}{spi\_mosi}}
+{\footnotesize\ttfamily \label{class_sensor_aab9150ec710efde8abe8fe6c706c8950} 
+uint8\+\_\+t Sensor\+::spi\+\_\+mosi\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_sensor_a28ec8a7a83b73bd7fb00f17c6e805e3a}\index{Sensor@{Sensor}!spi\_sck@{spi\_sck}}
+\index{spi\_sck@{spi\_sck}!Sensor@{Sensor}}
+\doxysubsubsection{\texorpdfstring{spi\_sck}{spi\_sck}}
+{\footnotesize\ttfamily \label{class_sensor_a28ec8a7a83b73bd7fb00f17c6e805e3a} 
+uint8\+\_\+t Sensor\+::spi\+\_\+sck\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_sensor_aedde3cfbb9743352506179d01dda5872}\index{Sensor@{Sensor}!status@{status}}
+\index{status@{status}!Sensor@{Sensor}}
+\doxysubsubsection{\texorpdfstring{status}{status}}
+{\footnotesize\ttfamily \label{class_sensor_aedde3cfbb9743352506179d01dda5872} 
+uint8\+\_\+t Sensor\+::status\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Bobby/\+Documents/\+USST/\+Infozilla/infozilla/\+Telemetry\+Program/lib/\+HAL/\mbox{\hyperlink{_sensor_8h}{Sensor.\+h}}\item 
+C\+:/\+Users/\+Bobby/\+Documents/\+USST/\+Infozilla/infozilla/\+Telemetry\+Program/lib/\+HAL/\mbox{\hyperlink{_sensor_8cpp}{Sensor.\+cpp}}\end{DoxyCompactItemize}

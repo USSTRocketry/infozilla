@@ -1,0 +1,193 @@
+\doxysection{C\+:/\+Users/\+Bobby/\+Documents/\+USST/\+Infozilla/infozilla/\+Telemetry\+Program/src/main.cpp File Reference}
+\hypertarget{main_8cpp}{}\label{main_8cpp}\index{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/src/main.cpp@{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/src/main.cpp}}
+{\ttfamily \#include $<$Arduino.\+h$>$}\newline
+{\ttfamily \#include $<$Wire.\+h$>$}\newline
+{\ttfamily \#include $<$SDHandler.\+h$>$}\newline
+{\ttfamily \#include $<$Sensor\+Init.\+h$>$}\newline
+{\ttfamily \#include $<$Sensors.\+h$>$}\newline
+{\ttfamily \#include $<$Data\+Packager.\+h$>$}\newline
+{\ttfamily \#include $<$log.\+h$>$}\newline
+{\ttfamily \#include "{}Avionics\+\_\+\+HAL.\+h"{}}\newline
+Include dependency graph for main.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{main_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{main_8cpp_ac3118bc144fa7b17c1410b6eb11b1395}{PRINT\+\_\+\+DEBUG}}~1
+\item 
+\#define \mbox{\hyperlink{main_8cpp_a778f00c9657294fbc7c42195fda533a8}{PRINT\+\_\+\+FREQUENCY}}~1000
+\item 
+\#define \mbox{\hyperlink{main_8cpp_a3d6889d40868de8a3efdb9145f23164d}{TRANSMIT\+\_\+\+FREQUENCY}}~500
+\item 
+\#define \mbox{\hyperlink{main_8cpp_a71f4c605f8d08a0764533714d4524ba5}{SENSOR\+\_\+\+READ\+\_\+\+FREQUENCY}}~100
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{main_8cpp_a8cba362ca11ae34339fbb241a1f6941b}{print\+\_\+sensor\+\_\+data}} (\mbox{\hyperlink{struct_sensor_data}{Sensor\+Data}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{main_8cpp_ac18fb2dc2c3996591e8cefc5f4912128}{sensor\+Data}})
+\item 
+void \mbox{\hyperlink{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}{setup}} ()
+\item 
+void \mbox{\hyperlink{main_8cpp_afe461d27b9c48d5921c00d521181f12f}{loop}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{main_8cpp_a925fe9258b8f192060c4a955a8e23b0d}{current\+Millis}} = 0
+\item 
+uint32\+\_\+t \mbox{\hyperlink{main_8cpp_a77337cd89823ffd2562ab1fee6a43e7b}{last\+\_\+debug\+\_\+time}} = 0
+\item 
+uint32\+\_\+t \mbox{\hyperlink{main_8cpp_a4976a954ec5bd0e1c5af6d638e93a07f}{last\+\_\+transmit\+\_\+time}} = 0
+\item 
+uint32\+\_\+t \mbox{\hyperlink{main_8cpp_a5d59e553077bc28c4c43ed3380734060}{last\+\_\+heartbeat\+\_\+time}} = 0
+\item 
+uint32\+\_\+t \mbox{\hyperlink{main_8cpp_a4f2aa8a2ca4cf83251eef63acec583ee}{last\+\_\+sensor\+\_\+read\+\_\+time}} = 0
+\item 
+\mbox{\hyperlink{struct_sensor_data}{Sensor\+Data}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{main_8cpp_ac18fb2dc2c3996591e8cefc5f4912128}{sensor\+Data}}
+\item 
+bool \mbox{\hyperlink{main_8cpp_afd6e6c6a31d58071dd2711c7da23522f}{led\+\_\+on}} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+USST Avionics 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2025-\/06-\/28
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2025 
+\end{DoxyCopyright}
+
+
+\label{doc-define-members}
+\Hypertarget{main_8cpp_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{main_8cpp_ac3118bc144fa7b17c1410b6eb11b1395}\index{main.cpp@{main.cpp}!PRINT\_DEBUG@{PRINT\_DEBUG}}
+\index{PRINT\_DEBUG@{PRINT\_DEBUG}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{PRINT\_DEBUG}{PRINT\_DEBUG}}
+{\footnotesize\ttfamily \label{main_8cpp_ac3118bc144fa7b17c1410b6eb11b1395} 
+\#define PRINT\+\_\+\+DEBUG~1}
+
+\Hypertarget{main_8cpp_a778f00c9657294fbc7c42195fda533a8}\index{main.cpp@{main.cpp}!PRINT\_FREQUENCY@{PRINT\_FREQUENCY}}
+\index{PRINT\_FREQUENCY@{PRINT\_FREQUENCY}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{PRINT\_FREQUENCY}{PRINT\_FREQUENCY}}
+{\footnotesize\ttfamily \label{main_8cpp_a778f00c9657294fbc7c42195fda533a8} 
+\#define PRINT\+\_\+\+FREQUENCY~1000}
+
+\Hypertarget{main_8cpp_a71f4c605f8d08a0764533714d4524ba5}\index{main.cpp@{main.cpp}!SENSOR\_READ\_FREQUENCY@{SENSOR\_READ\_FREQUENCY}}
+\index{SENSOR\_READ\_FREQUENCY@{SENSOR\_READ\_FREQUENCY}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{SENSOR\_READ\_FREQUENCY}{SENSOR\_READ\_FREQUENCY}}
+{\footnotesize\ttfamily \label{main_8cpp_a71f4c605f8d08a0764533714d4524ba5} 
+\#define SENSOR\+\_\+\+READ\+\_\+\+FREQUENCY~100}
+
+\Hypertarget{main_8cpp_a3d6889d40868de8a3efdb9145f23164d}\index{main.cpp@{main.cpp}!TRANSMIT\_FREQUENCY@{TRANSMIT\_FREQUENCY}}
+\index{TRANSMIT\_FREQUENCY@{TRANSMIT\_FREQUENCY}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{TRANSMIT\_FREQUENCY}{TRANSMIT\_FREQUENCY}}
+{\footnotesize\ttfamily \label{main_8cpp_a3d6889d40868de8a3efdb9145f23164d} 
+\#define TRANSMIT\+\_\+\+FREQUENCY~500}
+
+
+
+\label{doc-func-members}
+\Hypertarget{main_8cpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{main_8cpp_afe461d27b9c48d5921c00d521181f12f}\index{main.cpp@{main.cpp}!loop@{loop}}
+\index{loop@{loop}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{loop()}{loop()}}
+{\footnotesize\ttfamily \label{main_8cpp_afe461d27b9c48d5921c00d521181f12f} 
+void loop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{main_8cpp_afe461d27b9c48d5921c00d521181f12f_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{main_8cpp_a8cba362ca11ae34339fbb241a1f6941b}\index{main.cpp@{main.cpp}!print\_sensor\_data@{print\_sensor\_data}}
+\index{print\_sensor\_data@{print\_sensor\_data}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{print\_sensor\_data()}{print\_sensor\_data()}}
+{\footnotesize\ttfamily \label{main_8cpp_a8cba362ca11ae34339fbb241a1f6941b} 
+void print\+\_\+sensor\+\_\+data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_sensor_data}{Sensor\+Data}} \texorpdfstring{$\ast$}{*}}]{sensor\+Data}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=243pt]{main_8cpp_a8cba362ca11ae34339fbb241a1f6941b_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}\index{main.cpp@{main.cpp}!setup@{setup}}
+\index{setup@{setup}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily \label{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d} 
+void setup (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=349pt]{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d_cgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-var-members}
+\Hypertarget{main_8cpp_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{main_8cpp_a925fe9258b8f192060c4a955a8e23b0d}\index{main.cpp@{main.cpp}!currentMillis@{currentMillis}}
+\index{currentMillis@{currentMillis}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{currentMillis}{currentMillis}}
+{\footnotesize\ttfamily \label{main_8cpp_a925fe9258b8f192060c4a955a8e23b0d} 
+uint32\+\_\+t current\+Millis = 0}
+
+\Hypertarget{main_8cpp_a77337cd89823ffd2562ab1fee6a43e7b}\index{main.cpp@{main.cpp}!last\_debug\_time@{last\_debug\_time}}
+\index{last\_debug\_time@{last\_debug\_time}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{last\_debug\_time}{last\_debug\_time}}
+{\footnotesize\ttfamily \label{main_8cpp_a77337cd89823ffd2562ab1fee6a43e7b} 
+uint32\+\_\+t last\+\_\+debug\+\_\+time = 0}
+
+\Hypertarget{main_8cpp_a5d59e553077bc28c4c43ed3380734060}\index{main.cpp@{main.cpp}!last\_heartbeat\_time@{last\_heartbeat\_time}}
+\index{last\_heartbeat\_time@{last\_heartbeat\_time}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{last\_heartbeat\_time}{last\_heartbeat\_time}}
+{\footnotesize\ttfamily \label{main_8cpp_a5d59e553077bc28c4c43ed3380734060} 
+uint32\+\_\+t last\+\_\+heartbeat\+\_\+time = 0}
+
+\Hypertarget{main_8cpp_a4f2aa8a2ca4cf83251eef63acec583ee}\index{main.cpp@{main.cpp}!last\_sensor\_read\_time@{last\_sensor\_read\_time}}
+\index{last\_sensor\_read\_time@{last\_sensor\_read\_time}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{last\_sensor\_read\_time}{last\_sensor\_read\_time}}
+{\footnotesize\ttfamily \label{main_8cpp_a4f2aa8a2ca4cf83251eef63acec583ee} 
+uint32\+\_\+t last\+\_\+sensor\+\_\+read\+\_\+time = 0}
+
+\Hypertarget{main_8cpp_a4976a954ec5bd0e1c5af6d638e93a07f}\index{main.cpp@{main.cpp}!last\_transmit\_time@{last\_transmit\_time}}
+\index{last\_transmit\_time@{last\_transmit\_time}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{last\_transmit\_time}{last\_transmit\_time}}
+{\footnotesize\ttfamily \label{main_8cpp_a4976a954ec5bd0e1c5af6d638e93a07f} 
+uint32\+\_\+t last\+\_\+transmit\+\_\+time = 0}
+
+\Hypertarget{main_8cpp_afd6e6c6a31d58071dd2711c7da23522f}\index{main.cpp@{main.cpp}!led\_on@{led\_on}}
+\index{led\_on@{led\_on}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{led\_on}{led\_on}}
+{\footnotesize\ttfamily \label{main_8cpp_afd6e6c6a31d58071dd2711c7da23522f} 
+bool led\+\_\+on = false}
+
+\Hypertarget{main_8cpp_ac18fb2dc2c3996591e8cefc5f4912128}\index{main.cpp@{main.cpp}!sensorData@{sensorData}}
+\index{sensorData@{sensorData}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{sensorData}{sensorData}}
+{\footnotesize\ttfamily \label{main_8cpp_ac18fb2dc2c3996591e8cefc5f4912128} 
+\mbox{\hyperlink{struct_sensor_data}{Sensor\+Data}}\texorpdfstring{$\ast$}{*} sensor\+Data}
+

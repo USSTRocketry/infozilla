@@ -1,0 +1,32 @@
+\doxysection{Sensor\+Magnetometer.\+h}
+\hypertarget{_sensor_magnetometer_8h_source}{}\label{_sensor_magnetometer_8h_source}\index{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/HAL/SensorMagnetometer.h@{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/HAL/SensorMagnetometer.h}}
+\mbox{\hyperlink{_sensor_magnetometer_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <Wire.h>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <SPI.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <Adafruit\_LIS3MDL.h>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{types_8h}{types.h}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_sensor_8h}{Sensor.h}}"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_sensor_magnetometer_a3db5de4b6043cf6ab131b0ea795de8c7}{SensorMagnetometer}}\ :\ \mbox{\hyperlink{class_sensor_a8a6b74c730b8bd209e1dd7fcfc1d3e33}{Sensor}}}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00012\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00013\ \ \ \ \ Adafruit\_LIS3MDL\ lis3mdl;}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ \ \ sensors\_event\_t\ mag\_event;}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{types_8h_a34c81329fddf919347a1c051065b79ef}{MagnetometerData}}\ \mbox{\hyperlink{class_sensor_magnetometer_a3d6803f305e157308a57de47f977f71a}{data}};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{class_sensor_magnetometer_a3db5de4b6043cf6ab131b0ea795de8c7}{SensorMagnetometer}}(uint8\_t\ \mbox{\hyperlink{class_sensor_a0830ff1889f90b853f0c3a58353864c9}{i2c\_addr}}\ =\ LIS3MDL\_I2CADDR\_DEFAULT,\ uint8\_t\ \mbox{\hyperlink{class_sensor_a100459d76016af6212961a54a6f8d81f}{i2c\_wire}}\ =\ \mbox{\hyperlink{_sensor_8h_a1a0ff10faa6578101d9717e25182ea16}{I2C\_WIRE0}});}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{class_sensor_magnetometer_a3db5de4b6043cf6ab131b0ea795de8c7}{SensorMagnetometer}}(uint8\_t\ cs,\ uint8\_t\ miso,\ uint8\_t\ mosi,\ uint8\_t\ sck);}
+\DoxyCodeLine{00023\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{class_sensor_magnetometer_aedd6f97f4f52ea88d71e33edd1eba920}{begin}}();}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{types_8h_a34c81329fddf919347a1c051065b79ef}{MagnetometerData}}*\ \mbox{\hyperlink{class_sensor_magnetometer_aa83fc266895fd95df167c26a7ca1ee89}{read}}();}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{class_sensor_magnetometer_ae40b6b27d5e9557b56752c1fe94e8a1e}{\string~SensorMagnetometer}}();}
+\DoxyCodeLine{00026\ \};}
+
+\end{DoxyCode}

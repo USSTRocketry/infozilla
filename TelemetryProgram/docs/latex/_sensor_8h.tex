@@ -1,0 +1,85 @@
+\doxysection{C\+:/\+Users/\+Bobby/\+Documents/\+USST/\+Infozilla/infozilla/\+Telemetry\+Program/lib/\+HAL/\+Sensor.h File Reference}
+\hypertarget{_sensor_8h}{}\label{_sensor_8h}\index{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/HAL/Sensor.h@{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/HAL/Sensor.h}}
+{\ttfamily \#include $<$cstdint$>$}\newline
+Include dependency graph for Sensor.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=220pt]{_sensor_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_sensor_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_sensor}{Sensor}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_sensor_8h_a1a0ff10faa6578101d9717e25182ea16}{I2\+C\+\_\+\+WIRE0}}~0
+\item 
+\#define \mbox{\hyperlink{_sensor_8h_a5bd2214fca8b0db578203c6ef251a28e}{I2\+C\+\_\+\+WIRE1}}~1
+\item 
+\#define \mbox{\hyperlink{_sensor_8h_a33a57398e3ca6b4af58c471e94e6ec00}{I2\+C\+\_\+\+WIRE2}}~2
+\item 
+\#define \mbox{\hyperlink{_sensor_8h_ab7ed89422985d5069501dbeb6592eca3}{MAP\+\_\+\+I2\+C\+\_\+\+WIRE}}(w)
+\item 
+\#define \mbox{\hyperlink{_sensor_8h_add89a2a7bc4ad7dee1bbe74cf73ceb89}{SENSOR\+\_\+\+MODE\+\_\+\+I2C}}~0
+\item 
+\#define \mbox{\hyperlink{_sensor_8h_a715c1c67e25d6d0d8626a1f7379d62f1}{SENSOR\+\_\+\+MODE\+\_\+\+SPI}}~1
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{_sensor_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_sensor_8h_a1a0ff10faa6578101d9717e25182ea16}\index{Sensor.h@{Sensor.h}!I2C\_WIRE0@{I2C\_WIRE0}}
+\index{I2C\_WIRE0@{I2C\_WIRE0}!Sensor.h@{Sensor.h}}
+\doxysubsubsection{\texorpdfstring{I2C\_WIRE0}{I2C\_WIRE0}}
+{\footnotesize\ttfamily \label{_sensor_8h_a1a0ff10faa6578101d9717e25182ea16} 
+\#define I2\+C\+\_\+\+WIRE0~0}
+
+\Hypertarget{_sensor_8h_a5bd2214fca8b0db578203c6ef251a28e}\index{Sensor.h@{Sensor.h}!I2C\_WIRE1@{I2C\_WIRE1}}
+\index{I2C\_WIRE1@{I2C\_WIRE1}!Sensor.h@{Sensor.h}}
+\doxysubsubsection{\texorpdfstring{I2C\_WIRE1}{I2C\_WIRE1}}
+{\footnotesize\ttfamily \label{_sensor_8h_a5bd2214fca8b0db578203c6ef251a28e} 
+\#define I2\+C\+\_\+\+WIRE1~1}
+
+\Hypertarget{_sensor_8h_a33a57398e3ca6b4af58c471e94e6ec00}\index{Sensor.h@{Sensor.h}!I2C\_WIRE2@{I2C\_WIRE2}}
+\index{I2C\_WIRE2@{I2C\_WIRE2}!Sensor.h@{Sensor.h}}
+\doxysubsubsection{\texorpdfstring{I2C\_WIRE2}{I2C\_WIRE2}}
+{\footnotesize\ttfamily \label{_sensor_8h_a33a57398e3ca6b4af58c471e94e6ec00} 
+\#define I2\+C\+\_\+\+WIRE2~2}
+
+\Hypertarget{_sensor_8h_ab7ed89422985d5069501dbeb6592eca3}\index{Sensor.h@{Sensor.h}!MAP\_I2C\_WIRE@{MAP\_I2C\_WIRE}}
+\index{MAP\_I2C\_WIRE@{MAP\_I2C\_WIRE}!Sensor.h@{Sensor.h}}
+\doxysubsubsection{\texorpdfstring{MAP\_I2C\_WIRE}{MAP\_I2C\_WIRE}}
+{\footnotesize\ttfamily \label{_sensor_8h_ab7ed89422985d5069501dbeb6592eca3} 
+\#define MAP\+\_\+\+I2\+C\+\_\+\+WIRE(\begin{DoxyParamCaption}\item[{}]{w}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(w\ ==\ 0\ ?\ Wire\ :\ (w\ ==\ 1\ ?\ Wire1\ :\ Wire2))}
+
+\end{DoxyCode}
+\Hypertarget{_sensor_8h_add89a2a7bc4ad7dee1bbe74cf73ceb89}\index{Sensor.h@{Sensor.h}!SENSOR\_MODE\_I2C@{SENSOR\_MODE\_I2C}}
+\index{SENSOR\_MODE\_I2C@{SENSOR\_MODE\_I2C}!Sensor.h@{Sensor.h}}
+\doxysubsubsection{\texorpdfstring{SENSOR\_MODE\_I2C}{SENSOR\_MODE\_I2C}}
+{\footnotesize\ttfamily \label{_sensor_8h_add89a2a7bc4ad7dee1bbe74cf73ceb89} 
+\#define SENSOR\+\_\+\+MODE\+\_\+\+I2C~0}
+
+\Hypertarget{_sensor_8h_a715c1c67e25d6d0d8626a1f7379d62f1}\index{Sensor.h@{Sensor.h}!SENSOR\_MODE\_SPI@{SENSOR\_MODE\_SPI}}
+\index{SENSOR\_MODE\_SPI@{SENSOR\_MODE\_SPI}!Sensor.h@{Sensor.h}}
+\doxysubsubsection{\texorpdfstring{SENSOR\_MODE\_SPI}{SENSOR\_MODE\_SPI}}
+{\footnotesize\ttfamily \label{_sensor_8h_a715c1c67e25d6d0d8626a1f7379d62f1} 
+\#define SENSOR\+\_\+\+MODE\+\_\+\+SPI~1}
+

@@ -1,0 +1,36 @@
+\doxysection{GPS.\+h}
+\hypertarget{_g_p_s_8h_source}{}\label{_g_p_s_8h_source}\index{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/HAL/GPS.h@{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/HAL/GPS.h}}
+\mbox{\hyperlink{_g_p_s_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <Adafruit\_GPS.h>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <HardwareSerial.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{types_8h}{types.h}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_p_i_n_s_8h}{PINS.h}}"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_g_p_s_af183681255b1ffe057b2a9aa22b9f9d2}{GPS}}}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00015\ \ \ \ \ Adafruit\_GPS\ gps;}
+\DoxyCodeLine{00016\ \ \ \ \ uint32\_t\ baud\_rate;}
+\DoxyCodeLine{00017\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{struct_g_p_s_data}{GPSData}}\ \mbox{\hyperlink{class_g_p_s_a0b3113f8cfabc433390b20286462aeba}{data}};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{class_g_p_s_af183681255b1ffe057b2a9aa22b9f9d2}{GPS}}(uint8\_t\ serial\ =\ \mbox{\hyperlink{_p_i_n_s_8h_a6d1ec000c91b59c9bbc1896abf564ca1}{GPS\_HW\_SERIAL}},\ uint32\_t\ baud\_rate\ =\ 9600);}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{class_g_p_s_afe84b00ea93254fcb8b84a0f2b240c9d}{\string~GPS}}();}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_g_p_s_a168fa51c2053b5ab017ce80ed5ffccf5}{begin}}();}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_g_p_s_a7173870be89aad8cc86ed6bffea71a64}{configure}}(uint32\_t\ update\_rate\_ms\ =\ 1000,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ output\_mode\ =\ PMTK\_SET\_NMEA\_OUTPUT\_RMCONLY);}
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{struct_g_p_s_data}{GPSData}}*\ \mbox{\hyperlink{class_g_p_s_aa38ca65890c7fd32a6fbbb169f3880ee}{read}}();}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_g_p_s_a5b903e61f93bc5db0d9f78bec35730d4}{update}}();}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_g_p_s_a5b0119a5d40df6f81b1d09bbf0329ebe}{hasFix}}();}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_g_p_s_aeac0f81d932ae7a433e02a628de14e85}{sendCommand}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ command);}
+\DoxyCodeLine{00030\ \};}
+
+\end{DoxyCode}

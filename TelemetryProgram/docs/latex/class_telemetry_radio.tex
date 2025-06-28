@@ -1,0 +1,126 @@
+\doxysection{Telemetry\+Radio Class Reference}
+\hypertarget{class_telemetry_radio}{}\label{class_telemetry_radio}\index{TelemetryRadio@{TelemetryRadio}}
+
+
+{\ttfamily \#include $<$Telemetry\+Radio.\+h$>$}
+
+
+
+Inheritance diagram for Telemetry\+Radio\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=256pt]{class_telemetry_radio__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_telemetry_radio_a174453d4a4d9d8497e9171b0e1d3ed61}{\texorpdfstring{$\sim$}{\string~}\+Telemetry\+Radio}} ()
+\item 
+virtual bool \mbox{\hyperlink{class_telemetry_radio_aa173a8794b1d667270af6a354965d6f7}{begin}} ()=0
+\item 
+virtual void \mbox{\hyperlink{class_telemetry_radio_a9e2bcded604882a83de37ee4a85403ea}{reset}} (uint8\+\_\+t reset\+Pin=127)=0
+\item 
+virtual bool \mbox{\hyperlink{class_telemetry_radio_a7b88926fc28998a9dd100d2a8c370fc6}{send}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, size\+\_\+t length)=0
+\item 
+virtual bool \mbox{\hyperlink{class_telemetry_radio_a5739c2ab2baeb582e6fe68384222b374}{receive}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}buffer, size\+\_\+t max\+Length, size\+\_\+t \&received\+Length)=0
+\item 
+virtual void \mbox{\hyperlink{class_telemetry_radio_ae0656456d10994f42f6b5b39010de481}{set\+Frequency}} (float frequency)=0
+\item 
+virtual void \mbox{\hyperlink{class_telemetry_radio_aa68afab17b7d4a9cd2aa852484652e35}{set\+Tx\+Power}} (uint8\+\_\+t power)=0
+\item 
+virtual void \mbox{\hyperlink{class_telemetry_radio_a95d3f01697d86e3b58fc6b589298bbff}{configure\+Lo\+Ra}} (uint8\+\_\+t spreading\+Factor, uint16\+\_\+t bandwidth, uint8\+\_\+t coding\+Rate)=0
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_telemetry_radio_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_telemetry_radio_a174453d4a4d9d8497e9171b0e1d3ed61}\index{TelemetryRadio@{TelemetryRadio}!````~TelemetryRadio@{\texorpdfstring{$\sim$}{\string~}TelemetryRadio}}
+\index{````~TelemetryRadio@{\texorpdfstring{$\sim$}{\string~}TelemetryRadio}!TelemetryRadio@{TelemetryRadio}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}TelemetryRadio()}{\string~TelemetryRadio()}}
+{\footnotesize\ttfamily \label{class_telemetry_radio_a174453d4a4d9d8497e9171b0e1d3ed61} 
+virtual Telemetry\+Radio\+::\texorpdfstring{$\sim$}{\string~}\+Telemetry\+Radio (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_telemetry_radio_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_telemetry_radio_aa173a8794b1d667270af6a354965d6f7}\index{TelemetryRadio@{TelemetryRadio}!begin@{begin}}
+\index{begin@{begin}!TelemetryRadio@{TelemetryRadio}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}}
+{\footnotesize\ttfamily \label{class_telemetry_radio_aa173a8794b1d667270af6a354965d6f7} 
+virtual bool Telemetry\+Radio\+::begin (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_r_f_m95_radio_a1ab3bbfa65752214240336f32dcbf5f8}{RFM95\+Radio}}, and \mbox{\hyperlink{class_r_y_l_r998_radio_a764f55b8f587efcac4dbfee86bed5ae6}{RYLR998\+Radio}}.
+
+\Hypertarget{class_telemetry_radio_a95d3f01697d86e3b58fc6b589298bbff}\index{TelemetryRadio@{TelemetryRadio}!configureLoRa@{configureLoRa}}
+\index{configureLoRa@{configureLoRa}!TelemetryRadio@{TelemetryRadio}}
+\doxysubsubsection{\texorpdfstring{configureLoRa()}{configureLoRa()}}
+{\footnotesize\ttfamily \label{class_telemetry_radio_a95d3f01697d86e3b58fc6b589298bbff} 
+virtual void Telemetry\+Radio\+::configure\+Lo\+Ra (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{spreading\+Factor}{, }\item[{uint16\+\_\+t}]{bandwidth}{, }\item[{uint8\+\_\+t}]{coding\+Rate}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_r_f_m95_radio_a99839c8d74f989aa5af6ecee8949e709}{RFM95\+Radio}}, and \mbox{\hyperlink{class_r_y_l_r998_radio_a6bee13907f56a958ba9d75e10ae8ebca}{RYLR998\+Radio}}.
+
+\Hypertarget{class_telemetry_radio_a5739c2ab2baeb582e6fe68384222b374}\index{TelemetryRadio@{TelemetryRadio}!receive@{receive}}
+\index{receive@{receive}!TelemetryRadio@{TelemetryRadio}}
+\doxysubsubsection{\texorpdfstring{receive()}{receive()}}
+{\footnotesize\ttfamily \label{class_telemetry_radio_a5739c2ab2baeb582e6fe68384222b374} 
+virtual bool Telemetry\+Radio\+::receive (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{size\+\_\+t}]{max\+Length}{, }\item[{size\+\_\+t \&}]{received\+Length}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_r_f_m95_radio_ad560dd93339e3dfbaddae1037c54a85a}{RFM95\+Radio}}, and \mbox{\hyperlink{class_r_y_l_r998_radio_a0919598153aaeb9fa4e151dcf8373a51}{RYLR998\+Radio}}.
+
+\Hypertarget{class_telemetry_radio_a9e2bcded604882a83de37ee4a85403ea}\index{TelemetryRadio@{TelemetryRadio}!reset@{reset}}
+\index{reset@{reset}!TelemetryRadio@{TelemetryRadio}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily \label{class_telemetry_radio_a9e2bcded604882a83de37ee4a85403ea} 
+virtual void Telemetry\+Radio\+::reset (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{reset\+Pin}{ = {\ttfamily 127}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_r_f_m95_radio_aa481ec04fed8895e0d154dd6ef937ee2}{RFM95\+Radio}}.
+
+\Hypertarget{class_telemetry_radio_a7b88926fc28998a9dd100d2a8c370fc6}\index{TelemetryRadio@{TelemetryRadio}!send@{send}}
+\index{send@{send}!TelemetryRadio@{TelemetryRadio}}
+\doxysubsubsection{\texorpdfstring{send()}{send()}}
+{\footnotesize\ttfamily \label{class_telemetry_radio_a7b88926fc28998a9dd100d2a8c370fc6} 
+virtual bool Telemetry\+Radio\+::send (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{length}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_r_f_m95_radio_a0afeb25136949409b5df33234848464e}{RFM95\+Radio}}, and \mbox{\hyperlink{class_r_y_l_r998_radio_a1ce869d9e5cdcd6324ad7bcb60cb586f}{RYLR998\+Radio}}.
+
+\Hypertarget{class_telemetry_radio_ae0656456d10994f42f6b5b39010de481}\index{TelemetryRadio@{TelemetryRadio}!setFrequency@{setFrequency}}
+\index{setFrequency@{setFrequency}!TelemetryRadio@{TelemetryRadio}}
+\doxysubsubsection{\texorpdfstring{setFrequency()}{setFrequency()}}
+{\footnotesize\ttfamily \label{class_telemetry_radio_ae0656456d10994f42f6b5b39010de481} 
+virtual void Telemetry\+Radio\+::set\+Frequency (\begin{DoxyParamCaption}\item[{float}]{frequency}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_r_f_m95_radio_a7d7ac9f2684ccfada9f6822a8d9a7e4e}{RFM95\+Radio}}, and \mbox{\hyperlink{class_r_y_l_r998_radio_a5e5b8805584662921056200347e7e56c}{RYLR998\+Radio}}.
+
+\Hypertarget{class_telemetry_radio_aa68afab17b7d4a9cd2aa852484652e35}\index{TelemetryRadio@{TelemetryRadio}!setTxPower@{setTxPower}}
+\index{setTxPower@{setTxPower}!TelemetryRadio@{TelemetryRadio}}
+\doxysubsubsection{\texorpdfstring{setTxPower()}{setTxPower()}}
+{\footnotesize\ttfamily \label{class_telemetry_radio_aa68afab17b7d4a9cd2aa852484652e35} 
+virtual void Telemetry\+Radio\+::set\+Tx\+Power (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{power}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_r_f_m95_radio_aca6805cc84d17b9dbb513f39f57e3e65}{RFM95\+Radio}}, and \mbox{\hyperlink{class_r_y_l_r998_radio_ab3559ac8b6e8c2f888c91947b6e22bd5}{RYLR998\+Radio}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Bobby/\+Documents/\+USST/\+Infozilla/infozilla/\+Telemetry\+Program/lib/\+HAL/\mbox{\hyperlink{_telemetry_radio_8h}{Telemetry\+Radio.\+h}}\end{DoxyCompactItemize}

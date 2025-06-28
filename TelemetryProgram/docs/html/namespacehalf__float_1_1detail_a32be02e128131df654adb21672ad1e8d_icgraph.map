@@ -1,0 +1,15 @@
+<map id="half_float::detail::float2half_impl" name="half_float::detail::float2half_impl">
+<area shape="rect" id="Node000001" title=" " alt="" coords="389,99,502,141"/>
+<area shape="rect" id="Node000002" href="$namespacehalf__float_1_1detail.html#a09951d8c743d622eb51d0f4096be0f66" title=" " alt="" coords="228,99,341,141"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="373,123,342,123,342,117,373,117"/>
+<area shape="rect" id="Node000003" href="$classhalf__float_1_1half.html#a3d48c150d891e4811fbac2398d264c38" title=" " alt="" coords="7,5,178,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="245,91,214,67,178,46,150,35,152,30,181,42,217,63,249,87"/>
+<area shape="rect" id="Node000004" href="$classhalf__float_1_1half.html#a2e8b2f5dfe4be3228b4955b07233aad0" title=" " alt="" coords="5,56,180,83"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="212,104,145,86,147,81,214,99"/>
+<area shape="rect" id="Node000005" href="$classhalf__float_1_1half.html#ac2f12740d3f74bdc549a3ac73f4b6539" title=" " alt="" coords="7,107,178,133"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="212,123,178,123,178,117,212,117"/>
+<area shape="rect" id="Node000006" href="$classhalf__float_1_1half.html#aa7a3dfe36099c5c3aedc90a2b91ccaa4" title=" " alt="" coords="7,157,178,184"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="214,141,147,159,145,154,212,136"/>
+<area shape="rect" id="Node000007" href="$classhalf__float_1_1half.html#a01b8b2f0d100c0254a8ed315b1ae1634" title=" " alt="" coords="9,208,176,235"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="249,153,217,177,181,198,152,210,150,205,178,194,214,173,245,149"/>
+</map>

@@ -1,0 +1,521 @@
+\doxysection{fp16.\+h}
+\hypertarget{fp16_2fp16_8h_source}{}\label{fp16_2fp16_8h_source}\index{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/FP16-\/master/include/fp16/fp16.h@{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/FP16-\/master/include/fp16/fp16.h}}
+\mbox{\hyperlink{fp16_2fp16_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#ifndef\ FP16\_FP16\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#define\ FP16\_FP16\_H}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)\ \&\&\ (\_\_cplusplus\ >=\ 201103L)}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\ \ \ \ \#include\ <cstdint>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\ \ \ \ \#include\ <cmath>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#elif\ !defined(\_\_OPENCL\_VERSION\_\_)}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\ \ \ \ \#include\ <stdint.h>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\ \ \ \ \#include\ <math.h>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{bitcasts_8h}{fp16/bitcasts.h}}>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{macros_8h}{fp16/macros.h}}>}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#if\ defined(\_MSC\_VER)}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\ \ \ \ \#include\ <intrin.h>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#if\ defined(\_\_F16C\_\_)\ \&\&\ FP16\_USE\_NATIVE\_CONVERSION\ \&\&\ !FP16\_USE\_FLOAT16\_TYPE\ \&\&\ !FP16\_USE\_FP16\_TYPE}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\ \ \ \ \#include\ <immintrin.h>}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#if\ (defined(\_\_aarch64\_\_)\ ||\ defined(\_M\_ARM64))\ \&\&\ FP16\_USE\_NATIVE\_CONVERSION\ \&\&\ !FP16\_USE\_FLOAT16\_TYPE\ \&\&\ !FP16\_USE\_FP16\_TYPE}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\ \ \ \ \#include\ <arm\_neon.h>}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00028\ \textcolor{comment}{\ *\ Convert\ a\ 16-\/bit\ floating-\/point\ number\ in\ IEEE\ half-\/precision\ format,\ in\ bit\ representation,\ to}}
+\DoxyCodeLine{00029\ \textcolor{comment}{\ *\ a\ 32-\/bit\ floating-\/point\ number\ in\ IEEE\ single-\/precision\ format,\ in\ bit\ representation.}}
+\DoxyCodeLine{00030\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00031\ \textcolor{comment}{\ *\ @note\ The\ implementation\ doesn't\ use\ any\ floating-\/point\ operations.}}
+\DoxyCodeLine{00032\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00033\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint32\_t\ fp16\_ieee\_to\_fp32\_bits(uint16\_t\ h)\ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00035\ \textcolor{comment}{\ \ \ \ \ *\ Extend\ the\ half-\/precision\ floating-\/point\ number\ to\ 32\ bits\ and\ shift\ to\ the\ upper\ part\ of\ the\ 32-\/bit\ word:}}
+\DoxyCodeLine{00036\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ +-\/-\/-\/+-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{00037\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ |\ S\ |EEEEE|MM\ MMMM\ MMMM|0000\ 0000\ 0000\ 0000|}}
+\DoxyCodeLine{00038\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ +-\/-\/-\/+-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{00039\ \textcolor{comment}{\ \ \ \ \ *\ Bits\ \ 31\ \ 26-\/30\ \ \ \ 16-\/25\ \ \ \ \ \ \ \ \ \ \ \ 0-\/15}}
+\DoxyCodeLine{00040\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00041\ \textcolor{comment}{\ \ \ \ \ *\ S\ -\/\ sign\ bit,\ E\ -\/\ bits\ of\ the\ biased\ exponent,\ M\ -\/\ bits\ of\ the\ mantissa,\ 0\ -\/\ zero\ bits.}}
+\DoxyCodeLine{00042\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ w\ =\ (uint32\_t)\ h\ <<\ 16;}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00045\ \textcolor{comment}{\ \ \ \ \ *\ Extract\ the\ sign\ of\ the\ input\ number\ into\ the\ high\ bit\ of\ the\ 32-\/bit\ word:}}
+\DoxyCodeLine{00046\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00047\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ +-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{00048\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ |\ S\ |0000000\ 00000000\ 00000000\ 00000000|}}
+\DoxyCodeLine{00049\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ +-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{00050\ \textcolor{comment}{\ \ \ \ \ *\ Bits\ \ 31\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0-\/31}}
+\DoxyCodeLine{00051\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ sign\ =\ w\ \&\ UINT32\_C(0x80000000);}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00054\ \textcolor{comment}{\ \ \ \ \ *\ Extract\ mantissa\ and\ biased\ exponent\ of\ the\ input\ number\ into\ the\ bits\ 0-\/30\ of\ the\ 32-\/bit\ word:}}
+\DoxyCodeLine{00055\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00056\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ +-\/-\/-\/+-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{00057\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ |\ 0\ |EEEEE|MM\ MMMM\ MMMM|0000\ 0000\ 0000\ 0000|}}
+\DoxyCodeLine{00058\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ +-\/-\/-\/+-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{00059\ \textcolor{comment}{\ \ \ \ \ *\ Bits\ \ 30\ \ 27-\/31\ \ \ \ \ 17-\/26\ \ \ \ \ \ \ \ \ \ \ \ 0-\/16}}
+\DoxyCodeLine{00060\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ nonsign\ =\ w\ \&\ UINT32\_C(0x7FFFFFFF);}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00063\ \textcolor{comment}{\ \ \ \ \ *\ Renorm\ shift\ is\ the\ number\ of\ bits\ to\ shift\ mantissa\ left\ to\ make\ the\ half-\/precision\ number\ normalized.}}
+\DoxyCodeLine{00064\ \textcolor{comment}{\ \ \ \ \ *\ If\ the\ initial\ number\ is\ normalized,\ some\ of\ its\ high\ 6\ bits\ (sign\ ==\ 0\ and\ 5-\/bit\ exponent)\ equals\ one.}}
+\DoxyCodeLine{00065\ \textcolor{comment}{\ \ \ \ \ *\ In\ this\ case\ renorm\_shift\ ==\ 0.\ If\ the\ number\ is\ denormalize,\ renorm\_shift\ >\ 0.\ Note\ that\ if\ we\ shift}}
+\DoxyCodeLine{00066\ \textcolor{comment}{\ \ \ \ \ *\ denormalized\ nonsign\ by\ renorm\_shift,\ the\ unit\ bit\ of\ mantissa\ will\ shift\ into\ exponent,\ turning\ the}}
+\DoxyCodeLine{00067\ \textcolor{comment}{\ \ \ \ \ *\ biased\ exponent\ into\ 1,\ and\ making\ mantissa\ normalized\ (i.e.\ without\ leading\ 1).}}
+\DoxyCodeLine{00068\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00069\ \textcolor{preprocessor}{\#ifdef\ \_MSC\_VER}}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ nonsign\_bsr;}
+\DoxyCodeLine{00071\ \ \ \ \ \_BitScanReverse(\&nonsign\_bsr,\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long})\ nonsign);}
+\DoxyCodeLine{00072\ \ \ \ \ uint32\_t\ renorm\_shift\ =\ (uint32\_t)\ nonsign\_bsr\ \string^\ 31;}
+\DoxyCodeLine{00073\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00074\ \ \ \ \ uint32\_t\ renorm\_shift\ =\ \_\_builtin\_clz(nonsign);}
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00076\ \ \ \ \ renorm\_shift\ =\ renorm\_shift\ >\ 5\ ?\ renorm\_shift\ -\/\ 5\ :\ 0;}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00078\ \textcolor{comment}{\ \ \ \ \ *\ Iff\ half-\/precision\ number\ has\ exponent\ of\ 15,\ the\ addition\ overflows\ it\ into\ bit\ 31,}}
+\DoxyCodeLine{00079\ \textcolor{comment}{\ \ \ \ \ *\ and\ the\ subsequent\ shift\ turns\ the\ high\ 9\ bits\ into\ 1.\ Thus}}
+\DoxyCodeLine{00080\ \textcolor{comment}{\ \ \ \ \ *\ \ \ inf\_nan\_mask\ ==}}
+\DoxyCodeLine{00081\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x7F800000\ if\ the\ half-\/precision\ number\ had\ exponent\ of\ 15\ (i.e.\ was\ NaN\ or\ infinity)}}
+\DoxyCodeLine{00082\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x00000000\ otherwise}}
+\DoxyCodeLine{00083\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keyword}{const}\ int32\_t\ inf\_nan\_mask\ =\ ((int32\_t)\ (nonsign\ +\ 0x04000000)\ >>\ 8)\ \&\ INT32\_C(0x7F800000);}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00086\ \textcolor{comment}{\ \ \ \ \ *\ Iff\ nonsign\ is\ 0,\ it\ overflows\ into\ 0xFFFFFFFF,\ turning\ bit\ 31\ into\ 1.\ Otherwise,\ bit\ 31\ remains\ 0.}}
+\DoxyCodeLine{00087\ \textcolor{comment}{\ \ \ \ \ *\ The\ signed\ shift\ right\ by\ 31\ broadcasts\ bit\ 31\ into\ all\ bits\ of\ the\ zero\_mask.\ Thus}}
+\DoxyCodeLine{00088\ \textcolor{comment}{\ \ \ \ \ *\ \ \ zero\_mask\ ==}}
+\DoxyCodeLine{00089\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0xFFFFFFFF\ if\ the\ half-\/precision\ number\ was\ zero\ (+0.0h\ or\ -\/0.0h)}}
+\DoxyCodeLine{00090\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x00000000\ otherwise}}
+\DoxyCodeLine{00091\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keyword}{const}\ int32\_t\ zero\_mask\ =\ (int32\_t)\ (nonsign\ -\/\ 1)\ >>\ 31;}
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00094\ \textcolor{comment}{\ \ \ \ \ *\ 1.\ Shift\ nonsign\ left\ by\ renorm\_shift\ to\ normalize\ it\ (if\ the\ input\ was\ denormal)}}
+\DoxyCodeLine{00095\ \textcolor{comment}{\ \ \ \ \ *\ 2.\ Shift\ nonsign\ right\ by\ 3\ so\ the\ exponent\ (5\ bits\ originally)\ becomes\ an\ 8-\/bit\ field\ and\ 10-\/bit\ mantissa}}
+\DoxyCodeLine{00096\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ shifts\ into\ the\ 10\ high\ bits\ of\ the\ 23-\/bit\ mantissa\ of\ IEEE\ single-\/precision\ number.}}
+\DoxyCodeLine{00097\ \textcolor{comment}{\ \ \ \ \ *\ 3.\ Add\ 0x70\ to\ the\ exponent\ (starting\ at\ bit\ 23)\ to\ compensate\ the\ different\ in\ exponent\ bias}}
+\DoxyCodeLine{00098\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ (0x7F\ for\ single-\/precision\ number\ less\ 0xF\ for\ half-\/precision\ number).}}
+\DoxyCodeLine{00099\ \textcolor{comment}{\ \ \ \ \ *\ 4.\ Subtract\ renorm\_shift\ from\ the\ exponent\ (starting\ at\ bit\ 23)\ to\ account\ for\ renormalization.\ As\ renorm\_shift}}
+\DoxyCodeLine{00100\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ is\ less\ than\ 0x70,\ this\ can\ be\ combined\ with\ step\ 3.}}
+\DoxyCodeLine{00101\ \textcolor{comment}{\ \ \ \ \ *\ 5.\ Binary\ OR\ with\ inf\_nan\_mask\ to\ turn\ the\ exponent\ into\ 0xFF\ if\ the\ input\ was\ NaN\ or\ infinity.}}
+\DoxyCodeLine{00102\ \textcolor{comment}{\ \ \ \ \ *\ 6.\ Binary\ ANDNOT\ with\ zero\_mask\ to\ turn\ the\ mantissa\ and\ exponent\ into\ zero\ if\ the\ input\ was\ zero.\ }}
+\DoxyCodeLine{00103\ \textcolor{comment}{\ \ \ \ \ *\ 7.\ Combine\ with\ the\ sign\ of\ the\ input\ number.}}
+\DoxyCodeLine{00104\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordflow}{return}\ sign\ |\ ((((nonsign\ <<\ renorm\_shift\ >>\ 3)\ +\ ((0x70\ -\/\ renorm\_shift)\ <<\ 23))\ |\ inf\_nan\_mask)\ \&\ \string~zero\_mask);}
+\DoxyCodeLine{00106\ \}}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00109\ \textcolor{comment}{\ *\ Convert\ a\ 16-\/bit\ floating-\/point\ number\ in\ IEEE\ half-\/precision\ format,\ in\ bit\ representation,\ to}}
+\DoxyCodeLine{00110\ \textcolor{comment}{\ *\ a\ 32-\/bit\ floating-\/point\ number\ in\ IEEE\ single-\/precision\ format.}}
+\DoxyCodeLine{00111\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00112\ \textcolor{comment}{\ *\ @note\ The\ implementation\ relies\ on\ IEEE-\/like\ (no\ assumption\ about\ rounding\ mode\ and\ no\ operations\ on\ denormals)}}
+\DoxyCodeLine{00113\ \textcolor{comment}{\ *\ floating-\/point\ operations\ and\ bitcasts\ between\ integer\ and\ floating-\/point\ variables.}}
+\DoxyCodeLine{00114\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00115\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{float}\ fp16\_ieee\_to\_fp32\_value(uint16\_t\ h)\ \{}
+\DoxyCodeLine{00116\ \textcolor{preprocessor}{\#if\ FP16\_USE\_NATIVE\_CONVERSION}}
+\DoxyCodeLine{00117\ \textcolor{preprocessor}{\ \ \ \ \#if\ FP16\_USE\_FLOAT16\_TYPE}}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \textcolor{keyword}{union\ }\{}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ uint16\_t\ as\_bits;}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \_Float16\ as\_value;}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \}\ \mbox{\hyperlink{namespacefp16}{fp16}}\ =\ \{\ h\ \};}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keywordtype}{float})\ \mbox{\hyperlink{namespacefp16}{fp16}}.as\_value;}
+\DoxyCodeLine{00123\ \textcolor{preprocessor}{\ \ \ \ \#elif\ FP16\_USE\_FP16\_TYPE}}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \textcolor{keyword}{union\ }\{}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ uint16\_t\ as\_bits;}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \_\_fp16\ as\_value;}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \}\ \mbox{\hyperlink{namespacefp16}{fp16}}\ =\ \{\ h\ \};}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keywordtype}{float})\ \mbox{\hyperlink{namespacefp16}{fp16}}.as\_value;}
+\DoxyCodeLine{00129\ \textcolor{preprocessor}{\ \ \ \ \#else}}
+\DoxyCodeLine{00130\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#if\ (defined(\_\_INTEL\_COMPILER)\ ||\ defined(\_\_GNUC\_\_))\ \&\&\ defined(\_\_F16C\_\_)}}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_cvtsh\_ss((\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short})\ h);}
+\DoxyCodeLine{00132\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#elif\ defined(\_MSC\_VER)\ \&\&\ (defined(\_M\_IX86)\ ||\ defined(\_M\_X64))\ \&\&\ defined(\_\_AVX2\_\_)}}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_mm\_cvtss\_f32(\_mm\_cvtph\_ps(\_mm\_cvtsi32\_si128((\textcolor{keywordtype}{int})\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int})\ h)));}
+\DoxyCodeLine{00134\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#elif\ defined(\_M\_ARM64)\ ||\ defined(\_\_aarch64\_\_)}}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ vgetq\_lane\_f32(vcvt\_f32\_f16(vreinterpret\_f16\_u16(vdup\_n\_u16(h))),\ 0);}
+\DoxyCodeLine{00136\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#else}}
+\DoxyCodeLine{00137\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#error\ "{}Archtecture-\/\ or\ compiler-\/specific\ implementation\ required"{}}}
+\DoxyCodeLine{00138\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{00139\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{00140\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00141\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00142\ \textcolor{comment}{\ \ \ \ \ *\ Extend\ the\ half-\/precision\ floating-\/point\ number\ to\ 32\ bits\ and\ shift\ to\ the\ upper\ part\ of\ the\ 32-\/bit\ word:}}
+\DoxyCodeLine{00143\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ +-\/-\/-\/+-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{00144\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ |\ S\ |EEEEE|MM\ MMMM\ MMMM|0000\ 0000\ 0000\ 0000|}}
+\DoxyCodeLine{00145\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ +-\/-\/-\/+-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{00146\ \textcolor{comment}{\ \ \ \ \ *\ Bits\ \ 31\ \ 26-\/30\ \ \ \ 16-\/25\ \ \ \ \ \ \ \ \ \ \ \ 0-\/15}}
+\DoxyCodeLine{00147\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00148\ \textcolor{comment}{\ \ \ \ \ *\ S\ -\/\ sign\ bit,\ E\ -\/\ bits\ of\ the\ biased\ exponent,\ M\ -\/\ bits\ of\ the\ mantissa,\ 0\ -\/\ zero\ bits.}}
+\DoxyCodeLine{00149\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ w\ =\ (uint32\_t)\ h\ <<\ 16;}
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00152\ \textcolor{comment}{\ \ \ \ \ *\ Extract\ the\ sign\ of\ the\ input\ number\ into\ the\ high\ bit\ of\ the\ 32-\/bit\ word:}}
+\DoxyCodeLine{00153\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00154\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ +-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{00155\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ |\ S\ |0000000\ 00000000\ 00000000\ 00000000|}}
+\DoxyCodeLine{00156\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ +-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{00157\ \textcolor{comment}{\ \ \ \ \ *\ Bits\ \ 31\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0-\/31}}
+\DoxyCodeLine{00158\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ sign\ =\ w\ \&\ UINT32\_C(0x80000000);}
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00161\ \textcolor{comment}{\ \ \ \ \ *\ Extract\ mantissa\ and\ biased\ exponent\ of\ the\ input\ number\ into\ the\ high\ bits\ of\ the\ 32-\/bit\ word:}}
+\DoxyCodeLine{00162\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00163\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ +-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{00164\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ |EEEEE|MM\ MMMM\ MMMM|0\ 0000\ 0000\ 0000\ 0000|}}
+\DoxyCodeLine{00165\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ +-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{00166\ \textcolor{comment}{\ \ \ \ \ *\ Bits\ \ 27-\/31\ \ \ \ 17-\/26\ \ \ \ \ \ \ \ \ \ \ \ 0-\/16}}
+\DoxyCodeLine{00167\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00168\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ two\_w\ =\ w\ +\ w;}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00171\ \textcolor{comment}{\ \ \ \ \ *\ Shift\ mantissa\ and\ exponent\ into\ bits\ 23-\/28\ and\ bits\ 13-\/22\ so\ they\ become\ mantissa\ and\ exponent}}
+\DoxyCodeLine{00172\ \textcolor{comment}{\ \ \ \ \ *\ of\ a\ single-\/precision\ floating-\/point\ number:}}
+\DoxyCodeLine{00173\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00174\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ \ S|Exponent\ |\ \ \ \ \ \ \ \ \ \ Mantissa}}
+\DoxyCodeLine{00175\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ +-\/+-\/-\/-\/+-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{00176\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ |0|000|EEEEE|MM\ MMMM\ MMMM|0\ 0000\ 0000\ 0000|}}
+\DoxyCodeLine{00177\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ +-\/+-\/-\/-\/+-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{00178\ \textcolor{comment}{\ \ \ \ \ *\ Bits\ \ \ |\ 23-\/31\ \ \ |\ \ \ \ \ \ \ \ \ \ \ 0-\/22}}
+\DoxyCodeLine{00179\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00180\ \textcolor{comment}{\ \ \ \ \ *\ Next,\ there\ are\ some\ adjustments\ to\ the\ exponent:}}
+\DoxyCodeLine{00181\ \textcolor{comment}{\ \ \ \ \ *\ -\/\ The\ exponent\ needs\ to\ be\ corrected\ by\ the\ difference\ in\ exponent\ bias\ between\ single-\/precision\ and\ half-\/precision}}
+\DoxyCodeLine{00182\ \textcolor{comment}{\ \ \ \ \ *\ \ \ formats\ (0x7F\ -\/\ 0xF\ =\ 0x70)}}
+\DoxyCodeLine{00183\ \textcolor{comment}{\ \ \ \ \ *\ -\/\ Inf\ and\ NaN\ values\ in\ the\ inputs\ should\ become\ Inf\ and\ NaN\ values\ after\ conversion\ to\ the\ single-\/precision\ number.}}
+\DoxyCodeLine{00184\ \textcolor{comment}{\ \ \ \ \ *\ \ \ Therefore,\ if\ the\ biased\ exponent\ of\ the\ half-\/precision\ input\ was\ 0x1F\ (max\ possible\ value),\ the\ biased\ exponent}}
+\DoxyCodeLine{00185\ \textcolor{comment}{\ \ \ \ \ *\ \ \ of\ the\ single-\/precision\ output\ must\ be\ 0xFF\ (max\ possible\ value).\ We\ do\ this\ correction\ in\ two\ steps:}}
+\DoxyCodeLine{00186\ \textcolor{comment}{\ \ \ \ \ *\ \ \ -\/\ First,\ we\ adjust\ the\ exponent\ by\ (0xFF\ -\/\ 0x1F)\ =\ 0xE0\ (see\ exp\_offset\ below)\ rather\ than\ by\ 0x70\ suggested}}
+\DoxyCodeLine{00187\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ by\ the\ difference\ in\ the\ exponent\ bias\ (see\ above).}}
+\DoxyCodeLine{00188\ \textcolor{comment}{\ \ \ \ \ *\ \ \ -\/\ Then\ we\ multiply\ the\ single-\/precision\ result\ of\ exponent\ adjustment\ by\ 2**(-\/112)\ to\ reverse\ the\ effect\ of}}
+\DoxyCodeLine{00189\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ exponent\ adjustment\ by\ 0xE0\ less\ the\ necessary\ exponent\ adjustment\ by\ 0x70\ due\ to\ difference\ in\ exponent\ bias.}}
+\DoxyCodeLine{00190\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ The\ floating-\/point\ multiplication\ hardware\ would\ ensure\ than\ Inf\ and\ NaN\ would\ retain\ their\ value\ on\ at\ least}}
+\DoxyCodeLine{00191\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ partially\ IEEE754-\/compliant\ implementations.}}
+\DoxyCodeLine{00192\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00193\ \textcolor{comment}{\ \ \ \ \ *\ Note\ that\ the\ above\ operations\ do\ not\ handle\ denormal\ inputs\ (where\ biased\ exponent\ ==\ 0).\ However,\ they\ also\ do\ not}}
+\DoxyCodeLine{00194\ \textcolor{comment}{\ \ \ \ \ *\ operate\ on\ denormal\ inputs,\ and\ do\ not\ produce\ denormal\ results.}}
+\DoxyCodeLine{00195\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00196\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ exp\_offset\ =\ UINT32\_C(0xE0)\ <<\ 23;}
+\DoxyCodeLine{00197\ \textcolor{preprocessor}{\#if\ defined(\_\_STDC\_VERSION\_\_)\ \&\&\ (\_\_STDC\_VERSION\_\_\ >=\ 199901L)\ ||\ defined(\_\_GNUC\_\_)\ \&\&\ !defined(\_\_STRICT\_ANSI\_\_)}}
+\DoxyCodeLine{00198\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ exp\_scale\ =\ 0x1.0p-\/112f;}
+\DoxyCodeLine{00199\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00200\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ exp\_scale\ =\ fp32\_from\_bits(UINT32\_C(0x7800000));}
+\DoxyCodeLine{00201\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00202\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ normalized\_value\ =\ fp32\_from\_bits((two\_w\ >>\ 4)\ +\ exp\_offset)\ *\ exp\_scale;}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00204\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00205\ \textcolor{comment}{\ \ \ \ \ *\ Convert\ denormalized\ half-\/precision\ inputs\ into\ single-\/precision\ results\ (always\ normalized).}}
+\DoxyCodeLine{00206\ \textcolor{comment}{\ \ \ \ \ *\ Zero\ inputs\ are\ also\ handled\ here.}}
+\DoxyCodeLine{00207\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00208\ \textcolor{comment}{\ \ \ \ \ *\ In\ a\ denormalized\ number\ the\ biased\ exponent\ is\ zero,\ and\ mantissa\ has\ on-\/zero\ bits.}}
+\DoxyCodeLine{00209\ \textcolor{comment}{\ \ \ \ \ *\ First,\ we\ shift\ mantissa\ into\ bits\ 0-\/9\ of\ the\ 32-\/bit\ word.}}
+\DoxyCodeLine{00210\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00211\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ zeros\ \ \ \ \ \ \ \ \ \ \ |\ \ mantissa}}
+\DoxyCodeLine{00212\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ +-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{00213\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ |0000\ 0000\ 0000\ 0000\ 0000\ 00|MM\ MMMM\ MMMM|}}
+\DoxyCodeLine{00214\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ +-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{00215\ \textcolor{comment}{\ \ \ \ \ *\ Bits\ \ \ \ \ \ \ \ \ \ \ \ \ 10-\/31\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0-\/9}}
+\DoxyCodeLine{00216\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00217\ \textcolor{comment}{\ \ \ \ \ *\ Now,\ remember\ that\ denormalized\ half-\/precision\ numbers\ are\ represented\ as:}}
+\DoxyCodeLine{00218\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ FP16\ =\ mantissa\ *\ 2**(-\/24).}}
+\DoxyCodeLine{00219\ \textcolor{comment}{\ \ \ \ \ *\ The\ trick\ is\ to\ construct\ a\ normalized\ single-\/precision\ number\ with\ the\ same\ mantissa\ and\ thehalf-\/precision\ input}}
+\DoxyCodeLine{00220\ \textcolor{comment}{\ \ \ \ \ *\ and\ with\ an\ exponent\ which\ would\ scale\ the\ corresponding\ mantissa\ bits\ to\ 2**(-\/24).}}
+\DoxyCodeLine{00221\ \textcolor{comment}{\ \ \ \ \ *\ A\ normalized\ single-\/precision\ floating-\/point\ number\ is\ represented\ as:}}
+\DoxyCodeLine{00222\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ FP32\ =\ (1\ +\ mantissa\ *\ 2**(-\/23))\ *\ 2**(exponent\ -\/\ 127)}}
+\DoxyCodeLine{00223\ \textcolor{comment}{\ \ \ \ \ *\ Therefore,\ when\ the\ biased\ exponent\ is\ 126,\ a\ unit\ change\ in\ the\ mantissa\ of\ the\ input\ denormalized\ half-\/precision}}
+\DoxyCodeLine{00224\ \textcolor{comment}{\ \ \ \ \ *\ number\ causes\ a\ change\ of\ the\ constructud\ single-\/precision\ number\ by\ 2**(-\/24),\ i.e.\ the\ same\ ammount.}}
+\DoxyCodeLine{00225\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00226\ \textcolor{comment}{\ \ \ \ \ *\ The\ last\ step\ is\ to\ adjust\ the\ bias\ of\ the\ constructed\ single-\/precision\ number.\ When\ the\ input\ half-\/precision\ number}}
+\DoxyCodeLine{00227\ \textcolor{comment}{\ \ \ \ \ *\ is\ zero,\ the\ constructed\ single-\/precision\ number\ has\ the\ value\ of}}
+\DoxyCodeLine{00228\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ FP32\ =\ 1\ *\ 2**(126\ -\/\ 127)\ =\ 2**(-\/1)\ =\ 0.5}}
+\DoxyCodeLine{00229\ \textcolor{comment}{\ \ \ \ \ *\ Therefore,\ we\ need\ to\ subtract\ 0.5\ from\ the\ constructed\ single-\/precision\ number\ to\ get\ the\ numerical\ equivalent\ of}}
+\DoxyCodeLine{00230\ \textcolor{comment}{\ \ \ \ \ *\ the\ input\ half-\/precision\ number.}}
+\DoxyCodeLine{00231\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00232\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ magic\_mask\ =\ UINT32\_C(126)\ <<\ 23;}
+\DoxyCodeLine{00233\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ magic\_bias\ =\ 0.5f;}
+\DoxyCodeLine{00234\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ denormalized\_value\ =\ fp32\_from\_bits((two\_w\ >>\ 17)\ |\ magic\_mask)\ -\/\ magic\_bias;}
+\DoxyCodeLine{00235\ }
+\DoxyCodeLine{00236\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00237\ \textcolor{comment}{\ \ \ \ \ *\ -\/\ Choose\ either\ results\ of\ conversion\ of\ input\ as\ a\ normalized\ number,\ or\ as\ a\ denormalized\ number,\ depending\ on\ the}}
+\DoxyCodeLine{00238\ \textcolor{comment}{\ \ \ \ \ *\ \ \ input\ exponent.\ The\ variable\ two\_w\ contains\ input\ exponent\ in\ bits\ 27-\/31,\ therefore\ if\ its\ smaller\ than\ 2**27,\ the}}
+\DoxyCodeLine{00239\ \textcolor{comment}{\ \ \ \ \ *\ \ \ input\ is\ either\ a\ denormal\ number,\ or\ zero.}}
+\DoxyCodeLine{00240\ \textcolor{comment}{\ \ \ \ \ *\ -\/\ Combine\ the\ result\ of\ conversion\ of\ exponent\ and\ mantissa\ with\ the\ sign\ of\ the\ input\ number.}}
+\DoxyCodeLine{00241\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00242\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ denormalized\_cutoff\ =\ UINT32\_C(1)\ <<\ 27;}
+\DoxyCodeLine{00243\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ result\ =\ sign\ |}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ (two\_w\ <\ denormalized\_cutoff\ ?\ fp32\_to\_bits(denormalized\_value)\ :\ fp32\_to\_bits(normalized\_value));}
+\DoxyCodeLine{00245\ \ \ \ \ \textcolor{keywordflow}{return}\ fp32\_from\_bits(result);}
+\DoxyCodeLine{00246\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00247\ \}}
+\DoxyCodeLine{00248\ }
+\DoxyCodeLine{00249\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00250\ \textcolor{comment}{\ *\ Convert\ a\ 32-\/bit\ floating-\/point\ number\ in\ IEEE\ single-\/precision\ format\ to\ a\ 16-\/bit\ floating-\/point\ number\ in}}
+\DoxyCodeLine{00251\ \textcolor{comment}{\ *\ IEEE\ half-\/precision\ format,\ in\ bit\ representation.}}
+\DoxyCodeLine{00252\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00253\ \textcolor{comment}{\ *\ @note\ The\ implementation\ relies\ on\ IEEE-\/like\ (no\ assumption\ about\ rounding\ mode\ and\ no\ operations\ on\ denormals)}}
+\DoxyCodeLine{00254\ \textcolor{comment}{\ *\ floating-\/point\ operations\ and\ bitcasts\ between\ integer\ and\ floating-\/point\ variables.}}
+\DoxyCodeLine{00255\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00256\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint16\_t\ fp16\_ieee\_from\_fp32\_value(\textcolor{keywordtype}{float}\ f)\ \{}
+\DoxyCodeLine{00257\ \textcolor{preprocessor}{\#if\ FP16\_USE\_NATIVE\_CONVERSION}}
+\DoxyCodeLine{00258\ \textcolor{preprocessor}{\ \ \ \ \#if\ FP16\_USE\_FLOAT16\_TYPE}}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \textcolor{keyword}{union\ }\{}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \ \ \ \ \_Float16\ as\_value;}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \ \ \ \ uint16\_t\ as\_bits;}
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ \}\ \mbox{\hyperlink{namespacefp16}{fp16}}\ =\ \{\ (\_Float16)\ f\ \};}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespacefp16}{fp16}}.as\_bits;}
+\DoxyCodeLine{00264\ \textcolor{preprocessor}{\ \ \ \ \#elif\ FP16\_USE\_FP16\_TYPE}}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \textcolor{keyword}{union\ }\{}
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \ \ \ \ \_\_fp16\ as\_value;}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \ \ \ \ uint16\_t\ as\_bits;}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \}\ \mbox{\hyperlink{namespacefp16}{fp16}}\ =\ \{\ (\_\_fp16)\ f\ \};}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespacefp16}{fp16}}.as\_bits;}
+\DoxyCodeLine{00270\ \textcolor{preprocessor}{\ \ \ \ \#else}}
+\DoxyCodeLine{00271\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#if\ (defined(\_\_INTEL\_COMPILER)\ ||\ defined(\_\_GNUC\_\_))\ \&\&\ defined(\_\_F16C\_\_)}}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_cvtss\_sh(f,\ \_MM\_FROUND\_CUR\_DIRECTION);}
+\DoxyCodeLine{00273\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#elif\ defined(\_MSC\_VER)\ \&\&\ (defined(\_M\_IX86)\ ||\ defined(\_M\_X64))\ \&\&\ defined(\_\_AVX2\_\_)}}
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (uint16\_t)\ \_mm\_cvtsi128\_si32(\_mm\_cvtps\_ph(\_mm\_set\_ss(f),\ \_MM\_FROUND\_CUR\_DIRECTION));}
+\DoxyCodeLine{00275\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#elif\ defined(\_M\_ARM64)\ ||\ defined(\_\_aarch64\_\_)}}
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ vget\_lane\_u16(vcvt\_f16\_f32(vdupq\_n\_f32(f)),\ 0);}
+\DoxyCodeLine{00277\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#else}}
+\DoxyCodeLine{00278\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#error\ "{}Archtecture-\/\ or\ compiler-\/specific\ implementation\ required"{}}}
+\DoxyCodeLine{00279\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{00280\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{00281\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00282\ \textcolor{preprocessor}{\#if\ defined(\_\_STDC\_VERSION\_\_)\ \&\&\ (\_\_STDC\_VERSION\_\_\ >=\ 199901L)\ ||\ defined(\_\_GNUC\_\_)\ \&\&\ !defined(\_\_STRICT\_ANSI\_\_)}}
+\DoxyCodeLine{00283\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ scale\_to\_inf\ =\ 0x1.0p+112f;}
+\DoxyCodeLine{00284\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ scale\_to\_zero\ =\ 0x1.0p-\/110f;}
+\DoxyCodeLine{00285\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00286\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ scale\_to\_inf\ =\ fp32\_from\_bits(UINT32\_C(0x77800000));}
+\DoxyCodeLine{00287\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ scale\_to\_zero\ =\ fp32\_from\_bits(UINT32\_C(0x08800000));}
+\DoxyCodeLine{00288\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00289\ \textcolor{preprocessor}{\#if\ defined(\_MSC\_VER)\ \&\&\ defined(\_M\_IX86\_FP)\ \&\&\ (\_M\_IX86\_FP\ ==\ 0)\ ||\ defined(\_\_GNUC\_\_)\ \&\&\ defined(\_\_FLT\_EVAL\_METHOD\_\_)\ \&\&\ (\_\_FLT\_EVAL\_METHOD\_\_\ !=\ 0)}}
+\DoxyCodeLine{00290\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{volatile}\ \textcolor{keywordtype}{float}\ saturated\_f\ =\ fabsf(f)\ *\ scale\_to\_inf;}
+\DoxyCodeLine{00291\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00292\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ saturated\_f\ =\ fabsf(f)\ *\ scale\_to\_inf;}
+\DoxyCodeLine{00293\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00294\ \ \ \ \ \textcolor{keywordtype}{float}\ base\ =\ saturated\_f\ *\ scale\_to\_zero;}
+\DoxyCodeLine{00295\ }
+\DoxyCodeLine{00296\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ w\ =\ fp32\_to\_bits(f);}
+\DoxyCodeLine{00297\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ shl1\_w\ =\ w\ +\ w;}
+\DoxyCodeLine{00298\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ sign\ =\ w\ \&\ UINT32\_C(0x80000000);}
+\DoxyCodeLine{00299\ \ \ \ \ uint32\_t\ bias\ =\ shl1\_w\ \&\ UINT32\_C(0xFF000000);}
+\DoxyCodeLine{00300\ \ \ \ \ \textcolor{keywordflow}{if}\ (bias\ <\ UINT32\_C(0x71000000))\ \{}
+\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ bias\ =\ UINT32\_C(0x71000000);}
+\DoxyCodeLine{00302\ \ \ \ \ \}}
+\DoxyCodeLine{00303\ }
+\DoxyCodeLine{00304\ \ \ \ \ base\ =\ fp32\_from\_bits((bias\ >>\ 1)\ +\ UINT32\_C(0x07800000))\ +\ base;}
+\DoxyCodeLine{00305\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ bits\ =\ fp32\_to\_bits(base);}
+\DoxyCodeLine{00306\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ exp\_bits\ =\ (bits\ >>\ 13)\ \&\ UINT32\_C(0x00007C00);}
+\DoxyCodeLine{00307\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ mantissa\_bits\ =\ bits\ \&\ UINT32\_C(0x00000FFF);}
+\DoxyCodeLine{00308\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ nonsign\ =\ exp\_bits\ +\ mantissa\_bits;}
+\DoxyCodeLine{00309\ \ \ \ \ \textcolor{keywordflow}{return}\ (sign\ >>\ 16)\ |\ (shl1\_w\ >\ UINT32\_C(0xFF000000)\ ?\ UINT16\_C(0x7E00)\ :\ nonsign);}
+\DoxyCodeLine{00310\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00311\ \}}
+\DoxyCodeLine{00312\ }
+\DoxyCodeLine{00313\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00314\ \textcolor{comment}{\ *\ Convert\ a\ 16-\/bit\ floating-\/point\ number\ in\ ARM\ alternative\ half-\/precision\ format,\ in\ bit\ representation,\ to}}
+\DoxyCodeLine{00315\ \textcolor{comment}{\ *\ a\ 32-\/bit\ floating-\/point\ number\ in\ IEEE\ single-\/precision\ format,\ in\ bit\ representation.}}
+\DoxyCodeLine{00316\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00317\ \textcolor{comment}{\ *\ @note\ The\ implementation\ doesn't\ use\ any\ floating-\/point\ operations.}}
+\DoxyCodeLine{00318\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00319\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint32\_t\ fp16\_alt\_to\_fp32\_bits(uint16\_t\ h)\ \{}
+\DoxyCodeLine{00320\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00321\ \textcolor{comment}{\ \ \ \ \ *\ Extend\ the\ half-\/precision\ floating-\/point\ number\ to\ 32\ bits\ and\ shift\ to\ the\ upper\ part\ of\ the\ 32-\/bit\ word:}}
+\DoxyCodeLine{00322\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ +-\/-\/-\/+-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{00323\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ |\ S\ |EEEEE|MM\ MMMM\ MMMM|0000\ 0000\ 0000\ 0000|}}
+\DoxyCodeLine{00324\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ +-\/-\/-\/+-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{00325\ \textcolor{comment}{\ \ \ \ \ *\ Bits\ \ 31\ \ 26-\/30\ \ \ \ 16-\/25\ \ \ \ \ \ \ \ \ \ \ \ 0-\/15}}
+\DoxyCodeLine{00326\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00327\ \textcolor{comment}{\ \ \ \ \ *\ S\ -\/\ sign\ bit,\ E\ -\/\ bits\ of\ the\ biased\ exponent,\ M\ -\/\ bits\ of\ the\ mantissa,\ 0\ -\/\ zero\ bits.}}
+\DoxyCodeLine{00328\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00329\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ w\ =\ (uint32\_t)\ h\ <<\ 16;}
+\DoxyCodeLine{00330\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00331\ \textcolor{comment}{\ \ \ \ \ *\ Extract\ the\ sign\ of\ the\ input\ number\ into\ the\ high\ bit\ of\ the\ 32-\/bit\ word:}}
+\DoxyCodeLine{00332\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00333\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ +-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{00334\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ |\ S\ |0000000\ 00000000\ 00000000\ 00000000|}}
+\DoxyCodeLine{00335\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ +-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{00336\ \textcolor{comment}{\ \ \ \ \ *\ Bits\ \ 31\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0-\/31}}
+\DoxyCodeLine{00337\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00338\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ sign\ =\ w\ \&\ UINT32\_C(0x80000000);}
+\DoxyCodeLine{00339\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00340\ \textcolor{comment}{\ \ \ \ \ *\ Extract\ mantissa\ and\ biased\ exponent\ of\ the\ input\ number\ into\ the\ bits\ 0-\/30\ of\ the\ 32-\/bit\ word:}}
+\DoxyCodeLine{00341\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00342\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ +-\/-\/-\/+-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{00343\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ |\ 0\ |EEEEE|MM\ MMMM\ MMMM|0000\ 0000\ 0000\ 0000|}}
+\DoxyCodeLine{00344\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ +-\/-\/-\/+-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{00345\ \textcolor{comment}{\ \ \ \ \ *\ Bits\ \ 30\ \ 27-\/31\ \ \ \ \ 17-\/26\ \ \ \ \ \ \ \ \ \ \ \ 0-\/16}}
+\DoxyCodeLine{00346\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00347\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ nonsign\ =\ w\ \&\ UINT32\_C(0x7FFFFFFF);}
+\DoxyCodeLine{00348\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00349\ \textcolor{comment}{\ \ \ \ \ *\ Renorm\ shift\ is\ the\ number\ of\ bits\ to\ shift\ mantissa\ left\ to\ make\ the\ half-\/precision\ number\ normalized.}}
+\DoxyCodeLine{00350\ \textcolor{comment}{\ \ \ \ \ *\ If\ the\ initial\ number\ is\ normalized,\ some\ of\ its\ high\ 6\ bits\ (sign\ ==\ 0\ and\ 5-\/bit\ exponent)\ equals\ one.}}
+\DoxyCodeLine{00351\ \textcolor{comment}{\ \ \ \ \ *\ In\ this\ case\ renorm\_shift\ ==\ 0.\ If\ the\ number\ is\ denormalize,\ renorm\_shift\ >\ 0.\ Note\ that\ if\ we\ shift}}
+\DoxyCodeLine{00352\ \textcolor{comment}{\ \ \ \ \ *\ denormalized\ nonsign\ by\ renorm\_shift,\ the\ unit\ bit\ of\ mantissa\ will\ shift\ into\ exponent,\ turning\ the}}
+\DoxyCodeLine{00353\ \textcolor{comment}{\ \ \ \ \ *\ biased\ exponent\ into\ 1,\ and\ making\ mantissa\ normalized\ (i.e.\ without\ leading\ 1).}}
+\DoxyCodeLine{00354\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00355\ \textcolor{preprocessor}{\#ifdef\ \_MSC\_VER}}
+\DoxyCodeLine{00356\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long}\ nonsign\_bsr;}
+\DoxyCodeLine{00357\ \ \ \ \ \_BitScanReverse(\&nonsign\_bsr,\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{long})\ nonsign);}
+\DoxyCodeLine{00358\ \ \ \ \ uint32\_t\ renorm\_shift\ =\ (uint32\_t)\ nonsign\_bsr\ \string^\ 31;}
+\DoxyCodeLine{00359\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00360\ \ \ \ \ uint32\_t\ renorm\_shift\ =\ \_\_builtin\_clz(nonsign);}
+\DoxyCodeLine{00361\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00362\ \ \ \ \ renorm\_shift\ =\ renorm\_shift\ >\ 5\ ?\ renorm\_shift\ -\/\ 5\ :\ 0;}
+\DoxyCodeLine{00363\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00364\ \textcolor{comment}{\ \ \ \ \ *\ Iff\ nonsign\ is\ 0,\ it\ overflows\ into\ 0xFFFFFFFF,\ turning\ bit\ 31\ into\ 1.\ Otherwise,\ bit\ 31\ remains\ 0.}}
+\DoxyCodeLine{00365\ \textcolor{comment}{\ \ \ \ \ *\ The\ signed\ shift\ right\ by\ 31\ broadcasts\ bit\ 31\ into\ all\ bits\ of\ the\ zero\_mask.\ Thus}}
+\DoxyCodeLine{00366\ \textcolor{comment}{\ \ \ \ \ *\ \ \ zero\_mask\ ==}}
+\DoxyCodeLine{00367\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0xFFFFFFFF\ if\ the\ half-\/precision\ number\ was\ zero\ (+0.0h\ or\ -\/0.0h)}}
+\DoxyCodeLine{00368\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x00000000\ otherwise}}
+\DoxyCodeLine{00369\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00370\ \ \ \ \ \textcolor{keyword}{const}\ int32\_t\ zero\_mask\ =\ (int32\_t)\ (nonsign\ -\/\ 1)\ >>\ 31;}
+\DoxyCodeLine{00371\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00372\ \textcolor{comment}{\ \ \ \ \ *\ 1.\ Shift\ nonsign\ left\ by\ renorm\_shift\ to\ normalize\ it\ (if\ the\ input\ was\ denormal)}}
+\DoxyCodeLine{00373\ \textcolor{comment}{\ \ \ \ \ *\ 2.\ Shift\ nonsign\ right\ by\ 3\ so\ the\ exponent\ (5\ bits\ originally)\ becomes\ an\ 8-\/bit\ field\ and\ 10-\/bit\ mantissa}}
+\DoxyCodeLine{00374\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ shifts\ into\ the\ 10\ high\ bits\ of\ the\ 23-\/bit\ mantissa\ of\ IEEE\ single-\/precision\ number.}}
+\DoxyCodeLine{00375\ \textcolor{comment}{\ \ \ \ \ *\ 3.\ Add\ 0x70\ to\ the\ exponent\ (starting\ at\ bit\ 23)\ to\ compensate\ the\ different\ in\ exponent\ bias}}
+\DoxyCodeLine{00376\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ (0x7F\ for\ single-\/precision\ number\ less\ 0xF\ for\ half-\/precision\ number).}}
+\DoxyCodeLine{00377\ \textcolor{comment}{\ \ \ \ \ *\ 4.\ Subtract\ renorm\_shift\ from\ the\ exponent\ (starting\ at\ bit\ 23)\ to\ account\ for\ renormalization.\ As\ renorm\_shift}}
+\DoxyCodeLine{00378\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ is\ less\ than\ 0x70,\ this\ can\ be\ combined\ with\ step\ 3.}}
+\DoxyCodeLine{00379\ \textcolor{comment}{\ \ \ \ \ *\ 5.\ Binary\ ANDNOT\ with\ zero\_mask\ to\ turn\ the\ mantissa\ and\ exponent\ into\ zero\ if\ the\ input\ was\ zero.\ }}
+\DoxyCodeLine{00380\ \textcolor{comment}{\ \ \ \ \ *\ 6.\ Combine\ with\ the\ sign\ of\ the\ input\ number.}}
+\DoxyCodeLine{00381\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00382\ \ \ \ \ \textcolor{keywordflow}{return}\ sign\ |\ (((nonsign\ <<\ renorm\_shift\ >>\ 3)\ +\ ((0x70\ -\/\ renorm\_shift)\ <<\ 23))\ \&\ \string~zero\_mask);}
+\DoxyCodeLine{00383\ \}}
+\DoxyCodeLine{00384\ }
+\DoxyCodeLine{00385\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00386\ \textcolor{comment}{\ *\ Convert\ a\ 16-\/bit\ floating-\/point\ number\ in\ ARM\ alternative\ half-\/precision\ format,\ in\ bit\ representation,\ to}}
+\DoxyCodeLine{00387\ \textcolor{comment}{\ *\ a\ 32-\/bit\ floating-\/point\ number\ in\ IEEE\ single-\/precision\ format.}}
+\DoxyCodeLine{00388\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00389\ \textcolor{comment}{\ *\ @note\ The\ implementation\ relies\ on\ IEEE-\/like\ (no\ assumption\ about\ rounding\ mode\ and\ no\ operations\ on\ denormals)}}
+\DoxyCodeLine{00390\ \textcolor{comment}{\ *\ floating-\/point\ operations\ and\ bitcasts\ between\ integer\ and\ floating-\/point\ variables.}}
+\DoxyCodeLine{00391\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00392\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{float}\ fp16\_alt\_to\_fp32\_value(uint16\_t\ h)\ \{}
+\DoxyCodeLine{00393\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00394\ \textcolor{comment}{\ \ \ \ \ *\ Extend\ the\ half-\/precision\ floating-\/point\ number\ to\ 32\ bits\ and\ shift\ to\ the\ upper\ part\ of\ the\ 32-\/bit\ word:}}
+\DoxyCodeLine{00395\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ +-\/-\/-\/+-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{00396\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ |\ S\ |EEEEE|MM\ MMMM\ MMMM|0000\ 0000\ 0000\ 0000|}}
+\DoxyCodeLine{00397\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ +-\/-\/-\/+-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{00398\ \textcolor{comment}{\ \ \ \ \ *\ Bits\ \ 31\ \ 26-\/30\ \ \ \ 16-\/25\ \ \ \ \ \ \ \ \ \ \ \ 0-\/15}}
+\DoxyCodeLine{00399\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00400\ \textcolor{comment}{\ \ \ \ \ *\ S\ -\/\ sign\ bit,\ E\ -\/\ bits\ of\ the\ biased\ exponent,\ M\ -\/\ bits\ of\ the\ mantissa,\ 0\ -\/\ zero\ bits.}}
+\DoxyCodeLine{00401\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00402\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ w\ =\ (uint32\_t)\ h\ <<\ 16;}
+\DoxyCodeLine{00403\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00404\ \textcolor{comment}{\ \ \ \ \ *\ Extract\ the\ sign\ of\ the\ input\ number\ into\ the\ high\ bit\ of\ the\ 32-\/bit\ word:}}
+\DoxyCodeLine{00405\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00406\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ +-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{00407\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ |\ S\ |0000000\ 00000000\ 00000000\ 00000000|}}
+\DoxyCodeLine{00408\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ +-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{00409\ \textcolor{comment}{\ \ \ \ \ *\ Bits\ \ 31\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0-\/31}}
+\DoxyCodeLine{00410\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00411\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ sign\ =\ w\ \&\ UINT32\_C(0x80000000);}
+\DoxyCodeLine{00412\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00413\ \textcolor{comment}{\ \ \ \ \ *\ Extract\ mantissa\ and\ biased\ exponent\ of\ the\ input\ number\ into\ the\ high\ bits\ of\ the\ 32-\/bit\ word:}}
+\DoxyCodeLine{00414\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00415\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ +-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{00416\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ |EEEEE|MM\ MMMM\ MMMM|0\ 0000\ 0000\ 0000\ 0000|}}
+\DoxyCodeLine{00417\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ +-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{00418\ \textcolor{comment}{\ \ \ \ \ *\ Bits\ \ 27-\/31\ \ \ \ 17-\/26\ \ \ \ \ \ \ \ \ \ \ \ 0-\/16}}
+\DoxyCodeLine{00419\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00420\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ two\_w\ =\ w\ +\ w;}
+\DoxyCodeLine{00421\ }
+\DoxyCodeLine{00422\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00423\ \textcolor{comment}{\ \ \ \ \ *\ Shift\ mantissa\ and\ exponent\ into\ bits\ 23-\/28\ and\ bits\ 13-\/22\ so\ they\ become\ mantissa\ and\ exponent}}
+\DoxyCodeLine{00424\ \textcolor{comment}{\ \ \ \ \ *\ of\ a\ single-\/precision\ floating-\/point\ number:}}
+\DoxyCodeLine{00425\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00426\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ \ S|Exponent\ |\ \ \ \ \ \ \ \ \ \ Mantissa}}
+\DoxyCodeLine{00427\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ +-\/+-\/-\/-\/+-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{00428\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ |0|000|EEEEE|MM\ MMMM\ MMMM|0\ 0000\ 0000\ 0000|}}
+\DoxyCodeLine{00429\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ +-\/+-\/-\/-\/+-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{00430\ \textcolor{comment}{\ \ \ \ \ *\ Bits\ \ \ |\ 23-\/31\ \ \ |\ \ \ \ \ \ \ \ \ \ \ 0-\/22}}
+\DoxyCodeLine{00431\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00432\ \textcolor{comment}{\ \ \ \ \ *\ Next,\ the\ exponent\ is\ adjusted\ for\ the\ difference\ in\ exponent\ bias\ between\ single-\/precision\ and\ half-\/precision}}
+\DoxyCodeLine{00433\ \textcolor{comment}{\ \ \ \ \ *\ formats\ (0x7F\ -\/\ 0xF\ =\ 0x70).\ This\ operation\ never\ overflows\ or\ generates\ non-\/finite\ values,\ as\ the\ largest}}
+\DoxyCodeLine{00434\ \textcolor{comment}{\ \ \ \ \ *\ half-\/precision\ exponent\ is\ 0x1F\ and\ after\ the\ adjustment\ is\ can\ not\ exceed\ 0x8F\ <\ 0xFE\ (largest\ single-\/precision}}
+\DoxyCodeLine{00435\ \textcolor{comment}{\ \ \ \ \ *\ exponent\ for\ non-\/finite\ values).}}
+\DoxyCodeLine{00436\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00437\ \textcolor{comment}{\ \ \ \ \ *\ Note\ that\ this\ operation\ does\ not\ handle\ denormal\ inputs\ (where\ biased\ exponent\ ==\ 0).\ However,\ they\ also\ do\ not}}
+\DoxyCodeLine{00438\ \textcolor{comment}{\ \ \ \ \ *\ operate\ on\ denormal\ inputs,\ and\ do\ not\ produce\ denormal\ results.}}
+\DoxyCodeLine{00439\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00440\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ exp\_offset\ =\ UINT32\_C(0x70)\ <<\ 23;}
+\DoxyCodeLine{00441\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ normalized\_value\ =\ fp32\_from\_bits((two\_w\ >>\ 4)\ +\ exp\_offset);}
+\DoxyCodeLine{00442\ }
+\DoxyCodeLine{00443\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00444\ \textcolor{comment}{\ \ \ \ \ *\ Convert\ denormalized\ half-\/precision\ inputs\ into\ single-\/precision\ results\ (always\ normalized).}}
+\DoxyCodeLine{00445\ \textcolor{comment}{\ \ \ \ \ *\ Zero\ inputs\ are\ also\ handled\ here.}}
+\DoxyCodeLine{00446\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00447\ \textcolor{comment}{\ \ \ \ \ *\ In\ a\ denormalized\ number\ the\ biased\ exponent\ is\ zero,\ and\ mantissa\ has\ on-\/zero\ bits.}}
+\DoxyCodeLine{00448\ \textcolor{comment}{\ \ \ \ \ *\ First,\ we\ shift\ mantissa\ into\ bits\ 0-\/9\ of\ the\ 32-\/bit\ word.}}
+\DoxyCodeLine{00449\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00450\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ zeros\ \ \ \ \ \ \ \ \ \ \ |\ \ mantissa}}
+\DoxyCodeLine{00451\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ +-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{00452\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ |0000\ 0000\ 0000\ 0000\ 0000\ 00|MM\ MMMM\ MMMM|}}
+\DoxyCodeLine{00453\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ +-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}}
+\DoxyCodeLine{00454\ \textcolor{comment}{\ \ \ \ \ *\ Bits\ \ \ \ \ \ \ \ \ \ \ \ \ 10-\/31\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0-\/9}}
+\DoxyCodeLine{00455\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00456\ \textcolor{comment}{\ \ \ \ \ *\ Now,\ remember\ that\ denormalized\ half-\/precision\ numbers\ are\ represented\ as:}}
+\DoxyCodeLine{00457\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ FP16\ =\ mantissa\ *\ 2**(-\/24).}}
+\DoxyCodeLine{00458\ \textcolor{comment}{\ \ \ \ \ *\ The\ trick\ is\ to\ construct\ a\ normalized\ single-\/precision\ number\ with\ the\ same\ mantissa\ and\ thehalf-\/precision\ input}}
+\DoxyCodeLine{00459\ \textcolor{comment}{\ \ \ \ \ *\ and\ with\ an\ exponent\ which\ would\ scale\ the\ corresponding\ mantissa\ bits\ to\ 2**(-\/24).}}
+\DoxyCodeLine{00460\ \textcolor{comment}{\ \ \ \ \ *\ A\ normalized\ single-\/precision\ floating-\/point\ number\ is\ represented\ as:}}
+\DoxyCodeLine{00461\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ FP32\ =\ (1\ +\ mantissa\ *\ 2**(-\/23))\ *\ 2**(exponent\ -\/\ 127)}}
+\DoxyCodeLine{00462\ \textcolor{comment}{\ \ \ \ \ *\ Therefore,\ when\ the\ biased\ exponent\ is\ 126,\ a\ unit\ change\ in\ the\ mantissa\ of\ the\ input\ denormalized\ half-\/precision}}
+\DoxyCodeLine{00463\ \textcolor{comment}{\ \ \ \ \ *\ number\ causes\ a\ change\ of\ the\ constructud\ single-\/precision\ number\ by\ 2**(-\/24),\ i.e.\ the\ same\ ammount.}}
+\DoxyCodeLine{00464\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00465\ \textcolor{comment}{\ \ \ \ \ *\ The\ last\ step\ is\ to\ adjust\ the\ bias\ of\ the\ constructed\ single-\/precision\ number.\ When\ the\ input\ half-\/precision\ number}}
+\DoxyCodeLine{00466\ \textcolor{comment}{\ \ \ \ \ *\ is\ zero,\ the\ constructed\ single-\/precision\ number\ has\ the\ value\ of}}
+\DoxyCodeLine{00467\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ FP32\ =\ 1\ *\ 2**(126\ -\/\ 127)\ =\ 2**(-\/1)\ =\ 0.5}}
+\DoxyCodeLine{00468\ \textcolor{comment}{\ \ \ \ \ *\ Therefore,\ we\ need\ to\ subtract\ 0.5\ from\ the\ constructed\ single-\/precision\ number\ to\ get\ the\ numerical\ equivalent\ of}}
+\DoxyCodeLine{00469\ \textcolor{comment}{\ \ \ \ \ *\ the\ input\ half-\/precision\ number.}}
+\DoxyCodeLine{00470\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00471\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ magic\_mask\ =\ UINT32\_C(126)\ <<\ 23;}
+\DoxyCodeLine{00472\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ magic\_bias\ =\ 0.5f;}
+\DoxyCodeLine{00473\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ denormalized\_value\ =\ fp32\_from\_bits((two\_w\ >>\ 17)\ |\ magic\_mask)\ -\/\ magic\_bias;}
+\DoxyCodeLine{00474\ }
+\DoxyCodeLine{00475\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00476\ \textcolor{comment}{\ \ \ \ \ *\ -\/\ Choose\ either\ results\ of\ conversion\ of\ input\ as\ a\ normalized\ number,\ or\ as\ a\ denormalized\ number,\ depending\ on\ the}}
+\DoxyCodeLine{00477\ \textcolor{comment}{\ \ \ \ \ *\ \ \ input\ exponent.\ The\ variable\ two\_w\ contains\ input\ exponent\ in\ bits\ 27-\/31,\ therefore\ if\ its\ smaller\ than\ 2**27,\ the}}
+\DoxyCodeLine{00478\ \textcolor{comment}{\ \ \ \ \ *\ \ \ input\ is\ either\ a\ denormal\ number,\ or\ zero.}}
+\DoxyCodeLine{00479\ \textcolor{comment}{\ \ \ \ \ *\ -\/\ Combine\ the\ result\ of\ conversion\ of\ exponent\ and\ mantissa\ with\ the\ sign\ of\ the\ input\ number.}}
+\DoxyCodeLine{00480\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00481\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ denormalized\_cutoff\ =\ UINT32\_C(1)\ <<\ 27;}
+\DoxyCodeLine{00482\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ result\ =\ sign\ |}
+\DoxyCodeLine{00483\ \ \ \ \ \ \ \ \ (two\_w\ <\ denormalized\_cutoff\ ?\ fp32\_to\_bits(denormalized\_value)\ :\ fp32\_to\_bits(normalized\_value));}
+\DoxyCodeLine{00484\ \ \ \ \ \textcolor{keywordflow}{return}\ fp32\_from\_bits(result);}
+\DoxyCodeLine{00485\ \}}
+\DoxyCodeLine{00486\ }
+\DoxyCodeLine{00487\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00488\ \textcolor{comment}{\ *\ Convert\ a\ 32-\/bit\ floating-\/point\ number\ in\ IEEE\ single-\/precision\ format\ to\ a\ 16-\/bit\ floating-\/point\ number\ in}}
+\DoxyCodeLine{00489\ \textcolor{comment}{\ *\ ARM\ alternative\ half-\/precision\ format,\ in\ bit\ representation.}}
+\DoxyCodeLine{00490\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00491\ \textcolor{comment}{\ *\ @note\ The\ implementation\ relies\ on\ IEEE-\/like\ (no\ assumption\ about\ rounding\ mode\ and\ no\ operations\ on\ denormals)}}
+\DoxyCodeLine{00492\ \textcolor{comment}{\ *\ floating-\/point\ operations\ and\ bitcasts\ between\ integer\ and\ floating-\/point\ variables.}}
+\DoxyCodeLine{00493\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00494\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint16\_t\ fp16\_alt\_from\_fp32\_value(\textcolor{keywordtype}{float}\ f)\ \{}
+\DoxyCodeLine{00495\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ w\ =\ fp32\_to\_bits(f);}
+\DoxyCodeLine{00496\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ sign\ =\ w\ \&\ UINT32\_C(0x80000000);}
+\DoxyCodeLine{00497\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ shl1\_w\ =\ w\ +\ w;}
+\DoxyCodeLine{00498\ }
+\DoxyCodeLine{00499\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ shl1\_max\_fp16\_fp32\ =\ UINT32\_C(0x8FFFC000);}
+\DoxyCodeLine{00500\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ shl1\_base\ =\ shl1\_w\ >\ shl1\_max\_fp16\_fp32\ ?\ shl1\_max\_fp16\_fp32\ :\ shl1\_w;}
+\DoxyCodeLine{00501\ \ \ \ \ uint32\_t\ shl1\_bias\ =\ shl1\_base\ \&\ UINT32\_C(0xFF000000);}
+\DoxyCodeLine{00502\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ exp\_difference\ =\ 23\ -\/\ 10;}
+\DoxyCodeLine{00503\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ shl1\_bias\_min\ =\ (127\ -\/\ 1\ -\/\ exp\_difference)\ <<\ 24;}
+\DoxyCodeLine{00504\ \ \ \ \ \textcolor{keywordflow}{if}\ (shl1\_bias\ <\ shl1\_bias\_min)\ \{}
+\DoxyCodeLine{00505\ \ \ \ \ \ \ \ \ shl1\_bias\ =\ shl1\_bias\_min;}
+\DoxyCodeLine{00506\ \ \ \ \ \}}
+\DoxyCodeLine{00507\ }
+\DoxyCodeLine{00508\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ bias\ =\ fp32\_from\_bits((shl1\_bias\ >>\ 1)\ +\ ((exp\_difference\ +\ 2)\ <<\ 23));}
+\DoxyCodeLine{00509\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ base\ =\ fp32\_from\_bits((shl1\_base\ >>\ 1)\ +\ (2\ <<\ 23))\ +\ bias;}
+\DoxyCodeLine{00510\ }
+\DoxyCodeLine{00511\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ exp\_f\ =\ fp32\_to\_bits(base)\ >>\ 13;}
+\DoxyCodeLine{00512\ \ \ \ \ \textcolor{keywordflow}{return}\ (sign\ >>\ 16)\ |\ ((exp\_f\ \&\ UINT32\_C(0x00007C00))\ +\ (fp32\_to\_bits(base)\ \&\ UINT32\_C(0x00000FFF)));}
+\DoxyCodeLine{00513\ \}}
+\DoxyCodeLine{00514\ }
+\DoxyCodeLine{00515\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ FP16\_FP16\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

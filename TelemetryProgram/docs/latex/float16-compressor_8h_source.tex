@@ -1,0 +1,86 @@
+\doxysection{float16-\/compressor.h}
+\hypertarget{float16-compressor_8h_source}{}\label{float16-compressor_8h_source}\index{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/FP16-\/master/third-\/party/float16-\/compressor.h@{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/FP16-\/master/third-\/party/float16-\/compressor.h}}
+\mbox{\hyperlink{float16-compressor_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ This\ code\ snippet\ posted\ by\ user\ Phernost\ on\ }}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ https://stackoverflow.com/questions/1659440/32-\/bit-\/to-\/16-\/bit-\/floating-\/point-\/conversion}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ compress\ and\ decompress\ methods\ are\ made\ "{}inline"{}\ for\ performance}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_float16_compressor}{Float16Compressor}}}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{union\ }Bits}
+\DoxyCodeLine{00013\ \ \ \ \ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ f;}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ int32\_t\ si;}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ uint32\_t\ ui;}
+\DoxyCodeLine{00017\ \ \ \ \ \};}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ \textcolor{keyword}{const}\ shift\ =\ 13;}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ \textcolor{keyword}{const}\ shiftSign\ =\ 16;}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{static}\ int32\_t\ \textcolor{keyword}{const}\ infN\ =\ 0x7F800000;\ \textcolor{comment}{//\ flt32\ infinity}}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{static}\ int32\_t\ \textcolor{keyword}{const}\ maxN\ =\ 0x477FE000;\ \textcolor{comment}{//\ max\ flt16\ normal\ as\ a\ flt32}}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{static}\ int32\_t\ \textcolor{keyword}{const}\ minN\ =\ 0x38800000;\ \textcolor{comment}{//\ min\ flt16\ normal\ as\ a\ flt32}}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{static}\ int32\_t\ \textcolor{keyword}{const}\ signN\ =\ 0x80000000;\ \textcolor{comment}{//\ flt32\ sign\ bit}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{static}\ int32\_t\ \textcolor{keyword}{const}\ infC\ =\ infN\ >>\ shift;}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{static}\ int32\_t\ \textcolor{keyword}{const}\ nanN\ =\ (infC\ +\ 1)\ <<\ shift;\ \textcolor{comment}{//\ minimum\ flt16\ nan\ as\ a\ flt32}}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{static}\ int32\_t\ \textcolor{keyword}{const}\ maxC\ =\ maxN\ >>\ shift;}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{static}\ int32\_t\ \textcolor{keyword}{const}\ minC\ =\ minN\ >>\ shift;}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{static}\ int32\_t\ \textcolor{keyword}{const}\ signC\ =\ signN\ >>\ shiftSign;\ \textcolor{comment}{//\ flt16\ sign\ bit}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{static}\ int32\_t\ \textcolor{keyword}{const}\ mulN\ =\ 0x52000000;\ \textcolor{comment}{//\ (1\ <<\ 23)\ /\ minN}}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{static}\ int32\_t\ \textcolor{keyword}{const}\ mulC\ =\ 0x33800000;\ \textcolor{comment}{//\ minN\ /\ (1\ <<\ (23\ -\/\ shift))}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{static}\ int32\_t\ \textcolor{keyword}{const}\ subC\ =\ 0x003FF;\ \textcolor{comment}{//\ max\ flt32\ subnormal\ down\ shifted}}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{static}\ int32\_t\ \textcolor{keyword}{const}\ norC\ =\ 0x00400;\ \textcolor{comment}{//\ min\ flt32\ normal\ down\ shifted}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keyword}{static}\ int32\_t\ \textcolor{keyword}{const}\ maxD\ =\ infC\ -\/\ maxC\ -\/\ 1;}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{static}\ int32\_t\ \textcolor{keyword}{const}\ minD\ =\ minC\ -\/\ subC\ -\/\ 1;}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{static}\ uint16\_t\ \mbox{\hyperlink{class_float16_compressor_a14cbf3fb16ea850e1ce2e8fe419fb2e9}{compress}}(\textcolor{keywordtype}{float}\ value)}
+\DoxyCodeLine{00045\ \ \ \ \ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ Bits\ v,\ s;}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ v.f\ =\ value;}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ uint32\_t\ sign\ =\ v.si\ \&\ signN;}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ v.si\ \string^=\ sign;}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ sign\ >>=\ shiftSign;\ \textcolor{comment}{//\ logical\ shift}}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ s.si\ =\ mulN;}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ s.si\ =\ s.f\ *\ v.f;\ \textcolor{comment}{//\ correct\ subnormals}}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ v.si\ \string^=\ (s.si\ \string^\ v.si)\ \&\ -\/(minN\ >\ v.si);}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ v.si\ \string^=\ (infN\ \string^\ v.si)\ \&\ -\/((infN\ >\ v.si)\ \&\ (v.si\ >\ maxN));}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ v.si\ \string^=\ (nanN\ \string^\ v.si)\ \&\ -\/((nanN\ >\ v.si)\ \&\ (v.si\ >\ infN));}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ v.ui\ >>=\ shift;\ \textcolor{comment}{//\ logical\ shift}}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ v.si\ \string^=\ ((v.si\ -\/\ maxD)\ \string^\ v.si)\ \&\ -\/(v.si\ >\ maxC);}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ v.si\ \string^=\ ((v.si\ -\/\ minD)\ \string^\ v.si)\ \&\ -\/(v.si\ >\ subC);}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ v.ui\ |\ sign;}
+\DoxyCodeLine{00060\ \ \ \ \ \}}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_float16_compressor_a04c496ed5a030e4466de8fc16d358465}{decompress}}(uint16\_t\ value)}
+\DoxyCodeLine{00063\ \ \ \ \ \{}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ Bits\ v;}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ v.ui\ =\ value;}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ int32\_t\ sign\ =\ v.si\ \&\ signC;}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ v.si\ \string^=\ sign;}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ sign\ <<=\ shiftSign;}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ v.si\ \string^=\ ((v.si\ +\ minD)\ \string^\ v.si)\ \&\ -\/(v.si\ >\ subC);}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ v.si\ \string^=\ ((v.si\ +\ maxD)\ \string^\ v.si)\ \&\ -\/(v.si\ >\ maxC);}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ Bits\ s;}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ s.si\ =\ mulC;}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ s.f\ *=\ v.si;}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ int32\_t\ mask\ =\ -\/(norC\ >\ v.si);}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ v.si\ <<=\ shift;}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ v.si\ \string^=\ (s.si\ \string^\ v.si)\ \&\ mask;}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ v.si\ |=\ sign;}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ v.f;}
+\DoxyCodeLine{00079\ \ \ \ \ \}}
+\DoxyCodeLine{00080\ \};}
+
+\end{DoxyCode}

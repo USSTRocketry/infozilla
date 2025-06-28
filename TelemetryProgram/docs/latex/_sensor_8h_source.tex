@@ -1,0 +1,40 @@
+\doxysection{Sensor.\+h}
+\hypertarget{_sensor_8h_source}{}\label{_sensor_8h_source}\index{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/HAL/Sensor.h@{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/HAL/Sensor.h}}
+\mbox{\hyperlink{_sensor_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#define\ I2C\_WIRE0\ \ \ 0\ }\textcolor{comment}{//\ default\ (SDA\ =\ 18,\ SCL\ =\ 19)}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ I2C\_WIRE1\ \ \ 1\ }\textcolor{comment}{//\ (SDA\ =\ 17,\ SCL\ =\ 16)}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ I2C\_WIRE2\ \ \ 2\ }\textcolor{comment}{//\ (SDA\ =\ 25,\ SCL\ =\ 24)}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ MAP\_I2C\_WIRE(w)\ (w\ ==\ 0\ ?\ Wire\ :\ (w\ ==\ 1\ ?\ Wire1\ :\ Wire2))}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ SENSOR\_MODE\_I2C\ 0}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ SENSOR\_MODE\_SPI\ 1}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_sensor_a8a6b74c730b8bd209e1dd7fcfc1d3e33}{Sensor}}}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{comment}{//\ I2C}}
+\DoxyCodeLine{00019\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{class_sensor_a0830ff1889f90b853f0c3a58353864c9}{i2c\_addr}};}
+\DoxyCodeLine{00020\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{class_sensor_a100459d76016af6212961a54a6f8d81f}{i2c\_wire}};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{comment}{//\ SPI}}
+\DoxyCodeLine{00023\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{class_sensor_a9832da3629695f578d670d0050b1284b}{spi\_cs}};}
+\DoxyCodeLine{00024\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{class_sensor_ad92caf704404ac6f1a3fe5c9ab21f37b}{spi\_miso}};}
+\DoxyCodeLine{00025\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{class_sensor_aab9150ec710efde8abe8fe6c706c8950}{spi\_mosi}};}
+\DoxyCodeLine{00026\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{class_sensor_a28ec8a7a83b73bd7fb00f17c6e805e3a}{spi\_sck}};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{class_sensor_a2a866740311ecb0359bc42a74e998f9d}{sensor\_mode}};}
+\DoxyCodeLine{00029\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{class_sensor_aedde3cfbb9743352506179d01dda5872}{status}};}
+\DoxyCodeLine{00030\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{class_sensor_a8a6b74c730b8bd209e1dd7fcfc1d3e33}{Sensor}}(uint8\_t\ \mbox{\hyperlink{class_sensor_a0830ff1889f90b853f0c3a58353864c9}{i2c\_addr}},\ uint8\_t\ \mbox{\hyperlink{class_sensor_a100459d76016af6212961a54a6f8d81f}{i2c\_wire}});}
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{class_sensor_a8a6b74c730b8bd209e1dd7fcfc1d3e33}{Sensor}}(uint8\_t\ cs,\ uint8\_t\ miso,\ uint8\_t\ mosi,\ uint8\_t\ sck);}
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{class_sensor_aee8c70e7ef05ce65e7ee33686b5d7db2}{\string~Sensor}}();}
+\DoxyCodeLine{00034\ \};}
+
+\end{DoxyCode}

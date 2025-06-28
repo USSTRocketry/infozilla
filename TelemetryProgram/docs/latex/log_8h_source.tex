@@ -1,0 +1,64 @@
+\doxysection{log.\+h}
+\hypertarget{log_8h_source}{}\label{log_8h_source}\index{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/include/log.h@{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/include/log.h}}
+\mbox{\hyperlink{log_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <Arduino.h>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ log\_print(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ message)\ \{}
+\DoxyCodeLine{00006\ \ \ \ \ \textcolor{comment}{//\ Serial\ will\ not\ be\ available\ when\ powered\ by\ the\ battery\ through\ the\ gpio\ pins}}
+\DoxyCodeLine{00007\ \ \ \ \ \textcolor{keywordflow}{if}(Serial)\{}
+\DoxyCodeLine{00008\ \ \ \ \ \ \ \ \ Serial.print(message);}
+\DoxyCodeLine{00009\ \ \ \ \ \}}
+\DoxyCodeLine{00010\ \}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{comment}{//\ int\ overloaded\ function\ to\ print\ a\ number}}
+\DoxyCodeLine{00013\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ log\_print(\textcolor{keywordtype}{int}\ number)\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordflow}{if}(Serial)\{}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ Serial.print(number);}
+\DoxyCodeLine{00016\ \ \ \ \ \}}
+\DoxyCodeLine{00017\ \}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ float\ overloaded\ function\ to\ print\ a\ number}}
+\DoxyCodeLine{00019\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ log\_print(\textcolor{keywordtype}{float}\ number)\ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordflow}{if}(Serial)\{}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ Serial.print(number);}
+\DoxyCodeLine{00022\ \ \ \ \ \}}
+\DoxyCodeLine{00023\ \}}
+\DoxyCodeLine{00024\ \textcolor{comment}{//\ double\ overloaded\ function\ to\ print\ a\ number}}
+\DoxyCodeLine{00025\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ log\_print(\textcolor{keywordtype}{double}\ number)\ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordflow}{if}(Serial)\{}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ Serial.print(number);}
+\DoxyCodeLine{00028\ \ \ \ \ \}}
+\DoxyCodeLine{00029\ \}}
+\DoxyCodeLine{00030\ \textcolor{comment}{//\ long\ int\ overloaded\ function\ to\ print\ a\ number}}
+\DoxyCodeLine{00031\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ log\_print(\textcolor{keywordtype}{long}\ \textcolor{keywordtype}{int}\ number)\ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordflow}{if}(Serial)\{}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ Serial.print(number);}
+\DoxyCodeLine{00034\ \ \ \ \ \}}
+\DoxyCodeLine{00035\ \}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ log\_println(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ message)\ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordflow}{if}(Serial)\{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ Serial.println(message);}
+\DoxyCodeLine{00040\ \ \ \ \ \}}
+\DoxyCodeLine{00041\ \}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ log\_message(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ app,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ fmt,\ ...)\ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{char}\ message[256];}
+\DoxyCodeLine{00045\ \ \ \ \ va\_list\ args;}
+\DoxyCodeLine{00046\ \ \ \ \ va\_start(args,\ fmt);}
+\DoxyCodeLine{00047\ \ \ \ \ vsnprintf(message,\ \textcolor{keyword}{sizeof}(message),\ fmt,\ args);}
+\DoxyCodeLine{00048\ \ \ \ \ va\_end(args);}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordflow}{if}(Serial)\{}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}[\ "{}});}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ Serial.print(millis());}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}\ ]\ "{}});}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ Serial.print(app);}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ Serial.print(\textcolor{stringliteral}{"{}:\ "{}});}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ Serial.print(message);}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ Serial.println(\textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00057\ \ \ \ \ \}}
+\DoxyCodeLine{00058\ \}}
+
+\end{DoxyCode}

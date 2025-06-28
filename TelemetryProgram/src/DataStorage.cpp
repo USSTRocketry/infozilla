@@ -1,3 +1,14 @@
+/**
+ * @file DataStorage.cpp
+ * @author USST Avionics
+ * @brief This file has all the logic for saving telemetry data to the SD and flash
+ * @version 0.1
+ * @date 2025-06-28
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
+
 // #include <Arduino.h>
 #include <DataStorage.h>
 #include <SensorStructs.h>

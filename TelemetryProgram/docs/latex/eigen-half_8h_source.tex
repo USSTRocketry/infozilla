@@ -1,0 +1,176 @@
+\doxysection{eigen-\/half.h}
+\hypertarget{eigen-half_8h_source}{}\label{eigen-half_8h_source}\index{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/FP16-\/master/third-\/party/eigen-\/half.h@{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/FP16-\/master/third-\/party/eigen-\/half.h}}
+\mbox{\hyperlink{eigen-half_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ This\ implementation\ is\ extracted\ from\ Eigen:}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ \ \ Repo:\ bitbucket.org/eigen/eigen}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ \ \ File:\ Eigen/src/Core/arch/CUDA/Half.h}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ \ \ Commit\ ID:\ 96e0f73a35de54f675d825bef5339b2f08e77eb4}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ Removed\ a\ lot\ of\ redundant\ and\ cuda-\/specific\ code.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ EIGEN\_STRONG\_INLINE\ static\ inline}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ EIGEN\_DEVICE\_FUNC}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ This\ file\ is\ part\ of\ Eigen,\ a\ lightweight\ C++\ template\ library}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ for\ linear\ algebra.}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ This\ Source\ Code\ Form\ is\ subject\ to\ the\ terms\ of\ the\ Mozilla}}
+\DoxyCodeLine{00017\ \textcolor{comment}{//\ Public\ License\ v.\ 2.0.\ If\ a\ copy\ of\ the\ MPL\ was\ not\ distributed}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ with\ this\ file,\ You\ can\ obtain\ one\ at\ http://mozilla.org/MPL/2.0/.}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//}}
+\DoxyCodeLine{00020\ \textcolor{comment}{//\ The\ conversion\ routines\ are\ Copyright\ (c)\ Fabian\ Giesen,\ 2016.}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ The\ original\ license\ follows:}}
+\DoxyCodeLine{00022\ \textcolor{comment}{//}}
+\DoxyCodeLine{00023\ \textcolor{comment}{//\ Copyright\ (c)\ Fabian\ Giesen,\ 2016}}
+\DoxyCodeLine{00024\ \textcolor{comment}{//\ All\ rights\ reserved.}}
+\DoxyCodeLine{00025\ \textcolor{comment}{//\ Redistribution\ and\ use\ in\ source\ and\ binary\ forms,\ with\ or\ without}}
+\DoxyCodeLine{00026\ \textcolor{comment}{//\ modification,\ are\ permitted.}}
+\DoxyCodeLine{00027\ \textcolor{comment}{//\ THIS\ SOFTWARE\ IS\ PROVIDED\ BY\ THE\ COPYRIGHT\ HOLDERS\ AND\ CONTRIBUTORS}}
+\DoxyCodeLine{00028\ \textcolor{comment}{//\ “AS\ IS”\ AND\ ANY\ EXPRESS\ OR\ IMPLIED\ WARRANTIES,\ INCLUDING,\ BUT\ NOT}}
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ LIMITED\ TO,\ THE\ IMPLIED\ WARRANTIES\ OF\ MERCHANTABILITY\ AND\ FITNESS\ FOR}}
+\DoxyCodeLine{00030\ \textcolor{comment}{//\ A\ PARTICULAR\ PURPOSE\ ARE\ DISCLAIMED.\ IN\ NO\ EVENT\ SHALL\ THE\ COPYRIGHT}}
+\DoxyCodeLine{00031\ \textcolor{comment}{//\ HOLDER\ OR\ CONTRIBUTORS\ BE\ LIABLE\ FOR\ ANY\ DIRECT,\ INDIRECT,\ INCIDENTAL,}}
+\DoxyCodeLine{00032\ \textcolor{comment}{//\ SPECIAL,\ EXEMPLARY,\ OR\ CONSEQUENTIAL\ DAMAGES\ (INCLUDING,\ BUT\ NOT}}
+\DoxyCodeLine{00033\ \textcolor{comment}{//\ LIMITED\ TO,\ PROCUREMENT\ OF\ SUBSTITUTE\ GOODS\ OR\ SERVICES;\ LOSS\ OF\ USE,}}
+\DoxyCodeLine{00034\ \textcolor{comment}{//\ DATA,\ OR\ PROFITS;\ OR\ BUSINESS\ INTERRUPTION)\ HOWEVER\ CAUSED\ AND\ ON\ ANY}}
+\DoxyCodeLine{00035\ \textcolor{comment}{//\ THEORY\ OF\ LIABILITY,\ WHETHER\ IN\ CONTRACT,\ STRICT\ LIABILITY,\ OR\ TORT}}
+\DoxyCodeLine{00036\ \textcolor{comment}{//\ (INCLUDING\ NEGLIGENCE\ OR\ OTHERWISE)\ ARISING\ IN\ ANY\ WAY\ OUT\ OF\ THE\ USE}}
+\DoxyCodeLine{00037\ \textcolor{comment}{//\ OF\ THIS\ SOFTWARE,\ EVEN\ IF\ ADVISED\ OF\ THE\ POSSIBILITY\ OF\ SUCH\ DAMAGE.}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{comment}{//\ Standard\ 16-\/bit\ float\ type,\ mostly\ useful\ for\ GPUs.\ Defines\ a\ new}}
+\DoxyCodeLine{00041\ \textcolor{comment}{//\ type\ Eigen::half\ (inheriting\ from\ CUDA's\ \_\_half\ struct)\ with}}
+\DoxyCodeLine{00042\ \textcolor{comment}{//\ operator\ overloads\ such\ that\ it\ behaves\ basically\ as\ an\ arithmetic}}
+\DoxyCodeLine{00043\ \textcolor{comment}{//\ type.\ It\ will\ be\ quite\ slow\ on\ CPUs\ (so\ it\ is\ recommended\ to\ stay}}
+\DoxyCodeLine{00044\ \textcolor{comment}{//\ in\ fp32\ for\ CPUs,\ except\ for\ simple\ parameter\ conversions,\ I/O}}
+\DoxyCodeLine{00045\ \textcolor{comment}{//\ to\ disk\ and\ the\ likes),\ but\ fast\ on\ GPUs.}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#ifndef\ EIGEN\_HALF\_CUDA\_H}}
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#define\ EIGEN\_HALF\_CUDA\_H}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_eigen}{Eigen}}\ \{}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_eigen_1_1half__impl}{half\_impl}}\ \{}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{comment}{//\ Make\ our\ own\ \_\_half\ definition\ that\ is\ similar\ to\ CUDA's.}}
+\DoxyCodeLine{00056\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half_afea3e23a7cfc4c46c453fa40d2420074}{\_\_half}}\ \{}
+\DoxyCodeLine{00057\ \ \ \mbox{\hyperlink{eigen-half_8h_a9efec3cfd22b9a33bead9c6718d128da}{EIGEN\_DEVICE\_FUNC}}\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half_afea3e23a7cfc4c46c453fa40d2420074}{\_\_half}}()\ :\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half_a84b54fd1419c8250692f7375ae3a0745}{x}}(0)\ \{\}}
+\DoxyCodeLine{00058\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{eigen-half_8h_a9efec3cfd22b9a33bead9c6718d128da}{EIGEN\_DEVICE\_FUNC}}\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half_a33f3c4cf7cb73ff280728b21cd224b51}{\_\_half}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ raw)\ :\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half_a84b54fd1419c8250692f7375ae3a0745}{x}}(raw)\ \{\}}
+\DoxyCodeLine{00059\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half_a84b54fd1419c8250692f7375ae3a0745}{x}};}
+\DoxyCodeLine{00060\ \};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \mbox{\hyperlink{eigen-half_8h_af2b60117c00a6e75812de43bfe7db3b1}{EIGEN\_STRONG\_INLINE}}\ \mbox{\hyperlink{eigen-half_8h_a9efec3cfd22b9a33bead9c6718d128da}{EIGEN\_DEVICE\_FUNC}}\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half}{\_\_half}}\ \mbox{\hyperlink{namespace_eigen_1_1half__impl_a3369c49b5485894dc328c77df9189178}{raw\_uint16\_to\_half}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ x);}
+\DoxyCodeLine{00063\ \mbox{\hyperlink{eigen-half_8h_af2b60117c00a6e75812de43bfe7db3b1}{EIGEN\_STRONG\_INLINE}}\ \mbox{\hyperlink{eigen-half_8h_a9efec3cfd22b9a33bead9c6718d128da}{EIGEN\_DEVICE\_FUNC}}\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half}{\_\_half}}\ \mbox{\hyperlink{namespace_eigen_1_1half__impl_a2a8ead4ff87f83102a90536e6d475d20}{float\_to\_half\_rtne}}(\textcolor{keywordtype}{float}\ ff);}
+\DoxyCodeLine{00064\ \mbox{\hyperlink{eigen-half_8h_af2b60117c00a6e75812de43bfe7db3b1}{EIGEN\_STRONG\_INLINE}}\ \mbox{\hyperlink{eigen-half_8h_a9efec3cfd22b9a33bead9c6718d128da}{EIGEN\_DEVICE\_FUNC}}\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{namespace_eigen_1_1half__impl_a95f763352514926ddc9954a501b0146a}{half\_to\_float}}(\mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half}{\_\_half}}\ h);}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \textcolor{comment}{//\ Conversion\ routines,\ including\ fallbacks\ for\ the\ host\ or\ older\ CUDA.}}
+\DoxyCodeLine{00067\ \textcolor{comment}{//\ Note\ that\ newer\ Intel\ CPUs\ (Haswell\ or\ newer)\ have\ vectorized\ versions\ of}}
+\DoxyCodeLine{00068\ \textcolor{comment}{//\ these\ in\ hardware.\ If\ we\ need\ more\ performance\ on\ older/other\ CPUs,\ they\ are}}
+\DoxyCodeLine{00069\ \textcolor{comment}{//\ also\ possible\ to\ vectorize\ directly.}}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \mbox{\hyperlink{eigen-half_8h_af2b60117c00a6e75812de43bfe7db3b1}{EIGEN\_STRONG\_INLINE}}\ \mbox{\hyperlink{eigen-half_8h_a9efec3cfd22b9a33bead9c6718d128da}{EIGEN\_DEVICE\_FUNC}}\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half}{\_\_half}}\ \mbox{\hyperlink{namespace_eigen_1_1half__impl_a3369c49b5485894dc328c77df9189178}{raw\_uint16\_to\_half}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ x)\ \{}
+\DoxyCodeLine{00072\ \ \ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half}{\_\_half}}\ h;}
+\DoxyCodeLine{00073\ \ \ h.\mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half_a84b54fd1419c8250692f7375ae3a0745}{x}}\ =\ x;}
+\DoxyCodeLine{00074\ \ \ \textcolor{keywordflow}{return}\ h;}
+\DoxyCodeLine{00075\ \}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \textcolor{keyword}{union\ }\mbox{\hyperlink{union_eigen_1_1half__impl_1_1_f_p32}{FP32}}\ \{}
+\DoxyCodeLine{00078\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{union_eigen_1_1half__impl_1_1_f_p32_ad13f029b8bc6ba9441d161d2d660f1fa}{u}};}
+\DoxyCodeLine{00079\ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{union_eigen_1_1half__impl_1_1_f_p32_acade4f14091fc39b02bc78f30e8a11c0}{f}};}
+\DoxyCodeLine{00080\ \};}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \mbox{\hyperlink{eigen-half_8h_af2b60117c00a6e75812de43bfe7db3b1}{EIGEN\_STRONG\_INLINE}}\ \mbox{\hyperlink{eigen-half_8h_a9efec3cfd22b9a33bead9c6718d128da}{EIGEN\_DEVICE\_FUNC}}\ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half}{\_\_half}}\ \mbox{\hyperlink{namespace_eigen_1_1half__impl_a2a8ead4ff87f83102a90536e6d475d20}{float\_to\_half\_rtne}}(\textcolor{keywordtype}{float}\ ff)\ \{}
+\DoxyCodeLine{00083\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_HAS\_CUDA\_FP16)\ \&\&\ defined(\_\_CUDA\_ARCH\_\_)\ \&\&\ \_\_CUDA\_ARCH\_\_\ >=\ 300}}
+\DoxyCodeLine{00084\ \ \ \textcolor{keywordflow}{return}\ \_\_float2half(ff);}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \textcolor{preprocessor}{\#elif\ defined(EIGEN\_HAS\_FP16\_C)}}
+\DoxyCodeLine{00087\ \ \ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half}{\_\_half}}\ h;}
+\DoxyCodeLine{00088\ \ \ h.\mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half_a84b54fd1419c8250692f7375ae3a0745}{x}}\ =\ \_cvtss\_sh(ff,\ 0);}
+\DoxyCodeLine{00089\ \ \ \textcolor{keywordflow}{return}\ h;}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00092\ \ \ \mbox{\hyperlink{union_eigen_1_1half__impl_1_1_f_p32}{FP32}}\ f;\ f.\mbox{\hyperlink{union_eigen_1_1half__impl_1_1_f_p32_acade4f14091fc39b02bc78f30e8a11c0}{f}}\ =\ ff;}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{union_eigen_1_1half__impl_1_1_f_p32}{FP32}}\ f32infty\ =\ \{\ 255\ <<\ 23\ \};}
+\DoxyCodeLine{00095\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{union_eigen_1_1half__impl_1_1_f_p32}{FP32}}\ f16max\ =\ \{\ (127\ +\ 16)\ <<\ 23\ \};}
+\DoxyCodeLine{00096\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{union_eigen_1_1half__impl_1_1_f_p32}{FP32}}\ denorm\_magic\ =\ \{\ ((127\ -\/\ 15)\ +\ (23\ -\/\ 10)\ +\ 1)\ <<\ 23\ \};}
+\DoxyCodeLine{00097\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ sign\_mask\ =\ 0x80000000u;}
+\DoxyCodeLine{00098\ \ \ \mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half}{\_\_half}}\ o;}
+\DoxyCodeLine{00099\ \ \ o.\mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half_a84b54fd1419c8250692f7375ae3a0745}{x}}\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\textcolor{keyword}{>}(0x0u);}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ sign\ =\ f.\mbox{\hyperlink{union_eigen_1_1half__impl_1_1_f_p32_ad13f029b8bc6ba9441d161d2d660f1fa}{u}}\ \&\ sign\_mask;}
+\DoxyCodeLine{00102\ \ \ f.\mbox{\hyperlink{union_eigen_1_1half__impl_1_1_f_p32_ad13f029b8bc6ba9441d161d2d660f1fa}{u}}\ \string^=\ sign;}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \textcolor{comment}{//\ NOTE\ all\ the\ integer\ compares\ in\ this\ function\ can\ be\ safely}}
+\DoxyCodeLine{00105\ \ \ \textcolor{comment}{//\ compiled\ into\ signed\ compares\ since\ all\ operands\ are\ below}}
+\DoxyCodeLine{00106\ \ \ \textcolor{comment}{//\ 0x80000000.\ Important\ if\ you\ want\ fast\ straight\ SSE2\ code}}
+\DoxyCodeLine{00107\ \ \ \textcolor{comment}{//\ (since\ there's\ no\ unsigned\ PCMPGTD).}}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \textcolor{keywordflow}{if}\ (f.\mbox{\hyperlink{union_eigen_1_1half__impl_1_1_f_p32_ad13f029b8bc6ba9441d161d2d660f1fa}{u}}\ >=\ f16max.\mbox{\hyperlink{union_eigen_1_1half__impl_1_1_f_p32_ad13f029b8bc6ba9441d161d2d660f1fa}{u}})\ \{\ \ \textcolor{comment}{//\ result\ is\ Inf\ or\ NaN\ (all\ exponent\ bits\ set)}}
+\DoxyCodeLine{00110\ \ \ \ \ o.\mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half_a84b54fd1419c8250692f7375ae3a0745}{x}}\ =\ (f.\mbox{\hyperlink{union_eigen_1_1half__impl_1_1_f_p32_ad13f029b8bc6ba9441d161d2d660f1fa}{u}}\ >\ f32infty.\mbox{\hyperlink{union_eigen_1_1half__impl_1_1_f_p32_ad13f029b8bc6ba9441d161d2d660f1fa}{u}})\ ?\ 0x7e00\ :\ 0x7c00;\ \textcolor{comment}{//\ NaN-\/>qNaN\ and\ Inf-\/>Inf}}
+\DoxyCodeLine{00111\ \ \ \}\ \textcolor{keywordflow}{else}\ \{\ \ \textcolor{comment}{//\ (De)normalized\ number\ or\ zero}}
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordflow}{if}\ (f.\mbox{\hyperlink{union_eigen_1_1half__impl_1_1_f_p32_ad13f029b8bc6ba9441d161d2d660f1fa}{u}}\ <\ (113\ <<\ 23))\ \{\ \ \textcolor{comment}{//\ resulting\ FP16\ is\ subnormal\ or\ zero}}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \textcolor{comment}{//\ use\ a\ magic\ value\ to\ align\ our\ 10\ mantissa\ bits\ at\ the\ bottom\ of}}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \textcolor{comment}{//\ the\ float.\ as\ long\ as\ FP\ addition\ is\ round-\/to-\/nearest-\/even\ this}}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \textcolor{comment}{//\ just\ works.}}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ f.\mbox{\hyperlink{union_eigen_1_1half__impl_1_1_f_p32_acade4f14091fc39b02bc78f30e8a11c0}{f}}\ +=\ denorm\_magic.\mbox{\hyperlink{union_eigen_1_1half__impl_1_1_f_p32_acade4f14091fc39b02bc78f30e8a11c0}{f}};}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \textcolor{comment}{//\ and\ one\ integer\ subtract\ of\ the\ bias\ later,\ we\ have\ our\ final\ float!}}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ o.\mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half_a84b54fd1419c8250692f7375ae3a0745}{x}}\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\textcolor{keyword}{>}(f.\mbox{\hyperlink{union_eigen_1_1half__impl_1_1_f_p32_ad13f029b8bc6ba9441d161d2d660f1fa}{u}}\ -\/\ denorm\_magic.\mbox{\hyperlink{union_eigen_1_1half__impl_1_1_f_p32_ad13f029b8bc6ba9441d161d2d660f1fa}{u}});}
+\DoxyCodeLine{00120\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ mant\_odd\ =\ (f.\mbox{\hyperlink{union_eigen_1_1half__impl_1_1_f_p32_ad13f029b8bc6ba9441d161d2d660f1fa}{u}}\ >>\ 13)\ \&\ 1;\ \textcolor{comment}{//\ resulting\ mantissa\ is\ odd}}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \textcolor{comment}{//\ update\ exponent,\ rounding\ bias\ part\ 1}}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ f.\mbox{\hyperlink{union_eigen_1_1half__impl_1_1_f_p32_ad13f029b8bc6ba9441d161d2d660f1fa}{u}}\ +=\ ((\textcolor{keywordtype}{unsigned}\ int)(15\ -\/\ 127)\ <<\ 23)\ +\ 0xfff;}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \textcolor{comment}{//\ rounding\ bias\ part\ 2}}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ f.\mbox{\hyperlink{union_eigen_1_1half__impl_1_1_f_p32_ad13f029b8bc6ba9441d161d2d660f1fa}{u}}\ +=\ mant\_odd;}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \textcolor{comment}{//\ take\ the\ bits!}}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ o.\mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half_a84b54fd1419c8250692f7375ae3a0745}{x}}\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\textcolor{keyword}{>}(f.\mbox{\hyperlink{union_eigen_1_1half__impl_1_1_f_p32_ad13f029b8bc6ba9441d161d2d660f1fa}{u}}\ >>\ 13);}
+\DoxyCodeLine{00129\ \ \ \ \ \}}
+\DoxyCodeLine{00130\ \ \ \}}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00132\ \ \ o.\mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half_a84b54fd1419c8250692f7375ae3a0745}{x}}\ |=\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\textcolor{keyword}{>}(sign\ >>\ 16);}
+\DoxyCodeLine{00133\ \ \ \textcolor{keywordflow}{return}\ o;}
+\DoxyCodeLine{00134\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00135\ \}}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ \mbox{\hyperlink{eigen-half_8h_af2b60117c00a6e75812de43bfe7db3b1}{EIGEN\_STRONG\_INLINE}}\ \mbox{\hyperlink{eigen-half_8h_a9efec3cfd22b9a33bead9c6718d128da}{EIGEN\_DEVICE\_FUNC}}\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{namespace_eigen_1_1half__impl_a95f763352514926ddc9954a501b0146a}{half\_to\_float}}(\mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half}{\_\_half}}\ h)\ \{}
+\DoxyCodeLine{00138\ \textcolor{preprocessor}{\#if\ defined(EIGEN\_HAS\_CUDA\_FP16)\ \&\&\ defined(\_\_CUDA\_ARCH\_\_)\ \&\&\ \_\_CUDA\_ARCH\_\_\ >=\ 300}}
+\DoxyCodeLine{00139\ \ \ \textcolor{keywordflow}{return}\ \_\_half2float(h);}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ \textcolor{preprocessor}{\#elif\ defined(EIGEN\_HAS\_FP16\_C)}}
+\DoxyCodeLine{00142\ \ \ \textcolor{keywordflow}{return}\ \_cvtsh\_ss(h.\mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half_a84b54fd1419c8250692f7375ae3a0745}{x}});}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00145\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{union_eigen_1_1half__impl_1_1_f_p32}{FP32}}\ magic\ =\ \{\ 113\ <<\ 23\ \};}
+\DoxyCodeLine{00146\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ shifted\_exp\ =\ 0x7c00\ <<\ 13;\ \textcolor{comment}{//\ exponent\ mask\ after\ shift}}
+\DoxyCodeLine{00147\ \ \ \mbox{\hyperlink{union_eigen_1_1half__impl_1_1_f_p32}{FP32}}\ o;}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00149\ \ \ o.\mbox{\hyperlink{union_eigen_1_1half__impl_1_1_f_p32_ad13f029b8bc6ba9441d161d2d660f1fa}{u}}\ =\ (h.\mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half_a84b54fd1419c8250692f7375ae3a0745}{x}}\ \&\ 0x7fff)\ <<\ 13;\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ exponent/mantissa\ bits}}
+\DoxyCodeLine{00150\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ exp\ =\ shifted\_exp\ \&\ o.\mbox{\hyperlink{union_eigen_1_1half__impl_1_1_f_p32_ad13f029b8bc6ba9441d161d2d660f1fa}{u}};\ \ \ \textcolor{comment}{//\ just\ the\ exponent}}
+\DoxyCodeLine{00151\ \ \ o.\mbox{\hyperlink{union_eigen_1_1half__impl_1_1_f_p32_ad13f029b8bc6ba9441d161d2d660f1fa}{u}}\ +=\ (127\ -\/\ 15)\ <<\ 23;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ exponent\ adjust}}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00153\ \ \ \textcolor{comment}{//\ handle\ exponent\ special\ cases}}
+\DoxyCodeLine{00154\ \ \ \textcolor{keywordflow}{if}\ (exp\ ==\ shifted\_exp)\ \{\ \ \ \ \ \textcolor{comment}{//\ Inf/NaN?}}
+\DoxyCodeLine{00155\ \ \ \ \ o.\mbox{\hyperlink{union_eigen_1_1half__impl_1_1_f_p32_ad13f029b8bc6ba9441d161d2d660f1fa}{u}}\ +=\ (128\ -\/\ 16)\ <<\ 23;\ \ \ \ \textcolor{comment}{//\ extra\ exp\ adjust}}
+\DoxyCodeLine{00156\ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (exp\ ==\ 0)\ \{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Zero/Denormal?}}
+\DoxyCodeLine{00157\ \ \ \ \ o.\mbox{\hyperlink{union_eigen_1_1half__impl_1_1_f_p32_ad13f029b8bc6ba9441d161d2d660f1fa}{u}}\ +=\ 1\ <<\ 23;\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ extra\ exp\ adjust}}
+\DoxyCodeLine{00158\ \ \ \ \ o.\mbox{\hyperlink{union_eigen_1_1half__impl_1_1_f_p32_acade4f14091fc39b02bc78f30e8a11c0}{f}}\ -\/=\ magic.\mbox{\hyperlink{union_eigen_1_1half__impl_1_1_f_p32_acade4f14091fc39b02bc78f30e8a11c0}{f}};\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ renormalize}}
+\DoxyCodeLine{00159\ \ \ \}}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00161\ \ \ o.\mbox{\hyperlink{union_eigen_1_1half__impl_1_1_f_p32_ad13f029b8bc6ba9441d161d2d660f1fa}{u}}\ |=\ (h.\mbox{\hyperlink{struct_eigen_1_1half__impl_1_1____half_a84b54fd1419c8250692f7375ae3a0745}{x}}\ \&\ 0x8000)\ <<\ 16;\ \ \ \ \textcolor{comment}{//\ sign\ bit}}
+\DoxyCodeLine{00162\ \ \ \textcolor{keywordflow}{return}\ o.\mbox{\hyperlink{union_eigen_1_1half__impl_1_1_f_p32_acade4f14091fc39b02bc78f30e8a11c0}{f}};}
+\DoxyCodeLine{00163\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00164\ \}}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00166\ \}\ \textcolor{comment}{//\ end\ namespace\ half\_impl}}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00168\ \}\ \textcolor{comment}{//\ end\ namespace\ Eigen}}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ EIGEN\_HALF\_CUDA\_H}}
+
+\end{DoxyCode}

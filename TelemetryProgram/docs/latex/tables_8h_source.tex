@@ -1,0 +1,19 @@
+\doxysection{tables.\+h}
+\hypertarget{tables_8h_source}{}\label{tables_8h_source}\index{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/FP16-\/master/test/tables.h@{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/FP16-\/master/test/tables.h}}
+\mbox{\hyperlink{tables_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacefp16}{fp16}}\ \{}
+\DoxyCodeLine{00005\ \ \ \ \ \textcolor{comment}{/*\ FP32\ conversion\ results\ for\ FP16\ numbers\ in\ range\ [1.0h,\ 2.0h)\ */}}
+\DoxyCodeLine{00006\ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ uint32\_t\ \mbox{\hyperlink{namespacefp16_ab41fe3cd6c33546ef22ad7cb5e6a0f95}{normalizedValues}}[1024];}
+\DoxyCodeLine{00007\ \ \ \ \ \textcolor{comment}{/*\ FP32\ conversion\ results\ for\ FP16\ numbers\ in\ range\ [0.0h,\ HALF\_MIN)\ */}}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ uint32\_t\ \mbox{\hyperlink{namespacefp16_a601dac6a4687b9b5314908eeb5a384b4}{denormalizedValues}}[1024];}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{comment}{/*\ FP32\ numbers\ such\ that\ FP16(fp32)\ <\ as\_half(as\_uint16(1.0h)\ |\ index)\ for\ fp32\ <\ normalizedRanges[index]\ */}}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ uint32\_t\ \mbox{\hyperlink{namespacefp16_a076c63e8669cf8834d170f15b0951810}{normalizedRanges}}[1024];}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{comment}{/*\ FP32\ numbers\ such\ that\ FP16(fp32)\ <\ as\_half(index)\ for\ fp32\ <\ denormalizedRanges[index]\ */}}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ uint32\_t\ \mbox{\hyperlink{namespacefp16_ae29b2197751884fa1da3d3145d6e125a}{denormalizedRanges}}[1024];}
+\DoxyCodeLine{00013\ \}}
+
+\end{DoxyCode}

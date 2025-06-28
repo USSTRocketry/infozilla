@@ -1,0 +1,134 @@
+\doxysection{C\+:/\+Users/\+Bobby/\+Documents/\+USST/\+Infozilla/infozilla/\+Telemetry\+Program/src/\+Copy\+From\+SD.cpp File Reference}
+\hypertarget{_copy_from_s_d_8cpp}{}\label{_copy_from_s_d_8cpp}\index{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/src/CopyFromSD.cpp@{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/src/CopyFromSD.cpp}}
+
+
+This file provides test functions for the SD.  
+
+
+{\ttfamily \#include $<$Serial\+Flash.\+h$>$}\newline
+{\ttfamily \#include $<$SD.\+h$>$}\newline
+{\ttfamily \#include $<$SPI.\+h$>$}\newline
+Include dependency graph for Copy\+From\+SD.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=289pt]{_copy_from_s_d_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_copy_from_s_d_8cpp_a033c1432321a4d2bdbd1ad224a8f5d7b}{copy\+SDTo\+SPIFlash}} ()
+\begin{DoxyCompactList}\small\item\em test function that copies all files from the SD card to the SPI Flash memory chip. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{_copy_from_s_d_8cpp_a5c49cd6e5d48e91888f1189844bc5a84}{compare\+Files}} (File \&file, Serial\+Flash\+File \&ffile)
+\begin{DoxyCompactList}\small\item\em This function compares if a file and serial flash file have the same data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_copy_from_s_d_8cpp_ad384c8432c61d7397cc69aa201a14541}{error}} (const char \texorpdfstring{$\ast$}{*}message)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const int \mbox{\hyperlink{_copy_from_s_d_8cpp_a68e9e5c9e17fe9586bf6f9e460d32d17}{SDchip\+Select}} = 4
+\item 
+const int \mbox{\hyperlink{_copy_from_s_d_8cpp_a4f161d4ac97194a42c5131cf53383a3b}{Flash\+Chip\+Select}} = 6
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This file provides test functions for the SD. 
+
+\begin{DoxyAuthor}{Author}
+USST Avionics 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2025-\/06-\/28
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2025 
+\end{DoxyCopyright}
+
+
+\label{doc-func-members}
+\Hypertarget{_copy_from_s_d_8cpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_copy_from_s_d_8cpp_a5c49cd6e5d48e91888f1189844bc5a84}\index{CopyFromSD.cpp@{CopyFromSD.cpp}!compareFiles@{compareFiles}}
+\index{compareFiles@{compareFiles}!CopyFromSD.cpp@{CopyFromSD.cpp}}
+\doxysubsubsection{\texorpdfstring{compareFiles()}{compareFiles()}}
+{\footnotesize\ttfamily \label{_copy_from_s_d_8cpp_a5c49cd6e5d48e91888f1189844bc5a84} 
+bool compare\+Files (\begin{DoxyParamCaption}\item[{File \&}]{file}{, }\item[{Serial\+Flash\+File \&}]{ffile}{}\end{DoxyParamCaption})}
+
+
+
+This function compares if a file and serial flash file have the same data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file} & File \\
+\hline
+{\em ffile} & Serial\+Flash\+File \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true 
+
+false 
+\end{DoxyReturn}
+\Hypertarget{_copy_from_s_d_8cpp_a033c1432321a4d2bdbd1ad224a8f5d7b}\index{CopyFromSD.cpp@{CopyFromSD.cpp}!copySDToSPIFlash@{copySDToSPIFlash}}
+\index{copySDToSPIFlash@{copySDToSPIFlash}!CopyFromSD.cpp@{CopyFromSD.cpp}}
+\doxysubsubsection{\texorpdfstring{copySDToSPIFlash()}{copySDToSPIFlash()}}
+{\footnotesize\ttfamily \label{_copy_from_s_d_8cpp_a033c1432321a4d2bdbd1ad224a8f5d7b} 
+void copy\+SDTo\+SPIFlash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+test function that copies all files from the SD card to the SPI Flash memory chip. 
+
+This function initializes serial communication and sets up the SD and SPI Flash. It loops through all files in the root directory of the SD card. For each file\+:
+\begin{DoxyItemize}
+\item If the file already exists on the flash chip, it compares the file sizes.
+\item If the sizes are different (or comparison code is enabled and the content differs), the existing file on the flash chip is deleted and replaced.
+\item If the file does not exist or was removed, the file is created and copied over.
+\end{DoxyItemize}
+
+Dependencies\+:
+\begin{DoxyItemize}
+\item Requires {\ttfamily SD} and {\ttfamily Serial\+Flash} libraries.
+\item Assumes {\ttfamily SDchip\+Select} and {\ttfamily Flash\+Chip\+Select} are defined globally.
+\end{DoxyItemize}
+
+Notes\+:
+\begin{DoxyItemize}
+\item Uncomment SPI pin settings if using Teensy Audio shield or other SPI devices.
+\item Serial must be open (waits up to 10 seconds) before file operations start.
+\item Optional file content comparison code is included but commented out.
+\end{DoxyItemize}
+
+Output\+:
+\begin{DoxyItemize}
+\item Logs file transfer status via Serial Monitor. 
+\end{DoxyItemize}\Hypertarget{_copy_from_s_d_8cpp_ad384c8432c61d7397cc69aa201a14541}\index{CopyFromSD.cpp@{CopyFromSD.cpp}!error@{error}}
+\index{error@{error}!CopyFromSD.cpp@{CopyFromSD.cpp}}
+\doxysubsubsection{\texorpdfstring{error()}{error()}}
+{\footnotesize\ttfamily \label{_copy_from_s_d_8cpp_ad384c8432c61d7397cc69aa201a14541} 
+void error (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{message}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-var-members}
+\Hypertarget{_copy_from_s_d_8cpp_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{_copy_from_s_d_8cpp_a4f161d4ac97194a42c5131cf53383a3b}\index{CopyFromSD.cpp@{CopyFromSD.cpp}!FlashChipSelect@{FlashChipSelect}}
+\index{FlashChipSelect@{FlashChipSelect}!CopyFromSD.cpp@{CopyFromSD.cpp}}
+\doxysubsubsection{\texorpdfstring{FlashChipSelect}{FlashChipSelect}}
+{\footnotesize\ttfamily \label{_copy_from_s_d_8cpp_a4f161d4ac97194a42c5131cf53383a3b} 
+const int Flash\+Chip\+Select = 6}
+
+\Hypertarget{_copy_from_s_d_8cpp_a68e9e5c9e17fe9586bf6f9e460d32d17}\index{CopyFromSD.cpp@{CopyFromSD.cpp}!SDchipSelect@{SDchipSelect}}
+\index{SDchipSelect@{SDchipSelect}!CopyFromSD.cpp@{CopyFromSD.cpp}}
+\doxysubsubsection{\texorpdfstring{SDchipSelect}{SDchipSelect}}
+{\footnotesize\ttfamily \label{_copy_from_s_d_8cpp_a68e9e5c9e17fe9586bf6f9e460d32d17} 
+const int SDchip\+Select = 4}
+

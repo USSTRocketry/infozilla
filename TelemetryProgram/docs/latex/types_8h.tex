@@ -1,0 +1,189 @@
+\doxysection{C\+:/\+Users/\+Bobby/\+Documents/\+USST/\+Infozilla/infozilla/\+Telemetry\+Program/lib/\+HAL/types.h File Reference}
+\hypertarget{types_8h}{}\label{types_8h}\index{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/HAL/types.h@{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/HAL/types.h}}
+{\ttfamily \#include $<$cstdint$>$}\newline
+Include dependency graph for types.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=220pt]{types_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{types_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct__bmp280_data}{\+\_\+bmp280\+Data}}
+\item 
+struct \mbox{\hyperlink{struct__accel_gyro_data}{\+\_\+accel\+Gyro\+Data}}
+\item 
+struct \mbox{\hyperlink{struct__magnetometer_data}{\+\_\+magnetometer\+Data}}
+\item 
+struct \mbox{\hyperlink{struct__temperature_data}{\+\_\+temperature\+Data}}
+\item 
+struct \mbox{\hyperlink{struct_g_p_s_data}{GPSData}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{types_8h_aeb9a79ef851ece005de2b3018169d056}{HW\+\_\+\+SERIAL1}}~1
+\item 
+\#define \mbox{\hyperlink{types_8h_adc7fabce0c0b1228ab25c9937a3015cf}{HW\+\_\+\+SERIAL2}}~2
+\item 
+\#define \mbox{\hyperlink{types_8h_a6849362229e853b1d89ef1095efbbefd}{HW\+\_\+\+SERIAL3}}~3
+\item 
+\#define \mbox{\hyperlink{types_8h_a08ea8300e5314be85001cc7b76be20ef}{HW\+\_\+\+SERIAL4}}~4
+\item 
+\#define \mbox{\hyperlink{types_8h_a74e783152bbe2b3c956ad9646eeb7eca}{HW\+\_\+\+SERIAL5}}~5
+\item 
+\#define \mbox{\hyperlink{types_8h_a4249ba898a3e7715e167f974e9124c58}{HW\+\_\+\+SERIAL6}}~6
+\item 
+\#define \mbox{\hyperlink{types_8h_a32f80e8bafb168740a369ef2598ff077}{HW\+\_\+\+SERIAL7}}~7
+\item 
+\#define \mbox{\hyperlink{types_8h_af66182e5b9ab9f0816fe724d0999dc8c}{HW\+\_\+\+SERIAL8}}~8
+\item 
+\#define \mbox{\hyperlink{types_8h_a5f20e8ea24e0ef69981beb161a28c510}{HW\+\_\+\+SERIAL}}(w)
+\item 
+\#define \mbox{\hyperlink{types_8h_abbc636deac9cce5b81945886bc1e8e10}{HW\+\_\+\+SPI0}}~0
+\item 
+\#define \mbox{\hyperlink{types_8h_aa3d09f3b50eb6189bef57d77d3d5f77f}{HW\+\_\+\+SPI1}}~1
+\item 
+\#define \mbox{\hyperlink{types_8h_a7daa02fbba2f48f8d6e58f35ec8937ad}{HW\+\_\+\+SPI2}}~2
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{struct__bmp280_data}{\+\_\+bmp280\+Data}} \mbox{\hyperlink{types_8h_ab261644c5efcb7e97882e695b0964f03}{BMP280\+Data}}
+\item 
+typedef struct \mbox{\hyperlink{struct__accel_gyro_data}{\+\_\+accel\+Gyro\+Data}} \mbox{\hyperlink{types_8h_a052a1cf82d94d02541cda224aec1bc21}{Accel\+Gyro\+Data}}
+\item 
+typedef struct \mbox{\hyperlink{struct__magnetometer_data}{\+\_\+magnetometer\+Data}} \mbox{\hyperlink{types_8h_a34c81329fddf919347a1c051065b79ef}{Magnetometer\+Data}}
+\item 
+typedef struct \mbox{\hyperlink{struct__temperature_data}{\+\_\+temperature\+Data}} \mbox{\hyperlink{types_8h_a3a0f201aa4cd5af48c340f52be9cd22c}{Temperature\+Data}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{types_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{types_8h_a5f20e8ea24e0ef69981beb161a28c510}\index{types.h@{types.h}!HW\_SERIAL@{HW\_SERIAL}}
+\index{HW\_SERIAL@{HW\_SERIAL}!types.h@{types.h}}
+\doxysubsubsection{\texorpdfstring{HW\_SERIAL}{HW\_SERIAL}}
+{\footnotesize\ttfamily \label{types_8h_a5f20e8ea24e0ef69981beb161a28c510} 
+\#define HW\+\_\+\+SERIAL(\begin{DoxyParamCaption}\item[{}]{w}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (w\ ==\ 1\ ?\ Serial1\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ (w\ ==\ 2\ ?\ Serial2\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ (w\ ==\ 3\ ?\ Serial3\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ (w\ ==\ 4\ ?\ Serial4\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ (w\ ==\ 5\ ?\ Serial5\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ (w\ ==\ 6\ ?\ Serial6\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ (w\ ==\ 7\ ?\ Serial7\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ Serial8\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )))))))}
+
+\end{DoxyCode}
+\Hypertarget{types_8h_aeb9a79ef851ece005de2b3018169d056}\index{types.h@{types.h}!HW\_SERIAL1@{HW\_SERIAL1}}
+\index{HW\_SERIAL1@{HW\_SERIAL1}!types.h@{types.h}}
+\doxysubsubsection{\texorpdfstring{HW\_SERIAL1}{HW\_SERIAL1}}
+{\footnotesize\ttfamily \label{types_8h_aeb9a79ef851ece005de2b3018169d056} 
+\#define HW\+\_\+\+SERIAL1~1}
+
+\Hypertarget{types_8h_adc7fabce0c0b1228ab25c9937a3015cf}\index{types.h@{types.h}!HW\_SERIAL2@{HW\_SERIAL2}}
+\index{HW\_SERIAL2@{HW\_SERIAL2}!types.h@{types.h}}
+\doxysubsubsection{\texorpdfstring{HW\_SERIAL2}{HW\_SERIAL2}}
+{\footnotesize\ttfamily \label{types_8h_adc7fabce0c0b1228ab25c9937a3015cf} 
+\#define HW\+\_\+\+SERIAL2~2}
+
+\Hypertarget{types_8h_a6849362229e853b1d89ef1095efbbefd}\index{types.h@{types.h}!HW\_SERIAL3@{HW\_SERIAL3}}
+\index{HW\_SERIAL3@{HW\_SERIAL3}!types.h@{types.h}}
+\doxysubsubsection{\texorpdfstring{HW\_SERIAL3}{HW\_SERIAL3}}
+{\footnotesize\ttfamily \label{types_8h_a6849362229e853b1d89ef1095efbbefd} 
+\#define HW\+\_\+\+SERIAL3~3}
+
+\Hypertarget{types_8h_a08ea8300e5314be85001cc7b76be20ef}\index{types.h@{types.h}!HW\_SERIAL4@{HW\_SERIAL4}}
+\index{HW\_SERIAL4@{HW\_SERIAL4}!types.h@{types.h}}
+\doxysubsubsection{\texorpdfstring{HW\_SERIAL4}{HW\_SERIAL4}}
+{\footnotesize\ttfamily \label{types_8h_a08ea8300e5314be85001cc7b76be20ef} 
+\#define HW\+\_\+\+SERIAL4~4}
+
+\Hypertarget{types_8h_a74e783152bbe2b3c956ad9646eeb7eca}\index{types.h@{types.h}!HW\_SERIAL5@{HW\_SERIAL5}}
+\index{HW\_SERIAL5@{HW\_SERIAL5}!types.h@{types.h}}
+\doxysubsubsection{\texorpdfstring{HW\_SERIAL5}{HW\_SERIAL5}}
+{\footnotesize\ttfamily \label{types_8h_a74e783152bbe2b3c956ad9646eeb7eca} 
+\#define HW\+\_\+\+SERIAL5~5}
+
+\Hypertarget{types_8h_a4249ba898a3e7715e167f974e9124c58}\index{types.h@{types.h}!HW\_SERIAL6@{HW\_SERIAL6}}
+\index{HW\_SERIAL6@{HW\_SERIAL6}!types.h@{types.h}}
+\doxysubsubsection{\texorpdfstring{HW\_SERIAL6}{HW\_SERIAL6}}
+{\footnotesize\ttfamily \label{types_8h_a4249ba898a3e7715e167f974e9124c58} 
+\#define HW\+\_\+\+SERIAL6~6}
+
+\Hypertarget{types_8h_a32f80e8bafb168740a369ef2598ff077}\index{types.h@{types.h}!HW\_SERIAL7@{HW\_SERIAL7}}
+\index{HW\_SERIAL7@{HW\_SERIAL7}!types.h@{types.h}}
+\doxysubsubsection{\texorpdfstring{HW\_SERIAL7}{HW\_SERIAL7}}
+{\footnotesize\ttfamily \label{types_8h_a32f80e8bafb168740a369ef2598ff077} 
+\#define HW\+\_\+\+SERIAL7~7}
+
+\Hypertarget{types_8h_af66182e5b9ab9f0816fe724d0999dc8c}\index{types.h@{types.h}!HW\_SERIAL8@{HW\_SERIAL8}}
+\index{HW\_SERIAL8@{HW\_SERIAL8}!types.h@{types.h}}
+\doxysubsubsection{\texorpdfstring{HW\_SERIAL8}{HW\_SERIAL8}}
+{\footnotesize\ttfamily \label{types_8h_af66182e5b9ab9f0816fe724d0999dc8c} 
+\#define HW\+\_\+\+SERIAL8~8}
+
+\Hypertarget{types_8h_abbc636deac9cce5b81945886bc1e8e10}\index{types.h@{types.h}!HW\_SPI0@{HW\_SPI0}}
+\index{HW\_SPI0@{HW\_SPI0}!types.h@{types.h}}
+\doxysubsubsection{\texorpdfstring{HW\_SPI0}{HW\_SPI0}}
+{\footnotesize\ttfamily \label{types_8h_abbc636deac9cce5b81945886bc1e8e10} 
+\#define HW\+\_\+\+SPI0~0}
+
+\Hypertarget{types_8h_aa3d09f3b50eb6189bef57d77d3d5f77f}\index{types.h@{types.h}!HW\_SPI1@{HW\_SPI1}}
+\index{HW\_SPI1@{HW\_SPI1}!types.h@{types.h}}
+\doxysubsubsection{\texorpdfstring{HW\_SPI1}{HW\_SPI1}}
+{\footnotesize\ttfamily \label{types_8h_aa3d09f3b50eb6189bef57d77d3d5f77f} 
+\#define HW\+\_\+\+SPI1~1}
+
+\Hypertarget{types_8h_a7daa02fbba2f48f8d6e58f35ec8937ad}\index{types.h@{types.h}!HW\_SPI2@{HW\_SPI2}}
+\index{HW\_SPI2@{HW\_SPI2}!types.h@{types.h}}
+\doxysubsubsection{\texorpdfstring{HW\_SPI2}{HW\_SPI2}}
+{\footnotesize\ttfamily \label{types_8h_a7daa02fbba2f48f8d6e58f35ec8937ad} 
+\#define HW\+\_\+\+SPI2~2}
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{types_8h_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{types_8h_a052a1cf82d94d02541cda224aec1bc21}\index{types.h@{types.h}!AccelGyroData@{AccelGyroData}}
+\index{AccelGyroData@{AccelGyroData}!types.h@{types.h}}
+\doxysubsubsection{\texorpdfstring{AccelGyroData}{AccelGyroData}}
+{\footnotesize\ttfamily \label{types_8h_a052a1cf82d94d02541cda224aec1bc21} 
+typedef struct \mbox{\hyperlink{struct__accel_gyro_data}{\+\_\+accel\+Gyro\+Data}} \mbox{\hyperlink{types_8h_a052a1cf82d94d02541cda224aec1bc21}{Accel\+Gyro\+Data}}}
+
+\Hypertarget{types_8h_ab261644c5efcb7e97882e695b0964f03}\index{types.h@{types.h}!BMP280Data@{BMP280Data}}
+\index{BMP280Data@{BMP280Data}!types.h@{types.h}}
+\doxysubsubsection{\texorpdfstring{BMP280Data}{BMP280Data}}
+{\footnotesize\ttfamily \label{types_8h_ab261644c5efcb7e97882e695b0964f03} 
+typedef struct \mbox{\hyperlink{struct__bmp280_data}{\+\_\+bmp280\+Data}} \mbox{\hyperlink{types_8h_ab261644c5efcb7e97882e695b0964f03}{BMP280\+Data}}}
+
+\Hypertarget{types_8h_a34c81329fddf919347a1c051065b79ef}\index{types.h@{types.h}!MagnetometerData@{MagnetometerData}}
+\index{MagnetometerData@{MagnetometerData}!types.h@{types.h}}
+\doxysubsubsection{\texorpdfstring{MagnetometerData}{MagnetometerData}}
+{\footnotesize\ttfamily \label{types_8h_a34c81329fddf919347a1c051065b79ef} 
+typedef struct \mbox{\hyperlink{struct__magnetometer_data}{\+\_\+magnetometer\+Data}} \mbox{\hyperlink{types_8h_a34c81329fddf919347a1c051065b79ef}{Magnetometer\+Data}}}
+
+\Hypertarget{types_8h_a3a0f201aa4cd5af48c340f52be9cd22c}\index{types.h@{types.h}!TemperatureData@{TemperatureData}}
+\index{TemperatureData@{TemperatureData}!types.h@{types.h}}
+\doxysubsubsection{\texorpdfstring{TemperatureData}{TemperatureData}}
+{\footnotesize\ttfamily \label{types_8h_a3a0f201aa4cd5af48c340f52be9cd22c} 
+typedef struct \mbox{\hyperlink{struct__temperature_data}{\+\_\+temperature\+Data}} \mbox{\hyperlink{types_8h_a3a0f201aa4cd5af48c340f52be9cd22c}{Temperature\+Data}}}
+

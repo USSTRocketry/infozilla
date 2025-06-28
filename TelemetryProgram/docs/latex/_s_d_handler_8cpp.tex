@@ -1,0 +1,115 @@
+\doxysection{C\+:/\+Users/\+Bobby/\+Documents/\+USST/\+Infozilla/infozilla/\+Telemetry\+Program/src/\+SDHandler.cpp File Reference}
+\hypertarget{_s_d_handler_8cpp}{}\label{_s_d_handler_8cpp}\index{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/src/SDHandler.cpp@{C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/src/SDHandler.cpp}}
+{\ttfamily \#include $<$SDHandler.\+h$>$}\newline
+Include dependency graph for SDHandler.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=265pt]{_s_d_handler_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_s_d_handler_8cpp_ab777990837d4dff38b3162f86050eb33}{OPTIONAL\+\_\+\+FLASH\+\_\+\+CHIP}}~= 7
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_s_d_handler_8cpp_aed774cac0a55ad6bef5b0941c722af3e}{Init\+SD}} ()
+\item 
+void \mbox{\hyperlink{_s_d_handler_8cpp_ac39b0fd8c377a2e0b8f9710373f9fb62}{create\+Example\+Txt}} ()
+\item 
+void \mbox{\hyperlink{_s_d_handler_8cpp_a670d1752036e25533aa6e291298c7782}{delete\+Example\+Txt}} ()
+\item 
+void \mbox{\hyperlink{_s_d_handler_8cpp_aa380702c2402865ff92fa8381af452ea}{Write\+Test}} ()
+\item 
+void \mbox{\hyperlink{_s_d_handler_8cpp_ae7eea1dc0ad71b3abfb91cc651205657}{Store\+String\+Line\+To\+CSV}} (std\+::string stringline)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+File \mbox{\hyperlink{_s_d_handler_8cpp_a8eb13a6b9ea8026221cb3a45a822526a}{my\+File}}
+\item 
+const int \mbox{\hyperlink{_s_d_handler_8cpp_a266db0f4dbdfbc06ea34c96f66bebed3}{chip\+Select}} = BUILTIN\+\_\+\+SDCARD
+\item 
+int \mbox{\hyperlink{_s_d_handler_8cpp_a6082b63b4ed702f0c1c36683dfeedffd}{savecount}} = 0
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{_s_d_handler_8cpp_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_s_d_handler_8cpp_ab777990837d4dff38b3162f86050eb33}\index{SDHandler.cpp@{SDHandler.cpp}!OPTIONAL\_FLASH\_CHIP@{OPTIONAL\_FLASH\_CHIP}}
+\index{OPTIONAL\_FLASH\_CHIP@{OPTIONAL\_FLASH\_CHIP}!SDHandler.cpp@{SDHandler.cpp}}
+\doxysubsubsection{\texorpdfstring{OPTIONAL\_FLASH\_CHIP}{OPTIONAL\_FLASH\_CHIP}}
+{\footnotesize\ttfamily \label{_s_d_handler_8cpp_ab777990837d4dff38b3162f86050eb33} 
+\#define OPTIONAL\+\_\+\+FLASH\+\_\+\+CHIP~= 7}
+
+
+
+\label{doc-func-members}
+\Hypertarget{_s_d_handler_8cpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_s_d_handler_8cpp_ac39b0fd8c377a2e0b8f9710373f9fb62}\index{SDHandler.cpp@{SDHandler.cpp}!createExampleTxt@{createExampleTxt}}
+\index{createExampleTxt@{createExampleTxt}!SDHandler.cpp@{SDHandler.cpp}}
+\doxysubsubsection{\texorpdfstring{createExampleTxt()}{createExampleTxt()}}
+{\footnotesize\ttfamily \label{_s_d_handler_8cpp_ac39b0fd8c377a2e0b8f9710373f9fb62} 
+void create\+Example\+Txt (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_s_d_handler_8cpp_a670d1752036e25533aa6e291298c7782}\index{SDHandler.cpp@{SDHandler.cpp}!deleteExampleTxt@{deleteExampleTxt}}
+\index{deleteExampleTxt@{deleteExampleTxt}!SDHandler.cpp@{SDHandler.cpp}}
+\doxysubsubsection{\texorpdfstring{deleteExampleTxt()}{deleteExampleTxt()}}
+{\footnotesize\ttfamily \label{_s_d_handler_8cpp_a670d1752036e25533aa6e291298c7782} 
+void delete\+Example\+Txt (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_s_d_handler_8cpp_aed774cac0a55ad6bef5b0941c722af3e}\index{SDHandler.cpp@{SDHandler.cpp}!InitSD@{InitSD}}
+\index{InitSD@{InitSD}!SDHandler.cpp@{SDHandler.cpp}}
+\doxysubsubsection{\texorpdfstring{InitSD()}{InitSD()}}
+{\footnotesize\ttfamily \label{_s_d_handler_8cpp_aed774cac0a55ad6bef5b0941c722af3e} 
+void Init\+SD (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=301pt]{_s_d_handler_8cpp_aed774cac0a55ad6bef5b0941c722af3e_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{_s_d_handler_8cpp_ae7eea1dc0ad71b3abfb91cc651205657}\index{SDHandler.cpp@{SDHandler.cpp}!StoreStringLineToCSV@{StoreStringLineToCSV}}
+\index{StoreStringLineToCSV@{StoreStringLineToCSV}!SDHandler.cpp@{SDHandler.cpp}}
+\doxysubsubsection{\texorpdfstring{StoreStringLineToCSV()}{StoreStringLineToCSV()}}
+{\footnotesize\ttfamily \label{_s_d_handler_8cpp_ae7eea1dc0ad71b3abfb91cc651205657} 
+void Store\+String\+Line\+To\+CSV (\begin{DoxyParamCaption}\item[{std\+::string}]{stringline}{}\end{DoxyParamCaption})}
+
+\Hypertarget{_s_d_handler_8cpp_aa380702c2402865ff92fa8381af452ea}\index{SDHandler.cpp@{SDHandler.cpp}!WriteTest@{WriteTest}}
+\index{WriteTest@{WriteTest}!SDHandler.cpp@{SDHandler.cpp}}
+\doxysubsubsection{\texorpdfstring{WriteTest()}{WriteTest()}}
+{\footnotesize\ttfamily \label{_s_d_handler_8cpp_aa380702c2402865ff92fa8381af452ea} 
+void Write\+Test (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-var-members}
+\Hypertarget{_s_d_handler_8cpp_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{_s_d_handler_8cpp_a266db0f4dbdfbc06ea34c96f66bebed3}\index{SDHandler.cpp@{SDHandler.cpp}!chipSelect@{chipSelect}}
+\index{chipSelect@{chipSelect}!SDHandler.cpp@{SDHandler.cpp}}
+\doxysubsubsection{\texorpdfstring{chipSelect}{chipSelect}}
+{\footnotesize\ttfamily \label{_s_d_handler_8cpp_a266db0f4dbdfbc06ea34c96f66bebed3} 
+const int chip\+Select = BUILTIN\+\_\+\+SDCARD}
+
+\Hypertarget{_s_d_handler_8cpp_a8eb13a6b9ea8026221cb3a45a822526a}\index{SDHandler.cpp@{SDHandler.cpp}!myFile@{myFile}}
+\index{myFile@{myFile}!SDHandler.cpp@{SDHandler.cpp}}
+\doxysubsubsection{\texorpdfstring{myFile}{myFile}}
+{\footnotesize\ttfamily \label{_s_d_handler_8cpp_a8eb13a6b9ea8026221cb3a45a822526a} 
+File my\+File}
+
+\Hypertarget{_s_d_handler_8cpp_a6082b63b4ed702f0c1c36683dfeedffd}\index{SDHandler.cpp@{SDHandler.cpp}!savecount@{savecount}}
+\index{savecount@{savecount}!SDHandler.cpp@{SDHandler.cpp}}
+\doxysubsubsection{\texorpdfstring{savecount}{savecount}}
+{\footnotesize\ttfamily \label{_s_d_handler_8cpp_a6082b63b4ed702f0c1c36683dfeedffd} 
+int savecount = 0}
+

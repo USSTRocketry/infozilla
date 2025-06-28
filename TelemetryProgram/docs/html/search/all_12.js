@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['nanh_0',['nanh',['../structhalf__float_1_1detail_1_1functions.html#af8d60844e2fc5fca33f2f6501a484ca4',1,'half_float::detail::functions::nanh()'],['../namespacehalf__float_1_1detail.html#a101fb925e013bd8fc208fac1d2f72faa',1,'half_float::detail::nanh()'],['../namespacehalf__float.html#a101fb925e013bd8fc208fac1d2f72faa',1,'half_float::nanh()']]],
+  ['nearbyint_1',['nearbyint',['../namespacehalf__float_1_1detail.html#aa18533c0035bfe9c4f143acfd2b47272',1,'half_float::detail::nearbyint(half arg)'],['../namespacehalf__float_1_1detail.html#aebcfe947c8904d558b9a572d13b7a3ae',1,'half_float::detail::nearbyint(expr arg)'],['../namespacehalf__float.html#aa18533c0035bfe9c4f143acfd2b47272',1,'half_float::nearbyint()']]],
+  ['negate_2',['negate',['../structhalf__float_1_1detail_1_1unary__specialized.html#a6b8b9de170c31ccbcc6ef56ed9c488a1',1,'half_float::detail::unary_specialized::negate()'],['../structhalf__float_1_1detail_1_1unary__specialized_3_01expr_01_4.html#a52fafe72dd5633b391289700c7d41851',1,'half_float::detail::unary_specialized&lt; expr &gt;::negate()']]],
+  ['nextafter_3',['nextafter',['../structhalf__float_1_1detail_1_1functions.html#afad03c7ead9b0e39825852f274c72c5c',1,'half_float::detail::functions::nextafter()'],['../namespacehalf__float_1_1detail.html#abaff6defbabab12cdfbb47ebf2d757a8',1,'half_float::detail::nextafter(half from, half to)'],['../namespacehalf__float_1_1detail.html#ab1e7231cc386bb596373cf6618d63541',1,'half_float::detail::nextafter(half from, expr to)'],['../namespacehalf__float_1_1detail.html#ae9f4932000e04299199ad07b764f9757',1,'half_float::detail::nextafter(expr from, half to)'],['../namespacehalf__float_1_1detail.html#abcc7d0402bd1f7a94709bc16012baff2',1,'half_float::detail::nextafter(expr from, expr to)'],['../namespacehalf__float.html#abaff6defbabab12cdfbb47ebf2d757a8',1,'half_float::nextafter()']]],
+  ['nexttoward_4',['nexttoward',['../structhalf__float_1_1detail_1_1functions.html#a5d2061cb44af36a55953d764442236de',1,'half_float::detail::functions::nexttoward()'],['../namespacehalf__float_1_1detail.html#aef57aa188ad54b4740b8c3aed38c3c36',1,'half_float::detail::nexttoward(half from, long double to)'],['../namespacehalf__float_1_1detail.html#ae9f3e0b8320a8104eecd193179ee58d5',1,'half_float::detail::nexttoward(expr from, long double to)'],['../namespacehalf__float.html#aef57aa188ad54b4740b8c3aed38c3c36',1,'half_float::nexttoward()']]],
+  ['normalizedranges_5',['normalizedRanges',['../namespacefp16.html#a076c63e8669cf8834d170f15b0951810',1,'fp16']]],
+  ['normalizedvalues_6',['normalizedValues',['../namespacefp16.html#ab41fe3cd6c33546ef22ad7cb5e6a0f95',1,'fp16']]],
+  ['notes_7',['Notes',['../C:/Users/Bobby/Documents/USST/Infozilla/infozilla/TelemetryProgram/lib/HAL/README.md#autotoc_md95',1,'']]],
+  ['npy_2dhalffloat_2eh_8',['npy-halffloat.h',['../npy-halffloat_8h.html',1,'']]],
+  ['npy_5fhalf_5fgenerate_5finvalid_9',['NPY_HALF_GENERATE_INVALID',['../npy-halffloat_8h.html#a8635aeeeb37925f2bc9d1d7d84aadaf9',1,'npy-halffloat.h']]],
+  ['npy_5fhalf_5fgenerate_5foverflow_10',['NPY_HALF_GENERATE_OVERFLOW',['../npy-halffloat_8h.html#a0a6219c1ed97daf926ae98fd7fe133e1',1,'npy-halffloat.h']]],
+  ['npy_5fhalf_5fgenerate_5funderflow_11',['NPY_HALF_GENERATE_UNDERFLOW',['../npy-halffloat_8h.html#aecd748c231907a141e7804e1eed20b0b',1,'npy-halffloat.h']]],
+  ['npy_5fhalf_5fround_5fties_5fto_5feven_12',['NPY_HALF_ROUND_TIES_TO_EVEN',['../npy-halffloat_8h.html#ad876e95e4691f236e37d94db5e4e5be5',1,'npy-halffloat.h']]],
+  ['npy_5fuint16_13',['npy_uint16',['../npy-halffloat_8h.html#acdaf5997f283082a5afc13ca33813e93',1,'npy-halffloat.h']]],
+  ['npy_5fuint32_14',['npy_uint32',['../npy-halffloat_8h.html#a68ff8667752717e49f4e66fa08817d3b',1,'npy-halffloat.h']]],
+  ['npy_5fuint64_15',['npy_uint64',['../npy-halffloat_8h.html#a9127f9b89287c24a79d89439de12a893',1,'npy-halffloat.h']]],
+  ['numeric_5flimits_3c_20half_5ffloat_3a_3ahalf_20_3e_16',['numeric_limits&lt; half_float::half &gt;',['../classstd_1_1numeric__limits_3_01half__float_1_1half_01_4.html',1,'std']]]
+];

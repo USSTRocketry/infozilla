@@ -1,3 +1,14 @@
+/**
+ * @file main.cpp
+ * @author USST Avionics
+ * @brief 
+ * @version 0.1
+ * @date 2025-06-28
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
+
 // Setup code to run only once
 #include <Arduino.h>
 #include <Wire.h>

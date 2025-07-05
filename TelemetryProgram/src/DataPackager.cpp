@@ -92,13 +92,6 @@ void Update(float barval_meters){
         /* dont do anything */
         isCollectingData = false;
 
-        #if IsTestingMode
-        FlightState = ReadyForLaunch;
-        #else
-
-
-        #endif
-
         break;
     case ReadyForLaunch:
         isCollectingData = true;

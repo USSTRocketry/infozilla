@@ -1,23 +1,6 @@
 var searchData=
 [
-  ['half_5fconstexpr_0',['HALF_CONSTEXPR',['../half_8hpp.html#ace3116a3e2cd66dd15780b92060987c7',1,'half.hpp']]],
-  ['half_5fconstexpr_5fconst_1',['HALF_CONSTEXPR_CONST',['../half_8hpp.html#a5df92c245e5d4e45d35fad7b6de73354',1,'half.hpp']]],
-  ['half_5fgnuc_5fversion_2',['HALF_GNUC_VERSION',['../half_8hpp.html#aecb5b6a7616c7c83b2e13d546c99650a',1,'half.hpp']]],
-  ['half_5fnoexcept_3',['HALF_NOEXCEPT',['../half_8hpp.html#a04e7940852b33adbb81a8249fef1c508',1,'half.hpp']]],
-  ['half_5fnothrow_4',['HALF_NOTHROW',['../half_8hpp.html#a76353b496550acb4b523ad263d09908a',1,'half.hpp']]],
-  ['half_5fround_5fstyle_5',['HALF_ROUND_STYLE',['../half_8hpp.html#af470ed60568b3e7f4fde6092d22abbde',1,'half.hpp']]],
-  ['half_5fround_5fties_5fto_5feven_6',['HALF_ROUND_TIES_TO_EVEN',['../half_8hpp.html#ab0c3c06432f0247f22594abe3df0ebfe',1,'half.hpp']]],
-  ['huge_5fvalh_7',['HUGE_VALH',['../half_8hpp.html#abdcd774b81d03564edec8523484d02bf',1,'half.hpp']]],
-  ['hw_5fserial_8',['HW_SERIAL',['../types_8h.html#a5f20e8ea24e0ef69981beb161a28c510',1,'types.h']]],
-  ['hw_5fserial1_9',['HW_SERIAL1',['../types_8h.html#aeb9a79ef851ece005de2b3018169d056',1,'types.h']]],
-  ['hw_5fserial2_10',['HW_SERIAL2',['../types_8h.html#adc7fabce0c0b1228ab25c9937a3015cf',1,'types.h']]],
-  ['hw_5fserial3_11',['HW_SERIAL3',['../types_8h.html#a6849362229e853b1d89ef1095efbbefd',1,'types.h']]],
-  ['hw_5fserial4_12',['HW_SERIAL4',['../types_8h.html#a08ea8300e5314be85001cc7b76be20ef',1,'types.h']]],
-  ['hw_5fserial5_13',['HW_SERIAL5',['../types_8h.html#a74e783152bbe2b3c956ad9646eeb7eca',1,'types.h']]],
-  ['hw_5fserial6_14',['HW_SERIAL6',['../types_8h.html#a4249ba898a3e7715e167f974e9124c58',1,'types.h']]],
-  ['hw_5fserial7_15',['HW_SERIAL7',['../types_8h.html#a32f80e8bafb168740a369ef2598ff077',1,'types.h']]],
-  ['hw_5fserial8_16',['HW_SERIAL8',['../types_8h.html#af66182e5b9ab9f0816fe724d0999dc8c',1,'types.h']]],
-  ['hw_5fspi0_17',['HW_SPI0',['../types_8h.html#abbc636deac9cce5b81945886bc1e8e10',1,'types.h']]],
-  ['hw_5fspi1_18',['HW_SPI1',['../types_8h.html#aa3d09f3b50eb6189bef57d77d3d5f77f',1,'types.h']]],
-  ['hw_5fspi2_19',['HW_SPI2',['../types_8h.html#a7daa02fbba2f48f8d6e58f35ec8937ad',1,'types.h']]]
+  ['led1_0',['LED1',['../_p_i_n_s_8h.html#a8aa85ae9867fabf70ec72cd3bf6fb6b9',1,'PINS.h']]],
+  ['led2_1',['LED2',['../_p_i_n_s_8h.html#ad09fe5bf321b9a2de26bd5e5b9af6424',1,'PINS.h']]],
+  ['led3_2',['LED3',['../_p_i_n_s_8h.html#a4b7ff8e253a7412f83deba3a447028a8',1,'PINS.h']]]
 ];

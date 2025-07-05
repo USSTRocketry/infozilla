@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['begin_0',['begin',['../class_g_p_s.html#a168fa51c2053b5ab017ce80ed5ffccf5',1,'GPS::begin()'],['../class_r_f_m95_radio.html#a1ab3bbfa65752214240336f32dcbf5f8',1,'RFM95Radio::begin()'],['../class_r_y_l_r998_radio.html#a764f55b8f587efcac4dbfee86bed5ae6',1,'RYLR998Radio::begin()'],['../class_sensor_accel_gyro.html#a58130ba9699e7158dda89182a51d7e61',1,'SensorAccelGyro::begin()'],['../class_sensor_b_m_p280.html#a8b25f13e9fd8c077c6cde5b348dda6ae',1,'SensorBMP280::begin()'],['../class_sensor_magnetometer.html#aedd6f97f4f52ea88d71e33edd1eba920',1,'SensorMagnetometer::begin()'],['../class_sensor_temperature.html#add714ecd52c55c1460e6f8b54fcafa12',1,'SensorTemperature::begin()'],['../class_telemetry_radio.html#aa173a8794b1d667270af6a354965d6f7',1,'TelemetryRadio::begin()']]],
-  ['builtin_5fisinf_1',['builtin_isinf',['../namespacehalf__float_1_1detail.html#aeb1b5890af847586d019111c931e7f3b',1,'half_float::detail']]],
-  ['builtin_5fisnan_2',['builtin_isnan',['../namespacehalf__float_1_1detail.html#a20cedf19efac6e017090e17ea38342cf',1,'half_float::detail']]],
-  ['builtin_5fsignbit_3',['builtin_signbit',['../namespacehalf__float_1_1detail.html#a0f1b0ddcef962521b4c76f661659e5a7',1,'half_float::detail']]]
+  ['comparefiles_0',['compareFiles',['../_copy_from_s_d_8cpp.html#a5c49cd6e5d48e91888f1189844bc5a84',1,'CopyFromSD.cpp']]],
+  ['configure_1',['configure',['../class_g_p_s.html#a7173870be89aad8cc86ed6bffea71a64',1,'GPS']]],
+  ['configurelora_2',['configureLoRa',['../class_r_f_m95_radio.html#a99839c8d74f989aa5af6ecee8949e709',1,'RFM95Radio::configureLoRa()'],['../class_r_y_l_r998_radio.html#a6bee13907f56a958ba9d75e10ae8ebca',1,'RYLR998Radio::configureLoRa()'],['../class_telemetry_radio.html#a95d3f01697d86e3b58fc6b589298bbff',1,'TelemetryRadio::configureLoRa()']]],
+  ['convertdatatocsvrow_3',['convertDataToCSVRow',['../_data_storage_8cpp.html#a894c1f58954d7e8728d6473aa3496be6',1,'convertDataToCSVRow(SensorData *sensorData):&#160;DataStorage.cpp'],['../_data_storage_8h.html#a894c1f58954d7e8728d6473aa3496be6',1,'convertDataToCSVRow(SensorData *sensorData):&#160;DataStorage.cpp']]],
+  ['copysdtospiflash_4',['copySDToSPIFlash',['../_copy_from_s_d_8cpp.html#a033c1432321a4d2bdbd1ad224a8f5d7b',1,'CopyFromSD.cpp']]],
+  ['createexampletxt_5',['createExampleTxt',['../_s_d_handler_8cpp.html#ac39b0fd8c377a2e0b8f9710373f9fb62',1,'SDHandler.cpp']]]
 ];

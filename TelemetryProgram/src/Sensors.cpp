@@ -12,7 +12,7 @@
 // HAL libs
 #include "Avionics_HAL.h"
 
-DebugLights debugLights;
+DebugLights debug_lights;
 
 SensorData sdata;
 
@@ -46,11 +46,11 @@ RFM95Radio radio(RADIO_CS, RADIO_INT, RADIO_SPI, 915.0); // Default radio used -
  * 
  */
 
-void InitSensors(DebugLights debug_lights){
-    debugLights = debug_lights;
+void InitSensors(DebugLights debug_lights_in){
+    debug_lights = debug_lights_in;
     log_message(__func__, "Initializing sensors...");
     if(!InitSD()){
-        debugLights.AddError(INIT_SD_ERR);
+        debug_lights.AddError(INIT_SD_ERR);
     }
     InitBMP();
     InitAccelGyro();
@@ -133,7 +133,7 @@ bool InitBMP(){
         return true;
     } else {
         log_message(__func__, "Failed to initialize BMP280 sensor!");
-        debugLights.AddError(INIT_BMP_ERR);
+        debug_lights.AddError(INIT_BMP_ERR);
         return false;
     }
 }
@@ -146,7 +146,7 @@ bool InitAccelGyro() {
         return true;
     } else {
         log_message(__func__, "Failed to initialize accelerometer/gyroscope sensor!");
-        debugLights.AddError(INIT_ACCELGYRO_ERR);
+        debug_lights.AddError(INIT_ACCELGYRO_ERR);
         return false;
     }
 }
@@ -158,7 +158,7 @@ bool InitMagnetometer() {
         log_message(__func__, "Magnetometer initialized.");
     } else {
         log_message(__func__, "Failed to initialize magnetometer!");
-        debugLights.AddError(INIT_MAGNETOMETER_ERR);
+        debug_lights.AddError(INIT_MAGNETOMETER_ERR);
         return false;
     }
 }
@@ -170,7 +170,7 @@ bool InitTempSensor(){
         log_message(__func__, "Temperature sensor initialized.");
     } else {
         log_message(__func__, "Failed to initialize temperature sensor!");
-        debugLights.AddError(INIT_THERMOMETER_ERR);
+        debug_lights.AddError(INIT_THERMOMETER_ERR);
         return false;
     }
 }
@@ -180,7 +180,7 @@ void InitGPS() {
         log_message(__func__, "GPS initialized.");
     }else{
         log_message(__func__, "GPS Failed to initialize.");
-        debugLights.AddError(INIT_GPS_ERR);
+        debug_lights.AddError(INIT_GPS_ERR);
     }
     
     
@@ -192,7 +192,7 @@ bool InitRadio() {
         log_message(__func__, "RFM95 initialized.");
     } else {
         log_message(__func__, "Failed to initialize RFM95!");
-        debugLights.AddError(INIT_RADIO_ERR);
+        debug_lights.AddError(INIT_RADIO_ERR);
     }
     radio.setFrequency(915.0);
     radio.setTxPower(20);
@@ -250,6 +250,18 @@ void RWRadio() {
         Serial.println();
     }
     Serial.println("Radio Finished.");
+}
+
+uint8_t RadioBuffer[256];
+
+uint8_t * GetRadioByteData(){
+    size_t msgLength;
+    radio.receive(RadioBuffer,256,msgLength);
+    return RadioBuffer;
+}
+
+void SendRadioByteData(uint8_t *message, size_t length){
+    radio.send(message,length);
 }
 
 

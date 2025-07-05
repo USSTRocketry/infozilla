@@ -18,6 +18,7 @@
 #include <DataPackager.h>
 #include <log.h>
 #include <DebugLights.h>
+#include <NetworkPacketEnums.h>
 
 // HAL libs
 #include "Avionics_HAL.h"
@@ -103,11 +104,30 @@ void setup() {
 
 }
 
+uint8_t RadioReplyBuffer[256];
 
 void loop() {
     update_gps_data(); // Important!!!!
     currentMillis = millis();
     debugLights.UpdateLights();
+
+    uint8_t *radioByteData = GetRadioByteData();
+    if (radioByteData[0] == COMMAND)
+    {
+        switch (radioByteData[1])
+        {
+        case FLIGHT_READY:
+            SetFlightState(ReadyForLaunch);
+            RadioReplyBuffer[0] = static_cast<uint8_t>(COMMAND);
+            RadioReplyBuffer[1] = static_cast<uint8_t>(ACK_PONG);
+            SendRadioByteData(RadioReplyBuffer,2);
+            break;
+        
+        default:
+            break;
+        }
+    }
+    
 
     if(currentMillis - last_sensor_read_time >= SENSOR_READ_FREQUENCY) {
         sensorData = GetSensorData();

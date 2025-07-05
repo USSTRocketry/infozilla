@@ -96,7 +96,6 @@ void Update(float barval_meters){
         FlightState = ReadyForLaunch;
         #else
 
-        radio.recieve();
 
         #endif
 

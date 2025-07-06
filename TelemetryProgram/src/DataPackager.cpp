@@ -19,8 +19,11 @@
 #include <SDHandler.h>
 #include <string>
 
-//this define is for the low power library needing this define but not having it defined.
-// #define voidFuncPtr void*
+//this define is for the low power library needing this define but not having it defined only sems to be an issue on erics computer.
+#ifndef voidFuncPtr
+#define voidFuncPtr void*
+#endif
+
 #include <ArduinoLowPower.h>
 #include <FlexiTimer2.h>
 

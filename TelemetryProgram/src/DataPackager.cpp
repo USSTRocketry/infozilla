@@ -45,6 +45,12 @@ bool isCollectingData = true;
 void InitDataPackager(){
     //Serial.printf("InitDataPackager()");
     InitialHeightData = GetSensorData()->bmp280.altitude;
+    for (size_t i = 0; i < 30; i++)
+    {
+        /* code */
+        barvalQueue[i] = InitialHeightData;
+    }
+    
     
 }
 

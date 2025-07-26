@@ -1,3 +1,4 @@
 [submodule "TelemetryProgram/lib/HAL"]
 	path = TelemetryProgram/lib/HAL
 	url = https://github.com/USSTRocketry/HAL.git
+	branch = main

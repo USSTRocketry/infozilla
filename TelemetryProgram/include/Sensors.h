@@ -2,6 +2,8 @@
 
 #include <SensorStructs.h>
 #include <DebugLights.h>
+#include <utility>
+#include <NetworkPacketEnums.h>
 
 void GetBarData();
 void PrintSensors();
@@ -14,6 +16,7 @@ void transmit_sensor_data(const SensorData& data);
 // Sample less than once every 100 ms
 void update_gps_data(void);
 
-uint8_t * GetRadioByteData();
+std::pair<u_int8_t*, size_t> GetRadioByteData();
 
 void SendRadioByteData(uint8_t *message, size_t length);
+void SwitchRadioFrequency(uint8_t* message, size_t length);

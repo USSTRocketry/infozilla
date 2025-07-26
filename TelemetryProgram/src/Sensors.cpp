@@ -23,7 +23,8 @@ SensorMagnetometer magnetometer(0x1E, I2C_WIRE0); // Magnometer Default I2C addr
 SensorTemperature tempSensor; // Default I2C address and bus
 GPS gps(GPS_HW_SERIAL, 9600);
 // RYLR998Radio radio(HW_SERIAL8, 9600); // Not default Radio to be used
-RFM95Radio radio(RADIO_CS, RADIO_INT, RADIO_SPI, 915.0); // Default radio used - Interrupt 0 because it's not used, 915 MHz default 
+const float RADIO_FREQUENCY = 915.0; // Default radio frequency
+RFM95Radio radio(RADIO_CS, RADIO_INT, RADIO_SPI, RADIO_FREQUENCY); // Default radio used - Interrupt 0 because it's not used, 915 MHz default 
 
 
 
@@ -194,7 +195,7 @@ bool InitRadio() {
         log_message(__func__, "Failed to initialize RFM95!");
         debug_lights.AddError(INIT_RADIO_ERR);
     }
-    radio.setFrequency(915.0);
+    radio.setFrequency(RADIO_FREQUENCY);
     radio.setTxPower(20);
 
     return successs;
@@ -254,10 +255,13 @@ void RWRadio() {
 
 uint8_t RadioBuffer[256];
 
-uint8_t * GetRadioByteData(){
+std::pair<u_int8_t*, size_t> GetRadioByteData(){
     size_t msgLength;
-    radio.receive(RadioBuffer,256,msgLength);
-    return RadioBuffer;
+    bool status = radio.receive(RadioBuffer,256,msgLength);
+    if (!status || msgLength == 0) {
+        return std::make_pair(nullptr, 0);
+    }
+    return std::make_pair(RadioBuffer, msgLength);
 }
 
 void SendRadioByteData(uint8_t *message, size_t length){
@@ -354,4 +358,63 @@ void transmit_sensor_data(const SensorData& data) {
     } else {
         log_message(__func__, "Failed to transmit sensor data.");
     }
+}
+
+
+/**
+ *  Switch transmission frequency of the radio to one specified by the ground station.
+ *  Frequency switch routine:
+ *      Center (ground station): "switch radio frequency X"
+ *      Peripheral: "echo switch radio frequency X"
+ *      Center: "Ack"
+ *      ===== peripheral and center actually switches frequency here ======
+ *    Note: There should be a timeout of 3 seconds at each step and if reached, the routine is aborted
+ *        and the radio frequency is not changed.
+ * @param message The message received from the ground station.
+ *                 Byte 0 = COMMAND
+ *                 Byte 1 = SWITCH_RADIO_FREQUENCY
+ *                 Bytes 2-5 (inclusive) = Frequency in MHz (as float)
+ * @param length The length of the message.
+ */
+void SwitchRadioFrequency(uint8_t* message, size_t length) {
+    if (length < 6 || message[0] != COMMAND || message[1] != SWITCH_RADIO_FREQUENCY) {
+        log_message(__func__, "Invalid message format for frequency switch.");
+        return;
+    }
+
+    // Extract the frequency from the message
+    float newFrequency = *((float*)&message[2]);
+    log_message(__func__, "Initiating procedure to switch frequency to: %.2f MHz", newFrequency);
+
+    // Acknowledge the command
+    uint8_t ackMessage[7] = {COMMAND, ACK_PONG, SWITCH_RADIO_FREQUENCY};
+    *((float*)&ackMessage[3]) = newFrequency; // Include the new frequency in the ack message
+    SendRadioByteData(ackMessage, sizeof(ackMessage));
+
+    // Wait for the acknowledgment from the ground station
+    uint32_t cur_time = millis();
+    std::pair<u_int8_t*, size_t> res = GetRadioByteData();
+    bool ackReceived = false;
+    while (millis() - cur_time < 3000) {
+        // Wait for a maximum of 3 seconds for the acknowledgment
+        if (res.first != nullptr && res.second > 0 
+            && res.first[0] == COMMAND 
+            && res.first[1] == ACK_PONG 
+            && res.first[2] == SWITCH_RADIO_FREQUENCY
+        ) {
+            ackReceived = true;
+            break;
+        }
+        delay(100); // Polling delay
+        res = GetRadioByteData();
+    }
+    
+    if (!ackReceived) {
+        log_message(__func__, "No acknowledgment received for frequency switch.");
+        return; // Abort if no acknowledgment is received
+    }
+
+    // Set the new frequency
+    radio.setFrequency(newFrequency);
+    log_message(__func__, "Radio frequency switched to %.2f MHz", newFrequency);
 }

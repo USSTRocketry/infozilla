@@ -30,7 +30,7 @@
 #define IsTestingMode true
 
 #if IsTestingMode
-#define TestingMultiplier 0.01
+#define TestingMultiplier 0.1
 #else
 #define TestingMultiplier 1
 #endif

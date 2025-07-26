@@ -1,3 +1,5 @@
+#pragma once
+
 enum PacketType{
     INVALID_EMPTY_PING = 1,
     PACKED_SENSOR_VALUES = 2,
@@ -5,8 +7,9 @@ enum PacketType{
 };
 
 enum NetworkCommands{
-    ACK_PONG = 1,
-    ENABLE_DEBUGGING = 2,
-    FLIGHT_READY = 3,
-    SWITCH_RADIO_FREQUENCY = 4
+    PING = 1,
+    ACK_PONG = 2,
+    ENABLE_DEBUGGING = 3,
+    FLIGHT_READY = 4,
+    SWITCH_RADIO_FREQUENCY = 5
 };

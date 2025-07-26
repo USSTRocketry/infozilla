@@ -111,24 +111,30 @@ void loop() {
     currentMillis = millis();
     debugLights.UpdateLights();
 
-    uint8_t *radioByteData = GetRadioByteData();
-    if (radioByteData[0] == COMMAND)
-    {
-        switch (radioByteData[1])
+    auto [data, len] = GetRadioByteData();
+    if (data != nullptr && len > 0){
+        if (data[0] == COMMAND)
         {
-        case FLIGHT_READY:
-            SetFlightState(ReadyForLaunch);
-            RadioReplyBuffer[0] = static_cast<uint8_t>(COMMAND);
-            RadioReplyBuffer[1] = static_cast<uint8_t>(ACK_PONG);
-            SendRadioByteData(RadioReplyBuffer,2);
-            break;
-        
-        default:
-            break;
+            switch (data[1])
+            {
+            case FLIGHT_READY:
+                SetFlightState(ReadyForLaunch);
+                RadioReplyBuffer[0] = static_cast<uint8_t>(COMMAND);
+                RadioReplyBuffer[1] = static_cast<uint8_t>(ACK_PONG);
+                RadioReplyBuffer[2] = static_cast<uint8_t>(FLIGHT_READY);
+                SendRadioByteData(RadioReplyBuffer,2);
+                break;
+            case SWITCH_RADIO_FREQUENCY:
+                SwitchRadioFrequency(data, len);
+                break;
+            default:
+                log_message(__func__, "Unknown command received: %d", data[1]);
+                break;
+            }
         }
     }
     
-
+    
     if(currentMillis - last_sensor_read_time >= SENSOR_READ_FREQUENCY) {
         sensorData = GetSensorData();
         last_sensor_read_time = currentMillis;

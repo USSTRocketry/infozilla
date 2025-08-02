@@ -302,6 +302,7 @@ FORMAT = "<h I h 3h 3h h 3h h i i h H H I"
 
 #pragma pack(push, 1)  // Ensure no padding is added between struct members
 struct PacketData {
+    uint8_t packetType = SENSOR_DATA; // Packet type identifier
     int16_t bmp280_temp;        // Temperature in °C (*100)
     uint32_t pressure;          // Pressure in hPa (*100)
     int16_t bmp280_altitude;    // Altitude in meters (*10)
@@ -346,6 +347,8 @@ void sensor_data_to_radio_packet(const SensorData& data, struct PacketData& pack
     packetData.gps_speed = static_cast<uint16_t>(data.gps.speed * 100);
     packetData.gps_angle = static_cast<uint16_t>(data.gps.angle * 100);
     packetData.timestamp = data.timestamp;
+    
+    packetData.packetType = SENSOR_DATA; // Set the packet type
 }
 
 void transmit_sensor_data(const SensorData& data) {
@@ -387,8 +390,8 @@ void SwitchRadioFrequency(uint8_t* message, size_t length) {
     log_message(__func__, "Initiating procedure to switch frequency to: %.2f MHz", newFrequency);
 
     // Acknowledge the command
-    uint8_t ackMessage[7] = {COMMAND, ACK_PONG, SWITCH_RADIO_FREQUENCY};
-    *((float*)&ackMessage[3]) = newFrequency; // Include the new frequency in the ack message
+    uint8_t ackMessage[6] = {ACK_PONG, SWITCH_RADIO_FREQUENCY};
+    *((float*)&ackMessage[2]) = newFrequency; // Include the new frequency in the ack message
     SendRadioByteData(ackMessage, sizeof(ackMessage));
 
     // Wait for the acknowledgment from the ground station
@@ -398,9 +401,8 @@ void SwitchRadioFrequency(uint8_t* message, size_t length) {
     while (millis() - cur_time < 3000) {
         // Wait for a maximum of 3 seconds for the acknowledgment
         if (res.first != nullptr && res.second > 0 
-            && res.first[0] == COMMAND 
-            && res.first[1] == ACK_PONG 
-            && res.first[2] == SWITCH_RADIO_FREQUENCY
+            && res.first[0] == ACK_PONG
+            && res.first[1] == SWITCH_RADIO_FREQUENCY
         ) {
             ackReceived = true;
             break;

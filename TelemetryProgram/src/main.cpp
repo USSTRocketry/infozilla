@@ -118,10 +118,10 @@ void loop() {
             switch (data[1])
             {
             case FLIGHT_READY:
+                log_message(__func__, "Received FLIGHT_READY command.");
                 SetFlightState(ReadyForLaunch);
-                RadioReplyBuffer[0] = static_cast<uint8_t>(COMMAND);
-                RadioReplyBuffer[1] = static_cast<uint8_t>(ACK_PONG);
-                RadioReplyBuffer[2] = static_cast<uint8_t>(FLIGHT_READY);
+                RadioReplyBuffer[0] = static_cast<uint8_t>(ACK_PONG);
+                RadioReplyBuffer[1] = static_cast<uint8_t>(FLIGHT_READY);
                 SendRadioByteData(RadioReplyBuffer,2);
                 break;
             case SWITCH_RADIO_FREQUENCY:

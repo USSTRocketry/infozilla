@@ -25,7 +25,8 @@ GPS gps(GPS_HW_SERIAL, 9600);
 // RYLR998Radio radio(HW_SERIAL8, 9600); // Not default Radio to be used
 const float RADIO_FREQUENCY = 915.0; // Default radio frequency
 RFM95Radio radio(RADIO_CS, RADIO_INT, RADIO_SPI, RADIO_FREQUENCY); // Default radio used - Interrupt 0 because it's not used, 915 MHz default 
-
+const uint8_t RADIO_ADDRESS = 101; // Default radio address
+const uint8_t GROUND_RADIO_ADDRESS = 100; // Ground radio address
 
 
 /**
@@ -197,6 +198,9 @@ bool InitRadio() {
     }
     radio.setFrequency(RADIO_FREQUENCY);
     radio.setTxPower(20);
+    radio.setAddress(RADIO_ADDRESS);
+    radio.setDestinationAddress(GROUND_RADIO_ADDRESS);
+    radio.setPromiscuousMode(false); // Only receive packets addressed to this device
 
     return successs;
 }

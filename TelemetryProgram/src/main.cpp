@@ -113,6 +113,7 @@ void loop() {
 
     auto [data, len] = GetRadioByteData();
     if (data != nullptr && len > 0){
+        log_message(__func__, "Received %d bytes from radio.", len);
         if (data[0] == COMMAND)
         {
             switch (data[1])
@@ -125,6 +126,7 @@ void loop() {
                 SendRadioByteData(RadioReplyBuffer,2);
                 break;
             case SWITCH_RADIO_FREQUENCY:
+                log_message(__func__, "Received SWITCH_RADIO_FREQUENCY command.");
                 SwitchRadioFrequency(data, len);
                 break;
             default:

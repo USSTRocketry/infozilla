@@ -7,6 +7,7 @@
 #include <SDHandler.h>
 #include <log.h>
 #include <Sensors.h>
+#include <cstring>
 
 
 // HAL libs
@@ -190,17 +191,18 @@ void InitGPS() {
 
 bool InitRadio() {
     bool successs = radio.begin();
-    if (successs) {
-        log_message(__func__, "RFM95 initialized.");
-    } else {
+    if (!successs) {
         log_message(__func__, "Failed to initialize RFM95!");
         debug_lights.AddError(INIT_RADIO_ERR);
+        return false;
     }
     radio.setFrequency(RADIO_FREQUENCY);
     radio.setTxPower(20);
     radio.setAddress(RADIO_ADDRESS);
     radio.setDestinationAddress(GROUND_RADIO_ADDRESS);
     radio.setPromiscuousMode(false); // Only receive packets addressed to this device
+    log_message(__func__, "RFM95 initialized. Frq: %.2f MHz, Addr: %d, Dest Addr: %d",
+                RADIO_FREQUENCY, RADIO_ADDRESS, GROUND_RADIO_ADDRESS);
 
     return successs;
 }
@@ -261,7 +263,7 @@ uint8_t RadioBuffer[256];
 
 std::pair<u_int8_t*, size_t> GetRadioByteData(){
     size_t msgLength;
-    bool status = radio.receive(RadioBuffer,256,msgLength);
+    bool status = radio.receive(RadioBuffer, RH_RF95_MAX_MESSAGE_LEN, msgLength);
     if (!status || msgLength == 0) {
         return std::make_pair(nullptr, 0);
     }
@@ -361,7 +363,7 @@ void transmit_sensor_data(const SensorData& data) {
 
     // Send the packet over the radio
     if (radio.send((const uint8_t*)&packetData, sizeof(packetData))) {
-        log_message(__func__, "Sensor data transmitted successfully.");
+        // log_message(__func__, "Sensor data transmitted successfully.");
     } else {
         log_message(__func__, "Failed to transmit sensor data.");
     }
@@ -390,7 +392,8 @@ void SwitchRadioFrequency(uint8_t* message, size_t length) {
     }
 
     // Extract the frequency from the message
-    float newFrequency = *((float*)&message[2]);
+    float newFrequency;
+    std::memcpy(&newFrequency, &message[2], sizeof(float));
     log_message(__func__, "Initiating procedure to switch frequency to: %.2f MHz", newFrequency);
 
     // Acknowledge the command

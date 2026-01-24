@@ -276,6 +276,7 @@ void SendRadioByteData(uint8_t *message, size_t length){
 
 
 // Radio packaging
+/// NOTE: NEED TO INCUDE ROCKET STATE and CONSOLE LOG STRINGS.
 /*
 """
 +--------------------+-----------+-------+------------+-------------------------------+
